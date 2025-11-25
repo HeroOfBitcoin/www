@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hero of Bitcoin - Instruction Booklet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto+Mono:wght@400;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 12px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #fbbf24;
+        border-left: 2px solid #000;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #000;
+        border: 2px solid #fbbf24;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #333;
+      }
+      .font-pixel {
+        font-family: 'Press Start 2P', cursive;
+      }
+      .font-mono {
+        font-family: 'Roboto Mono', monospace;
+      }
+      .font-sans {
+        font-family: 'Inter', sans-serif;
+      }
+      .pixel-shadow {
+        box-shadow: 4px 4px 0px 0px #000000;
+      }
+      .pixel-shadow-sm {
+        box-shadow: 2px 2px 0px 0px #000000;
+      }
+      .text-shadow {
+        text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+      }
+      .rendering-pixelated {
+        image-rendering: pixelated;
+      }
+    </style>
+</head>
+  <body class="bg-[#F7931A] text-slate-900 font-sans antialiased overflow-x-hidden min-h-screen flex flex-col">
+    <div id="root" class="flex-1 flex flex-col"></div>
+    <script type="module" src="/src/index.tsx"></script>
+  </body>
+</html>

@@ -15,7 +15,7 @@ const DeviceGuide: React.FC = () => {
   return (
     <div className="space-y-8 animate-fadeIn text-black bg-white">
       
-      {/* Header Block */}
+      {/* Header Block - Looks like printed doc header */}
       <div className="border-b-4 border-black pb-4 mb-8">
         <div className="flex justify-between items-start">
             <div>
@@ -106,7 +106,7 @@ const DeviceGuide: React.FC = () => {
             </h3>
             <p className="text-xs font-sans mb-2">Path: <span className="font-mono">EASYROMS/roms/</span></p>
             <ul className="text-xs list-square ml-4 space-y-1 text-yellow-900">
-                <li>Match game to folder (nes -> /nes).</li>
+                <li>Match game to folder (nes &rarr; /nes).</li>
                 <li>Bios files are included.</li>
                 <li>Avoid special characters in filenames.</li>
             </ul>

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import PixelCard from './ui/PixelCard';
-import { Coins, MapPin, Sword, Glasses, TrendingUp, Mic2, Landmark, Hash, Ghost, LucideIcon, ImageOff } from 'lucide-react';
+import { Coins, MapPin, Sword, Glasses, TrendingUp, Mic2, Landmark, Hash, Ghost, ImageOff } from 'lucide-react';
 import { Character } from '../types';
 
 const characters: Character[] = [

@@ -44,6 +44,14 @@ const App: React.FC = () => {
   const pressedKeysRef = useRef(new Set<string>());
   const hasToggledRef = useRef(false);
 
+  // Handle hash navigation on page load
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (hash && ['collectors-edition', 'digital-edition', 'hero-handheld'].includes(hash)) {
+      setActiveTab(Tab.PRODUCTS);
+    }
+  }, []);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const key = e.key.toLowerCase();

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PixelCard from './ui/PixelCard';
-import { Star, ShieldCheck, ShoppingCart, Sticker, Gamepad2, Zap, HardDrive, ChevronDown, ChevronUp, HelpCircle, AlertTriangle, FolderOpen, Disc } from 'lucide-react';
+import { Star, ShieldCheck, ShoppingCart, Sticker, Gamepad2, Zap, HardDrive, ChevronDown, ChevronUp, HelpCircle, AlertTriangle, FolderOpen, Disc, Link } from 'lucide-react';
 
 /*
   =============================================================================
@@ -68,6 +68,7 @@ const ProductGallery: React.FC<{
   Reusable card for each product with image, details, features, and gallery
 */
 interface ProductCardProps {
+  id: string;
   title: string;
   subtitle: string;
   quote: string;
@@ -83,6 +84,7 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
+  id,
   title,
   subtitle,
   quote,
@@ -97,10 +99,18 @@ const ProductCard: React.FC<ProductCardProps> = ({
   children
 }) => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [copied, setCopied] = useState(false);
   const hasImages = images && images.length > 0;
 
+  const copyLink = () => {
+    const url = `${window.location.origin}${window.location.pathname}#${id}`;
+    navigator.clipboard.writeText(url);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
-    <div className="border-4 border-black bg-white p-6 pixel-shadow">
+    <div id={id} className="border-4 border-black bg-white p-6 pixel-shadow scroll-mt-24">
       <div className="grid md:grid-cols-2 gap-6 items-start">
         {/* Product Image with Gallery */}
         <div className="relative">
@@ -141,9 +151,22 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
         {/* Details */}
         <div className="space-y-4">
-          <div>
-            <h3 className="font-bold text-xl font-sans">{title}</h3>
-            <p className="text-xs text-gray-500 font-mono">{subtitle}</p>
+          <div className="flex items-start justify-between gap-2">
+            <div>
+              <h3 className="font-bold text-xl font-sans">{title}</h3>
+              <p className="text-xs text-gray-500 font-mono">{subtitle}</p>
+            </div>
+            <button
+              onClick={copyLink}
+              className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded transition-colors shrink-0"
+              title="Copy link to this product"
+            >
+              {copied ? (
+                <span className="text-green-600 text-xs font-mono">Copied!</span>
+              ) : (
+                <Link size={16} />
+              )}
+            </button>
           </div>
 
           <p className="font-serif italic text-gray-600 border-l-4 border-yellow-400 pl-3 text-sm">
@@ -193,6 +216,20 @@ const ProductCard: React.FC<ProductCardProps> = ({
 const Products: React.FC = () => {
   const [showR36STechDetails, setShowR36STechDetails] = useState(false);
 
+  // Handle hash navigation on mount
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      // Small delay to ensure DOM is ready
+      setTimeout(() => {
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  }, []);
+
   return (
     <div className="space-y-12">
       {/* Header */}
@@ -211,6 +248,7 @@ const Products: React.FC = () => {
         =========================================================================
       */}
       <ProductCard
+        id="collectors-edition"
         title="Collector's Edition"
         subtitle="LIMITED TO ~450 UNITS"
         quote="A tangible piece of Bitcoin history, playable on original hardware."
@@ -241,6 +279,7 @@ const Products: React.FC = () => {
         =========================================================================
       */}
       <ProductCard
+        id="digital-edition"
         title="Digital Edition"
         subtitle="PLAY ANYWHERE"
         quote="The perfect collectible for emulator enthusiasts. No Game Boy required."
@@ -273,6 +312,7 @@ const Products: React.FC = () => {
         =========================================================================
       */}
       <ProductCard
+        id="hero-handheld"
         title="Hero Handheld"
         subtitle="READY TO PLAY"
         quote="Hero of Bitcoin pre-installed. Power on and play instantly."

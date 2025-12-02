@@ -3,39 +3,64 @@ import GameManual from './components/GameManual';
 import DeviceGuide from './components/DeviceGuide';
 import PhysicalCartridge from './components/PhysicalCartridge';
 import { Tab } from './types';
-import { Gamepad2, Smartphone, Disc, Menu, Play, ShoppingCart } from 'lucide-react';
+import { Smartphone, Disc, Menu, Play, ShoppingCart, Shirt } from 'lucide-react';
+
+/*
+  =============================================================================
+  COPIARO PRODUCT LINKS
+  =============================================================================
+  All product links point to the Copiaro store. Update these URLs when
+  individual product pages become available.
+
+  LINK_STORE_MAIN: Main Hero of Bitcoin brand page on Copiaro
+  LINK_FAN_SWAG: Merchandise category (cups, shirts, caps)
+  =============================================================================
+*/
+const LINK_STORE_MAIN = 'https://copiaro.com/brand/hob';
+const LINK_FAN_SWAG = 'https://copiaro.com/brand/hob'; // TODO: Update to merchandise category when available
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<Tab>(Tab.GAME);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scanlinesActive, setScanlinesActive] = useState(false);
-  const [konamiProgress, setKonamiProgress] = useState(0);
 
-  // Konami Code: ↑ ↑ ↓ ↓ ← → ← → B A
-  const konamiCode = [
-    'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
-    'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
-    'KeyB', 'KeyA'
-  ];
-
+  /*
+    ===========================================================================
+    SCANLINES EASTER EGG
+    ===========================================================================
+    Activation: Hold C + R + T simultaneously (desktop only)
+    Effect: Toggles CRT-style scanline overlay across the entire website
+    ===========================================================================
+  */
   useEffect(() => {
+    const pressedKeys = new Set<string>();
+
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.code === konamiCode[konamiProgress]) {
-        const newProgress = konamiProgress + 1;
-        if (newProgress === konamiCode.length) {
+      const key = e.key.toLowerCase();
+      if (['c', 'r', 't'].includes(key)) {
+        pressedKeys.add(key);
+        // Check if all three keys are held
+        if (pressedKeys.has('c') && pressedKeys.has('r') && pressedKeys.has('t')) {
           setScanlinesActive(prev => !prev);
-          setKonamiProgress(0);
-        } else {
-          setKonamiProgress(newProgress);
+          pressedKeys.clear(); // Reset after activation
         }
-      } else {
-        setKonamiProgress(0);
+      }
+    };
+
+    const handleKeyUp = (e: KeyboardEvent) => {
+      const key = e.key.toLowerCase();
+      if (['c', 'r', 't'].includes(key)) {
+        pressedKeys.delete(key);
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [konamiProgress]);
+    window.addEventListener('keyup', handleKeyUp);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, []);
 
   const NavButton = ({ tab, icon: Icon, label }: { tab: Tab; icon: any; label: string }) => (
     <button
@@ -57,7 +82,7 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col items-center py-4 md:py-8 px-2 md:px-0 relative">
 
-      {/* Scanlines Overlay (Easter Egg) */}
+      {/* Scanlines Overlay (Easter Egg - activated by holding C+R+T) */}
       {scanlinesActive && (
         <div
           className="fixed inset-0 pointer-events-none z-[9999]"
@@ -91,14 +116,17 @@ const App: React.FC = () => {
 
                     {/* Brand / Logo Area */}
                     <div className="flex items-center justify-between w-full md:w-auto">
-                        <div className="flex items-center gap-3">
+                        <button
+                            onClick={() => { setActiveTab(Tab.GAME); setMobileMenuOpen(false); }}
+                            className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+                        >
                             <div className="w-8 h-8 bg-red-600 border-2 border-black rounded-full flex items-center justify-center text-white font-bold text-xs pixel-shadow-sm">
                                 HB
                             </div>
-                            <h1 className="font-pixel text-sm md:text-base text-black tracking-tighter leading-none">
+                            <h1 className="font-pixel text-sm md:text-base text-black tracking-tighter leading-none text-left">
                                 HERO OF<br/>BITCOIN
                             </h1>
-                        </div>
+                        </button>
                         {/* Mobile Menu Toggle */}
                         <button
                             className="md:hidden p-2 border-2 border-black bg-white active:bg-gray-100"
@@ -110,7 +138,7 @@ const App: React.FC = () => {
 
                     {/* Navigation Tabs */}
                     <nav className={`${mobileMenuOpen ? 'flex' : 'hidden'} md:flex flex-col md:flex-row gap-2 md:gap-4 w-full md:w-auto mt-4 md:mt-0`}>
-                        <NavButton tab={Tab.GAME} icon={Gamepad2} label="MANUAL" />
+                        {/* Note: MANUAL tab removed - accessed via logo click or QR code on physical products */}
                         <NavButton tab={Tab.DEVICE} icon={Smartphone} label="DEVICE" />
                         <NavButton tab={Tab.CARTRIDGE} icon={Disc} label="CARTRIDGE" />
                         <a
@@ -120,9 +148,9 @@ const App: React.FC = () => {
                             <Play size={18} />
                             <span className="font-pixel text-xs tracking-wide">PLAY DEMO</span>
                         </a>
-                        {/* Prominent BUY Button */}
+                        {/* Prominent BUY Button - Links to main Copiaro store page */}
                         <a
-                            href="https://copiaro.com/brand/hob"
+                            href={LINK_STORE_MAIN}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center gap-2 px-4 py-3 md:py-2 text-sm font-bold border-2 border-black transition-all w-full md:w-auto bg-green-500 text-white hover:bg-green-600 hover:scale-105 animate-pulse hover:animate-none"
@@ -145,6 +173,17 @@ const App: React.FC = () => {
 
             {/* Footer */}
             <footer className="bg-yellow-400 border-t-4 border-black p-4 text-center shrink-0">
+                {/* Fan Swag Link */}
+                <a
+                    href={LINK_FAN_SWAG}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 mb-3 text-xs font-bold border-2 border-black bg-white hover:bg-yellow-100 transition-colors"
+                >
+                    <Shirt size={14} />
+                    <span>CUPS, SHIRTS & CAPS</span>
+                </a>
+
                 <p className="font-pixel text-[8px] md:text-[10px] text-yellow-900 uppercase tracking-wider">
                     ©2022-2025 Hero of Bitcoin • heroofbitcoin.xyz
                 </p>

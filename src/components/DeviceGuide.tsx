@@ -1,6 +1,17 @@
 import React from 'react';
-import { AlertTriangle, HardDrive, FolderOpen } from 'lucide-react';
+import { AlertTriangle, HardDrive, FolderOpen, ShoppingCart } from 'lucide-react';
 import { Shortcut } from '../types';
+
+/*
+  =============================================================================
+  COPIARO PRODUCT LINKS - R36S DEVICE
+  =============================================================================
+  Update this URL when the individual R36S product page becomes available.
+
+  LINK_R36S_DEVICE: R36S handheld console with Hero of Bitcoin pre-installed
+  =============================================================================
+*/
+const LINK_R36S_DEVICE = 'https://copiaro.com/brand/hob'; // TODO: Update to R36S product page when available
 
 const shortcuts: Shortcut[] = [
   { action: 'Hotkey Modifier', buttons: ['SELECT'] },
@@ -14,7 +25,7 @@ const shortcuts: Shortcut[] = [
 const DeviceGuide: React.FC = () => {
   return (
     <div className="space-y-8 animate-fadeIn text-black bg-white">
-      
+
       {/* Header Block - Looks like printed doc header */}
       <div className="border-b-4 border-black pb-4 mb-8">
         <div className="flex flex-col md:flex-row justify-between items-start gap-6">
@@ -45,6 +56,33 @@ const DeviceGuide: React.FC = () => {
                 <div className="font-mono text-xs border border-black px-2 py-1 inline-block">ArkOS v1.1</div>
                 <div className="font-mono text-xs mt-1">20251014</div>
             </div>
+        </div>
+      </div>
+
+      {/* Buy R36S Device CTA */}
+      <div className="bg-green-50 border-2 border-green-600 p-4 pixel-shadow-sm">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div>
+                <h3 className="font-bold text-green-800 text-lg mb-1">Get Your Own R36S</h3>
+                <p className="text-xs text-green-700">Pre-configured with Hero of Bitcoin and ready to play!</p>
+            </div>
+            {/*
+              =========================================================================
+              PRODUCT LINK: R36S Console
+              =========================================================================
+              Links to: Copiaro R36S product page
+              Update LINK_R36S_DEVICE constant at top of file when URL changes
+              =========================================================================
+            */}
+            <a
+                href={LINK_R36S_DEVICE}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-6 py-3 bg-green-500 text-white font-pixel text-xs border-2 border-black hover:bg-green-600 hover:scale-105 transition-all pixel-shadow-sm shrink-0"
+            >
+                <ShoppingCart size={16} />
+                <span>BUY R36S</span>
+            </a>
         </div>
       </div>
 
@@ -107,7 +145,7 @@ const DeviceGuide: React.FC = () => {
       <div className="grid md:grid-cols-2 gap-8">
          <section className="bg-blue-50 border-2 border-blue-900 p-4">
             <h3 className="font-bold text-blue-900 flex items-center gap-2 mb-3">
-                <HardDrive size={18}/> 
+                <HardDrive size={18}/>
                 4) microSD Handling
             </h3>
             <p className="text-xs font-sans mb-2">Drive Name: <strong className="font-mono bg-white px-1 border border-blue-200">EASYROMS</strong></p>
@@ -120,7 +158,7 @@ const DeviceGuide: React.FC = () => {
 
          <section className="bg-yellow-50 border-2 border-yellow-600 p-4">
             <h3 className="font-bold text-yellow-800 flex items-center gap-2 mb-3">
-                <FolderOpen size={18}/> 
+                <FolderOpen size={18}/>
                 6) Adding Games
             </h3>
             <p className="text-xs font-sans mb-2">Path: <span className="font-mono">EASYROMS/roms/</span></p>

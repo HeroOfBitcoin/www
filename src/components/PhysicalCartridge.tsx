@@ -1,6 +1,17 @@
 import React from 'react';
 import PixelCard from './ui/PixelCard';
-import { Package, Star, ShieldCheck, ShoppingCart } from 'lucide-react';
+import { Package, Star, ShieldCheck, ShoppingCart, Sticker } from 'lucide-react';
+
+/*
+  =============================================================================
+  COPIARO PRODUCT LINKS - PHYSICAL CARTRIDGE
+  =============================================================================
+  Update these URLs when individual product pages become available.
+
+  LINK_PHYSICAL_CARTRIDGE: Physical Game Boy cartridge collector's edition
+  =============================================================================
+*/
+const LINK_PHYSICAL_CARTRIDGE = 'https://copiaro.com/brand/hob'; // TODO: Update to cartridge product page when available
 
 const PhysicalCartridge: React.FC = () => {
   return (
@@ -45,7 +56,7 @@ const PhysicalCartridge: React.FC = () => {
             <p className="font-serif italic text-gray-600 border-l-4 border-yellow-400 pl-4">
                 "A tangible piece of Bitcoin history, playable on original hardware."
             </p>
-            
+
             <ul className="space-y-3 font-mono text-sm">
                 <li className="flex items-center gap-3">
                     <ShieldCheck className="text-green-600" size={20} />
@@ -56,13 +67,21 @@ const PhysicalCartridge: React.FC = () => {
                     <span>Transparent Orange Cartridge</span>
                 </li>
                 <li className="flex items-center gap-3">
-                    <Package className="text-blue-600" size={20} />
-                    <span>Includes Sticker Pack</span>
+                    <Sticker className="text-blue-600" size={20} />
+                    <span>Includes Sticker</span>
                 </li>
             </ul>
 
+            {/*
+              =========================================================================
+              PRODUCT LINK: Physical Cartridge
+              =========================================================================
+              Links to: Copiaro physical cartridge product page
+              Update LINK_PHYSICAL_CARTRIDGE constant at top of file when URL changes
+              =========================================================================
+            */}
             <a
-                href="https://copiaro.com/brand/hob"
+                href={LINK_PHYSICAL_CARTRIDGE}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full bg-green-500 text-white font-pixel py-4 px-6 border-2 border-black hover:bg-green-600 hover:scale-[1.02] active:scale-[0.98] transition-all pixel-shadow flex items-center justify-center gap-3"
@@ -104,7 +123,7 @@ const PhysicalCartridge: React.FC = () => {
             {/*
               IMAGE #13: GALLERY IMAGE 3
               Location: public/assets/product/gallery/gallery-03.png
-              Suggestion: Sticker pack or other included items
+              Suggestion: Sticker or other included items
             */}
             <div className="bg-gray-100 border-2 border-black aspect-square flex items-center justify-center relative hover:bg-gray-200 transition-colors cursor-pointer">
                 <span className="font-pixel text-[10px] text-gray-400">IMG_03</span>

@@ -139,13 +139,19 @@ const GameManual: React.FC = () => {
         =========================================================================
       */}
       <div className="bg-yellow-400 border-4 border-black p-6 md:p-8 relative overflow-hidden pixel-shadow">
-        {/* Official Seal */}
+        {/*
+          =========================================================================
+          OFFICIAL SEAL
+          =========================================================================
+          Location: public/assets/images/seal.png
+          =========================================================================
+        */}
         <div className="absolute top-2 right-2 z-10">
-          <div className="w-14 h-14 md:w-16 md:h-16 bg-yellow-300 border-2 border-yellow-600 rounded-full flex items-center justify-center rotate-12">
-            <div className="text-[5px] md:text-[6px] font-bold text-yellow-800 text-center leading-tight font-sans">
-              Official<br/>Seal
-            </div>
-          </div>
+          <img
+            src="/assets/images/seal.png"
+            alt="Official Bitcoin Seal of Quality"
+            className="w-16 h-16 md:w-20 md:h-20 rotate-12 drop-shadow-md"
+          />
         </div>
 
         {/* Logo and Title - Compact Header */}

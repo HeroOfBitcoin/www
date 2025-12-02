@@ -129,58 +129,47 @@ const GameManual: React.FC = () => {
 
       {/*
         =========================================================================
-        SECTION 1: COVER HEADER
+        HERO SECTION: COVER + TRAILER COMBINED
         =========================================================================
-        Yellow booklet-style cover with logo, title, and official seal
+        Single cohesive yellow section with:
+        - Logo and title at top
+        - Embedded trailer video
+        - Copiaro buy button at bottom
+        - Official seal badge
         =========================================================================
       */}
-      <div className="bg-yellow-400 border-4 border-black p-8 text-center relative overflow-hidden pixel-shadow transform rotate-1">
+      <div className="bg-yellow-400 border-4 border-black p-6 md:p-8 relative overflow-hidden pixel-shadow">
         {/* Official Seal */}
-        <div className="absolute top-2 right-2">
-          <div className="w-16 h-16 bg-yellow-300 border-2 border-yellow-600 rounded-full flex items-center justify-center rotate-12">
-            <div className="text-[6px] font-bold text-yellow-800 text-center leading-tight font-sans">
+        <div className="absolute top-2 right-2 z-10">
+          <div className="w-14 h-14 md:w-16 md:h-16 bg-yellow-300 border-2 border-yellow-600 rounded-full flex items-center justify-center rotate-12">
+            <div className="text-[5px] md:text-[6px] font-bold text-yellow-800 text-center leading-tight font-sans">
               Official<br/>Seal
             </div>
           </div>
         </div>
 
-        {/*
-          =========================================================================
-          HERO OF BITCOIN LOGO WITH AVATAR
-          =========================================================================
-          Location: public/assets/images/HoB_Logo_Avatar.png
-          Description: Full logo with Hero character - compact size for cover
-          =========================================================================
-        */}
-        <img
-          src="/assets/images/HoB_Logo_Avatar.png"
-          alt="Hero of Bitcoin"
-          className="mx-auto w-32 h-auto mb-4"
-        />
+        {/* Logo and Title - Compact Header */}
+        <div className="text-center mb-6">
+          {/*
+            =========================================================================
+            HERO OF BITCOIN LOGO WITH AVATAR
+            =========================================================================
+            Location: public/assets/images/HoB_Logo_Avatar.png
+            =========================================================================
+          */}
+          <img
+            src="/assets/images/HoB_Logo_Avatar.png"
+            alt="Hero of Bitcoin"
+            className="mx-auto w-24 md:w-28 h-auto mb-2"
+          />
+          <h1 className="font-pixel text-2xl md:text-3xl text-red-600 mb-1 drop-shadow-[2px_2px_0_black]">
+            HERO OF BITCOIN
+          </h1>
+          <div className="font-bold text-[10px] tracking-widest uppercase text-yellow-800">Instruction Booklet</div>
+        </div>
 
-        <h1 className="font-pixel text-3xl text-red-600 mb-2 drop-shadow-[2px_2px_0_black]">
-          HERO OF<br/>BITCOIN
-        </h1>
-        <div className="font-bold text-xs tracking-widest uppercase">Instruction Booklet</div>
-      </div>
-
-      {/*
-        =========================================================================
-        RELEASE TRAILER SECTION
-        =========================================================================
-        Prominent video section with:
-        - Thumbnail with play button (no autoplay)
-        - Copiaro buy button placed BELOW the video (non-intrusive)
-        =========================================================================
-      */}
-      <div>
-        <h2 className="font-pixel text-xl border-b-4 border-black mb-6 pb-2 flex items-center gap-2">
-          <Play size={20} className="text-red-600" />
-          Release Trailer
-        </h2>
-
-        {/* Video Container */}
-        <div className="border-4 border-black overflow-hidden bg-black max-w-2xl mx-auto pixel-shadow">
+        {/* Release Trailer - Embedded in cover */}
+        <div className="border-4 border-black overflow-hidden bg-black">
           <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
             {!showTrailer ? (
               /* Thumbnail with Play Button */
@@ -194,7 +183,6 @@ const GameManual: React.FC = () => {
                   alt="Hero of Bitcoin - Release Trailer"
                   className="w-full h-full object-cover"
                   onError={(e) => {
-                    // Fallback to hqdefault if maxresdefault not available
                     (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${YOUTUBE_TRAILER_ID}/hqdefault.jpg`;
                   }}
                 />
@@ -204,18 +192,18 @@ const GameManual: React.FC = () => {
 
                 {/* Play Button */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-20 h-20 md:w-24 md:h-24 bg-red-600 rounded-full flex items-center justify-center border-4 border-white shadow-2xl group-hover:scale-110 group-hover:bg-red-500 transition-all">
-                    <Play size={40} className="text-white ml-1" fill="white" />
+                  <div className="w-16 h-16 md:w-20 md:h-20 bg-red-600 rounded-full flex items-center justify-center border-4 border-white shadow-2xl group-hover:scale-110 group-hover:bg-red-500 transition-all">
+                    <Play size={32} className="text-white ml-1" fill="white" />
                   </div>
                 </div>
 
-                {/* "Watch Trailer" Text */}
-                <div className="absolute top-4 left-4 bg-black/70 px-3 py-1 rounded">
-                  <span className="font-pixel text-xs text-white">WATCH TRAILER</span>
+                {/* "Watch Trailer" Label */}
+                <div className="absolute top-3 left-3 bg-yellow-400 px-2 py-1 border-2 border-black">
+                  <span className="font-pixel text-[10px] text-black">WATCH TRAILER</span>
                 </div>
               </div>
             ) : (
-              /* YouTube Embed - Only loads when user clicks */
+              /* YouTube Embed */
               <iframe
                 className="absolute inset-0 w-full h-full"
                 src={`https://www.youtube.com/embed/${YOUTUBE_TRAILER_ID}?autoplay=1&rel=0&modestbranding=1`}
@@ -228,27 +216,19 @@ const GameManual: React.FC = () => {
           </div>
         </div>
 
-        {/*
-          =========================================================================
-          COPIARO BUY BUTTON
-          =========================================================================
-          Placed BELOW the video - always visible, non-intrusive
-          =========================================================================
-        */}
-        <div className="max-w-2xl mx-auto mt-4">
-          <a
-            href={LINK_COPIARO_STORE}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-3 bg-green-500 hover:bg-green-400 text-white font-pixel py-3 px-6 border-2 border-black pixel-shadow-sm hover:scale-[1.02] transition-all w-full"
-          >
-            <ShoppingCart size={18} />
-            <span className="text-sm">BUY AT COPIARO</span>
-          </a>
-          <p className="text-center text-gray-500 text-[10px] mt-2 font-mono">
-            Our trusted partner for physical cartridges & merchandise
-          </p>
-        </div>
+        {/* Copiaro Buy Button - Integrated into cover */}
+        <a
+          href={LINK_COPIARO_STORE}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-3 bg-green-500 hover:bg-green-400 text-white font-pixel py-3 px-6 border-2 border-black mt-4 hover:scale-[1.02] transition-all w-full"
+        >
+          <ShoppingCart size={18} />
+          <span className="text-sm">BUY AT COPIARO</span>
+        </a>
+        <p className="text-center text-yellow-800 text-[10px] mt-2 font-mono">
+          Our trusted partner for physical cartridges & merchandise
+        </p>
       </div>
 
       {/* SECTION 2: STORY */}

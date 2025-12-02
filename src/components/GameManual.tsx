@@ -399,6 +399,18 @@ const GameManual: React.FC = () => {
          </div>
       </div>
 
+      {/* Legal Disclaimer */}
+      <div className="text-[10px] text-gray-400 font-mono leading-relaxed border-t border-gray-200 pt-6">
+        <p className="mb-2">
+          Please note that the 'Game Boy©' name is mentioned to demonstrate console compatibility.
+          All trademarks are the property of their respective owners.
+        </p>
+        <p>
+          This game can be played on Game Boy©, Game Boy Color©, Game Boy Advance©, Super Game Boy©
+          and Analogue Pocket©. <strong className="text-gray-500">This game is not licensed by Nintendo©.</strong>
+        </p>
+      </div>
+
     </div>
   );
 };

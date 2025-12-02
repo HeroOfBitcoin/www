@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Coins, MapPin, Glasses, TrendingUp, Mic2, Landmark, Hash, Ghost, ImageOff, Play, ShoppingCart, BookOpen } from 'lucide-react';
+import { Glasses, TrendingUp, Mic2, Landmark, Hash, Ghost, ImageOff, Play, ShoppingCart, BookOpen } from 'lucide-react';
 import { Character } from '../types';
 
 /**
@@ -255,32 +255,35 @@ const GameManual: React.FC = () => {
             
             {/*
               =========================================================================
-              GAME SCREENSHOTS SECTION
+              GAME SCENES
               =========================================================================
-              Location: public/assets/screenshots/
-              Size: 160x144px (Game Boy resolution) or 320x288px (2x scaled)
-              Format: PNG
-              Aspect ratio: 10:9 (Game Boy aspect ratio)
+              Location: public/assets/images/scenes/
               =========================================================================
             */}
-            <div className="flex flex-col gap-4">
-                {/*
-                  IMAGE #8: SCREENSHOT - TOWN SCENE
-                  Location: public/assets/screenshots/town.png
-                  Description: Screenshot showing a town/village area in the game
-                */}
-                <div className="bg-[#e0f8cf] border-4 border-black aspect-video relative flex items-center justify-center pixel-shadow">
-                    <MapPin className="text-[#306850]" size={48} />
-                    <span className="absolute bottom-1 right-2 font-pixel text-[8px] text-[#071821]">SCENE: TOWN</span>
+            <div className="flex flex-col gap-3">
+                {/* Airport Scene - Arriving in El Salvador */}
+                <div className="border-4 border-black pixel-shadow overflow-hidden">
+                    <img
+                        src="/assets/images/scenes/airport_color.png"
+                        alt="Arriving at El Salvador Airport"
+                        className="w-full h-auto"
+                    />
                 </div>
-                {/*
-                  IMAGE #9: SCREENSHOT - COLLECT/GAMEPLAY SCENE
-                  Location: public/assets/screenshots/collect.png
-                  Description: Screenshot showing coin/bitcoin collection gameplay
-                */}
-                <div className="bg-[#e0f8cf] border-4 border-black aspect-video relative flex items-center justify-center pixel-shadow">
-                    <Coins className="text-[#306850]" size={48} />
-                    <span className="absolute bottom-1 right-2 font-pixel text-[8px] text-[#071821]">SCENE: COLLECT</span>
+                {/* Art Gallery Scene */}
+                <div className="border-4 border-black pixel-shadow overflow-hidden">
+                    <img
+                        src="/assets/images/scenes/gallery_color.png"
+                        alt="Hero of Bitcoin Art Gallery"
+                        className="w-full h-auto"
+                    />
+                </div>
+                {/* Shiitake Coin Scene - poking fun at altcoins */}
+                <div className="border-4 border-black pixel-shadow overflow-hidden">
+                    <img
+                        src="/assets/images/scenes/shiitake_color.jpg"
+                        alt="Shiitake Coin - Go Down Tech"
+                        className="w-full h-auto"
+                    />
                 </div>
             </div>
         </div>
@@ -289,39 +292,22 @@ const GameManual: React.FC = () => {
       {/* SECTION 3: CONTROLS */}
       <div>
          <h2 className="font-pixel text-xl border-b-4 border-black mb-6 pb-2">Controls</h2>
-         <div className="flex flex-col md:flex-row gap-8 items-center justify-center">
-             {/*
-               =========================================================================
-               GAME BOY IMAGE
-               =========================================================================
-               Location: public/assets/images/Game_Boy_HoB.jpg
-               Description: Custom orange Game Boy with Hero of Bitcoin branding
-               Shows button layout: D-Pad, A, B, Select, Start
-               =========================================================================
-             */}
-             <div className="shrink-0">
+         {/*
+           =========================================================================
+           CONTROLS IMAGE
+           =========================================================================
+           Location: public/assets/images/controls.jpg
+           Description: Game Boy with labeled controls (D-Pad, A, B, Start)
+           =========================================================================
+         */}
+         <div className="flex justify-center">
+            <div className="border-4 border-black pixel-shadow overflow-hidden max-w-lg">
                 <img
-                  src="/assets/images/Game_Boy_HoB.jpg"
-                  alt="Hero of Bitcoin Game Boy Controls"
-                  className="w-48 md:w-56 h-auto pixel-shadow border-4 border-black"
+                  src="/assets/images/controls.jpg"
+                  alt="Hero of Bitcoin Game Controls"
+                  className="w-full h-auto"
                 />
-             </div>
-
-             {/* Key Map */}
-             <div className="grid grid-cols-1 gap-4 w-full max-w-sm">
-                {[
-                    { btn: 'A Button', desc: 'Confirm, Jump, Talk', color: 'bg-red-500' },
-                    { btn: 'B Button', desc: 'Run, Sword', color: 'bg-red-500' },
-                    { btn: 'Start', desc: 'Pause', color: 'bg-black' },
-                    { btn: 'Select', desc: 'Unused', color: 'bg-black' },
-                    { btn: 'D-Pad', desc: 'Move, Climb, Enter', color: 'bg-black' }
-                ].map((c) => (
-                    <div key={c.btn} className="flex items-center gap-4 border-b border-gray-200 pb-2">
-                        <span className={`px-2 py-1 text-white text-[10px] font-bold min-w-[60px] text-center rounded ${c.color}`}>{c.btn}</span>
-                        <span className="font-mono text-xs uppercase text-gray-700">{c.desc}</span>
-                    </div>
-                ))}
-             </div>
+            </div>
          </div>
       </div>
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import GameManual from './components/GameManual';
 import Products from './components/Products';
 import { Tab } from './types';
-import { Package, Menu, Play, ShoppingCart, Shirt } from 'lucide-react';
+import { Package, Menu, Play, ShoppingCart, Shirt, Mail, Instagram, Youtube } from 'lucide-react';
 
 /*
   =============================================================================
@@ -17,6 +17,16 @@ import { Package, Menu, Play, ShoppingCart, Shirt } from 'lucide-react';
 */
 const LINK_STORE_MAIN = 'https://copiaro.com/brand/hob';
 const LINK_FAN_SWAG = 'https://copiaro.com/brand/hob'; // TODO: Update to merchandise category when available
+
+/*
+  =============================================================================
+  SOCIAL LINKS & CONTACT
+  =============================================================================
+*/
+const CONTACT_EMAIL = 'HeroOfBitcoin@pm.me';
+const LINK_INSTAGRAM = 'https://instagram.com/heroofbitcoin';
+const LINK_X = 'https://x.com/HeroOfBitcoin';
+const LINK_YOUTUBE = 'https://youtube.com/@HeroOfBitcoin';
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<Tab>(Tab.GAME);
@@ -180,6 +190,47 @@ const App: React.FC = () => {
                     <Shirt size={14} />
                     <span>CUPS, SHIRTS & CAPS</span>
                 </a>
+
+                {/* Social Links */}
+                <div className="flex items-center justify-center gap-3 mb-3">
+                    <a
+                        href={`mailto:${CONTACT_EMAIL}`}
+                        className="w-8 h-8 bg-white border-2 border-black flex items-center justify-center hover:bg-yellow-100 transition-colors"
+                        title="Email"
+                    >
+                        <Mail size={16} />
+                    </a>
+                    <a
+                        href={LINK_INSTAGRAM}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-8 h-8 bg-white border-2 border-black flex items-center justify-center hover:bg-yellow-100 transition-colors"
+                        title="Instagram"
+                    >
+                        <Instagram size={16} />
+                    </a>
+                    <a
+                        href={LINK_X}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-8 h-8 bg-white border-2 border-black flex items-center justify-center hover:bg-yellow-100 transition-colors"
+                        title="X (Twitter)"
+                    >
+                        {/* X logo - custom SVG since lucide doesn't have X/Twitter */}
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg>
+                    </a>
+                    <a
+                        href={LINK_YOUTUBE}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-8 h-8 bg-white border-2 border-black flex items-center justify-center hover:bg-yellow-100 transition-colors"
+                        title="YouTube"
+                    >
+                        <Youtube size={16} />
+                    </a>
+                </div>
 
                 <p className="font-pixel text-[8px] md:text-[10px] text-yellow-900 uppercase tracking-wider">
                     ©2022-2025 Hero of Bitcoin • heroofbitcoin.xyz

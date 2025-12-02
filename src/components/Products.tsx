@@ -251,8 +251,11 @@ const Products: React.FC = () => {
         ]}
         buyLink={LINK_MICROSD_CARTRIDGE}
         badgeText="NEW"
-        imageIcon={<Disc size={60} className="text-gray-400" strokeWidth={1.5} />}
-        imagePlaceholderText="MICROSD CART IMAGE"
+        images={[
+          '/assets/product/microsd/1.jpg',
+          '/assets/product/microsd/2.jpg',
+          '/assets/product/microsd/3.jpg'
+        ]}
         galleryCount={3}
         compatibility="microSD works with R36S, Miyoo Mini, Analogue Pocket, and any emulator."
       >
@@ -282,8 +285,11 @@ const Products: React.FC = () => {
         ]}
         buyLink={LINK_R36S_DEVICE}
         badgeText="READY TO PLAY"
-        imageIcon={<Gamepad2 size={60} className="text-gray-400" strokeWidth={1.5} />}
-        imagePlaceholderText="R36S DEVICE IMAGE"
+        images={[
+          '/assets/product/r36s/1.jpg',
+          '/assets/product/r36s/2.jpg',
+          '/assets/product/r36s/3.jpg'
+        ]}
         galleryCount={3}
         compatibility="Supports GB, GBC, GBA, NES, SNES, Genesis, PS1, and more."
       >

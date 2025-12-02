@@ -99,7 +99,11 @@ Sobald ich die URLs habe, aktualisiere ich die Website und alle Links funktionie
 
 ## Marketing-Links (LIVE)
 
-Diese Direktlinks sind aktiv und koennen sofort fuer Marketing verwendet werden:
+Diese Direktlinks sind aktiv und koennen sofort fuer Marketing verwendet werden.
+
+**Tipp:** Die Sprache kann direkt auf der Website ueber kleine Pixel-Art Flaggen im Header umgeschaltet werden. Die Spracheinstellung wird im Browser gespeichert.
+
+### Englisch (EN)
 
 | Zweck | URL |
 |-------|-----|
@@ -108,9 +112,29 @@ Diese Direktlinks sind aktiv und koennen sofort fuer Marketing verwendet werden:
 | Collector's Edition | `https://heroofbitcoin.xyz/#collectors-edition` |
 | Digital Edition | `https://heroofbitcoin.xyz/#digital-edition` |
 | Hero Handheld | `https://heroofbitcoin.xyz/#hero-handheld` |
-| Spielbare Demo | `https://demo.heroofbitcoin.xyz` |
+| Play Demo | `https://demo.heroofbitcoin.xyz` |
 
-**Tipp:** Die Sprache kann direkt auf der Website ueber kleine Pixel-Art Flaggen im Header umgeschaltet werden. Die Spracheinstellung wird im Browser gespeichert.
+### Deutsch (DE)
+
+| Zweck | URL |
+|-------|-----|
+| Startseite | `https://heroofbitcoin.xyz` |
+| Alle Produkte | `https://heroofbitcoin.xyz/#products` |
+| Sammler-Edition | `https://heroofbitcoin.xyz/#collectors-edition` |
+| Digital Edition | `https://heroofbitcoin.xyz/#digital-edition` |
+| Hero Handheld | `https://heroofbitcoin.xyz/#hero-handheld` |
+| Demo Spielen | `https://demo.heroofbitcoin.xyz` |
+
+### Spanisch (ES)
+
+| Zweck | URL |
+|-------|-----|
+| Pagina Principal | `https://heroofbitcoin.xyz` |
+| Todos los Productos | `https://heroofbitcoin.xyz/#products` |
+| Edicion Coleccionista | `https://heroofbitcoin.xyz/#collectors-edition` |
+| Edicion Digital | `https://heroofbitcoin.xyz/#digital-edition` |
+| Hero Handheld | `https://heroofbitcoin.xyz/#hero-handheld` |
+| Jugar Demo | `https://demo.heroofbitcoin.xyz` |
 
 ---
 

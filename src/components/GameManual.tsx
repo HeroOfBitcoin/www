@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Coins, MapPin, Sword, Glasses, TrendingUp, Mic2, Landmark, Hash, Ghost, ImageOff } from 'lucide-react';
+import { Coins, MapPin, Sword, Glasses, TrendingUp, Mic2, Landmark, Hash, Ghost, ImageOff, Play, ShoppingCart } from 'lucide-react';
 import { Character } from '../types';
 
 /**
@@ -93,10 +93,118 @@ const CharacterPortrait: React.FC<{ char: Character }> = ({ char }) => {
     );
 };
 
+/*
+  =============================================================================
+  COPIARO STORE LINK
+  =============================================================================
+  Update this URL when the direct product page becomes available.
+  =============================================================================
+*/
+const LINK_COPIARO_STORE = 'https://copiaro.com/brand/hob';
+
+/*
+  =============================================================================
+  YOUTUBE TRAILER
+  =============================================================================
+  Video ID: 5puiZFbMUN4
+  Full URL: https://www.youtube.com/watch?v=5puiZFbMUN4
+  =============================================================================
+*/
+const YOUTUBE_TRAILER_ID = '5puiZFbMUN4';
+
 const GameManual: React.FC = () => {
+  const [showTrailer, setShowTrailer] = useState(false);
+
   return (
     <div className="space-y-16">
-      
+
+      {/*
+        =========================================================================
+        RELEASE TRAILER SECTION
+        =========================================================================
+        Prominent video section with:
+        - Thumbnail with play button (no autoplay)
+        - Copiaro buy overlay at bottom of video
+        =========================================================================
+      */}
+      <div className="relative">
+        <h2 className="font-pixel text-xl border-b-4 border-black mb-6 pb-2 flex items-center gap-2">
+          <Play size={20} className="text-red-600" />
+          Release Trailer
+        </h2>
+
+        <div className="relative border-4 border-black pixel-shadow overflow-hidden bg-black">
+          {/* Video Container - 16:9 aspect ratio */}
+          <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+            {!showTrailer ? (
+              /* Thumbnail with Play Button */
+              <div
+                className="absolute inset-0 cursor-pointer group"
+                onClick={() => setShowTrailer(true)}
+              >
+                {/* YouTube Thumbnail */}
+                <img
+                  src={`https://img.youtube.com/vi/${YOUTUBE_TRAILER_ID}/maxresdefault.jpg`}
+                  alt="Hero of Bitcoin - Release Trailer"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    // Fallback to hqdefault if maxresdefault not available
+                    (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${YOUTUBE_TRAILER_ID}/hqdefault.jpg`;
+                  }}
+                />
+
+                {/* Dark Overlay */}
+                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors" />
+
+                {/* Play Button */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-20 h-20 md:w-24 md:h-24 bg-red-600 rounded-full flex items-center justify-center border-4 border-white shadow-2xl group-hover:scale-110 group-hover:bg-red-500 transition-all">
+                    <Play size={40} className="text-white ml-1" fill="white" />
+                  </div>
+                </div>
+
+                {/* "Watch Trailer" Text */}
+                <div className="absolute top-4 left-4 bg-black/70 px-3 py-1 rounded">
+                  <span className="font-pixel text-xs text-white">CLICK TO PLAY</span>
+                </div>
+              </div>
+            ) : (
+              /* YouTube Embed - Only loads when user clicks */
+              <iframe
+                className="absolute inset-0 w-full h-full"
+                src={`https://www.youtube.com/embed/${YOUTUBE_TRAILER_ID}?autoplay=1&rel=0&modestbranding=1`}
+                title="Hero of Bitcoin - Release Trailer"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            )}
+          </div>
+
+          {/*
+            =========================================================================
+            COPIARO BUY OVERLAY
+            =========================================================================
+            Persistent overlay at bottom of video linking to Copiaro store
+            =========================================================================
+          */}
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent pt-8 pb-3 px-4 pointer-events-none">
+            <a
+              href={LINK_COPIARO_STORE}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="pointer-events-auto flex items-center justify-center gap-3 bg-green-500 hover:bg-green-400 text-white font-pixel py-3 px-6 border-2 border-white shadow-lg hover:scale-105 transition-all mx-auto max-w-xs"
+            >
+              <ShoppingCart size={18} />
+              <span className="text-sm">BUY AT COPIARO</span>
+            </a>
+            <p className="text-center text-white/70 text-[10px] mt-2 font-mono">
+              Our trusted partner for physical cartridges & merchandise
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* SECTION 1: COVER (Yellow Style inside the white page flow for emphasis) */}
       <div className="bg-yellow-400 border-4 border-black p-8 text-center relative overflow-hidden pixel-shadow transform rotate-1">
         <div className="absolute top-2 right-2">

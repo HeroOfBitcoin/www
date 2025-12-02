@@ -127,7 +127,7 @@ const App: React.FC = () => {
                     <div className="flex items-center justify-between w-full md:w-auto">
                         <button
                             onClick={() => { setActiveTab(Tab.GAME); setMobileMenuOpen(false); }}
-                            className="flex items-center hover:opacity-80 transition-opacity"
+                            className="flex items-center transition-transform hover:scale-105 active:scale-95"
                         >
                             {/*
                               =========================================================================
@@ -140,7 +140,7 @@ const App: React.FC = () => {
                             <img
                                 src="/assets/images/HoB_Logo_only.png"
                                 alt="Hero of Bitcoin"
-                                className="h-10 md:h-12 w-auto mix-blend-multiply"
+                                className="h-12 md:h-14 w-auto mix-blend-multiply"
                             />
                         </button>
                         {/* Mobile Menu Toggle */}

@@ -239,16 +239,16 @@ const GameManual: React.FC = () => {
         <div className="grid md:grid-cols-2 gap-8 items-start">
             <div className="space-y-6">
                 <p className="text-base md:text-lg leading-relaxed text-gray-800">
-                  <span className="font-pixel text-yellow-600">Hero of Bitcoin</span> is a story inspired by Bitcoin culture, set in the beautiful Bitcoin-sovereign nation of <strong className="font-bold">El Salvador</strong>.
+                  <span className="font-pixel text-yellow-600">Hero of Bitcoin</span> is a story inspired by Bitcoin culture, set in the beautiful Bitcoin-sovereign nation of <span className="font-pixel text-yellow-600">El Salvador</span>.
                 </p>
                 <p className="text-base md:text-lg leading-relaxed text-gray-800">
-                  You will be taken to iconic places such as <strong>Bitcoin Beach</strong>, the volcano and more, all the way to the bank's doorstep.
+                  You will be taken to iconic places such as <span className="font-pixel text-yellow-600">Bitcoin Beach</span>, the volcano and more, all the way to the bank's doorstep.
                 </p>
                 <p className="text-base md:text-lg leading-relaxed text-gray-800">
-                  The game follows the journey of a young man called <span className="font-pixel text-red-600">Hero</span>, a new bitcoiner, who journeys to El Salvador wanting to help the Bitcoin fight on the frontlines.
+                  The game follows the journey of a young man called <span className="font-pixel text-yellow-600">Hero</span>, a new bitcoiner, who journeys to El Salvador wanting to help the Bitcoin fight on the frontlines.
                 </p>
                 <p className="text-base md:text-lg leading-relaxed text-gray-800">
-                  You will need to help <strong>President Bukele</strong> and other bitcoiners to ensure poocoiners, bears, bankers and more do not stand in the way of Bitcoin adoption.
+                  You will need to help <span className="font-pixel text-yellow-600">President Bukele</span> and other bitcoiners to ensure poocoiners, bears, bankers and more do not stand in the way of Bitcoin adoption.
                 </p>
             </div>
 

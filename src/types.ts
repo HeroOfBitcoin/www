@@ -16,6 +16,5 @@ export interface Shortcut {
 
 export enum Tab {
   GAME = 'GAME',
-  DEVICE = 'DEVICE',
-  CARTRIDGE = 'CARTRIDGE'
+  PRODUCTS = 'PRODUCTS'
 }

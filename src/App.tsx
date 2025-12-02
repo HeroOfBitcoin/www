@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import GameManual from './components/GameManual';
-import DeviceGuide from './components/DeviceGuide';
-import PhysicalCartridge from './components/PhysicalCartridge';
+import Products from './components/Products';
 import { Tab } from './types';
-import { Smartphone, Disc, Menu, Play, ShoppingCart, Shirt } from 'lucide-react';
+import { Package, Menu, Play, ShoppingCart, Shirt } from 'lucide-react';
 
 /*
   =============================================================================
@@ -138,9 +137,8 @@ const App: React.FC = () => {
 
                     {/* Navigation Tabs */}
                     <nav className={`${mobileMenuOpen ? 'flex' : 'hidden'} md:flex flex-col md:flex-row gap-2 md:gap-4 w-full md:w-auto mt-4 md:mt-0`}>
-                        {/* Note: MANUAL tab removed - accessed via logo click or QR code on physical products */}
-                        <NavButton tab={Tab.DEVICE} icon={Smartphone} label="DEVICE" />
-                        <NavButton tab={Tab.CARTRIDGE} icon={Disc} label="CARTRIDGE" />
+                        {/* Single PRODUCTS tab for all products (cartridge, microSD, R36S) */}
+                        <NavButton tab={Tab.PRODUCTS} icon={Package} label="PRODUCTS" />
                         <a
                             href="https://demo.heroofbitcoin.xyz"
                             className="flex items-center gap-2 px-4 py-3 md:py-2 text-sm font-bold border-2 border-black transition-all w-full md:w-auto bg-red-500 text-white hover:bg-red-600"
@@ -166,8 +164,7 @@ const App: React.FC = () => {
             <main className="flex-1 p-4 md:p-8 overflow-y-auto bg-[#f8f9fa]">
                 <div className="animate-fadeIn max-w-3xl mx-auto">
                     {activeTab === Tab.GAME && <GameManual />}
-                    {activeTab === Tab.DEVICE && <DeviceGuide />}
-                    {activeTab === Tab.CARTRIDGE && <PhysicalCartridge />}
+                    {activeTab === Tab.PRODUCTS && <Products />}
                 </div>
             </main>
 

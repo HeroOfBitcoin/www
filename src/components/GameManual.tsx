@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Coins, MapPin, Sword, Glasses, TrendingUp, Mic2, Landmark, Hash, Ghost, ImageOff, Play, ShoppingCart } from 'lucide-react';
+import { Coins, MapPin, Glasses, TrendingUp, Mic2, Landmark, Hash, Ghost, ImageOff, Play, ShoppingCart } from 'lucide-react';
 import { Character } from '../types';
 
 /**
@@ -120,20 +120,44 @@ const GameManual: React.FC = () => {
 
       {/*
         =========================================================================
-        RELEASE TRAILER SECTION
+        HERO SECTION: COVER + RELEASE TRAILER COMBINED
         =========================================================================
-        Prominent video section with:
-        - Thumbnail with play button (no autoplay)
-        - Copiaro buy overlay at bottom of video
+        Prominent header with:
+        - Hero of Bitcoin logo with avatar
+        - Release trailer (click to play, no autoplay)
+        - Copiaro buy overlay appears ONLY after watching trailer
         =========================================================================
       */}
-      <div className="relative">
-        <h2 className="font-pixel text-xl border-b-4 border-black mb-6 pb-2 flex items-center gap-2">
-          <Play size={20} className="text-red-600" />
-          Release Trailer
-        </h2>
+      <div className="bg-yellow-400 border-4 border-black p-6 md:p-8 relative overflow-hidden pixel-shadow">
+        {/* Official Seal */}
+        <div className="absolute top-2 right-2 z-10">
+          <div className="w-14 h-14 md:w-16 md:h-16 bg-yellow-300 border-2 border-yellow-600 rounded-full flex items-center justify-center rotate-12">
+            <div className="text-[5px] md:text-[6px] font-bold text-yellow-800 text-center leading-tight font-sans">
+              Official<br/>Seal
+            </div>
+          </div>
+        </div>
 
-        <div className="relative border-4 border-black pixel-shadow overflow-hidden bg-black">
+        {/* Logo and Title */}
+        <div className="text-center mb-6">
+          {/*
+            =========================================================================
+            HERO OF BITCOIN LOGO WITH AVATAR
+            =========================================================================
+            Location: public/assets/images/HoB_Logo_Avatar.png
+            Description: Full logo with Hero character - used in cover/header
+            =========================================================================
+          */}
+          <img
+            src="/assets/images/HoB_Logo_Avatar.png"
+            alt="Hero of Bitcoin"
+            className="mx-auto w-48 md:w-64 h-auto mb-4 drop-shadow-lg"
+          />
+          <div className="font-bold text-xs tracking-widest uppercase text-yellow-900">Instruction Booklet</div>
+        </div>
+
+        {/* Release Trailer */}
+        <div className="relative border-4 border-black overflow-hidden bg-black max-w-2xl mx-auto">
           {/* Video Container - 16:9 aspect ratio */}
           <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
             {!showTrailer ? (
@@ -165,7 +189,7 @@ const GameManual: React.FC = () => {
 
                 {/* "Watch Trailer" Text */}
                 <div className="absolute top-4 left-4 bg-black/70 px-3 py-1 rounded">
-                  <span className="font-pixel text-xs text-white">CLICK TO PLAY</span>
+                  <span className="font-pixel text-xs text-white">WATCH TRAILER</span>
                 </div>
               </div>
             ) : (
@@ -185,54 +209,26 @@ const GameManual: React.FC = () => {
             =========================================================================
             COPIARO BUY OVERLAY
             =========================================================================
-            Persistent overlay at bottom of video linking to Copiaro store
+            Only visible AFTER user clicks to watch the trailer
             =========================================================================
           */}
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent pt-8 pb-3 px-4 pointer-events-none">
-            <a
-              href={LINK_COPIARO_STORE}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="pointer-events-auto flex items-center justify-center gap-3 bg-green-500 hover:bg-green-400 text-white font-pixel py-3 px-6 border-2 border-white shadow-lg hover:scale-105 transition-all mx-auto max-w-xs"
-            >
-              <ShoppingCart size={18} />
-              <span className="text-sm">BUY AT COPIARO</span>
-            </a>
-            <p className="text-center text-white/70 text-[10px] mt-2 font-mono">
-              Our trusted partner for physical cartridges & merchandise
-            </p>
-          </div>
+          {showTrailer && (
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent pt-8 pb-3 px-4 pointer-events-none">
+              <a
+                href={LINK_COPIARO_STORE}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="pointer-events-auto flex items-center justify-center gap-3 bg-green-500 hover:bg-green-400 text-white font-pixel py-3 px-6 border-2 border-white shadow-lg hover:scale-105 transition-all mx-auto max-w-xs"
+              >
+                <ShoppingCart size={18} />
+                <span className="text-sm">BUY AT COPIARO</span>
+              </a>
+              <p className="text-center text-white/70 text-[10px] mt-2 font-mono">
+                Our trusted partner for physical cartridges & merchandise
+              </p>
+            </div>
+          )}
         </div>
-      </div>
-
-      {/* SECTION 1: COVER (Yellow Style inside the white page flow for emphasis) */}
-      <div className="bg-yellow-400 border-4 border-black p-8 text-center relative overflow-hidden pixel-shadow transform rotate-1">
-        <div className="absolute top-2 right-2">
-             <div className="w-16 h-16 bg-yellow-300 border-2 border-yellow-600 rounded-full flex items-center justify-center rotate-12">
-                <div className="text-[6px] font-bold text-yellow-800 text-center leading-tight font-sans">
-                    Official<br/>Seal
-                </div>
-             </div>
-        </div>
-
-        {/*
-          =========================================================================
-          IMAGE #7: COVER ART / GAME LOGO
-          =========================================================================
-          Location: public/assets/cover-logo.png
-          Size: 128x128px recommended (displayed at 128x128px)
-          Description: Main game logo or cover art for the instruction booklet
-          Currently showing: Sword icon placeholder
-          =========================================================================
-        */}
-        <div className="mx-auto w-32 h-32 bg-[#e0f8cf] border-4 border-black mb-4 flex items-center justify-center pixel-shadow">
-             <Sword size={48} className="text-[#071821]" />
-        </div>
-
-        <h1 className="font-pixel text-3xl text-red-600 mb-2 drop-shadow-[2px_2px_0_black]">
-          HERO OF<br/>BITCOIN
-        </h1>
-        <div className="font-bold text-xs tracking-widest uppercase">Instruction Booklet</div>
       </div>
 
       {/* SECTION 2: STORY */}
@@ -288,30 +284,23 @@ const GameManual: React.FC = () => {
       <div>
          <h2 className="font-pixel text-xl border-b-4 border-black mb-6 pb-2">Controls</h2>
          <div className="flex flex-col md:flex-row gap-8 items-center justify-center">
-             {/* Game Boy Illustration */}
-             <div className="w-48 h-72 bg-yellow-400 border-4 border-black rounded-lg relative pixel-shadow shadow-xl shrink-0">
-                <div className="absolute top-4 left-4 right-4 h-32 bg-gray-700 rounded-t-lg border-2 border-black flex items-center justify-center">
-                    <div className="w-32 h-24 bg-[#9bbc0f] border-2 border-black shadow-inner flex flex-col items-center justify-center">
-                        <span className="font-pixel text-[6px] text-[#0f380f]">PAUSED</span>
-                    </div>
-                </div>
-                {/* D-Pad */}
-                <div className="absolute top-48 left-4 w-12 h-12">
-                    <div className="w-4 h-12 bg-black absolute left-4 rounded-sm"></div>
-                    <div className="w-12 h-4 bg-black absolute top-4 rounded-sm"></div>
-                </div>
-                {/* AB Buttons */}
-                <div className="absolute top-52 right-4 flex gap-2 transform rotate-[-15deg]">
-                    <div className="w-6 h-6 bg-red-600 rounded-full border-b-2 border-red-800"></div>
-                    <div className="w-6 h-6 bg-red-600 rounded-full border-b-2 border-red-800"></div>
-                </div>
-                {/* Start/Select */}
-                <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-2">
-                    <div className="w-8 h-3 bg-black rounded-full transform rotate-12"></div>
-                    <div className="w-8 h-3 bg-black rounded-full transform rotate-12"></div>
-                </div>
+             {/*
+               =========================================================================
+               GAME BOY IMAGE
+               =========================================================================
+               Location: public/assets/images/Game_Boy_HoB.jpg
+               Description: Custom orange Game Boy with Hero of Bitcoin branding
+               Shows button layout: D-Pad, A, B, Select, Start
+               =========================================================================
+             */}
+             <div className="shrink-0">
+                <img
+                  src="/assets/images/Game_Boy_HoB.jpg"
+                  alt="Hero of Bitcoin Game Boy Controls"
+                  className="w-48 md:w-56 h-auto pixel-shadow border-4 border-black"
+                />
              </div>
-             
+
              {/* Key Map */}
              <div className="grid grid-cols-1 gap-4 w-full max-w-sm">
                 {[

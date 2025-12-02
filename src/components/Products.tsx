@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PixelCard from './ui/PixelCard';
+import { useLanguage } from '../i18n';
 import { Star, ShieldCheck, ShoppingCart, Sticker, Gamepad2, Zap, HardDrive, ChevronDown, ChevronUp, HelpCircle, AlertTriangle, FolderOpen, Disc, Link } from 'lucide-react';
 
 /*
@@ -214,6 +215,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 };
 
 const Products: React.FC = () => {
+  const { t } = useLanguage();
   const [showR36STechDetails, setShowR36STechDetails] = useState(false);
 
   // Handle hash navigation on mount
@@ -234,7 +236,7 @@ const Products: React.FC = () => {
     <div className="space-y-12">
       {/* Header */}
       <div id="products" className="text-center mb-8 scroll-mt-24">
-        <h2 className="font-pixel text-2xl md:text-3xl text-black mb-4 uppercase">Products</h2>
+        <h2 className="font-pixel text-2xl md:text-3xl text-black mb-4 uppercase">{t.products.title}</h2>
         <div className="w-24 h-1 bg-black mx-auto"></div>
       </div>
 
@@ -249,24 +251,24 @@ const Products: React.FC = () => {
       */}
       <ProductCard
         id="collectors-edition"
-        title="Collector's Edition"
-        subtitle="LIMITED TO ~450 UNITS"
-        quote="A tangible piece of Bitcoin history, playable on original hardware."
+        title={t.products.collectors.title}
+        subtitle={t.products.collectors.subtitle}
+        quote={t.products.collectors.quote}
         features={[
-          { icon: <ShieldCheck className="text-green-600" size={18} />, text: "Premium Box & Manual" },
-          { icon: <Star className="text-yellow-600" size={18} />, text: "Orange Game Boy Cartridge" },
-          { icon: <Disc className="text-purple-600" size={18} />, text: "ROM Available on Request" },
-          { icon: <Sticker className="text-blue-600" size={18} />, text: "Includes Sticker" },
+          { icon: <ShieldCheck className="text-green-600" size={18} />, text: t.products.collectors.feature1 },
+          { icon: <Star className="text-yellow-600" size={18} />, text: t.products.collectors.feature2 },
+          { icon: <Disc className="text-purple-600" size={18} />, text: t.products.collectors.feature3 },
+          { icon: <Sticker className="text-blue-600" size={18} />, text: t.products.collectors.feature4 },
         ]}
         buyLink={LINK_PHYSICAL_CARTRIDGE}
-        badgeText="LTD EDITION"
+        badgeText={t.products.badges.ltdEdition}
         images={[
           '/assets/product/cartridge/1.webp',
           '/assets/product/cartridge/2.webp',
           '/assets/product/cartridge/3.webp'
         ]}
         galleryCount={3}
-        compatibility="Compatible with Game Boy, GBC, GBA, Analogue Pocket. Region free."
+        compatibility={t.products.collectors.compatibility}
       />
 
       {/* Product 2: Digital Edition */}
@@ -280,26 +282,26 @@ const Products: React.FC = () => {
       */}
       <ProductCard
         id="digital-edition"
-        title="Digital Edition"
-        subtitle="PLAY ANYWHERE"
-        quote="The perfect collectible for emulator enthusiasts. No Game Boy required."
+        title={t.products.digital.title}
+        subtitle={t.products.digital.subtitle}
+        quote={t.products.digital.quote}
         features={[
-          { icon: <ShieldCheck className="text-green-600" size={18} />, text: "Premium Box & Manual" },
-          { icon: <Disc className="text-purple-600" size={18} />, text: "microSD with Game ROM" },
-          { icon: <Sticker className="text-blue-600" size={18} />, text: "Includes Sticker" },
+          { icon: <ShieldCheck className="text-green-600" size={18} />, text: t.products.digital.feature1 },
+          { icon: <Disc className="text-purple-600" size={18} />, text: t.products.digital.feature2 },
+          { icon: <Sticker className="text-blue-600" size={18} />, text: t.products.digital.feature3 },
         ]}
         buyLink={LINK_MICROSD_CARTRIDGE}
-        badgeText="BUDGET PICK"
+        badgeText={t.products.badges.budgetPick}
         images={[
           '/assets/product/microsd/1.jpg',
           '/assets/product/microsd/2.jpg',
           '/assets/product/microsd/3.jpg'
         ]}
         galleryCount={3}
-        compatibility="Play on Raspberry Pi, MiSTer FPGA, RetroArch, or any Game Boy emulator."
+        compatibility={t.products.digital.compatibility}
       >
         <div className="bg-purple-50 border border-purple-200 p-2 rounded text-xs">
-          <strong className="text-purple-700">Note:</strong> Includes a decorative cartridge-shaped collectible. The game ROM is on the included microSD card.
+          <strong className="text-purple-700">Note:</strong> {t.products.digital.note}
         </div>
       </ProductCard>
 
@@ -313,38 +315,38 @@ const Products: React.FC = () => {
       */}
       <ProductCard
         id="hero-handheld"
-        title="Hero Handheld"
-        subtitle="READY TO PLAY"
-        quote="Hero of Bitcoin pre-installed. Power on and play instantly."
+        title={t.products.handheld.title}
+        subtitle={t.products.handheld.subtitle}
+        quote={t.products.handheld.quote}
         features={[
-          { icon: <Zap className="text-green-600" size={18} />, text: "ArkOS Pre-Installed" },
-          { icon: <Gamepad2 className="text-yellow-600" size={18} />, text: "Hero of Bitcoin Ready" },
-          { icon: <HardDrive className="text-blue-600" size={18} />, text: "microSD Card Included" },
-          { icon: <Sticker className="text-blue-600" size={18} />, text: "Includes Sticker" },
+          { icon: <Zap className="text-green-600" size={18} />, text: t.products.handheld.feature1 },
+          { icon: <Gamepad2 className="text-yellow-600" size={18} />, text: t.products.handheld.feature2 },
+          { icon: <HardDrive className="text-blue-600" size={18} />, text: t.products.handheld.feature3 },
+          { icon: <Sticker className="text-blue-600" size={18} />, text: t.products.handheld.feature4 },
         ]}
         buyLink={LINK_R36S_DEVICE}
-        badgeText="READY TO PLAY"
+        badgeText={t.products.badges.readyToPlay}
         images={[
           '/assets/product/r36s/1.jpg',
           '/assets/product/r36s/2.jpg',
           '/assets/product/r36s/3.jpg'
         ]}
         galleryCount={3}
-        compatibility="Also supports GB, GBC, GBA, NES, SNES, Genesis, PS1, and more."
+        compatibility={t.products.handheld.compatibility}
       >
         {/* Controls */}
         <div className="border border-gray-200 p-3 bg-gray-50">
-          <h4 className="font-bold text-xs mb-2">Quick Controls</h4>
+          <h4 className="font-bold text-xs mb-2">{t.products.handheld.quickControls}</h4>
           <div className="grid grid-cols-2 gap-1 text-[10px] font-mono">
-            <div>Exit: SELECT+START</div>
-            <div>Save: SELECT+R1</div>
-            <div>Load: SELECT+L1</div>
-            <div>Fast Fwd: SELECT+R2</div>
+            <div>{t.products.handheld.exit}: SELECT+START</div>
+            <div>{t.products.handheld.save}: SELECT+R1</div>
+            <div>{t.products.handheld.load}: SELECT+L1</div>
+            <div>{t.products.handheld.fastFwd}: SELECT+R2</div>
           </div>
         </div>
         {/* Copyright disclaimer */}
         <p className="text-[9px] text-gray-400 font-mono mt-2">
-          Other system ROMs not included. Please respect copyright holders when adding additional games.
+          {t.products.handheld.copyright}
         </p>
       </ProductCard>
 
@@ -356,7 +358,7 @@ const Products: React.FC = () => {
         >
           <span className="font-pixel text-sm flex items-center gap-2">
             <HelpCircle size={16} />
-            Hero Handheld Technical Details & Troubleshooting
+            {t.products.techDetails.title}
           </span>
           {showR36STechDetails ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
         </button>
@@ -367,7 +369,7 @@ const Products: React.FC = () => {
             <div className="flex gap-3 p-3 bg-red-50 border border-red-200">
               <AlertTriangle className="text-red-600 shrink-0" size={20} />
               <div className="text-xs font-mono">
-                <strong className="text-red-600">Safe Shutdown:</strong> Never pull card while saving. Use START → Quit → Shutdown or SELECT+START twice.
+                <strong className="text-red-600">{t.products.techDetails.safeShutdown}</strong> {t.products.techDetails.safeShutdownDesc}
               </div>
             </div>
 
@@ -376,12 +378,12 @@ const Products: React.FC = () => {
               <section>
                 <h4 className="font-bold mb-2 flex items-center gap-1">
                   <Zap size={14} className="text-yellow-600" />
-                  Power & Charging
+                  {t.products.techDetails.power}
                 </h4>
                 <ul className="list-disc list-inside space-y-1 font-mono text-gray-600">
-                  <li>USB-A to USB-C only</li>
-                  <li>5V (1-2A) charger</li>
-                  <li>Avoid fast chargers</li>
+                  {t.products.techDetails.powerItems.map((item, i) => (
+                    <li key={i}>{item}</li>
+                  ))}
                 </ul>
               </section>
 
@@ -389,12 +391,12 @@ const Products: React.FC = () => {
               <section>
                 <h4 className="font-bold mb-2 flex items-center gap-1">
                   <HardDrive size={14} className="text-blue-600" />
-                  microSD Handling
+                  {t.products.techDetails.microsd}
                 </h4>
                 <ul className="list-disc list-inside space-y-1 font-mono text-gray-600">
-                  <li>Don't reformat card</li>
-                  <li>Use EASYROMS partition</li>
-                  <li>Always eject safely</li>
+                  {t.products.techDetails.microsdItems.map((item, i) => (
+                    <li key={i}>{item}</li>
+                  ))}
                 </ul>
               </section>
 
@@ -402,12 +404,12 @@ const Products: React.FC = () => {
               <section>
                 <h4 className="font-bold mb-2 flex items-center gap-1">
                   <FolderOpen size={14} className="text-yellow-600" />
-                  Adding Games
+                  {t.products.techDetails.addingGames}
                 </h4>
                 <ul className="list-disc list-inside space-y-1 font-mono text-gray-600">
-                  <li>Path: EASYROMS/roms/</li>
-                  <li>Match folder (nes → /nes)</li>
-                  <li>Bios files included</li>
+                  {t.products.techDetails.addingItems.map((item, i) => (
+                    <li key={i}>{item}</li>
+                  ))}
                 </ul>
               </section>
             </div>
@@ -415,16 +417,16 @@ const Products: React.FC = () => {
             {/* Troubleshooting */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
               <div className="border border-gray-200 p-2 bg-gray-50 text-[10px]">
-                <strong className="block uppercase mb-1">Won't Boot</strong>
-                <span className="font-mono text-gray-600">Hold POWER+A 15s, release, press Power</span>
+                <strong className="block uppercase mb-1">{t.products.techDetails.wontBoot}</strong>
+                <span className="font-mono text-gray-600">{t.products.techDetails.wontBootDesc}</span>
               </div>
               <div className="border border-gray-200 p-2 bg-gray-50 text-[10px]">
-                <strong className="block uppercase mb-1">Games Missing</strong>
-                <span className="font-mono text-gray-600">Check extensions, unzip, rescan in Options</span>
+                <strong className="block uppercase mb-1">{t.products.techDetails.gamesMissing}</strong>
+                <span className="font-mono text-gray-600">{t.products.techDetails.gamesMissingDesc}</span>
               </div>
               <div className="border border-gray-200 p-2 bg-gray-50 text-[10px]">
-                <strong className="block uppercase mb-1">Charging Issues</strong>
-                <span className="font-mono text-gray-600">Try different 5V brick, avoid sleeping ports</span>
+                <strong className="block uppercase mb-1">{t.products.techDetails.chargingIssues}</strong>
+                <span className="font-mono text-gray-600">{t.products.techDetails.chargingIssuesDesc}</span>
               </div>
             </div>
           </div>
@@ -434,8 +436,8 @@ const Products: React.FC = () => {
       {/* Info Note */}
       <PixelCard variant="info" className="mt-8">
         <div className="text-xs font-mono">
-          <strong className="block mb-2 uppercase">Shipping Info</strong>
-          All products ship worldwide. Customs and import duties may apply depending on your country.
+          <strong className="block mb-2 uppercase">{t.products.shippingTitle}</strong>
+          {t.products.shippingText}
         </div>
       </PixelCard>
     </div>

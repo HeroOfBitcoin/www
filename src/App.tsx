@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import GameManual from './components/GameManual';
 import Products from './components/Products';
+import LanguageSwitcher from './components/LanguageSwitcher';
+import { useLanguage } from './i18n';
 import { Tab } from './types';
 import { Package, Menu, Play, ShoppingCart, Shirt, Mail, Instagram, Youtube } from 'lucide-react';
 
@@ -29,6 +31,7 @@ const LINK_X = 'https://x.com/HeroOfBitcoin';
 const LINK_YOUTUBE = 'https://youtube.com/@HeroOfBitcoin';
 
 const App: React.FC = () => {
+  const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState<Tab>(Tab.GAME);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scanlinesActive, setScanlinesActive] = useState(false);
@@ -169,15 +172,19 @@ const App: React.FC = () => {
                     </div>
 
                     {/* Navigation Tabs */}
-                    <nav className={`${mobileMenuOpen ? 'flex' : 'hidden'} md:flex flex-col md:flex-row gap-2 md:gap-4 w-full md:w-auto mt-4 md:mt-0`}>
+                    <nav className={`${mobileMenuOpen ? 'flex' : 'hidden'} md:flex flex-col md:flex-row gap-2 md:gap-4 w-full md:w-auto mt-4 md:mt-0 items-center`}>
+                        {/* Language Switcher */}
+                        <div className="order-last md:order-first">
+                          <LanguageSwitcher />
+                        </div>
                         {/* Single PRODUCTS tab for all products (cartridge, microSD, R36S) */}
-                        <NavButton tab={Tab.PRODUCTS} icon={Package} label="PRODUCTS" />
+                        <NavButton tab={Tab.PRODUCTS} icon={Package} label={t.nav.products} />
                         <a
                             href="https://demo.heroofbitcoin.xyz"
                             className="flex items-center gap-2 px-4 py-3 md:py-2 text-sm font-bold border-2 border-black transition-all w-full md:w-auto bg-red-500 text-white hover:bg-red-600"
                         >
                             <Play size={18} />
-                            <span className="font-pixel text-xs tracking-wide">PLAY DEMO</span>
+                            <span className="font-pixel text-xs tracking-wide">{t.nav.playDemo}</span>
                         </a>
                         {/* Prominent BUY Button - Links to main Copiaro store page */}
                         <a
@@ -187,7 +194,7 @@ const App: React.FC = () => {
                             className="flex items-center gap-2 px-4 py-3 md:py-2 text-sm font-bold border-2 border-black transition-all w-full md:w-auto bg-green-500 text-white hover:bg-green-600 hover:scale-105 animate-pulse hover:animate-none"
                         >
                             <ShoppingCart size={18} />
-                            <span className="font-pixel text-xs tracking-wide">BUY NOW</span>
+                            <span className="font-pixel text-xs tracking-wide">{t.nav.buyNow}</span>
                         </a>
                     </nav>
                 </div>
@@ -211,7 +218,7 @@ const App: React.FC = () => {
                     className="inline-flex items-center gap-2 px-4 py-2 mb-3 text-xs font-bold border-2 border-black bg-white hover:bg-yellow-100 transition-colors"
                 >
                     <Shirt size={14} />
-                    <span>CUPS, SHIRTS & CAPS</span>
+                    <span>{t.footer.fanSwag}</span>
                 </a>
 
                 {/* Social Links */}
@@ -256,7 +263,7 @@ const App: React.FC = () => {
                 </div>
 
                 <p className="font-pixel text-[8px] md:text-[10px] text-yellow-900 uppercase tracking-wider">
-                    ©2022-2025 Hero of Bitcoin • heroofbitcoin.xyz
+                    {t.footer.copyright}
                 </p>
             </footer>
         </div>

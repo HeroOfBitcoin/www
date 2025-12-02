@@ -139,7 +139,7 @@ const GameManual: React.FC = () => {
                 The game follows the journey of a young man called <strong className="text-red-600">Hero</strong>, a new bitcoiner, who journeys to El Salvador wanting to help the Bitcoin fight on the frontlines.
                 </p>
                 <div className="bg-gray-100 p-4 border-l-4 border-black text-xs italic text-gray-700 mt-4 font-mono">
-                "You will need to help President Bukele and other bitcoiners to ensure sh*tcoiners, bears, bankers and more do not stand in the way of Bitcoin adoption."
+                "You will need to help President Bukele and other bitcoiners to ensure poocoiners, bears, bankers and more do not stand in the way of Bitcoin adoption."
                 </div>
             </div>
             

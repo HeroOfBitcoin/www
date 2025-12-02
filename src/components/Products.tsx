@@ -201,23 +201,23 @@ const Products: React.FC = () => {
         <div className="w-24 h-1 bg-black mx-auto"></div>
       </div>
 
-      {/* Product 1: Physical Cartridge */}
+      {/* Product 1: Collector's Edition */}
       {/*
         =========================================================================
-        PRODUCT: Physical Game Boy Cartridge
+        PRODUCT: Collector's Edition - Physical Game Boy Cartridge
         =========================================================================
         Images location: public/assets/product/cartridge/
-        - main.png (400x400px) - Main product image
-        - gallery-1.png, gallery-2.png, gallery-3.png (200x200px) - Gallery thumbs
+        Limited to ~450 units worldwide
         =========================================================================
       */}
       <ProductCard
-        title="Physical Cartridge"
-        subtitle="COLLECTOR'S EDITION"
+        title="Collector's Edition"
+        subtitle="LIMITED TO ~450 UNITS"
         quote="A tangible piece of Bitcoin history, playable on original hardware."
         features={[
           { icon: <ShieldCheck className="text-green-600" size={18} />, text: "Premium Box & Manual" },
-          { icon: <Star className="text-yellow-600" size={18} />, text: "Transparent Orange Cartridge" },
+          { icon: <Star className="text-yellow-600" size={18} />, text: "Orange Game Boy Cartridge" },
+          { icon: <Disc className="text-purple-600" size={18} />, text: "ROM Available on Request" },
           { icon: <Sticker className="text-blue-600" size={18} />, text: "Includes Sticker" },
         ]}
         buyLink={LINK_PHYSICAL_CARTRIDGE}
@@ -231,58 +231,56 @@ const Products: React.FC = () => {
         compatibility="Compatible with Game Boy, GBC, GBA, Analogue Pocket. Region free."
       />
 
-      {/* Product 2: microSD Cartridge */}
+      {/* Product 2: Digital Edition */}
       {/*
         =========================================================================
-        PRODUCT: microSD Cartridge Collectible
+        PRODUCT: Digital Edition - Collectible with microSD
         =========================================================================
         Images location: public/assets/product/microsd/
-        - main.png (400x400px) - Main product image
-        - gallery-1.png, gallery-2.png, gallery-3.png (200x200px) - Gallery thumbs
+        Budget-friendly option for emulator users
         =========================================================================
       */}
       <ProductCard
-        title="microSD Cartridge"
-        subtitle="DIGITAL COLLECTIBLE"
-        quote="Collector's cartridge with the game ROM ready to play on any emulator."
+        title="Digital Edition"
+        subtitle="PLAY ANYWHERE"
+        quote="The perfect collectible for emulator enthusiasts. No Game Boy required."
         features={[
           { icon: <ShieldCheck className="text-green-600" size={18} />, text: "Premium Box & Manual" },
           { icon: <Disc className="text-purple-600" size={18} />, text: "microSD with Game ROM" },
           { icon: <Sticker className="text-blue-600" size={18} />, text: "Includes Sticker" },
         ]}
         buyLink={LINK_MICROSD_CARTRIDGE}
-        badgeText="NEW"
+        badgeText="BUDGET PICK"
         images={[
           '/assets/product/microsd/1.jpg',
           '/assets/product/microsd/2.jpg',
           '/assets/product/microsd/3.jpg'
         ]}
         galleryCount={3}
-        compatibility="microSD works with R36S, Miyoo Mini, Analogue Pocket, and any emulator."
+        compatibility="Play on Raspberry Pi, MiSTer FPGA, RetroArch, or any Game Boy emulator."
       >
         <div className="bg-purple-50 border border-purple-200 p-2 rounded text-xs">
-          <strong className="text-purple-700">Note:</strong> This is a decorative cartridge-shaped collectible, not a playable Game Boy cartridge. The game is on the included microSD card.
+          <strong className="text-purple-700">Note:</strong> Includes a decorative cartridge-shaped collectible. The game ROM is on the included microSD card.
         </div>
       </ProductCard>
 
-      {/* Product 3: R36S Console */}
+      {/* Product 3: Hero Handheld */}
       {/*
         =========================================================================
-        PRODUCT: R36S Handheld Console
+        PRODUCT: Hero Handheld - R36S with Hero of Bitcoin pre-installed
         =========================================================================
         Images location: public/assets/product/r36s/
-        - main.png (400x400px) - Main product image
-        - gallery-1.png, gallery-2.png, gallery-3.png (200x200px) - Gallery thumbs
         =========================================================================
       */}
       <ProductCard
-        title="R36S Console"
-        subtitle="PRE-CONFIGURED HANDHELD"
+        title="Hero Handheld"
+        subtitle="READY TO PLAY"
         quote="Hero of Bitcoin pre-installed. Power on and play instantly."
         features={[
           { icon: <Zap className="text-green-600" size={18} />, text: "ArkOS Pre-Installed" },
           { icon: <Gamepad2 className="text-yellow-600" size={18} />, text: "Hero of Bitcoin Ready" },
           { icon: <HardDrive className="text-blue-600" size={18} />, text: "microSD Card Included" },
+          { icon: <Sticker className="text-blue-600" size={18} />, text: "Includes Sticker" },
         ]}
         buyLink={LINK_R36S_DEVICE}
         badgeText="READY TO PLAY"
@@ -292,7 +290,7 @@ const Products: React.FC = () => {
           '/assets/product/r36s/3.jpg'
         ]}
         galleryCount={3}
-        compatibility="Supports GB, GBC, GBA, NES, SNES, Genesis, PS1, and more."
+        compatibility="Also supports GB, GBC, GBA, NES, SNES, Genesis, PS1, and more."
       >
         {/* Controls */}
         <div className="border border-gray-200 p-3 bg-gray-50">
@@ -304,9 +302,13 @@ const Products: React.FC = () => {
             <div>Fast Fwd: SELECT+R2</div>
           </div>
         </div>
+        {/* Copyright disclaimer */}
+        <p className="text-[9px] text-gray-400 font-mono mt-2">
+          Other system ROMs not included. Please respect copyright holders when adding additional games.
+        </p>
       </ProductCard>
 
-      {/* R36S Technical Details - Collapsible */}
+      {/* Hero Handheld Technical Details - Collapsible */}
       <div className="border-2 border-gray-300 -mt-6">
         <button
           onClick={() => setShowR36STechDetails(!showR36STechDetails)}
@@ -314,7 +316,7 @@ const Products: React.FC = () => {
         >
           <span className="font-pixel text-sm flex items-center gap-2">
             <HelpCircle size={16} />
-            R36S Technical Details & Troubleshooting
+            Hero Handheld Technical Details & Troubleshooting
           </span>
           {showR36STechDetails ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
         </button>

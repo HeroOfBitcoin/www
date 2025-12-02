@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import GameManual from './components/GameManual';
 import Products from './components/Products';
 import { Tab } from './types';
@@ -41,17 +41,23 @@ const App: React.FC = () => {
     Effect: Toggles CRT-style scanline overlay across the entire website
     ===========================================================================
   */
-  useEffect(() => {
-    const pressedKeys = new Set<string>();
+  const pressedKeysRef = useRef(new Set<string>());
+  const hasToggledRef = useRef(false);
 
+  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const key = e.key.toLowerCase();
       if (['c', 'r', 't'].includes(key)) {
-        pressedKeys.add(key);
-        // Check if all three keys are held
-        if (pressedKeys.has('c') && pressedKeys.has('r') && pressedKeys.has('t')) {
+        pressedKeysRef.current.add(key);
+        // Check if all three keys are held and we haven't toggled yet
+        if (
+          pressedKeysRef.current.has('c') &&
+          pressedKeysRef.current.has('r') &&
+          pressedKeysRef.current.has('t') &&
+          !hasToggledRef.current
+        ) {
           setScanlinesActive(prev => !prev);
-          pressedKeys.clear(); // Reset after activation
+          hasToggledRef.current = true; // Prevent repeated toggles while holding
         }
       }
     };
@@ -59,7 +65,9 @@ const App: React.FC = () => {
     const handleKeyUp = (e: KeyboardEvent) => {
       const key = e.key.toLowerCase();
       if (['c', 'r', 't'].includes(key)) {
-        pressedKeys.delete(key);
+        pressedKeysRef.current.delete(key);
+        // Reset toggle flag when any key is released
+        hasToggledRef.current = false;
       }
     };
 

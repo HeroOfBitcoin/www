@@ -236,16 +236,22 @@ const GameManual: React.FC = () => {
       {/* SECTION 2: STORY */}
       <div>
         <h2 className="font-pixel text-xl border-b-4 border-black mb-6 pb-2">The Story</h2>
-        <div className="grid md:grid-cols-2 gap-8">
-            <div className="space-y-4 text-sm font-sans leading-relaxed text-gray-900 text-justify">
-                <p>
-                <strong className="font-bold">Hero of Bitcoin</strong> the game is a story inspired by Bitcoin culture and is set in the beautiful Bitcoin-sovereign nation of El Salvador. You will be taken to iconic places such as Bitcoin Beach, the volcano and more, all the way to the bank's doorstep.
+        <div className="grid md:grid-cols-2 gap-8 items-start">
+            <div className="space-y-6">
+                <p className="text-base md:text-lg leading-relaxed text-gray-800">
+                  <span className="font-pixel text-yellow-600">Hero of Bitcoin</span> is a story inspired by Bitcoin culture, set in the beautiful Bitcoin-sovereign nation of <strong className="font-bold">El Salvador</strong>.
                 </p>
-                <p>
-                The game follows the journey of a young man called <strong className="text-red-600">Hero</strong>, a new bitcoiner, who journeys to El Salvador wanting to help the Bitcoin fight on the frontlines. You will need to help President Bukele and other bitcoiners to ensure poocoiners, bears, bankers and more do not stand in the way of Bitcoin adoption.
+                <p className="text-base md:text-lg leading-relaxed text-gray-800">
+                  You will be taken to iconic places such as <strong>Bitcoin Beach</strong>, the volcano and more, all the way to the bank's doorstep.
+                </p>
+                <p className="text-base md:text-lg leading-relaxed text-gray-800">
+                  The game follows the journey of a young man called <span className="font-pixel text-red-600">Hero</span>, a new bitcoiner, who journeys to El Salvador wanting to help the Bitcoin fight on the frontlines.
+                </p>
+                <p className="text-base md:text-lg leading-relaxed text-gray-800">
+                  You will need to help <strong>President Bukele</strong> and other bitcoiners to ensure poocoiners, bears, bankers and more do not stand in the way of Bitcoin adoption.
                 </p>
             </div>
-            
+
             {/*
               =========================================================================
               GAME SCENES

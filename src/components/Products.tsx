@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PixelCard from './ui/PixelCard';
-import { Package, Star, ShieldCheck, ShoppingCart, Sticker, Gamepad2, Zap, HardDrive, ChevronDown, ChevronUp, HelpCircle, AlertTriangle, FolderOpen, Disc } from 'lucide-react';
+import { Star, ShieldCheck, ShoppingCart, Sticker, Gamepad2, Zap, HardDrive, ChevronDown, ChevronUp, HelpCircle, AlertTriangle, FolderOpen, Disc } from 'lucide-react';
 
 /*
   =============================================================================
@@ -21,9 +21,32 @@ const LINK_MICROSD_CARTRIDGE = 'https://copiaro.com/brand/hob'; // TODO: Update 
   =============================================================================
   PRODUCT GALLERY COMPONENT
   =============================================================================
-  Displays 1-3 small thumbnail images in a horizontal row below the main image
+  Displays thumbnail images - either actual images or placeholders
 */
-const ProductGallery: React.FC<{ placeholderCount: number }> = ({ placeholderCount }) => {
+const ProductGallery: React.FC<{
+  images?: string[];
+  placeholderCount?: number;
+  onSelect: (index: number) => void;
+  selectedIndex: number;
+}> = ({ images, placeholderCount = 3, onSelect, selectedIndex }) => {
+  if (images && images.length > 0) {
+    return (
+      <div className="flex gap-2 mt-3">
+        {images.map((src, i) => (
+          <button
+            key={i}
+            onClick={() => onSelect(i)}
+            className={`flex-1 aspect-square border-2 overflow-hidden transition-all ${
+              selectedIndex === i ? 'border-yellow-500 scale-105' : 'border-black hover:border-yellow-400'
+            }`}
+          >
+            <img src={src} alt={`Product view ${i + 1}`} className="w-full h-full object-cover" />
+          </button>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div className="flex gap-2 mt-3">
       {Array.from({ length: placeholderCount }).map((_, i) => (
@@ -51,9 +74,10 @@ interface ProductCardProps {
   features: { icon: React.ReactNode; text: string }[];
   buyLink: string;
   badgeText: string;
-  imageIcon: React.ReactNode;
-  imagePlaceholderText: string;
-  galleryCount: number;
+  imageIcon?: React.ReactNode;
+  imagePlaceholderText?: string;
+  images?: string[];
+  galleryCount?: number;
   compatibility?: string;
   children?: React.ReactNode;
 }
@@ -67,23 +91,36 @@ const ProductCard: React.FC<ProductCardProps> = ({
   badgeText,
   imageIcon,
   imagePlaceholderText,
-  galleryCount,
+  images,
+  galleryCount = 3,
   compatibility,
   children
 }) => {
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const hasImages = images && images.length > 0;
+
   return (
     <div className="border-4 border-black bg-white p-6 pixel-shadow">
       <div className="grid md:grid-cols-2 gap-6 items-start">
         {/* Product Image with Gallery */}
         <div>
           {/* Main Image */}
-          {/* Image comment injected via imageComment prop */}
-          <div className="bg-gray-100 border-2 border-black aspect-square relative flex items-center justify-center group">
-            <div className="absolute inset-0 bg-[linear-gradient(45deg,#f3f4f6_25%,transparent_25%,transparent_75%,#f3f4f6_75%,#f3f4f6)] bg-[length:16px_16px] opacity-50"></div>
-            {imageIcon}
-            <div className="absolute bottom-2 left-0 right-0 text-center font-pixel text-[10px] text-gray-400">
-              {imagePlaceholderText}
-            </div>
+          <div className="bg-gray-100 border-2 border-black aspect-square relative flex items-center justify-center group overflow-hidden">
+            {hasImages ? (
+              <img
+                src={images[selectedImageIndex]}
+                alt={`${title} - View ${selectedImageIndex + 1}`}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <>
+                <div className="absolute inset-0 bg-[linear-gradient(45deg,#f3f4f6_25%,transparent_25%,transparent_75%,#f3f4f6_75%,#f3f4f6)] bg-[length:16px_16px] opacity-50"></div>
+                {imageIcon}
+                <div className="absolute bottom-2 left-0 right-0 text-center font-pixel text-[10px] text-gray-400">
+                  {imagePlaceholderText}
+                </div>
+              </>
+            )}
             {/* Badge */}
             <div className="absolute -top-3 -right-3 bg-yellow-400 border-2 border-black px-2 py-1 rounded-full pixel-shadow-sm rotate-12 z-10">
               <div className="text-center font-bold text-[10px] leading-tight whitespace-nowrap">
@@ -92,11 +129,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
             </div>
           </div>
 
-          {/*
-            Gallery thumbnails - placeholder images
-            Add actual images to public/assets/product/[product-name]/
-          */}
-          <ProductGallery placeholderCount={galleryCount} />
+          {/* Gallery thumbnails */}
+          <ProductGallery
+            images={images}
+            placeholderCount={galleryCount}
+            onSelect={setSelectedImageIndex}
+            selectedIndex={selectedImageIndex}
+          />
         </div>
 
         {/* Details */}
@@ -182,8 +221,11 @@ const Products: React.FC = () => {
         ]}
         buyLink={LINK_PHYSICAL_CARTRIDGE}
         badgeText="LTD EDITION"
-        imageIcon={<Package size={60} className="text-gray-400" strokeWidth={1.5} />}
-        imagePlaceholderText="CARTRIDGE IMAGE"
+        images={[
+          '/assets/product/cartridge/1.webp',
+          '/assets/product/cartridge/2.webp',
+          '/assets/product/cartridge/3.webp'
+        ]}
         galleryCount={3}
         compatibility="Compatible with Game Boy, GBC, GBA, Analogue Pocket. Region free."
       />

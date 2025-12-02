@@ -2,7 +2,9 @@
 
 Hallo Ronny,
 
-hier findest du alle wichtigen Informationen zur neuen Hero of Bitcoin Website und den benoetigten Produkt-Links.
+die neue Hero of Bitcoin Website ist jetzt live unter **heroofbitcoin.xyz** - inklusive vollstaendiger Mehrsprachigkeit (Englisch, Spanisch, Deutsch)!
+
+Hier findest du alle wichtigen Informationen zur Website und den benoetigten Produkt-Links.
 
 ---
 
@@ -95,9 +97,9 @@ Sobald ich die URLs habe, aktualisiere ich die Website und alle Links funktionie
 
 ---
 
-## Marketing-Links (bereits aktiv)
+## Marketing-Links (LIVE)
 
-Diese Direktlinks koennen bereits fuer Marketing verwendet werden:
+Diese Direktlinks sind aktiv und koennen sofort fuer Marketing verwendet werden:
 
 | Zweck | URL |
 |-------|-----|
@@ -107,6 +109,8 @@ Diese Direktlinks koennen bereits fuer Marketing verwendet werden:
 | Digital Edition | `https://heroofbitcoin.xyz/#digital-edition` |
 | Hero Handheld | `https://heroofbitcoin.xyz/#hero-handheld` |
 | Spielbare Demo | `https://demo.heroofbitcoin.xyz` |
+
+**Tipp:** Die Sprache kann direkt auf der Website ueber kleine Pixel-Art Flaggen im Header umgeschaltet werden. Die Spracheinstellung wird im Browser gespeichert.
 
 ---
 

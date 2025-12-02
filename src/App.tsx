@@ -240,17 +240,6 @@ const App: React.FC = () => {
                 <p className="font-pixel text-[8px] md:text-[10px] text-yellow-900 uppercase tracking-wider">
                     ©2022-2025 Hero of Bitcoin • heroofbitcoin.xyz
                 </p>
-                <p className="text-[10px] text-yellow-800 mt-2">
-                    Sponsored by{' '}
-                    <a
-                        href="https://base58.info"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-bold underline hover:text-black transition-colors"
-                    >
-                        Base58 School of Engineering
-                    </a>
-                </p>
             </footer>
         </div>
       </div>

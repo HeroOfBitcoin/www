@@ -386,7 +386,14 @@ const GameManual: React.FC = () => {
                 </dl>
                 <div className="mt-6 pt-4 border-t border-gray-300 text-center">
                     <span className="block text-gray-500 mb-2">Sponsored by</span>
-                    <strong className="font-pixel text-[10px]">BASE58 School of Engineering</strong>
+                    <a
+                        href="https://base58.info"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-pixel text-[10px] hover:text-yellow-600 transition-colors"
+                    >
+                        Base58⛓️🔓
+                    </a>
                 </div>
             </div>
          </div>

@@ -1,5 +1,6 @@
-import React from 'react';
-import { AlertTriangle, HardDrive, FolderOpen, ShoppingCart } from 'lucide-react';
+import React, { useState } from 'react';
+import { AlertTriangle, HardDrive, FolderOpen, ShoppingCart, Zap, Gamepad2, ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
+import PixelCard from './ui/PixelCard';
 import { Shortcut } from '../types';
 
 /*
@@ -23,49 +24,66 @@ const shortcuts: Shortcut[] = [
 ];
 
 const DeviceGuide: React.FC = () => {
+  const [showTechDetails, setShowTechDetails] = useState(false);
+
   return (
-    <div className="space-y-8 animate-fadeIn text-black bg-white">
-
-      {/* Header Block - Looks like printed doc header */}
-      <div className="border-b-4 border-black pb-4 mb-8">
-        <div className="flex flex-col md:flex-row justify-between items-start gap-6">
-            <div className="flex-1">
-                <h2 className="font-mono text-2xl md:text-3xl font-bold uppercase tracking-tighter">R36S Quick-Start</h2>
-                <p className="font-sans text-sm font-bold mt-1">UNOFFICIAL COMPANION GUIDE</p>
-                <div className="text-right md:hidden mt-2">
-                    <div className="font-mono text-xs border border-black px-2 py-1 inline-block">ArkOS v1.1</div>
-                </div>
-            </div>
-
-            {/*
-              =========================================================================
-              IMAGE #14: R36S DEVICE PHOTO
-              =========================================================================
-              Location: public/assets/device/r36s-custom.png
-              Size: 300x200px or 600x400px recommended
-              Description: Photo of your customized R36S handheld device
-                           showing the Hero of Bitcoin game or branding
-              Currently showing: Placeholder box
-              =========================================================================
-            */}
-            <div className="w-full md:w-48 h-32 bg-gray-100 border-2 border-black flex items-center justify-center pixel-shadow-sm shrink-0">
-                <span className="font-pixel text-[10px] text-gray-400 text-center px-2">R36S DEVICE<br/>IMAGE</span>
-            </div>
-
-            <div className="text-right hidden md:block">
-                <div className="font-mono text-xs border border-black px-2 py-1 inline-block">ArkOS v1.1</div>
-                <div className="font-mono text-xs mt-1">20251014</div>
-            </div>
-        </div>
+    <div className="space-y-8">
+      {/* Header */}
+      <div className="text-center mb-12">
+        <h2 className="font-pixel text-2xl md:text-3xl text-black mb-4 uppercase">R36S Console</h2>
+        <div className="w-24 h-1 bg-black mx-auto"></div>
       </div>
 
-      {/* Buy R36S Device CTA */}
-      <div className="bg-green-50 border-2 border-green-600 p-4 pixel-shadow-sm">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div>
-                <h3 className="font-bold text-green-800 text-lg mb-1">Get Your Own R36S</h3>
-                <p className="text-xs text-green-700">Pre-configured with Hero of Bitcoin and ready to play!</p>
+      {/* Main Product Showcase */}
+      <div className="grid md:grid-cols-2 gap-8 items-center">
+        {/*
+          =========================================================================
+          IMAGE #14: R36S DEVICE PHOTO
+          =========================================================================
+          Location: public/assets/device/r36s-custom.png
+          Size: 400x400px or 800x800px recommended (displayed as square)
+          Description: Photo of your customized R36S handheld device
+                       showing the Hero of Bitcoin game or branding
+          Currently showing: Placeholder box
+          =========================================================================
+        */}
+        <div className="bg-gray-100 border-4 border-black aspect-square relative flex items-center justify-center pixel-shadow group">
+            <div className="absolute inset-0 bg-[linear-gradient(45deg,#f3f4f6_25%,transparent_25%,transparent_75%,#f3f4f6_75%,#f3f4f6)] bg-[length:20px_20px] opacity-50"></div>
+            <Gamepad2 size={80} className="text-gray-400 group-hover:scale-110 transition-transform duration-300" strokeWidth={1.5} />
+            <div className="absolute bottom-4 left-0 right-0 text-center font-pixel text-xs text-gray-400">
+                R36S DEVICE IMAGE
             </div>
+
+            {/* Badge */}
+            <div className="absolute -top-4 -right-4 bg-yellow-400 border-2 border-black p-3 rounded-full pixel-shadow-sm rotate-12 z-10">
+                <div className="text-center font-bold text-xs leading-none">
+                    READY<br/>TO PLAY
+                </div>
+            </div>
+        </div>
+
+        {/* Details */}
+        <div className="space-y-6">
+            <h3 className="font-bold text-2xl font-sans">Pre-Configured R36S Handheld</h3>
+            <p className="font-serif italic text-gray-600 border-l-4 border-yellow-400 pl-4">
+                "Hero of Bitcoin pre-installed. Power on and play instantly."
+            </p>
+
+            <ul className="space-y-3 font-mono text-sm">
+                <li className="flex items-center gap-3">
+                    <Zap className="text-green-600" size={20} />
+                    <span>ArkOS Pre-Installed</span>
+                </li>
+                <li className="flex items-center gap-3">
+                    <Gamepad2 className="text-yellow-600" size={20} />
+                    <span>Hero of Bitcoin Ready</span>
+                </li>
+                <li className="flex items-center gap-3">
+                    <HardDrive className="text-blue-600" size={20} />
+                    <span>microSD Card Included</span>
+                </li>
+            </ul>
+
             {/*
               =========================================================================
               PRODUCT LINK: R36S Console
@@ -78,119 +96,136 @@ const DeviceGuide: React.FC = () => {
                 href={LINK_R36S_DEVICE}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-6 py-3 bg-green-500 text-white font-pixel text-xs border-2 border-black hover:bg-green-600 hover:scale-105 transition-all pixel-shadow-sm shrink-0"
+                className="w-full bg-green-500 text-white font-pixel py-4 px-6 border-2 border-black hover:bg-green-600 hover:scale-[1.02] active:scale-[0.98] transition-all pixel-shadow flex items-center justify-center gap-3"
             >
-                <ShoppingCart size={16} />
-                <span>BUY R36S</span>
+                <ShoppingCart size={18} />
+                <span>BUY NOW</span>
             </a>
         </div>
       </div>
 
-      {/* 1. CRITICAL WARNING (Red Ink style) */}
-      <div className="border-2 border-red-600 bg-red-50 p-6 pixel-shadow-sm">
-        <div className="flex gap-4">
-            <AlertTriangle className="text-red-600 shrink-0" size={32} />
-            <div>
-                <h3 className="text-lg font-bold text-red-600 font-mono uppercase mb-2">2) SAFE SHUTDOWN (CRITICAL!)</h3>
-                <p className="font-sans text-sm mb-4 leading-relaxed font-semibold">
-                    Never pull the card or power-cycle while a game is saving. Wait until the screen is fully off.
-                </p>
-                <div className="grid md:grid-cols-2 gap-4 font-mono text-xs">
-                    <div className="bg-white border border-red-200 p-2">
-                        <span className="block font-bold underline mb-1">SYSTEM MENU:</span>
-                        START → Quit → Shutdown System
-                    </div>
-                    <div className="bg-white border border-red-200 p-2">
-                        <span className="block font-bold underline mb-1">IN-GAME:</span>
-                        SELECT + START (twice) → Shutdown
-                    </div>
-                </div>
-            </div>
+      {/* Controls Cheat-Sheet */}
+      <div className="mt-12">
+        <h4 className="font-pixel text-sm mb-6 border-b-2 border-gray-200 pb-2">Controls</h4>
+        <div className="border-2 border-black p-4 bg-gray-50 pixel-shadow-sm">
+            <table className="w-full font-mono text-xs">
+                <tbody>
+                    {shortcuts.map((s, i) => (
+                        <tr key={i} className="border-b border-gray-300 last:border-0">
+                            <td className="py-2 pr-2">{s.action}</td>
+                            <td className="py-2 pl-2 text-right font-bold">{s.buttons.join(' + ')}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-8">
-        {/* Power */}
-        <section>
-            <h3 className="font-pixel text-sm bg-black text-white px-2 py-1 inline-block mb-4">1) Power & Charging</h3>
-            <ul className="list-disc list-inside space-y-2 font-mono text-xs md:text-sm">
-                <li>Use <span className="font-bold bg-yellow-200">USB-A to USB-C</span> cables only.</li>
-                <li>Use 5V (1-2A) charger. Avoid fast chargers.</li>
-                <li>Charge fully before first use.</li>
-                <li>Shut down properly before plugging in.</li>
-            </ul>
-        </section>
-
-        {/* Shortcuts */}
-        <section>
-            <h3 className="font-pixel text-sm bg-black text-white px-2 py-1 inline-block mb-4">3) Controls Cheat-Sheet</h3>
-            <div className="border-2 border-black p-4 bg-gray-50 pixel-shadow-sm">
-                <table className="w-full font-mono text-xs">
-                    <tbody>
-                        {shortcuts.map((s, i) => (
-                            <tr key={i} className="border-b border-gray-300 last:border-0">
-                                <td className="py-2 pr-2">{s.action}</td>
-                                <td className="py-2 pl-2 text-right font-bold">{s.buttons.join(' + ')}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+      {/* Critical Warning */}
+      <PixelCard variant="alert" className="mt-8">
+        <div className="flex gap-4">
+            <AlertTriangle className="text-red-600 shrink-0" size={24} />
+            <div className="text-xs font-mono">
+                <strong className="block mb-2 uppercase text-red-600">Safe Shutdown</strong>
+                <p className="mb-2">Never pull the card or power-cycle while saving. Wait until screen is fully off.</p>
+                <div className="grid md:grid-cols-2 gap-2 text-[10px]">
+                    <div><strong>Menu:</strong> START → Quit → Shutdown</div>
+                    <div><strong>In-Game:</strong> SELECT+START (twice) → Shutdown</div>
+                </div>
             </div>
-        </section>
+        </div>
+      </PixelCard>
+
+      {/* Technical Details - Collapsible */}
+      <div className="mt-8 border-2 border-gray-300">
+        <button
+            onClick={() => setShowTechDetails(!showTechDetails)}
+            className="w-full flex items-center justify-between p-4 bg-gray-100 hover:bg-gray-200 transition-colors text-left"
+        >
+            <span className="font-pixel text-sm flex items-center gap-2">
+                <HelpCircle size={16} />
+                Technical Details & Troubleshooting
+            </span>
+            {showTechDetails ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+        </button>
+
+        {showTechDetails && (
+            <div className="p-4 space-y-6 bg-white">
+                {/* Power & Charging */}
+                <section>
+                    <h4 className="font-bold text-sm mb-3 flex items-center gap-2">
+                        <Zap size={16} className="text-yellow-600" />
+                        Power & Charging
+                    </h4>
+                    <ul className="list-disc list-inside space-y-1 font-mono text-xs text-gray-700">
+                        <li>Use <span className="font-bold bg-yellow-200 px-1">USB-A to USB-C</span> cables only</li>
+                        <li>Use 5V (1-2A) charger. Avoid fast chargers</li>
+                        <li>Charge fully before first use</li>
+                        <li>Shut down properly before plugging in</li>
+                    </ul>
+                </section>
+
+                {/* microSD Handling */}
+                <section>
+                    <h4 className="font-bold text-sm mb-3 flex items-center gap-2">
+                        <HardDrive size={16} className="text-blue-600" />
+                        microSD Handling
+                    </h4>
+                    <p className="text-xs font-sans mb-2 text-gray-600">
+                        Drive Name: <strong className="font-mono bg-blue-100 px-1 border border-blue-200">EASYROMS</strong>
+                    </p>
+                    <ul className="list-disc list-inside space-y-1 font-mono text-xs text-gray-700">
+                        <li>Do NOT reformat the card</li>
+                        <li>Work ONLY on the EASYROMS partition</li>
+                        <li>Always EJECT safely</li>
+                    </ul>
+                </section>
+
+                {/* Adding Games */}
+                <section>
+                    <h4 className="font-bold text-sm mb-3 flex items-center gap-2">
+                        <FolderOpen size={16} className="text-yellow-600" />
+                        Adding Games
+                    </h4>
+                    <p className="text-xs font-sans mb-2 text-gray-600">
+                        Path: <span className="font-mono bg-gray-100 px-1">EASYROMS/roms/</span>
+                    </p>
+                    <ul className="list-disc list-inside space-y-1 font-mono text-xs text-gray-700">
+                        <li>Match game to folder (nes → /nes)</li>
+                        <li>Bios files are included</li>
+                        <li>Avoid special characters in filenames</li>
+                    </ul>
+                </section>
+
+                {/* Troubleshooting */}
+                <section>
+                    <h4 className="font-bold text-sm mb-3">Troubleshooting</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div className="border border-gray-200 p-3 bg-gray-50">
+                            <strong className="block text-xs uppercase mb-1">Device Won't Boot</strong>
+                            <p className="text-[10px] leading-tight font-mono text-gray-600">Hold POWER + A for 15 seconds. Release, then press Power once.</p>
+                        </div>
+                        <div className="border border-gray-200 p-3 bg-gray-50">
+                            <strong className="block text-xs uppercase mb-1">Games Don't Show</strong>
+                            <p className="text-[10px] leading-tight font-mono text-gray-600">Check extensions, unzip files, and rescan ROMs in Options.</p>
+                        </div>
+                        <div className="border border-gray-200 p-3 bg-gray-50">
+                            <strong className="block text-xs uppercase mb-1">Charging Issues</strong>
+                            <p className="text-[10px] leading-tight font-mono text-gray-600">Try a different 5V brick. Avoid laptop ports that sleep.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        )}
       </div>
 
-      <hr className="border-t-2 border-dashed border-gray-400 my-8" />
-
-      {/* ROMS & SD Card */}
-      <div className="grid md:grid-cols-2 gap-8">
-         <section className="bg-blue-50 border-2 border-blue-900 p-4">
-            <h3 className="font-bold text-blue-900 flex items-center gap-2 mb-3">
-                <HardDrive size={18}/>
-                4) microSD Handling
-            </h3>
-            <p className="text-xs font-sans mb-2">Drive Name: <strong className="font-mono bg-white px-1 border border-blue-200">EASYROMS</strong></p>
-            <ul className="text-xs list-square ml-4 space-y-1 text-blue-900">
-                <li>Do NOT reformat the card.</li>
-                <li>Work ONLY on the EASYROMS partition.</li>
-                <li>Always EJECT safely.</li>
-            </ul>
-         </section>
-
-         <section className="bg-yellow-50 border-2 border-yellow-600 p-4">
-            <h3 className="font-bold text-yellow-800 flex items-center gap-2 mb-3">
-                <FolderOpen size={18}/>
-                6) Adding Games
-            </h3>
-            <p className="text-xs font-sans mb-2">Path: <span className="font-mono">EASYROMS/roms/</span></p>
-            <ul className="text-xs list-square ml-4 space-y-1 text-yellow-900">
-                <li>Match game to folder (nes &rarr; /nes).</li>
-                <li>Bios files are included.</li>
-                <li>Avoid special characters in filenames.</li>
-            </ul>
-         </section>
-      </div>
-
-      {/* Troubleshooting */}
-      <section className="mt-8">
-         <h3 className="font-pixel text-sm bg-black text-white px-2 py-1 inline-block mb-4 w-full md:w-auto text-center md:text-left">
-            8) Quick Troubleshooting
-         </h3>
-         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-             <div className="border border-black p-3 hover:bg-black hover:text-white transition-colors cursor-default group">
-                 <strong className="block text-xs uppercase mb-2 group-hover:text-yellow-400">Device Won't Boot</strong>
-                 <p className="text-[10px] leading-tight font-mono">Hold POWER + A (or B) for 15 seconds. Release, then press Power once.</p>
-             </div>
-             <div className="border border-black p-3 hover:bg-black hover:text-white transition-colors cursor-default group">
-                 <strong className="block text-xs uppercase mb-2 group-hover:text-yellow-400">Games Don't Show</strong>
-                 <p className="text-[10px] leading-tight font-mono">Check extensions, unzip files, and rescan ROMs in Options.</p>
-             </div>
-             <div className="border border-black p-3 hover:bg-black hover:text-white transition-colors cursor-default group">
-                 <strong className="block text-xs uppercase mb-2 group-hover:text-yellow-400">Charging Issues</strong>
-                 <p className="text-[10px] leading-tight font-mono">Try a different 5V brick. Do not use laptop ports that sleep.</p>
-             </div>
-         </div>
-      </section>
-
+      {/* Compatibility Note */}
+      <PixelCard variant="info" className="mt-8">
+        <div className="text-xs font-mono">
+            <strong className="block mb-2 uppercase">System Info</strong>
+            Running ArkOS v1.1. Supports Game Boy, GBC, GBA, NES, SNES, Genesis, PS1, and more.
+        </div>
+      </PixelCard>
     </div>
   );
 };

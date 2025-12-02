@@ -103,7 +103,14 @@ const ProductCard: React.FC<ProductCardProps> = ({
     <div className="border-4 border-black bg-white p-6 pixel-shadow">
       <div className="grid md:grid-cols-2 gap-6 items-start">
         {/* Product Image with Gallery */}
-        <div>
+        <div className="relative">
+          {/* Badge - positioned outside overflow container */}
+          <div className="absolute -top-2 -right-2 bg-yellow-400 border-2 border-black px-2 py-1 rounded-full pixel-shadow-sm rotate-12 z-20">
+            <div className="text-center font-bold text-[10px] leading-tight whitespace-nowrap">
+              {badgeText}
+            </div>
+          </div>
+
           {/* Main Image */}
           <div className="bg-gray-100 border-2 border-black aspect-square relative flex items-center justify-center group overflow-hidden">
             {hasImages ? (
@@ -121,12 +128,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 </div>
               </>
             )}
-            {/* Badge */}
-            <div className="absolute -top-3 -right-3 bg-yellow-400 border-2 border-black px-2 py-1 rounded-full pixel-shadow-sm rotate-12 z-10">
-              <div className="text-center font-bold text-[10px] leading-tight whitespace-nowrap">
-                {badgeText}
-              </div>
-            </div>
           </div>
 
           {/* Gallery thumbnails */}

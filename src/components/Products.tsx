@@ -233,7 +233,7 @@ const Products: React.FC = () => {
   return (
     <div className="space-y-12">
       {/* Header */}
-      <div className="text-center mb-8">
+      <div id="products" className="text-center mb-8 scroll-mt-24">
         <h2 className="font-pixel text-2xl md:text-3xl text-black mb-4 uppercase">Products</h2>
         <div className="w-24 h-1 bg-black mx-auto"></div>
       </div>

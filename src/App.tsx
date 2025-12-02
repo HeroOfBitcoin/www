@@ -47,7 +47,7 @@ const App: React.FC = () => {
   // Handle hash navigation on page load
   useEffect(() => {
     const hash = window.location.hash.slice(1);
-    if (hash && ['collectors-edition', 'digital-edition', 'hero-handheld'].includes(hash)) {
+    if (hash === 'products' || ['collectors-edition', 'digital-edition', 'hero-handheld'].includes(hash)) {
       setActiveTab(Tab.PRODUCTS);
     }
   }, []);

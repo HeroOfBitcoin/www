@@ -127,19 +127,21 @@ const App: React.FC = () => {
                     <div className="flex items-center justify-between w-full md:w-auto">
                         <button
                             onClick={() => { setActiveTab(Tab.GAME); setMobileMenuOpen(false); }}
-                            className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+                            className="flex items-center hover:opacity-80 transition-opacity"
                         >
                             {/*
                               =========================================================================
-                              HEADER LOGO - Text-based for clean integration with yellow header
+                              HEADER LOGO
+                              =========================================================================
+                              Location: public/assets/images/HoB_Logo_only.png
+                              Using mix-blend-mode: multiply to blend white background with yellow
                               =========================================================================
                             */}
-                            <div className="w-8 h-8 bg-red-600 border-2 border-black rounded-full flex items-center justify-center text-white font-bold text-xs pixel-shadow-sm">
-                                HB
-                            </div>
-                            <h1 className="font-pixel text-sm md:text-base text-black tracking-tighter leading-none text-left">
-                                HERO OF<br/>BITCOIN
-                            </h1>
+                            <img
+                                src="/assets/images/HoB_Logo_only.png"
+                                alt="Hero of Bitcoin"
+                                className="h-10 md:h-12 w-auto mix-blend-multiply"
+                            />
                         </button>
                         {/* Mobile Menu Toggle */}
                         <button

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Coins, MapPin, Glasses, TrendingUp, Mic2, Landmark, Hash, Ghost, ImageOff, Play, ShoppingCart } from 'lucide-react';
+import { Coins, MapPin, Glasses, TrendingUp, Mic2, Landmark, Hash, Ghost, ImageOff, Play, ShoppingCart, BookOpen } from 'lucide-react';
 import { Character } from '../types';
 
 /**
@@ -66,6 +66,15 @@ const characters: Character[] = [
     // IMAGE #6: Craig Wright (Faketoshi) portrait - public/assets/characters/faketoshi.png
     imageSrc: '/assets/characters/faketoshi.png',
     icon: Ghost
+  },
+  {
+    name: 'Saifedean',
+    role: 'The Economist',
+    description: 'Author of The Bitcoin Standard, advocating for sound money principles.',
+    color: 'green',
+    // IMAGE #7: Saifedean Ammous portrait - public/assets/characters/saifedean.png
+    imageSrc: '/assets/characters/saifedean.png',
+    icon: BookOpen
   },
 ];
 

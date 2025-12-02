@@ -382,15 +382,21 @@ const GameManual: React.FC = () => {
          <div>
             <h3 className="font-pixel text-lg mb-4">Credits</h3>
             <div className="bg-gray-100 p-6 font-mono text-xs border-2 border-black pixel-shadow-sm">
-                <dl className="grid grid-cols-2 gap-y-2">
+                <dl className="grid grid-cols-2 gap-y-3">
                     <dt className="text-gray-500">Pixelart</dt>
                     <dd className="font-bold">Hero of Bitcoin</dd>
-                    
+
+                    <dt className="text-gray-500">Programming</dt>
+                    <dd className="font-bold">Hero of Bitcoin</dd>
+
                     <dt className="text-gray-500">Music</dt>
                     <dd className="font-bold">Mr. V</dd>
-                    
+
                     <dt className="text-gray-500">Sound FX</dt>
-                    <dd className="font-bold">Coffee 'Valen'</dd>
+                    <dd className="font-bold">Coffee 'Valen' - Bat</dd>
+
+                    <dt className="text-gray-500">Community supporters</dt>
+                    <dd className="font-bold">Geyser team & <span className="text-yellow-600">YOU</span></dd>
                 </dl>
                 <div className="mt-6 pt-4 border-t border-gray-300 text-center">
                     <span className="block text-gray-500 mb-2">Sponsored by</span>

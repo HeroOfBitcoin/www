@@ -154,8 +154,8 @@ const GameManual: React.FC = () => {
           />
         </div>
 
-        {/* Logo and Title - Compact Header */}
-        <div className="text-center mb-6">
+        {/* Logo */}
+        <div className="text-center mb-4">
           {/*
             =========================================================================
             HERO OF BITCOIN LOGO WITH AVATAR
@@ -166,12 +166,8 @@ const GameManual: React.FC = () => {
           <img
             src="/assets/images/HoB_Logo_Avatar.png"
             alt="Hero of Bitcoin"
-            className="mx-auto w-24 md:w-28 h-auto mb-2"
+            className="mx-auto w-28 md:w-32 h-auto"
           />
-          <h1 className="font-pixel text-2xl md:text-3xl text-red-600 mb-1 drop-shadow-[2px_2px_0_black]">
-            HERO OF BITCOIN
-          </h1>
-          <div className="font-bold text-[10px] tracking-widest uppercase text-yellow-800">Instruction Booklet</div>
         </div>
 
         {/* Release Trailer - Embedded in cover */}
@@ -261,14 +257,6 @@ const GameManual: React.FC = () => {
               =========================================================================
             */}
             <div className="flex flex-col gap-3">
-                {/* Airport Scene - Arriving in El Salvador */}
-                <div className="border-4 border-black pixel-shadow overflow-hidden">
-                    <img
-                        src="/assets/images/scenes/airport_color.png"
-                        alt="Arriving at El Salvador Airport"
-                        className="w-full h-auto"
-                    />
-                </div>
                 {/* Art Gallery Scene */}
                 <div className="border-4 border-black pixel-shadow overflow-hidden">
                     <img
@@ -292,22 +280,38 @@ const GameManual: React.FC = () => {
       {/* SECTION 3: CONTROLS */}
       <div>
          <h2 className="font-pixel text-xl border-b-4 border-black mb-6 pb-2">Controls</h2>
-         {/*
-           =========================================================================
-           CONTROLS IMAGE
-           =========================================================================
-           Location: public/assets/images/controls.jpg
-           Description: Game Boy with labeled controls (D-Pad, A, B, Start)
-           =========================================================================
-         */}
-         <div className="flex justify-center">
-            <div className="border-4 border-black pixel-shadow overflow-hidden max-w-lg">
+         <div className="flex flex-col md:flex-row gap-8 items-center justify-center">
+             {/*
+               =========================================================================
+               GAME BOY IMAGE
+               =========================================================================
+               Location: public/assets/images/Game_Boy_HoB.jpg
+               Description: Custom orange Game Boy with Hero of Bitcoin branding
+               =========================================================================
+             */}
+             <div className="shrink-0">
                 <img
-                  src="/assets/images/controls.jpg"
-                  alt="Hero of Bitcoin Game Controls"
-                  className="w-full h-auto"
+                  src="/assets/images/Game_Boy_HoB.jpg"
+                  alt="Hero of Bitcoin Game Boy Controls"
+                  className="w-48 md:w-56 h-auto pixel-shadow border-4 border-black"
                 />
-            </div>
+             </div>
+
+             {/* Key Map */}
+             <div className="grid grid-cols-1 gap-4 w-full max-w-sm">
+                {[
+                    { btn: 'A Button', desc: 'Confirm, Jump, Talk', color: 'bg-red-500' },
+                    { btn: 'B Button', desc: 'Run, Sword', color: 'bg-red-500' },
+                    { btn: 'Start', desc: 'Pause', color: 'bg-black' },
+                    { btn: 'Select', desc: 'Unused', color: 'bg-black' },
+                    { btn: 'D-Pad', desc: 'Move, Climb, Enter', color: 'bg-black' }
+                ].map((c) => (
+                    <div key={c.btn} className="flex items-center gap-4 border-b border-gray-200 pb-2">
+                        <span className={`px-2 py-1 text-white text-[10px] font-bold min-w-[60px] text-center rounded ${c.color}`}>{c.btn}</span>
+                        <span className="font-mono text-xs uppercase text-gray-700">{c.desc}</span>
+                    </div>
+                ))}
+             </div>
          </div>
       </div>
 

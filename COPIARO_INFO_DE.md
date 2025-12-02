@@ -97,43 +97,42 @@ Sobald ich die URLs habe, aktualisiere ich die Website und alle Links funktionie
 
 ---
 
-## Marketing-Links (LIVE)
+## Lokalisierte Marketing-Direktlinks (LIVE)
 
-Diese Direktlinks sind aktiv und koennen sofort fuer Marketing verwendet werden.
-
-**Tipp:** Die Sprache kann direkt auf der Website ueber kleine Pixel-Art Flaggen im Header umgeschaltet werden. Die Spracheinstellung wird im Browser gespeichert.
+Diese Direktlinks oeffnen die Website automatisch in der richtigen Sprache.
+Der `?lang=` Parameter setzt die Sprache direkt beim Aufruf.
 
 ### Englisch (EN)
 
 | Zweck | URL |
 |-------|-----|
-| Startseite | `https://heroofbitcoin.xyz` |
-| Alle Produkte | `https://heroofbitcoin.xyz/#products` |
-| Collector's Edition | `https://heroofbitcoin.xyz/#collectors-edition` |
-| Digital Edition | `https://heroofbitcoin.xyz/#digital-edition` |
-| Hero Handheld | `https://heroofbitcoin.xyz/#hero-handheld` |
+| Startseite | `https://heroofbitcoin.xyz?lang=en` |
+| Alle Produkte | `https://heroofbitcoin.xyz?lang=en#products` |
+| Collector's Edition | `https://heroofbitcoin.xyz?lang=en#collectors-edition` |
+| Digital Edition | `https://heroofbitcoin.xyz?lang=en#digital-edition` |
+| Hero Handheld | `https://heroofbitcoin.xyz?lang=en#hero-handheld` |
 | Play Demo | `https://demo.heroofbitcoin.xyz` |
 
 ### Deutsch (DE)
 
 | Zweck | URL |
 |-------|-----|
-| Startseite | `https://heroofbitcoin.xyz` |
-| Alle Produkte | `https://heroofbitcoin.xyz/#products` |
-| Sammler-Edition | `https://heroofbitcoin.xyz/#collectors-edition` |
-| Digital Edition | `https://heroofbitcoin.xyz/#digital-edition` |
-| Hero Handheld | `https://heroofbitcoin.xyz/#hero-handheld` |
+| Startseite | `https://heroofbitcoin.xyz?lang=de` |
+| Alle Produkte | `https://heroofbitcoin.xyz?lang=de#products` |
+| Sammler-Edition | `https://heroofbitcoin.xyz?lang=de#collectors-edition` |
+| Digital Edition | `https://heroofbitcoin.xyz?lang=de#digital-edition` |
+| Hero Handheld | `https://heroofbitcoin.xyz?lang=de#hero-handheld` |
 | Demo Spielen | `https://demo.heroofbitcoin.xyz` |
 
 ### Spanisch (ES)
 
 | Zweck | URL |
 |-------|-----|
-| Pagina Principal | `https://heroofbitcoin.xyz` |
-| Todos los Productos | `https://heroofbitcoin.xyz/#products` |
-| Edicion Coleccionista | `https://heroofbitcoin.xyz/#collectors-edition` |
-| Edicion Digital | `https://heroofbitcoin.xyz/#digital-edition` |
-| Hero Handheld | `https://heroofbitcoin.xyz/#hero-handheld` |
+| Pagina Principal | `https://heroofbitcoin.xyz?lang=es` |
+| Todos los Productos | `https://heroofbitcoin.xyz?lang=es#products` |
+| Edicion Coleccionista | `https://heroofbitcoin.xyz?lang=es#collectors-edition` |
+| Edicion Digital | `https://heroofbitcoin.xyz?lang=es#digital-edition` |
+| Hero Handheld | `https://heroofbitcoin.xyz?lang=es#hero-handheld` |
 | Jugar Demo | `https://demo.heroofbitcoin.xyz` |
 
 ---

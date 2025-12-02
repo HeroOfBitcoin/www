@@ -17,11 +17,30 @@ const DeviceGuide: React.FC = () => {
       
       {/* Header Block - Looks like printed doc header */}
       <div className="border-b-4 border-black pb-4 mb-8">
-        <div className="flex justify-between items-start">
-            <div>
+        <div className="flex flex-col md:flex-row justify-between items-start gap-6">
+            <div className="flex-1">
                 <h2 className="font-mono text-2xl md:text-3xl font-bold uppercase tracking-tighter">R36S Quick-Start</h2>
                 <p className="font-sans text-sm font-bold mt-1">UNOFFICIAL COMPANION GUIDE</p>
+                <div className="text-right md:hidden mt-2">
+                    <div className="font-mono text-xs border border-black px-2 py-1 inline-block">ArkOS v1.1</div>
+                </div>
             </div>
+
+            {/*
+              =========================================================================
+              IMAGE #14: R36S DEVICE PHOTO
+              =========================================================================
+              Location: public/assets/device/r36s-custom.png
+              Size: 300x200px or 600x400px recommended
+              Description: Photo of your customized R36S handheld device
+                           showing the Hero of Bitcoin game or branding
+              Currently showing: Placeholder box
+              =========================================================================
+            */}
+            <div className="w-full md:w-48 h-32 bg-gray-100 border-2 border-black flex items-center justify-center pixel-shadow-sm shrink-0">
+                <span className="font-pixel text-[10px] text-gray-400 text-center px-2">R36S DEVICE<br/>IMAGE</span>
+            </div>
+
             <div className="text-right hidden md:block">
                 <div className="font-mono text-xs border border-black px-2 py-1 inline-block">ArkOS v1.1</div>
                 <div className="font-mono text-xs mt-1">20251014</div>

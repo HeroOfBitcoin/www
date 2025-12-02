@@ -2,52 +2,68 @@ import React, { useState } from 'react';
 import { Coins, MapPin, Sword, Glasses, TrendingUp, Mic2, Landmark, Hash, Ghost, ImageOff } from 'lucide-react';
 import { Character } from '../types';
 
+/**
+ * =============================================================================
+ * CHARACTER PORTRAIT IMAGES
+ * =============================================================================
+ * Place character portrait images in: public/assets/characters/
+ * Recommended size: 80x80px or 160x160px (will be displayed at 64-80px)
+ * Format: PNG with transparency preferred
+ * Style: Pixel art to match game aesthetic
+ * =============================================================================
+ */
 const characters: Character[] = [
-  { 
-    name: 'Samson', 
-    role: 'Veteran Advocate', 
-    description: 'A veteran in the space and fervent advocate for Bitcoin technology.', 
+  {
+    name: 'Samson',
+    role: 'Veteran Advocate',
+    description: 'A veteran in the space and fervent advocate for Bitcoin technology.',
     color: 'green',
+    // IMAGE #1: Samson Mow portrait - public/assets/characters/samson.png
     imageSrc: '/assets/characters/samson.png',
     icon: Glasses
   },
-  { 
-    name: 'Michael', 
-    role: 'Inflation Hedge', 
-    description: 'Vocal advocate of Bitcoin as a digital asset and inflation hedge.', 
+  {
+    name: 'Michael',
+    role: 'Inflation Hedge',
+    description: 'Vocal advocate of Bitcoin as a digital asset and inflation hedge.',
     color: 'green',
+    // IMAGE #2: Michael Saylor portrait - public/assets/characters/michael.png
     imageSrc: '/assets/characters/michael.png',
     icon: TrendingUp
   },
-  { 
-    name: 'Max and Stacey', 
-    role: 'Financial News', 
-    description: 'Renowned for a financial news show covering topics related to global finance.', 
+  {
+    name: 'Max and Stacey',
+    role: 'Financial News',
+    description: 'Renowned for a financial news show covering topics related to global finance.',
     color: 'green',
+    // IMAGE #3: Max Keiser & Stacey Herbert portrait - public/assets/characters/max_stacey.png
     imageSrc: '/assets/characters/max_stacey.png',
     icon: Mic2
   },
-  { 
-    name: 'Nayib', 
-    role: 'The President', 
-    description: 'Made a historic impact on Bitcoin establishing it as legal tender in El Salvador.', 
+  {
+    name: 'Nayib',
+    role: 'The President',
+    description: 'Made a historic impact on Bitcoin establishing it as legal tender in El Salvador.',
     color: 'green',
+    // IMAGE #4: Nayib Bukele portrait - public/assets/characters/nayib.png
     imageSrc: '/assets/characters/nayib.png',
     icon: Landmark
   },
-  { 
-    name: 'Adam', 
-    role: 'OG Cyberpunk', 
-    description: 'Known for his pioneering work on cryptographic systems.', 
+  {
+    name: 'Adam',
+    role: 'OG Cyberpunk',
+    description: 'Known for his pioneering work on cryptographic systems.',
     color: 'green',
+    // IMAGE #5: Adam Back portrait - public/assets/characters/adam.png
     imageSrc: '/assets/characters/adam.png',
     icon: Hash
   },
-  { 
-    name: 'Faketoshi', 
-    role: 'Impersonator', 
-    description: 'Clown or impersonator? Whatever the correct term is, he is not Satoshi.', 
+  {
+    name: 'Faketoshi',
+    role: 'Impersonator',
+    description: 'Clown or impersonator? Whatever the correct term is, he is not Satoshi.',
     color: 'green',
+    // IMAGE #6: Craig Wright (Faketoshi) portrait - public/assets/characters/faketoshi.png
     imageSrc: '/assets/characters/faketoshi.png',
     icon: Ghost
   },
@@ -90,7 +106,17 @@ const GameManual: React.FC = () => {
                 </div>
              </div>
         </div>
-        
+
+        {/*
+          =========================================================================
+          IMAGE #7: COVER ART / GAME LOGO
+          =========================================================================
+          Location: public/assets/cover-logo.png
+          Size: 128x128px recommended (displayed at 128x128px)
+          Description: Main game logo or cover art for the instruction booklet
+          Currently showing: Sword icon placeholder
+          =========================================================================
+        */}
         <div className="mx-auto w-32 h-32 bg-[#e0f8cf] border-4 border-black mb-4 flex items-center justify-center pixel-shadow">
              <Sword size={48} className="text-[#071821]" />
         </div>
@@ -117,12 +143,31 @@ const GameManual: React.FC = () => {
                 </div>
             </div>
             
-            {/* Screenshots */}
+            {/*
+              =========================================================================
+              GAME SCREENSHOTS SECTION
+              =========================================================================
+              Location: public/assets/screenshots/
+              Size: 160x144px (Game Boy resolution) or 320x288px (2x scaled)
+              Format: PNG
+              Aspect ratio: 10:9 (Game Boy aspect ratio)
+              =========================================================================
+            */}
             <div className="flex flex-col gap-4">
+                {/*
+                  IMAGE #8: SCREENSHOT - TOWN SCENE
+                  Location: public/assets/screenshots/town.png
+                  Description: Screenshot showing a town/village area in the game
+                */}
                 <div className="bg-[#e0f8cf] border-4 border-black aspect-video relative flex items-center justify-center pixel-shadow">
                     <MapPin className="text-[#306850]" size={48} />
                     <span className="absolute bottom-1 right-2 font-pixel text-[8px] text-[#071821]">SCENE: TOWN</span>
                 </div>
+                {/*
+                  IMAGE #9: SCREENSHOT - COLLECT/GAMEPLAY SCENE
+                  Location: public/assets/screenshots/collect.png
+                  Description: Screenshot showing coin/bitcoin collection gameplay
+                */}
                 <div className="bg-[#e0f8cf] border-4 border-black aspect-video relative flex items-center justify-center pixel-shadow">
                     <Coins className="text-[#306850]" size={48} />
                     <span className="absolute bottom-1 right-2 font-pixel text-[8px] text-[#071821]">SCENE: COLLECT</span>

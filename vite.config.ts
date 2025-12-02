@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   // IMPORTANT: This ensures assets load correctly on GitHub Pages
-  // If using a custom domain (manual.heroofbitcoin.xyz), this stays '/'
+  // Using custom domain (heroofbitcoin.xyz), this stays '/'
   // If using username.github.io/repo, change to '/repo-name/'
   base: '/', 
 })

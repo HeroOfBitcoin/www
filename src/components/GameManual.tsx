@@ -239,14 +239,11 @@ const GameManual: React.FC = () => {
         <div className="grid md:grid-cols-2 gap-8">
             <div className="space-y-4 text-sm font-sans leading-relaxed text-gray-900 text-justify">
                 <p>
-                <strong className="font-bold">Hero of Bitcoin</strong> the game is a story inspired by Bitcoin culture and is set in the beautiful Bitcoin-sovereign nation of <strong className="bg-yellow-200 px-1 border border-black text-xs uppercase">El Salvador</strong>. You will be taken to iconic places such as Bitcoin Beach, the volcano and more, all the way to the bank's doorstep.
+                <strong className="font-bold">Hero of Bitcoin</strong> the game is a story inspired by Bitcoin culture and is set in the beautiful Bitcoin-sovereign nation of El Salvador. You will be taken to iconic places such as Bitcoin Beach, the volcano and more, all the way to the bank's doorstep.
                 </p>
                 <p>
-                The game follows the journey of a young man called <strong className="text-red-600">Hero</strong>, a new bitcoiner, who journeys to El Salvador wanting to help the Bitcoin fight on the frontlines.
+                The game follows the journey of a young man called <strong className="text-red-600">Hero</strong>, a new bitcoiner, who journeys to El Salvador wanting to help the Bitcoin fight on the frontlines. You will need to help President Bukele and other bitcoiners to ensure poocoiners, bears, bankers and more do not stand in the way of Bitcoin adoption.
                 </p>
-                <div className="bg-gray-100 p-4 border-l-4 border-black text-xs italic text-gray-700 mt-4 font-mono">
-                "You will need to help President Bukele and other bitcoiners to ensure poocoiners, bears, bankers and more do not stand in the way of Bitcoin adoption."
-                </div>
             </div>
             
             {/*

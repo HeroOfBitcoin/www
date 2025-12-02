@@ -106,13 +106,13 @@ const App: React.FC = () => {
       <div className="w-full max-w-5xl bg-yellow-400 min-h-[90vh] pixel-shadow border-4 border-black relative flex flex-col md:flex-row overflow-hidden">
 
         {/* Grey 'Binding' Stripe on Left (Desktop Only) */}
-        <div className="hidden md:block w-12 bg-neutral-300 border-r-4 border-black relative shrink-0 z-20">
+        <div className="hidden md:block w-14 bg-neutral-300 border-r-4 border-black relative shrink-0 z-20">
            {/* Binding texture */}
            <div className="h-full w-full opacity-30 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIi8+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiMwMDAiLz4KPC9zdmc+')]"></div>
 
            {/* Vertical Spine Text */}
            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-90 whitespace-nowrap">
-              <span className="font-pixel text-4xl text-neutral-400 font-bold tracking-[0.5em] opacity-60">MANUAL</span>
+              <span className="font-pixel text-4xl text-neutral-400 font-bold tracking-[0.5em] opacity-60">BITCOIN</span>
            </div>
         </div>
 

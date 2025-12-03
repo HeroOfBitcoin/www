@@ -146,7 +146,6 @@ export const translations = {
         feature3: 'Premium Protective Toploader',
         feature4: 'Creator Interview Inside',
         note: 'Limited edition collectible. Magazine and art print ship in protective toploader.',
-        partner: 'Sold exclusively via Proof of Ink',
       },
       // Tech Details
       techDetails: {
@@ -325,7 +324,6 @@ export const translations = {
         feature3: 'Toploader Protector Premium',
         feature4: 'Entrevista del Creador',
         note: 'Coleccionable de edición limitada. Revista e impresión artística enviadas en toploader protector.',
-        partner: 'Vendido exclusivamente por Proof of Ink',
       },
       // Tech Details
       techDetails: {
@@ -504,7 +502,6 @@ export const translations = {
         feature3: 'Premium Schutzhülle',
         feature4: 'Entwickler-Interview',
         note: 'Limitiertes Sammlerstück. Magazin und Kunstdruck werden in Schutzhülle geliefert.',
-        partner: 'Exklusiv erhältlich bei Proof of Ink',
       },
       // Tech Details
       techDetails: {
@@ -634,7 +631,6 @@ export interface Translations {
       feature3: string;
       feature4: string;
       note: string;
-      partner: string;
     };
     techDetails: {
       title: string;

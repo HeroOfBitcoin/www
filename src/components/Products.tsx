@@ -20,12 +20,12 @@ const LINK_MICROSD_CARTRIDGE = 'https://copiaro.com/brand/hob'; // TODO: Update 
 
 /*
   =============================================================================
-  PROOF OF INK PRODUCT LINK
+  STACKCHAIN MAGAZINE LINK
   =============================================================================
   Stackchain Magazine with Hero of Bitcoin fine art print
   =============================================================================
 */
-const LINK_STACKCHAIN_MAGAZINE = 'https://proofofink.com/product/pre-order-stackchain-magazine-round-5-with-protective-toploader/';
+const LINK_STACKCHAIN_MAGAZINE = 'https://copiaro.com/brand/hob'; // TODO: Update to magazine product page
 
 /*
   =============================================================================
@@ -466,9 +466,6 @@ const Products: React.FC = () => {
         badgeText={t.products.badges.printEdition}
         galleryCount={3}
       >
-        <div className="bg-orange-50 border border-orange-200 p-2 rounded text-xs">
-          <strong className="text-orange-700">Partner:</strong> {t.products.magazine.partner}
-        </div>
         <p className="text-[10px] text-gray-500 font-mono">
           {t.products.magazine.note}
         </p>

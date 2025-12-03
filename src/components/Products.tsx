@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PixelCard from './ui/PixelCard';
 import { useLanguage } from '../i18n';
-import { Star, ShieldCheck, ShoppingCart, Sticker, Gamepad2, Zap, HardDrive, ChevronDown, ChevronUp, HelpCircle, AlertTriangle, FolderOpen, Disc, Link } from 'lucide-react';
+import { Star, ShieldCheck, ShoppingCart, Sticker, Gamepad2, Zap, HardDrive, ChevronDown, ChevronUp, HelpCircle, AlertTriangle, FolderOpen, Disc, Link, BookOpen, Image, Award } from 'lucide-react';
 
 /*
   =============================================================================
@@ -17,6 +17,15 @@ import { Star, ShieldCheck, ShoppingCart, Sticker, Gamepad2, Zap, HardDrive, Che
 const LINK_PHYSICAL_CARTRIDGE = 'https://copiaro.com/brand/hob'; // TODO: Update to cartridge product page
 const LINK_R36S_DEVICE = 'https://copiaro.com/brand/hob'; // TODO: Update to R36S product page
 const LINK_MICROSD_CARTRIDGE = 'https://copiaro.com/brand/hob'; // TODO: Update to microSD cartridge page
+
+/*
+  =============================================================================
+  PROOF OF INK PRODUCT LINK
+  =============================================================================
+  Stackchain Magazine with Hero of Bitcoin fine art print
+  =============================================================================
+*/
+const LINK_STACKCHAIN_MAGAZINE = 'https://proofofink.com/product/pre-order-stackchain-magazine-round-5-with-protective-toploader/';
 
 /*
   =============================================================================
@@ -432,6 +441,38 @@ const Products: React.FC = () => {
           </div>
         )}
       </div>
+
+      {/* Product 4: Stackchain Magazine */}
+      {/*
+        =========================================================================
+        PRODUCT: Stackchain Magazine - Limited Edition Print with Fine Art
+        =========================================================================
+        External partner: Proof of Ink
+        Includes: Magazine Round 5, Fine Art Print (Alt Cover), Protective Toploader
+        =========================================================================
+      */}
+      <ProductCard
+        id="stackchain-magazine"
+        title={t.products.magazine.title}
+        subtitle={t.products.magazine.subtitle}
+        quote={t.products.magazine.quote}
+        features={[
+          { icon: <BookOpen className="text-orange-600" size={18} />, text: t.products.magazine.feature1 },
+          { icon: <Image className="text-purple-600" size={18} />, text: t.products.magazine.feature2 },
+          { icon: <Award className="text-yellow-600" size={18} />, text: t.products.magazine.feature3 },
+          { icon: <Star className="text-blue-600" size={18} />, text: t.products.magazine.feature4 },
+        ]}
+        buyLink={LINK_STACKCHAIN_MAGAZINE}
+        badgeText={t.products.badges.printEdition}
+        galleryCount={3}
+      >
+        <div className="bg-orange-50 border border-orange-200 p-2 rounded text-xs">
+          <strong className="text-orange-700">Partner:</strong> {t.products.magazine.partner}
+        </div>
+        <p className="text-[10px] text-gray-500 font-mono">
+          {t.products.magazine.note}
+        </p>
+      </ProductCard>
 
       {/* Info Note */}
       <PixelCard variant="info" className="mt-8">

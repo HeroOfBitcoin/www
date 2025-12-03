@@ -136,6 +136,18 @@ export const translations = {
         copyright: 'Other system ROMs not included. Please respect copyright holders when adding additional games.',
         compatibility: 'Also supports GB, GBC, GBA, NES, SNES, Genesis, PS1, and more.',
       },
+      // Stackchain Magazine
+      magazine: {
+        title: 'Stackchain Magazine',
+        subtitle: 'LIMITED EDITION PRINT',
+        quote: 'Exclusive interview with the creator, plus fine art print with alternative Hero of Bitcoin cover.',
+        feature1: 'Stackchain Magazine Round 5',
+        feature2: 'Fine Art Print (Alt Cover)',
+        feature3: 'Premium Protective Toploader',
+        feature4: 'Creator Interview Inside',
+        note: 'Limited edition collectible. Magazine and art print ship in protective toploader.',
+        partner: 'Sold exclusively via Proof of Ink',
+      },
       // Tech Details
       techDetails: {
         title: 'Hero Handheld Technical Details & Troubleshooting',
@@ -158,6 +170,7 @@ export const translations = {
         ltdEdition: 'LTD EDITION',
         budgetPick: 'BUDGET PICK',
         readyToPlay: 'READY TO PLAY',
+        printEdition: 'PRINT EDITION',
       },
     },
     // Footer
@@ -302,6 +315,18 @@ export const translations = {
         copyright: 'ROMs de otros sistemas no incluidas. Por favor respeta los derechos de autor al añadir juegos adicionales.',
         compatibility: 'También soporta GB, GBC, GBA, NES, SNES, Genesis, PS1 y más.',
       },
+      // Stackchain Magazine
+      magazine: {
+        title: 'Stackchain Magazine',
+        subtitle: 'EDICIÓN IMPRESA LIMITADA',
+        quote: 'Entrevista exclusiva con el creador, más impresión artística con portada alternativa de Hero of Bitcoin.',
+        feature1: 'Stackchain Magazine Ronda 5',
+        feature2: 'Impresión Artística (Portada Alt)',
+        feature3: 'Toploader Protector Premium',
+        feature4: 'Entrevista del Creador',
+        note: 'Coleccionable de edición limitada. Revista e impresión artística enviadas en toploader protector.',
+        partner: 'Vendido exclusivamente por Proof of Ink',
+      },
       // Tech Details
       techDetails: {
         title: 'Detalles Técnicos y Solución de Problemas del Hero Handheld',
@@ -324,6 +349,7 @@ export const translations = {
         ltdEdition: 'ED. LIMITADA',
         budgetPick: 'ECONÓMICO',
         readyToPlay: 'LISTO PARA JUGAR',
+        printEdition: 'ED. IMPRESA',
       },
     },
     // Footer
@@ -468,6 +494,18 @@ export const translations = {
         copyright: 'Andere System-ROMs nicht enthalten. Bitte respektiere Urheberrechte beim Hinzufügen weiterer Spiele.',
         compatibility: 'Unterstützt auch GB, GBC, GBA, NES, SNES, Genesis, PS1 und mehr.',
       },
+      // Stackchain Magazine
+      magazine: {
+        title: 'Stackchain Magazine',
+        subtitle: 'LIMITIERTE DRUCKAUSGABE',
+        quote: 'Exklusives Interview mit dem Entwickler, plus Kunstdruck mit alternativem Hero of Bitcoin Cover.',
+        feature1: 'Stackchain Magazine Runde 5',
+        feature2: 'Kunstdruck (Alt. Cover)',
+        feature3: 'Premium Schutzhülle',
+        feature4: 'Entwickler-Interview',
+        note: 'Limitiertes Sammlerstück. Magazin und Kunstdruck werden in Schutzhülle geliefert.',
+        partner: 'Exklusiv erhältlich bei Proof of Ink',
+      },
       // Tech Details
       techDetails: {
         title: 'Hero Handheld Technische Details & Fehlerbehebung',
@@ -490,6 +528,7 @@ export const translations = {
         ltdEdition: 'LIMITIERT',
         budgetPick: 'PREISWERT',
         readyToPlay: 'SPIELBEREIT',
+        printEdition: 'DRUCKAUSGABE',
       },
     },
     // Footer
@@ -586,6 +625,17 @@ export interface Translations {
       copyright: string;
       compatibility: string;
     };
+    magazine: {
+      title: string;
+      subtitle: string;
+      quote: string;
+      feature1: string;
+      feature2: string;
+      feature3: string;
+      feature4: string;
+      note: string;
+      partner: string;
+    };
     techDetails: {
       title: string;
       safeShutdown: string;
@@ -603,7 +653,7 @@ export interface Translations {
       chargingIssues: string;
       chargingIssuesDesc: string;
     };
-    badges: { ltdEdition: string; budgetPick: string; readyToPlay: string };
+    badges: { ltdEdition: string; budgetPick: string; readyToPlay: string; printEdition: string };
   };
   footer: { fanSwag: string; copyright: string };
 }

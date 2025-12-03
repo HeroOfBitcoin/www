@@ -447,7 +447,7 @@ const Products: React.FC = () => {
         =========================================================================
         PRODUCT: Stackchain Magazine - Limited Edition Print with Fine Art
         =========================================================================
-        External partner: Proof of Ink
+        Images location: public/assets/product/magazine/
         Includes: Magazine Round 5, Fine Art Print (Alt Cover), Protective Toploader
         =========================================================================
       */}

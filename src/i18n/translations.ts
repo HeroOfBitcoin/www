@@ -106,6 +106,7 @@ export const translations = {
         feature2: 'Orange Game Boy Cartridge',
         feature3: 'ROM Available on Request',
         feature4: 'Includes Sticker',
+        feature5: 'Protective Box Cover',
         compatibility: 'Compatible with Game Boy, GBC, GBA, Analogue Pocket. Region free.',
       },
       // Digital Edition
@@ -116,6 +117,7 @@ export const translations = {
         feature1: 'Premium Box & Manual',
         feature2: 'microSD with Game ROM',
         feature3: 'Includes Sticker',
+        feature4: 'Protective Box Cover',
         note: 'Includes a decorative cartridge-shaped collectible. The game ROM is on the included microSD card.',
         compatibility: 'Play on Raspberry Pi, MiSTer FPGA, RetroArch, or any Game Boy emulator.',
       },
@@ -284,6 +286,7 @@ export const translations = {
         feature2: 'Cartucho Naranja de Game Boy',
         feature3: 'ROM Disponible bajo Petición',
         feature4: 'Incluye Pegatina',
+        feature5: 'Funda Protectora',
         compatibility: 'Compatible con Game Boy, GBC, GBA, Analogue Pocket. Sin restricción de región.',
       },
       // Digital Edition
@@ -294,6 +297,7 @@ export const translations = {
         feature1: 'Caja Premium y Manual',
         feature2: 'microSD con ROM del Juego',
         feature3: 'Incluye Pegatina',
+        feature4: 'Funda Protectora',
         note: 'Incluye un coleccionable decorativo en forma de cartucho. La ROM está en la tarjeta microSD incluida.',
         compatibility: 'Juega en Raspberry Pi, MiSTer FPGA, RetroArch o cualquier emulador de Game Boy.',
       },
@@ -462,6 +466,7 @@ export const translations = {
         feature2: 'Oranges Game Boy Cartridge',
         feature3: 'ROM auf Anfrage verfügbar',
         feature4: 'Inklusive Aufkleber',
+        feature5: 'Schutzhülle für Box',
         compatibility: 'Kompatibel mit Game Boy, GBC, GBA, Analogue Pocket. Regionsfrei.',
       },
       // Digital Edition
@@ -472,6 +477,7 @@ export const translations = {
         feature1: 'Premium-Box & Handbuch',
         feature2: 'microSD mit Spiel-ROM',
         feature3: 'Inklusive Aufkleber',
+        feature4: 'Schutzhülle für Box',
         note: 'Enthält ein dekoratives Cartridge-Sammlerstück. Die ROM befindet sich auf der enthaltenen microSD-Karte.',
         compatibility: 'Spielbar auf Raspberry Pi, MiSTer FPGA, RetroArch oder jedem Game Boy Emulator.',
       },
@@ -594,6 +600,7 @@ export interface Translations {
       feature2: string;
       feature3: string;
       feature4: string;
+      feature5: string;
       compatibility: string;
     };
     digital: {
@@ -603,6 +610,7 @@ export interface Translations {
       feature1: string;
       feature2: string;
       feature3: string;
+      feature4: string;
       note: string;
       compatibility: string;
     };

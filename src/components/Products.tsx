@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PixelCard from './ui/PixelCard';
 import { useLanguage } from '../i18n';
-import { Star, ShieldCheck, ShoppingCart, Sticker, Gamepad2, Zap, HardDrive, ChevronDown, ChevronUp, HelpCircle, AlertTriangle, FolderOpen, Disc, Link, BookOpen, Image, Award } from 'lucide-react';
+import { Star, ShieldCheck, ShoppingCart, Sticker, Gamepad2, Zap, HardDrive, ChevronDown, ChevronUp, HelpCircle, AlertTriangle, FolderOpen, Disc, Link, BookOpen, Image, Award, Shield } from 'lucide-react';
 
 /*
   =============================================================================
@@ -268,6 +268,7 @@ const Products: React.FC = () => {
           { icon: <Star className="text-yellow-600" size={18} />, text: t.products.collectors.feature2 },
           { icon: <Disc className="text-purple-600" size={18} />, text: t.products.collectors.feature3 },
           { icon: <Sticker className="text-blue-600" size={18} />, text: t.products.collectors.feature4 },
+          { icon: <Shield className="text-gray-600" size={18} />, text: t.products.collectors.feature5 },
         ]}
         buyLink={LINK_PHYSICAL_CARTRIDGE}
         badgeText={t.products.badges.ltdEdition}
@@ -298,6 +299,7 @@ const Products: React.FC = () => {
           { icon: <ShieldCheck className="text-green-600" size={18} />, text: t.products.digital.feature1 },
           { icon: <Disc className="text-purple-600" size={18} />, text: t.products.digital.feature2 },
           { icon: <Sticker className="text-blue-600" size={18} />, text: t.products.digital.feature3 },
+          { icon: <Shield className="text-gray-600" size={18} />, text: t.products.digital.feature4 },
         ]}
         buyLink={LINK_MICROSD_CARTRIDGE}
         badgeText={t.products.badges.budgetPick}

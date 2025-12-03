@@ -303,8 +303,8 @@ const Products: React.FC = () => {
         badgeText={t.products.badges.budgetPick}
         images={[
           '/assets/product/microsd/1.jpg',
-          '/assets/product/microsd/2.jpg',
-          '/assets/product/microsd/3.jpg'
+          '/assets/product/microsd/2.png',
+          '/assets/product/microsd/3.png'
         ]}
         galleryCount={3}
         compatibility={t.products.digital.compatibility}
@@ -464,6 +464,11 @@ const Products: React.FC = () => {
         ]}
         buyLink={LINK_STACKCHAIN_MAGAZINE}
         badgeText={t.products.badges.printEdition}
+        images={[
+          '/assets/product/magazine/1.png',
+          '/assets/product/magazine/2.png',
+          '/assets/product/magazine/3.png'
+        ]}
         galleryCount={3}
       >
         <p className="text-[10px] text-gray-500 font-mono">

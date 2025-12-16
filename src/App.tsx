@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import GameManual from './components/GameManual';
 import Products from './components/Products';
+import Partners from './components/Partners';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import { useLanguage } from './i18n';
 import { Tab } from './types';
-import { Package, Menu, Play, ShoppingCart, Shirt, Mail, Instagram, Youtube } from 'lucide-react';
+import { Package, Menu, Play, ShoppingCart, Shirt, Mail, Instagram, Youtube, Handshake } from 'lucide-react';
 
 /*
   =============================================================================
@@ -52,6 +53,8 @@ const App: React.FC = () => {
     const hash = window.location.hash.slice(1);
     if (hash === 'products' || ['collectors-edition', 'digital-edition', 'hero-handheld'].includes(hash)) {
       setActiveTab(Tab.PRODUCTS);
+    } else if (hash === 'partners') {
+      setActiveTab(Tab.PARTNERS);
     }
   }, []);
 
@@ -179,6 +182,7 @@ const App: React.FC = () => {
                         </div>
                         {/* Single PRODUCTS tab for all products (cartridge, microSD, R36S) */}
                         <NavButton tab={Tab.PRODUCTS} icon={Package} label={t.nav.products} />
+                        <NavButton tab={Tab.PARTNERS} icon={Handshake} label={t.nav.partners} />
                         <a
                             href="https://demo.heroofbitcoin.xyz"
                             className="flex items-center gap-2 px-4 py-3 md:py-2 text-sm font-bold border-2 border-black transition-all w-full md:w-auto bg-red-500 text-white hover:bg-red-600"
@@ -205,6 +209,7 @@ const App: React.FC = () => {
                 <div className="animate-fadeIn max-w-3xl mx-auto">
                     {activeTab === Tab.GAME && <GameManual />}
                     {activeTab === Tab.PRODUCTS && <Products />}
+                    {activeTab === Tab.PARTNERS && <Partners />}
                 </div>
             </main>
 

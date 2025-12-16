@@ -5,6 +5,7 @@ export const translations = {
     // Navigation
     nav: {
       products: 'PRODUCTS',
+      partners: 'PARTNERS',
       playDemo: 'PLAY DEMO',
       buyNow: 'BUY NOW',
     },
@@ -174,6 +175,20 @@ export const translations = {
         printEdition: 'PRINT EDITION',
       },
     },
+    // Partners Page
+    partners: {
+      title: 'Our Partners',
+      subtitle: 'Trusted retailers bringing Hero of Bitcoin to the world',
+      visitStore: 'Visit Store',
+      copiaro: {
+        name: 'Copiaro',
+        description: 'Copiaro is an established, international Bitcoin retailer and fulfillment partner, offering professional service, reliable worldwide shipping, and a curated selection of high-quality Bitcoin products. A premium choice for customers who want a smooth, trusted buying experience.',
+      },
+      plebstyle: {
+        name: 'Plebstyle',
+        description: 'Plebstyle is a Bitcoin-native, independent shop run with passion and care, offering thoughtfully designed products created by a Bitcoiner for the Bitcoin community. Best suited for customers within the EU who value authenticity, craftsmanship, and direct community support.',
+      },
+    },
     // Footer
     footer: {
       fanSwag: 'CUPS, SHIRTS & CAPS',
@@ -185,6 +200,7 @@ export const translations = {
     // Navigation
     nav: {
       products: 'PRODUCTOS',
+      partners: 'SOCIOS',
       playDemo: 'JUGAR DEMO',
       buyNow: 'COMPRAR',
     },
@@ -354,6 +370,20 @@ export const translations = {
         printEdition: 'ED. IMPRESA',
       },
     },
+    // Partners Page
+    partners: {
+      title: 'Nuestros Socios',
+      subtitle: 'Minoristas de confianza que llevan Hero of Bitcoin al mundo',
+      visitStore: 'Visitar Tienda',
+      copiaro: {
+        name: 'Copiaro',
+        description: 'Copiaro es un minorista internacional de Bitcoin establecido y socio de cumplimiento, que ofrece servicio profesional, envío mundial confiable y una selección curada de productos Bitcoin de alta calidad. Una opción premium para clientes que desean una experiencia de compra fluida y confiable.',
+      },
+      plebstyle: {
+        name: 'Plebstyle',
+        description: 'Plebstyle es una tienda independiente nativa de Bitcoin, gestionada con pasión y cuidado, que ofrece productos diseñados con esmero, creados por un Bitcoiner para la comunidad Bitcoin. Ideal para clientes dentro de la UE que valoran la autenticidad, la artesanía y el apoyo directo a la comunidad.',
+      },
+    },
     // Footer
     footer: {
       fanSwag: 'TAZAS, CAMISETAS Y GORRAS',
@@ -365,6 +395,7 @@ export const translations = {
     // Navigation
     nav: {
       products: 'PRODUKTE',
+      partners: 'PARTNER',
       playDemo: 'DEMO SPIELEN',
       buyNow: 'KAUFEN',
     },
@@ -534,6 +565,20 @@ export const translations = {
         printEdition: 'DRUCKAUSGABE',
       },
     },
+    // Partners Page
+    partners: {
+      title: 'Unsere Partner',
+      subtitle: 'Vertrauenswürdige Händler, die Hero of Bitcoin in die Welt bringen',
+      visitStore: 'Shop Besuchen',
+      copiaro: {
+        name: 'Copiaro',
+        description: 'Copiaro ist ein etablierter, internationaler Bitcoin-Händler und Fulfillment-Partner, der professionellen Service, zuverlässigen weltweiten Versand und eine kuratierte Auswahl hochwertiger Bitcoin-Produkte bietet. Eine Premium-Wahl für Kunden, die ein reibungsloses, vertrauenswürdiges Kauferlebnis wünschen.',
+      },
+      plebstyle: {
+        name: 'Plebstyle',
+        description: 'Plebstyle ist ein Bitcoin-nativer, unabhängiger Shop, der mit Leidenschaft und Sorgfalt geführt wird und durchdacht gestaltete Produkte anbietet, die von einem Bitcoiner für die Bitcoin-Community geschaffen wurden. Ideal für Kunden in der EU, die Authentizität, Handwerkskunst und direkte Community-Unterstützung schätzen.',
+      },
+    },
     // Footer
     footer: {
       fanSwag: 'TASSEN, SHIRTS & CAPS',
@@ -544,7 +589,7 @@ export const translations = {
 
 // Use a more flexible type that allows different string values
 export interface Translations {
-  nav: { products: string; playDemo: string; buyNow: string };
+  nav: { products: string; partners: string; playDemo: string; buyNow: string };
   hero: { watchTrailer: string; buyAtCopiaro: string; copiaroSubtext: string };
   story: { title: string; p1: string; p2: string; p3: string; p4: string };
   controls: {
@@ -658,6 +703,13 @@ export interface Translations {
       chargingIssuesDesc: string;
     };
     badges: { ltdEdition: string; budgetPick: string; readyToPlay: string; printEdition: string };
+  };
+  partners: {
+    title: string;
+    subtitle: string;
+    visitStore: string;
+    copiaro: { name: string; description: string };
+    plebstyle: { name: string; description: string };
   };
   footer: { fanSwag: string; copyright: string };
 }

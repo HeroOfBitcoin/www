@@ -48,15 +48,51 @@ const App: React.FC = () => {
   const pressedKeysRef = useRef(new Set<string>());
   const hasToggledRef = useRef(false);
 
-  // Handle hash navigation on page load
+  // Map tabs to URL hashes
+  const tabToHash: Record<Tab, string> = {
+    [Tab.GAME]: '',
+    [Tab.PRODUCTS]: 'products',
+    [Tab.PARTNERS]: 'partners',
+  };
+
+  const hashToTab: Record<string, Tab> = {
+    '': Tab.GAME,
+    'products': Tab.PRODUCTS,
+    'partners': Tab.PARTNERS,
+    'collectors-edition': Tab.PRODUCTS,
+    'digital-edition': Tab.PRODUCTS,
+    'hero-handheld': Tab.PRODUCTS,
+  };
+
+  // Handle hash navigation on page load and browser back/forward
   useEffect(() => {
-    const hash = window.location.hash.slice(1);
-    if (hash === 'products' || ['collectors-edition', 'digital-edition', 'hero-handheld'].includes(hash)) {
-      setActiveTab(Tab.PRODUCTS);
-    } else if (hash === 'partners') {
-      setActiveTab(Tab.PARTNERS);
-    }
+    const handleHashChange = () => {
+      const hash = window.location.hash.slice(1);
+      const tab = hashToTab[hash];
+      if (tab !== undefined) {
+        setActiveTab(tab);
+      }
+    };
+
+    // Set initial tab from URL
+    handleHashChange();
+
+    // Listen for browser navigation
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
+
+  // Update URL when changing tabs
+  const navigateToTab = (tab: Tab) => {
+    setActiveTab(tab);
+    setMobileMenuOpen(false);
+    const hash = tabToHash[tab];
+    if (hash) {
+      window.history.pushState(null, '', `#${hash}`);
+    } else {
+      window.history.pushState(null, '', window.location.pathname + window.location.search);
+    }
+  };
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -95,17 +131,14 @@ const App: React.FC = () => {
 
   const NavButton = ({ tab, icon: Icon, label }: { tab: Tab; icon: any; label: string }) => (
     <button
-      onClick={() => {
-        setActiveTab(tab);
-        setMobileMenuOpen(false);
-      }}
-      className={`flex items-center gap-2 px-4 py-3 md:py-2 text-sm font-bold border-2 border-black transition-all w-full md:w-auto ${
+      onClick={() => navigateToTab(tab)}
+      className={`flex items-center gap-2 px-4 py-3 md:py-2 border-2 border-black transition-all w-full md:w-auto ${
         activeTab === tab
           ? 'bg-white text-black pixel-shadow-sm translate-x-[-2px] translate-y-[-2px] z-10'
           : 'bg-yellow-500 text-yellow-900 hover:bg-yellow-400'
       }`}
     >
-      <Icon size={18} />
+      <Icon size={16} />
       <span className="font-pixel text-xs tracking-wide">{label}</span>
     </button>
   );
@@ -148,7 +181,7 @@ const App: React.FC = () => {
                     {/* Brand / Logo Area */}
                     <div className="flex items-center justify-between w-full md:w-auto">
                         <button
-                            onClick={() => { setActiveTab(Tab.GAME); setMobileMenuOpen(false); }}
+                            onClick={() => navigateToTab(Tab.GAME)}
                             className="flex items-center transition-transform hover:scale-105 active:scale-95"
                         >
                             {/*
@@ -175,19 +208,17 @@ const App: React.FC = () => {
                     </div>
 
                     {/* Navigation Tabs */}
-                    <nav className={`${mobileMenuOpen ? 'flex' : 'hidden'} md:flex flex-col md:flex-row gap-2 md:gap-4 w-full md:w-auto mt-4 md:mt-0 items-center`}>
+                    <nav className={`${mobileMenuOpen ? 'flex' : 'hidden'} md:flex flex-col md:flex-row gap-2 md:gap-3 w-full md:w-auto mt-4 md:mt-0 items-center`}>
                         {/* Language Switcher */}
-                        <div className="order-last md:order-first">
-                          <LanguageSwitcher />
-                        </div>
+                        <LanguageSwitcher />
                         {/* Single PRODUCTS tab for all products (cartridge, microSD, R36S) */}
                         <NavButton tab={Tab.PRODUCTS} icon={Package} label={t.nav.products} />
                         <NavButton tab={Tab.PARTNERS} icon={Handshake} label={t.nav.partners} />
                         <a
                             href="https://demo.heroofbitcoin.xyz"
-                            className="flex items-center gap-2 px-4 py-3 md:py-2 text-sm font-bold border-2 border-black transition-all w-full md:w-auto bg-red-500 text-white hover:bg-red-600"
+                            className="flex items-center gap-2 px-4 py-3 md:py-2 border-2 border-black transition-all w-full md:w-auto bg-red-500 text-white hover:bg-red-600"
                         >
-                            <Play size={18} />
+                            <Play size={16} />
                             <span className="font-pixel text-xs tracking-wide">{t.nav.playDemo}</span>
                         </a>
                         {/* Prominent BUY Button - Links to main Copiaro store page */}
@@ -195,9 +226,9 @@ const App: React.FC = () => {
                             href={LINK_STORE_MAIN}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-4 py-3 md:py-2 text-sm font-bold border-2 border-black transition-all w-full md:w-auto bg-green-500 text-white hover:bg-green-600 hover:scale-105 animate-pulse hover:animate-none"
+                            className="flex items-center gap-2 px-4 py-3 md:py-2 border-2 border-black transition-all w-full md:w-auto bg-green-500 text-white hover:bg-green-600 hover:scale-105 animate-pulse hover:animate-none"
                         >
-                            <ShoppingCart size={18} />
+                            <ShoppingCart size={16} />
                             <span className="font-pixel text-xs tracking-wide">{t.nav.buyNow}</span>
                         </a>
                     </nav>

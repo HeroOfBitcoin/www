@@ -89,8 +89,8 @@ export const translations = {
     // Legal
     legal: {
       disclaimer1: 'Please note that the \'Game Boy©\' name is mentioned to demonstrate console compatibility. All trademarks are the property of their respective owners.',
-      disclaimer2: 'This game can be played on Game Boy©, Game Boy Color©, Game Boy Advance©, Super Game Boy© and Analogue Pocket©.',
-      notLicensed: 'This game is not licensed by Nintendo©.',
+      disclaimer2: 'Cartridge plays on Game Boy© hardware and Analogue Pocket. Digital edition runs on any emulator.',
+      notLicensed: 'Not licensed by Nintendo©.',
     },
     // Products Page
     products: {
@@ -285,8 +285,8 @@ export const translations = {
     // Legal
     legal: {
       disclaimer1: 'El nombre \'Game Boy©\' se menciona para demostrar compatibilidad. Todas las marcas son propiedad de sus respectivos dueños.',
-      disclaimer2: 'Este juego puede jugarse en Game Boy©, Game Boy Color©, Game Boy Advance©, Super Game Boy© y Analogue Pocket©.',
-      notLicensed: 'Este juego no está licenciado por Nintendo©.',
+      disclaimer2: 'El cartucho funciona en hardware Game Boy© y Analogue Pocket. La edición digital funciona en cualquier emulador.',
+      notLicensed: 'No licenciado por Nintendo©.',
     },
     // Products Page
     products: {
@@ -481,8 +481,8 @@ export const translations = {
     // Legal
     legal: {
       disclaimer1: 'Der Name \'Game Boy©\' wird zur Demonstration der Kompatibilität erwähnt. Alle Marken sind Eigentum ihrer jeweiligen Inhaber.',
-      disclaimer2: 'Dieses Spiel kann auf Game Boy©, Game Boy Color©, Game Boy Advance©, Super Game Boy© und Analogue Pocket© gespielt werden.',
-      notLicensed: 'Dieses Spiel ist nicht von Nintendo© lizenziert.',
+      disclaimer2: 'Cartridge spielbar auf Game Boy© Hardware und Analogue Pocket. Digital Edition läuft auf jedem Emulator.',
+      notLicensed: 'Nicht von Nintendo© lizenziert.',
     },
     // Products Page
     products: {

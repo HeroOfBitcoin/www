@@ -193,6 +193,7 @@ export const translations = {
     footer: {
       fanSwag: 'CUPS, SHIRTS & CAPS',
       copyright: '©2022-2025 Hero of Bitcoin • heroofbitcoin.xyz',
+      privacy: 'No tracking • No cookies • No data collection',
     },
   },
 
@@ -388,6 +389,7 @@ export const translations = {
     footer: {
       fanSwag: 'TAZAS, CAMISETAS Y GORRAS',
       copyright: '©2022-2025 Hero of Bitcoin • heroofbitcoin.xyz',
+      privacy: 'Sin rastreo • Sin cookies • Sin recopilación de datos',
     },
   },
 
@@ -583,6 +585,7 @@ export const translations = {
     footer: {
       fanSwag: 'TASSEN, SHIRTS & CAPS',
       copyright: '©2022-2025 Hero of Bitcoin • heroofbitcoin.xyz',
+      privacy: 'Kein Tracking • Keine Cookies • Keine Datenerfassung',
     },
   },
 } as const;
@@ -711,5 +714,5 @@ export interface Translations {
     copiaro: { name: string; description: string };
     plebstyle: { name: string; description: string };
   };
-  footer: { fanSwag: string; copyright: string };
+  footer: { fanSwag: string; copyright: string; privacy: string };
 }

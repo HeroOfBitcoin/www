@@ -17,7 +17,7 @@ import { Star, ShieldCheck, ShoppingCart, Sticker, Gamepad2, Zap, HardDrive, Che
   =============================================================================
 */
 const LINK_BRAND_PAGE = 'https://copiaro.com/en/hero-of-bitcoin';
-const LINK_PHYSICAL_CARTRIDGE = LINK_BRAND_PAGE; // TODO: Update when cartridge product page is available
+const LINK_PHYSICAL_CARTRIDGE = 'https://copiaro.com/hero-of-bitcoin-the-game-boxed-gameboy-version-batch2-en';
 const LINK_MICROSD_CARTRIDGE = 'https://copiaro.com/en/hero-of-bitcoin-digital-version-v2';
 const LINK_R36S_DEVICE = 'https://copiaro.com/en/hero-of-bitcoin-handheld-version-v2';
 const LINK_STACKCHAIN_MAGAZINE = LINK_BRAND_PAGE; // TODO: Update when magazine product page is available

@@ -23,9 +23,9 @@ The Hero of Bitcoin website (heroofbitcoin.xyz) serves as the official product p
 | Product | Status | Copiaro URL |
 |---------|--------|-------------|
 | **Brand Page** | Live | `https://copiaro.com/en/hero-of-bitcoin` |
+| **Collector's Edition** | Live | `https://copiaro.com/hero-of-bitcoin-the-game-boxed-gameboy-version-batch2-en` |
 | **Digital Edition** | Live | `https://copiaro.com/en/hero-of-bitcoin-digital-version-v2` |
 | **Hero Handheld** | Live | `https://copiaro.com/en/hero-of-bitcoin-handheld-version-v2` |
-| **Collector's Edition** | Pending | Points to brand page |
 | **Stackchain Magazine** | Pending | Points to brand page |
 | **Fan Merchandise** | Pending | Points to brand page |
 
@@ -34,7 +34,7 @@ The Hero of Bitcoin website (heroofbitcoin.xyz) serves as the official product p
 **File:** `src/components/Products.tsx`
 ```typescript
 const LINK_BRAND_PAGE = 'https://copiaro.com/en/hero-of-bitcoin';
-const LINK_PHYSICAL_CARTRIDGE = LINK_BRAND_PAGE; // TODO: Update when available
+const LINK_PHYSICAL_CARTRIDGE = 'https://copiaro.com/hero-of-bitcoin-the-game-boxed-gameboy-version-batch2-en';
 const LINK_MICROSD_CARTRIDGE = 'https://copiaro.com/en/hero-of-bitcoin-digital-version-v2';
 const LINK_R36S_DEVICE = 'https://copiaro.com/en/hero-of-bitcoin-handheld-version-v2';
 const LINK_STACKCHAIN_MAGAZINE = LINK_BRAND_PAGE; // TODO: Update when available
@@ -57,7 +57,7 @@ const LINK_FAN_SWAG = 'https://copiaro.com/en/hero-of-bitcoin'; // TODO: Update 
 - **Compatibility:** Game Boy, GBC, GBA, Analogue Pocket
 - **Special:** ROM available on request
 - **Direct Link:** `heroofbitcoin.xyz/#collectors-edition`
-- **Copiaro:** Pending
+- **Copiaro:** `copiaro.com/hero-of-bitcoin-the-game-boxed-gameboy-version-batch2-en`
 
 ### 2. Digital Edition
 - **Target:** Budget-conscious buyers, emulator users
@@ -139,6 +139,6 @@ Add `?lang=` parameter for language-specific pages:
 
 1. ~~Create Digital Edition product page~~ Done
 2. ~~Create Hero Handheld product page~~ Done
-3. Create Collector's Edition product page
+3. ~~Create Collector's Edition product page~~ Done
 4. Create Stackchain Magazine product page
 5. (Optional) Create merchandise category page for cups, shirts, caps

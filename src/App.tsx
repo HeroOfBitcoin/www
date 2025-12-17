@@ -311,6 +311,9 @@ const App: React.FC = () => {
                 <p className="font-pixel text-[8px] md:text-[10px] text-yellow-900 uppercase tracking-wider">
                     {t.footer.copyright}
                 </p>
+                <p className="font-pixel text-[6px] md:text-[8px] text-yellow-800 mt-2 opacity-80">
+                    {t.footer.privacy}
+                </p>
             </footer>
         </div>
       </div>

@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import './styles/fonts.css';
+import './styles/global.css';
 import { LanguageProvider } from './i18n';
 import App from './App';
 

@@ -1,0 +1,63 @@
+/*
+  =============================================================================
+  GLOBAL STYLES
+  =============================================================================
+  Tailwind CSS base + custom styles for Hero of Bitcoin website.
+  All external dependencies removed for privacy.
+  =============================================================================
+*/
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fbbf24;
+  border-left: 2px solid #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #000;
+  border: 2px solid #fbbf24;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #333;
+}
+
+/* Font utility classes */
+.font-pixel {
+  font-family: 'Press Start 2P', cursive;
+}
+
+.font-mono {
+  font-family: 'Roboto Mono', monospace;
+}
+
+.font-sans {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Pixel-art shadows */
+.pixel-shadow {
+  box-shadow: 4px 4px 0px 0px #000000;
+}
+
+.pixel-shadow-sm {
+  box-shadow: 2px 2px 0px 0px #000000;
+}
+
+/* Text shadow */
+.text-shadow {
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+}
+
+/* Pixelated image rendering */
+.rendering-pixelated {
+  image-rendering: pixelated;
+}

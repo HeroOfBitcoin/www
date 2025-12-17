@@ -178,14 +178,11 @@ const GameManual: React.FC = () => {
                 className="absolute inset-0 cursor-pointer group"
                 onClick={() => setShowTrailer(true)}
               >
-                {/* YouTube Thumbnail */}
+                {/* Self-hosted YouTube Thumbnail - No external requests */}
                 <img
-                  src={`https://img.youtube.com/vi/${YOUTUBE_TRAILER_ID}/maxresdefault.jpg`}
+                  src="/assets/images/trailer-thumbnail.jpg"
                   alt="Hero of Bitcoin - Release Trailer"
                   className="w-full h-full object-cover"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${YOUTUBE_TRAILER_ID}/hqdefault.jpg`;
-                  }}
                 />
 
                 {/* Dark Overlay */}
@@ -204,10 +201,10 @@ const GameManual: React.FC = () => {
                 </div>
               </div>
             ) : (
-              /* YouTube Embed */
+              /* Privacy-enhanced YouTube embed - no cookies until video plays */
               <iframe
                 className="absolute inset-0 w-full h-full"
-                src={`https://www.youtube.com/embed/${YOUTUBE_TRAILER_ID}?autoplay=1&rel=0&modestbranding=1`}
+                src={`https://www.youtube-nocookie.com/embed/${YOUTUBE_TRAILER_ID}?autoplay=1&rel=0&modestbranding=1`}
                 title="Hero of Bitcoin - Release Trailer"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

@@ -7,42 +7,43 @@ The Hero of Bitcoin website (heroofbitcoin.xyz) serves as the official product p
 - **Release trailer** with embedded YouTube video
 - **Game story and controls** documentation
 - **Character profiles** for NPCs
-- **Three product offerings** with image galleries
-- **Multi-language support** (English, Spanish, German)
+- **Four product offerings** with image galleries
+- **Partners page** with retail partner information
+- **Multi-language support** (English, Spanish, German) via URL parameter
+- **RSS feed** for products at `/products.xml`
 - **SEO optimization** for search engines and LLMs
 - **Direct linking** to specific products
 
 ---
 
-## Product Link Structure
+## Product Link Configuration
 
-Each product needs a dedicated URL on Copiaro. Update these constants in the codebase when individual product pages become available:
+### Current Copiaro Links
 
-### Current Configuration
-All products currently point to the brand page: `https://copiaro.com/brand/hob`
-
-### Required Product Links
-
-| Product | Current Link | Needed Link Format |
-|---------|--------------|-------------------|
-| **Collector's Edition** | `https://copiaro.com/brand/hob` | `https://copiaro.com/product/[collectors-edition-slug]` |
-| **Digital Edition** | `https://copiaro.com/brand/hob` | `https://copiaro.com/product/[digital-edition-slug]` |
-| **Hero Handheld** | `https://copiaro.com/brand/hob` | `https://copiaro.com/product/[hero-handheld-slug]` |
-| **Fan Merchandise** | `https://copiaro.com/brand/hob` | `https://copiaro.com/category/[merchandise-slug]` |
+| Product | Status | Copiaro URL |
+|---------|--------|-------------|
+| **Brand Page** | Live | `https://copiaro.com/en/hero-of-bitcoin` |
+| **Digital Edition** | Live | `https://copiaro.com/en/hero-of-bitcoin-digital-version-v2` |
+| **Hero Handheld** | Live | `https://copiaro.com/en/hero-of-bitcoin-handheld-version-v2` |
+| **Collector's Edition** | Pending | Points to brand page |
+| **Stackchain Magazine** | Pending | Points to brand page |
+| **Fan Merchandise** | Pending | Points to brand page |
 
 ### Where to Update Links
 
-**File:** `src/components/Products.tsx` (lines 16-18)
+**File:** `src/components/Products.tsx`
 ```typescript
-const LINK_PHYSICAL_CARTRIDGE = 'https://copiaro.com/brand/hob'; // Collector's Edition
-const LINK_R36S_DEVICE = 'https://copiaro.com/brand/hob';        // Hero Handheld
-const LINK_MICROSD_CARTRIDGE = 'https://copiaro.com/brand/hob';  // Digital Edition
+const LINK_BRAND_PAGE = 'https://copiaro.com/en/hero-of-bitcoin';
+const LINK_PHYSICAL_CARTRIDGE = LINK_BRAND_PAGE; // TODO: Update when available
+const LINK_MICROSD_CARTRIDGE = 'https://copiaro.com/en/hero-of-bitcoin-digital-version-v2';
+const LINK_R36S_DEVICE = 'https://copiaro.com/en/hero-of-bitcoin-handheld-version-v2';
+const LINK_STACKCHAIN_MAGAZINE = LINK_BRAND_PAGE; // TODO: Update when available
 ```
 
-**File:** `src/App.tsx` (lines 18-19)
+**File:** `src/App.tsx`
 ```typescript
-const LINK_STORE_MAIN = 'https://copiaro.com/brand/hob';  // Main store/brand page
-const LINK_FAN_SWAG = 'https://copiaro.com/brand/hob';    // Merchandise category
+const LINK_STORE_MAIN = 'https://copiaro.com/en/hero-of-bitcoin';
+const LINK_FAN_SWAG = 'https://copiaro.com/en/hero-of-bitcoin'; // TODO: Update when available
 ```
 
 ---
@@ -51,17 +52,19 @@ const LINK_FAN_SWAG = 'https://copiaro.com/brand/hob';    // Merchandise categor
 
 ### 1. Collector's Edition
 - **Target:** Collectors, Game Boy enthusiasts
-- **Contents:** Physical orange Game Boy cartridge, premium box, manual, sticker
+- **Contents:** Physical orange Game Boy cartridge, premium box, manual, sticker, protective box cover
 - **Limitation:** ~450 units worldwide
 - **Compatibility:** Game Boy, GBC, GBA, Analogue Pocket
 - **Special:** ROM available on request
 - **Direct Link:** `heroofbitcoin.xyz/#collectors-edition`
+- **Copiaro:** Pending
 
 ### 2. Digital Edition
 - **Target:** Budget-conscious buyers, emulator users
-- **Contents:** Decorative cartridge collectible, microSD with ROM, box, manual, sticker
+- **Contents:** Decorative cartridge collectible, microSD with ROM, box, manual, sticker, protective box cover
 - **Compatibility:** Raspberry Pi, MiSTer FPGA, RetroArch, any GB emulator
 - **Direct Link:** `heroofbitcoin.xyz/#digital-edition`
+- **Copiaro:** `copiaro.com/en/hero-of-bitcoin-digital-version-v2`
 
 ### 3. Hero Handheld
 - **Target:** Casual gamers, gift buyers
@@ -69,32 +72,57 @@ const LINK_FAN_SWAG = 'https://copiaro.com/brand/hob';    // Merchandise categor
 - **Features:** ArkOS, ready to play out of box
 - **Note:** Supports other retro systems (copyright disclaimer included)
 - **Direct Link:** `heroofbitcoin.xyz/#hero-handheld`
+- **Copiaro:** `copiaro.com/en/hero-of-bitcoin-handheld-version-v2`
+
+### 4. Stackchain Magazine
+- **Target:** Collectors, Bitcoin enthusiasts
+- **Contents:** Stackchain Magazine Round 5, fine art print (alt cover), premium protective toploader
+- **Limitation:** 30 prints worldwide
+- **Special:** Exclusive creator interview
+- **Direct Link:** `heroofbitcoin.xyz/#stackchain-magazine`
+- **Copiaro:** Pending
+
+---
+
+## Partners
+
+### Copiaro
+- **Website:** `https://copiaro.com`
+- **Role:** Primary fulfillment partner, international shipping
+- **Products:** All Hero of Bitcoin products
+
+### Plebstyle
+- **Website:** `https://plebstyle.com`
+- **Role:** EU-focused partner, community-driven
+- **Products:** Select Hero of Bitcoin merchandise
 
 ---
 
 ## Direct Links for Marketing
 
-Use these URLs in marketing materials:
+### Product Pages
 
 | Purpose | URL |
 |---------|-----|
 | Homepage | `https://heroofbitcoin.xyz` |
 | All Products | `https://heroofbitcoin.xyz/#products` |
+| Partners | `https://heroofbitcoin.xyz/#partners` |
 | Collector's Edition | `https://heroofbitcoin.xyz/#collectors-edition` |
 | Digital Edition | `https://heroofbitcoin.xyz/#digital-edition` |
 | Hero Handheld | `https://heroofbitcoin.xyz/#hero-handheld` |
+| Stackchain Magazine | `https://heroofbitcoin.xyz/#stackchain-magazine` |
 | Play Demo | `https://demo.heroofbitcoin.xyz` |
+| RSS Feed | `https://heroofbitcoin.xyz/products.xml` |
 
----
+### Localized Links
 
-## Language Support
+Add `?lang=` parameter for language-specific pages:
 
-The website supports three languages with pixel-art flag buttons:
-- **English** (default)
-- **Spanish** (Español)
-- **German** (Deutsch)
-
-All product descriptions, UI text, and content are fully translated.
+| Language | Products Page | Partners Page |
+|----------|---------------|---------------|
+| English | `heroofbitcoin.xyz/#products` | `heroofbitcoin.xyz/#partners` |
+| German | `heroofbitcoin.xyz/?lang=de#products` | `heroofbitcoin.xyz/?lang=de#partners` |
+| Spanish | `heroofbitcoin.xyz/?lang=es#products` | `heroofbitcoin.xyz/?lang=es#partners` |
 
 ---
 
@@ -109,7 +137,8 @@ All product descriptions, UI text, and content are fully translated.
 
 ## Action Items for Copiaro
 
-1. Create individual product pages for each of the 3 products
-2. Provide the direct product URLs
-3. Update the link constants in the codebase
-4. (Optional) Create a merchandise category page for cups, shirts, caps
+1. ~~Create Digital Edition product page~~ Done
+2. ~~Create Hero Handheld product page~~ Done
+3. Create Collector's Edition product page
+4. Create Stackchain Magazine product page
+5. (Optional) Create merchandise category page for cups, shirts, caps

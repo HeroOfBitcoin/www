@@ -18,8 +18,8 @@ import { Package, Menu, Play, ShoppingCart, Shirt, Mail, Instagram, Youtube, Han
   LINK_FAN_SWAG: Merchandise category (cups, shirts, caps)
   =============================================================================
 */
-const LINK_STORE_MAIN = 'https://copiaro.com/brand/hob';
-const LINK_FAN_SWAG = 'https://copiaro.com/brand/hob'; // TODO: Update to merchandise category when available
+const LINK_STORE_MAIN = 'https://copiaro.com/en/hero-of-bitcoin';
+const LINK_FAN_SWAG = 'https://copiaro.com/en/hero-of-bitcoin'; // TODO: Update to merchandise category when available
 
 /*
   =============================================================================
@@ -62,6 +62,7 @@ const App: React.FC = () => {
     'collectors-edition': Tab.PRODUCTS,
     'digital-edition': Tab.PRODUCTS,
     'hero-handheld': Tab.PRODUCTS,
+    'stackchain-magazine': Tab.PRODUCTS,
   };
 
   // Handle hash navigation on page load and browser back/forward
@@ -71,6 +72,15 @@ const App: React.FC = () => {
       const tab = hashToTab[hash];
       if (tab !== undefined) {
         setActiveTab(tab);
+        // Scroll to specific product element after a short delay
+        if (hash && hash !== 'products' && hash !== 'partners') {
+          setTimeout(() => {
+            const element = document.getElementById(hash);
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }, 100);
+        }
       }
     };
 

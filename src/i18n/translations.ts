@@ -142,7 +142,7 @@ export const translations = {
       // Stackchain Magazine
       magazine: {
         title: 'Stackchain Magazine',
-        subtitle: 'LIMITED EDITION PRINT',
+        subtitle: 'LIMITED TO 30 PRINTS',
         quote: 'Exclusive interview with the creator, plus fine art print with alternative Hero of Bitcoin cover.',
         feature1: 'Stackchain Magazine Round 5',
         feature2: 'Fine Art Print (Alt Cover)',
@@ -337,7 +337,7 @@ export const translations = {
       // Stackchain Magazine
       magazine: {
         title: 'Stackchain Magazine',
-        subtitle: 'EDICIÓN IMPRESA LIMITADA',
+        subtitle: 'LIMITADO A 30 IMPRESIONES',
         quote: 'Entrevista exclusiva con el creador, más impresión artística con portada alternativa de Hero of Bitcoin.',
         feature1: 'Stackchain Magazine Ronda 5',
         feature2: 'Impresión Artística (Portada Alt)',
@@ -532,7 +532,7 @@ export const translations = {
       // Stackchain Magazine
       magazine: {
         title: 'Stackchain Magazine',
-        subtitle: 'LIMITIERTE DRUCKAUSGABE',
+        subtitle: 'LIMITIERT AUF 30 STÜCK',
         quote: 'Exklusives Interview mit dem Entwickler, plus Kunstdruck mit alternativem Hero of Bitcoin Cover.',
         feature1: 'Stackchain Magazine Runde 5',
         feature2: 'Kunstdruck (Alt. Cover)',

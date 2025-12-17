@@ -7,25 +7,20 @@ import { Star, ShieldCheck, ShoppingCart, Sticker, Gamepad2, Zap, HardDrive, Che
   =============================================================================
   COPIARO PRODUCT LINKS
   =============================================================================
-  Update these URLs when individual product pages become available.
+  Direct links to product pages on Copiaro store.
+  Brand page: https://copiaro.com/en/hero-of-bitcoin
 
   LINK_PHYSICAL_CARTRIDGE: Physical Game Boy cartridge collector's edition
+  LINK_MICROSD_CARTRIDGE: Digital Edition with microSD card
   LINK_R36S_DEVICE: R36S handheld console with Hero of Bitcoin pre-installed
-  LINK_MICROSD_CARTRIDGE: Cartridge-shaped collectible with microSD card
+  LINK_STACKCHAIN_MAGAZINE: Stackchain Magazine with fine art print
   =============================================================================
 */
-const LINK_PHYSICAL_CARTRIDGE = 'https://copiaro.com/brand/hob'; // TODO: Update to cartridge product page
-const LINK_R36S_DEVICE = 'https://copiaro.com/brand/hob'; // TODO: Update to R36S product page
-const LINK_MICROSD_CARTRIDGE = 'https://copiaro.com/brand/hob'; // TODO: Update to microSD cartridge page
-
-/*
-  =============================================================================
-  STACKCHAIN MAGAZINE LINK
-  =============================================================================
-  Stackchain Magazine with Hero of Bitcoin fine art print
-  =============================================================================
-*/
-const LINK_STACKCHAIN_MAGAZINE = 'https://copiaro.com/brand/hob'; // TODO: Update to magazine product page
+const LINK_BRAND_PAGE = 'https://copiaro.com/en/hero-of-bitcoin';
+const LINK_PHYSICAL_CARTRIDGE = LINK_BRAND_PAGE; // TODO: Update when cartridge product page is available
+const LINK_MICROSD_CARTRIDGE = 'https://copiaro.com/en/hero-of-bitcoin-digital-version-v2';
+const LINK_R36S_DEVICE = 'https://copiaro.com/en/hero-of-bitcoin-handheld-version-v2';
+const LINK_STACKCHAIN_MAGAZINE = LINK_BRAND_PAGE; // TODO: Update when magazine product page is available
 
 /*
   =============================================================================

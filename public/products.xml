@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hero of Bitcoin - Products</title>
+    <link>https://heroofbitcoin.xyz/#products</link>
+    <description>Official Hero of Bitcoin merchandise and collectibles. Game Boy cartridges, handheld consoles, and limited edition prints.</description>
+    <language>en</language>
+    <lastBuildDate>Wed, 17 Dec 2025 20:25:49 GMT</lastBuildDate>
+    <atom:link href="https://heroofbitcoin.xyz/products.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Collector&apos;s Edition - Physical Game Boy Cartridge</title>
+      <link>https://heroofbitcoin.xyz/#collectors-edition</link>
+      <guid isPermaLink="true">https://heroofbitcoin.xyz/#collectors-edition</guid>
+      <description>Limited to ~450 units. A tangible piece of Bitcoin history, playable on original hardware. Includes premium box, manual, orange Game Boy cartridge, sticker, and protective box cover. Compatible with Game Boy, GBC, GBA, and Analogue Pocket.</description>
+      <pubDate>Mon, 01 Jan 2024 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title>Digital Edition - microSD Cartridge</title>
+      <link>https://heroofbitcoin.xyz/#digital-edition</link>
+      <guid isPermaLink="true">https://heroofbitcoin.xyz/#digital-edition</guid>
+      <description>Play anywhere. The perfect collectible for emulator enthusiasts. No Game Boy required. Includes premium box, manual, microSD with game ROM, decorative cartridge collectible, sticker, and protective box cover. Play on Raspberry Pi, MiSTer FPGA, RetroArch, or any Game Boy emulator.</description>
+      <pubDate>Mon, 01 Jan 2024 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title>Hero Handheld - R36S Console Bundle</title>
+      <link>https://heroofbitcoin.xyz/#hero-handheld</link>
+      <guid isPermaLink="true">https://heroofbitcoin.xyz/#hero-handheld</guid>
+      <description>Ready to play. Hero of Bitcoin pre-installed. Power on and play instantly. Includes ArkOS pre-installed, microSD card, and sticker. Also supports GB, GBC, GBA, NES, SNES, Genesis, PS1, and more.</description>
+      <pubDate>Mon, 01 Jan 2024 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title>Stackchain Magazine - Limited Edition Print</title>
+      <link>https://heroofbitcoin.xyz/#stackchain-magazine</link>
+      <guid isPermaLink="true">https://heroofbitcoin.xyz/#stackchain-magazine</guid>
+      <description>Limited to 30 prints. Exclusive interview with the creator, plus fine art print with alternative Hero of Bitcoin cover. Includes Stackchain Magazine Round 5, fine art print, and premium protective toploader.</description>
+      <pubDate>Tue, 17 Dec 2024 00:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>

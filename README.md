@@ -22,33 +22,90 @@ npm run dev
 ```
 Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
 
-### 3. Adding Assets
+### 3. Build for Production
 
-Before building, ensure you have placed your images in the public folder. See the source files for detailed comments on each image location:
+```bash
+npm run build
+```
+
+This will:
+1. Auto-generate the RSS feed (`public/products.xml`)
+2. Run TypeScript compilation
+3. Build with Vite
+
+### 4. Generate RSS Feed Only
+
+```bash
+npm run generate:rss
+```
+
+---
+
+## Features
+
+- **Multi-language support** (EN, ES, DE) via URL parameter (`?lang=de`)
+- **Products page** with 4 product offerings
+- **Partners page** with retail partner information
+- **RSS feed** for products (`/products.xml`)
+- **Direct linking** to specific products via hash URLs
+- **SEO optimization** with structured data for search engines and LLMs
+
+---
+
+## Adding/Updating Products
+
+Products are defined in a single source of truth:
+
+**File:** `src/data/products.ts`
+
+When you add or modify products:
+1. Update the `products` array in `src/data/products.ts`
+2. Update translations in `src/i18n/translations.ts`
+3. Update the ProductCard in `src/components/Products.tsx`
+4. Run `npm run build` - RSS feed updates automatically
+
+---
+
+## URL Structure
+
+### Direct Links
+
+| Page | URL |
+|------|-----|
+| Homepage | `heroofbitcoin.xyz` |
+| Products | `heroofbitcoin.xyz/#products` |
+| Partners | `heroofbitcoin.xyz/#partners` |
+| Collector's Edition | `heroofbitcoin.xyz/#collectors-edition` |
+| Digital Edition | `heroofbitcoin.xyz/#digital-edition` |
+| Hero Handheld | `heroofbitcoin.xyz/#hero-handheld` |
+| Stackchain Magazine | `heroofbitcoin.xyz/#stackchain-magazine` |
+
+### Localized Links
+
+Add `?lang=` parameter for language-specific links:
+- `heroofbitcoin.xyz/?lang=de#products` (German)
+- `heroofbitcoin.xyz/?lang=es#partners` (Spanish)
+
+---
+
+## Adding Assets
+
+Place images in the public folder. See source files for detailed comments:
 
 **Character Portraits** (`public/assets/characters/`):
-- `samson.png` - Samson Mow portrait (80x80px or 160x160px)
-- `michael.png` - Michael Saylor portrait
-- `max_stacey.png` - Max & Stacey portrait
-- `nayib.png` - Nayib Bukele portrait
-- `adam.png` - Adam Back portrait
-- `faketoshi.png` - Faketoshi portrait
+- `samson.png`, `michael.png`, `max_stacey.png`, `nayib.png`, `adam.png`, `faketoshi.png`
 
 **Screenshots** (`public/assets/screenshots/`):
-- `town.png` - Town scene screenshot (160x144px or 320x288px)
-- `collect.png` - Collect/gameplay screenshot
-
-**Cover & Logo** (`public/assets/`):
-- `cover-logo.png` - Main game logo (128x128px)
-
-**Device** (`public/assets/device/`):
-- `r36s-custom.png` - Custom R36S device photo (300x200px or 600x400px)
+- `town.png`, `collect.png`
 
 **Product Images** (`public/assets/product/`):
-- `box-art.png` - Main product box art (400x400px or 800x800px)
-- `gallery/gallery-01.png` - Gallery image 1
-- `gallery/gallery-02.png` - Gallery image 2
-- `gallery/gallery-03.png` - Gallery image 3
+- `cartridge/1.webp, 2.webp, 3.webp` - Collector's Edition
+- `microsd/1.webp, 2.png, 3.png` - Digital Edition
+- `bundles/1.webp, 2.webp, 3.webp` - Hero Handheld
+- `magazine/1.png, 2.png, 3.png` - Stackchain Magazine
+
+**Partner Logos** (`public/assets/partners/`):
+- `copiaro.jpeg`, `plebstyle.jpeg`
 
 ---
 

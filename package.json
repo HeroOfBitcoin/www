@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "generate:rss": "tsx scripts/generate-rss.ts",
+    "build": "npm run generate:rss && tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -14,9 +15,11 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@types/node": "^20.10.0",
     "@types/react": "^18.2.64",
     "@types/react-dom": "^18.2.21",
     "@vitejs/plugin-react": "^4.2.1",
+    "tsx": "^4.7.0",
     "typescript": "^5.2.2",
     "vite": "^5.1.6"
   }

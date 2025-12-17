@@ -59,3 +59,56 @@
 .rendering-pixelated {
   image-rendering: pixelated;
 }
+
+/* =============================================================================
+   MOBILE OPTIMIZATIONS
+   ============================================================================= */
+
+/* Reduce pixel shadow intensity on mobile for cleaner look */
+@media (max-width: 768px) {
+  .pixel-shadow {
+    box-shadow: 2px 2px 0px 0px #000000;
+  }
+
+  .pixel-shadow-sm {
+    box-shadow: 1px 1px 0px 0px #000000;
+  }
+}
+
+/* Ensure tap targets are adequate (minimum 44x44px) */
+@media (max-width: 768px) {
+  button, a {
+    min-height: 44px;
+  }
+
+  /* Exception for inline links and small UI elements */
+  a:not([class*="flex"]):not([class*="px-"]) {
+    min-height: auto;
+  }
+}
+
+/* Prevent horizontal overflow on mobile */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Improve text readability on mobile */
+@media (max-width: 768px) {
+  /* Ensure minimum readable font size for body text */
+  body {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+}
+
+/* Hide custom scrollbar on touch devices (native scrolling is better) */
+@media (pointer: coarse) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  * {
+    scrollbar-width: none;
+  }
+}

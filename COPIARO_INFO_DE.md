@@ -17,7 +17,7 @@ Die Hero of Bitcoin Website (heroofbitcoin.xyz) ist die offizielle Produktseite 
 - **Release-Trailer** mit eingebettetem YouTube-Video
 - **Spielgeschichte und Steuerung** als digitale Anleitung
 - **Charakter-Profile** aller NPCs im Spiel
-- **Drei Produktangebote** mit Bildergalerien und Direktlinks
+- **Vier Produktangebote** mit Bildergalerien und Direktlinks
 - **Mehrsprachig** - Englisch, Spanisch und Deutsch
 - **SEO-optimiert** fuer Suchmaschinen und KI-Systeme (ChatGPT, Claude, etc.)
 - **Direktlinks** zu einzelnen Produkten fuer Marketing
@@ -72,6 +72,21 @@ Ich benoetige individuelle Produkt-URLs fuer jeden Artikel:
 
 ---
 
+### Produkt 4: Stackchain Magazine (Partner: Proof of Ink)
+
+| Sprache | Produktname auf der Website |
+|---------|----------------------------|
+| Englisch | Stackchain Magazine |
+| Deutsch | Stackchain Magazine |
+| Spanisch | Stackchain Magazine |
+
+**Inhalt:** Stackchain Magazine Runde 5, Fine Art Print mit alternativem Hero of Bitcoin Cover, Premium Schutzhuelle (Toploader)
+**Besonderheit:** Interview mit dem Hero of Bitcoin Entwickler
+**Partner:** Proof of Ink (externes Produkt - kein Copiaro Link noetig)
+**Link:** `https://proofofink.com/product/pre-order-stackchain-magazine-round-5-with-protective-toploader/`
+
+---
+
 ### Optional: Fan Merchandise
 
 | Sprache | Button-Text auf der Website |
@@ -97,10 +112,10 @@ Sobald ich die URLs habe, aktualisiere ich die Website und alle Links funktionie
 
 ---
 
-## Lokalisierte Marketing-Direktlinks (LIVE)
+## Lokalisierte Marketing-Direktlinks (LIVE & GETESTET)
 
 Diese Direktlinks oeffnen die Website automatisch in der richtigen Sprache.
-Der `?lang=` Parameter setzt die Sprache direkt beim Aufruf.
+Der `?lang=` Parameter setzt die Sprache direkt beim Aufruf - getestet und funktioniert!
 
 ### Englisch (EN)
 
@@ -111,6 +126,7 @@ Der `?lang=` Parameter setzt die Sprache direkt beim Aufruf.
 | Collector's Edition | `https://heroofbitcoin.xyz?lang=en#collectors-edition` |
 | Digital Edition | `https://heroofbitcoin.xyz?lang=en#digital-edition` |
 | Hero Handheld | `https://heroofbitcoin.xyz?lang=en#hero-handheld` |
+| Stackchain Magazine | `https://heroofbitcoin.xyz?lang=en#stackchain-magazine` |
 | Play Demo | `https://demo.heroofbitcoin.xyz` |
 
 ### Deutsch (DE)
@@ -122,6 +138,7 @@ Der `?lang=` Parameter setzt die Sprache direkt beim Aufruf.
 | Sammler-Edition | `https://heroofbitcoin.xyz?lang=de#collectors-edition` |
 | Digital Edition | `https://heroofbitcoin.xyz?lang=de#digital-edition` |
 | Hero Handheld | `https://heroofbitcoin.xyz?lang=de#hero-handheld` |
+| Stackchain Magazine | `https://heroofbitcoin.xyz?lang=de#stackchain-magazine` |
 | Demo Spielen | `https://demo.heroofbitcoin.xyz` |
 
 ### Spanisch (ES)
@@ -133,6 +150,7 @@ Der `?lang=` Parameter setzt die Sprache direkt beim Aufruf.
 | Edicion Coleccionista | `https://heroofbitcoin.xyz?lang=es#collectors-edition` |
 | Edicion Digital | `https://heroofbitcoin.xyz?lang=es#digital-edition` |
 | Hero Handheld | `https://heroofbitcoin.xyz?lang=es#hero-handheld` |
+| Stackchain Magazine | `https://heroofbitcoin.xyz?lang=es#stackchain-magazine` |
 | Jugar Demo | `https://demo.heroofbitcoin.xyz` |
 
 ---

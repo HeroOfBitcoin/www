@@ -135,6 +135,38 @@ Add `?lang=` parameter for language-specific pages:
 
 ---
 
+## Privacy & Technical Implementation
+
+### Privacy Features (No Tracking)
+The website collects **zero user data**:
+
+- **Self-hosted fonts** - Google Fonts downloaded locally (`public/assets/fonts/`)
+- **Self-hosted Tailwind CSS** - Bundled with PostCSS, no CDN
+- **Self-hosted YouTube thumbnail** - No external request until video plays
+- **Privacy-enhanced YouTube** - Uses `youtube-nocookie.com` for embeds
+- **No analytics** - No Google Analytics, no tracking pixels
+- **No cookies** - Only `localStorage` for language preference
+
+Footer displays: "No tracking • No cookies • No data collection"
+
+### Mobile Optimization
+- Responsive design with `md:` breakpoints
+- Minimum 44px tap targets for accessibility
+- Reduced shadows on mobile for cleaner look
+- Native scrolling on touch devices
+- Hamburger menu for mobile navigation
+
+### Build System
+```bash
+npm run dev          # Start dev server
+npm run build        # Generate RSS + TypeScript + Vite build
+npm run generate:rss # Regenerate RSS feed only
+```
+
+RSS feed auto-generates from `src/data/products.ts` on every build.
+
+---
+
 ## Action Items for Copiaro
 
 1. ~~Create Digital Edition product page~~ Done

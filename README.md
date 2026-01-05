@@ -49,6 +49,20 @@ npm run generate:rss
 - **RSS feed** for products (`/products.xml`)
 - **Direct linking** to specific products via hash URLs
 - **SEO optimization** with structured data for search engines and LLMs
+- **Privacy-first** - No tracking, no cookies, no data collection
+- **Mobile-optimized** - Responsive design with touch-friendly UI
+
+---
+
+## Privacy
+
+This website collects **zero user data**:
+
+- **Self-hosted fonts** - No requests to Google Fonts
+- **Self-hosted Tailwind CSS** - Bundled locally, no CDN
+- **Privacy-enhanced YouTube** - Uses `youtube-nocookie.com`
+- **No analytics or tracking pixels**
+- **No cookies** - Only `localStorage` for language preference
 
 ---
 
@@ -134,4 +148,4 @@ This project auto-deploys to GitHub Pages via GitHub Actions on every push to `m
 
 ## Copyright
 
-©2022-2025 Hero of Bitcoin. All rights reserved.
+©2022-2026 Hero of Bitcoin. All rights reserved.

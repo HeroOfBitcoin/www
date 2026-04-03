@@ -229,6 +229,57 @@ const GameManual: React.FC = () => {
         </p>
       </div>
 
+      <div className="border-4 border-black bg-white pixel-shadow overflow-hidden">
+        <div className="grid md:grid-cols-[1.1fr_0.9fr]">
+          <div className="bg-black text-white p-5 md:p-6">
+            <p className="font-pixel text-[10px] uppercase tracking-[0.2em] text-yellow-300 mb-3">
+              {t.hero.instantTitle}
+            </p>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="flex items-center gap-2 text-3xl leading-none" aria-hidden="true">
+                <span className="font-sans font-bold text-[#F7931A]">₿</span>
+                <span className="font-sans text-yellow-300">⚡</span>
+              </span>
+              <p className="font-mono text-sm text-neutral-200">{t.hero.instantMeta}</p>
+            </div>
+            <p className="font-mono text-sm text-neutral-200 mb-5 max-w-md">
+              {t.hero.instantBody}
+            </p>
+            <a
+              href="#instant-download"
+              className="inline-flex items-center gap-3 border-2 border-yellow-300 bg-yellow-300 px-4 py-3 font-pixel text-[10px] uppercase text-black transition-all hover:translate-x-[2px] hover:-translate-y-[2px]"
+            >
+              <span className="flex items-center gap-1 text-base leading-none" aria-hidden="true">
+                <span className="font-sans font-bold text-[#F7931A]">₿</span>
+                <span className="font-sans">⚡</span>
+              </span>
+              <span>{t.hero.instantCta}</span>
+            </a>
+          </div>
+
+          <div className="bg-yellow-200 p-5 md:p-6 border-t-4 md:border-t-0 md:border-l-4 border-black">
+            <p className="font-pixel text-[10px] uppercase tracking-[0.2em] text-yellow-900 mb-3">
+              {t.hero.physicalTitle}
+            </p>
+            <p className="font-mono text-sm text-yellow-950 mb-3">
+              {t.hero.physicalBody}
+            </p>
+            <p className="font-mono text-xs text-yellow-900 mb-5">
+              {t.hero.physicalMeta}
+            </p>
+            <a
+              href={LINK_COPIARO_STORE}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 border-2 border-black bg-white px-4 py-3 font-pixel text-[10px] uppercase text-black transition-all hover:translate-x-[2px] hover:-translate-y-[2px]"
+            >
+              <ShoppingCart size={14} />
+              <span>{t.hero.physicalCta}</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
       {/* SECTION 2: STORY */}
       <div>
         <h2 className="font-pixel text-xl border-b-4 border-black mb-6 pb-2">{t.story.title}</h2>

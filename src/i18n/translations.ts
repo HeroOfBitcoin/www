@@ -8,12 +8,53 @@ export const translations = {
       partners: 'PARTNERS',
       playDemo: 'PLAY DEMO',
       buyNow: 'BUY NOW',
+      instantDownload: 'INSTANT DOWNLOAD',
+      physicalStore: 'PHYSICAL STORE',
     },
     // Hero Section
     hero: {
       watchTrailer: 'WATCH TRAILER',
       buyAtCopiaro: 'BUY AT COPIARO',
       copiaroSubtext: 'Our trusted partner for physical cartridges & merchandise',
+      instantTitle: 'Instant Download',
+      instantBody: 'Pay with Bitcoin or Lightning and unlock the ROM + PDF bundle after confirmation.',
+      instantCta: 'OPEN BTC / LN CHECKOUT',
+      instantMeta: 'Private download. No account required.',
+      physicalTitle: 'Physical Editions',
+      physicalBody: 'Collector cartridges, boxed microSD bundles, and other physical releases stay available via our fulfillment partner.',
+      physicalCta: 'BROWSE PHYSICAL STORE',
+      physicalMeta: 'Box, manual, cartridge, and Bitcoin-native merchandise.',
+    },
+    checkout: {
+      title: 'Payment Status',
+      subtitle: 'This page unlocks your digital bundle after payment is confirmed.',
+      missingOrder: 'Missing order reference. Return to the product page and start checkout again.',
+      loading: 'Checking payment status...',
+      refresh: 'REFRESH STATUS',
+      backToProducts: 'BACK TO PRODUCTS',
+      pendingTitle: 'Waiting for payment',
+      pendingBody: 'Complete the hosted checkout in your payment window. This page refreshes automatically for up to two minutes.',
+      processingTitle: 'Payment detected',
+      processingBody: 'We have seen your payment and are waiting for final confirmation.',
+      paidTitle: 'Payment confirmed',
+      paidBody: 'Your bundle is ready. Download access is temporary and limited.',
+      expiredTitle: 'Checkout expired',
+      expiredBody: 'The checkout window expired before payment completed. Start a new checkout from the product page.',
+      underpaidTitle: 'Payment underpaid',
+      underpaidBody: 'A payment was detected, but the full amount has not settled yet.',
+      genericError: 'Could not load this order right now. Try refreshing in a moment.',
+      orderDetails: 'Order Details',
+      orderId: 'Order ID',
+      paymentId: 'Payment ID',
+      amount: 'Amount',
+      createdAt: 'Created',
+      paidAt: 'Paid At',
+      downloadsRemaining: 'Downloads Remaining',
+      downloadButton: 'DOWNLOAD ZIP',
+      downloadHint: 'The link is private, time-limited, and meant for your personal order only.',
+      noDownloadsLeft: 'This order has used all remaining downloads.',
+      lastUpdated: 'Last updated',
+      stillWaiting: 'Still waiting? If you paid on-chain, confirmation can take longer than the auto-refresh window.',
     },
     // Story Section
     story: {
@@ -96,8 +137,31 @@ export const translations = {
     products: {
       title: 'Products',
       buyNow: 'BUY NOW',
+      chooseFormatTitle: 'Choose Your Format',
+      chooseFormatBody: 'Start with the instant Bitcoin + Lightning download or compare it with the premium physical editions.',
+      chooseFormatPrimary: 'START INSTANT DOWNLOAD',
+      chooseFormatSecondary: 'SEE PHYSICAL EDITIONS',
       shippingTitle: 'Shipping Info',
       shippingText: 'All products ship worldwide. Customs and import duties may apply depending on your country.',
+      instant: {
+        title: 'Instant Download',
+        subtitle: 'ROM + PDF BUNDLE',
+        quote: 'The fastest way to buy, pay, and play with Bitcoin or Lightning.',
+        feature1: 'Game Boy ROM + PDF Manual',
+        feature2: 'Bitcoin + Lightning Checkout',
+        feature3: 'No Email Required',
+        feature4: 'Private Timed Download',
+        note: 'Optional email is stored with your order, but the full purchase flow works without it.',
+        compatibility: 'Play on Raspberry Pi, MiSTer FPGA, RetroArch, or any Game Boy emulator.',
+        emailLabel: 'Optional Email',
+        emailPlaceholder: 'you@example.com',
+        emailHint: 'Leave this blank if you want a fast, email-free checkout.',
+        buyWithBitcoin: 'PAY WITH BITCOIN + LIGHTNING',
+        redirecting: 'Redirecting to secure checkout...',
+        checkoutTitle: 'Bitcoin + Lightning checkout',
+        checkoutBody: 'Your private ZIP unlocks automatically after payment confirmation.',
+        checkoutError: 'Could not start checkout. Please try again.',
+      },
       // Collector's Edition
       collectors: {
         title: "Collector's Edition",
@@ -113,14 +177,15 @@ export const translations = {
       // Digital Edition
       digital: {
         title: 'Digital Edition',
-        subtitle: 'PLAY ANYWHERE',
-        quote: 'The perfect collectible for emulator enthusiasts. No Game Boy required.',
+        subtitle: 'BOXED microSD BUNDLE',
+        quote: 'A physical collectible for emulator players who want the box, manual, and ROM on microSD.',
         feature1: 'Premium Box & Manual',
         feature2: 'microSD with Game ROM',
-        feature3: 'Includes Sticker',
-        feature4: 'Protective Box Cover',
-        note: 'Includes a decorative cartridge-shaped collectible. The game ROM is on the included microSD card.',
+        feature3: 'Decorative Cartridge Collectible',
+        feature4: 'Sticker + Protective Box Cover',
+        note: 'This boxed edition ships physically. The game ROM comes on the included microSD card.',
         compatibility: 'Play on Raspberry Pi, MiSTer FPGA, RetroArch, or any Game Boy emulator.',
+        buyAtCopiaro: 'VIEW BOXED EDITION',
       },
       // Hero Handheld
       handheld: {
@@ -169,6 +234,8 @@ export const translations = {
         chargingIssuesDesc: 'Try different 5V brick, avoid sleeping ports',
       },
       badges: {
+        instantAccess: 'INSTANT ACCESS',
+        boxedEdition: 'BOXED EDITION',
         ltdEdition: 'LTD EDITION',
         budgetPick: 'BUDGET PICK',
         readyToPlay: 'READY TO PLAY',
@@ -204,12 +271,53 @@ export const translations = {
       partners: 'SOCIOS',
       playDemo: 'JUGAR DEMO',
       buyNow: 'COMPRAR',
+      instantDownload: 'DESCARGA INSTANTANEA',
+      physicalStore: 'TIENDA FISICA',
     },
     // Hero Section
     hero: {
       watchTrailer: 'VER TRÁILER',
       buyAtCopiaro: 'COMPRAR EN COPIARO',
       copiaroSubtext: 'Nuestro socio de confianza para cartuchos físicos y merchandising',
+      instantTitle: 'Descarga Instantanea',
+      instantBody: 'Paga con Bitcoin o Lightning y desbloquea el bundle ROM + PDF tras la confirmacion.',
+      instantCta: 'ABRIR CHECKOUT BTC / LN',
+      instantMeta: 'Descarga privada. Sin cuenta obligatoria.',
+      physicalTitle: 'Ediciones Fisicas',
+      physicalBody: 'Cartuchos coleccionista, bundles con microSD y otros lanzamientos fisicos siguen disponibles a traves de nuestro socio logistico.',
+      physicalCta: 'VER TIENDA FISICA',
+      physicalMeta: 'Caja, manual, cartucho y merchandising Bitcoin-native.',
+    },
+    checkout: {
+      title: 'Estado del Pago',
+      subtitle: 'Esta página desbloquea tu bundle digital cuando se confirma el pago.',
+      missingOrder: 'Falta la referencia del pedido. Vuelve a la página del producto e inicia el checkout de nuevo.',
+      loading: 'Comprobando el estado del pago...',
+      refresh: 'ACTUALIZAR ESTADO',
+      backToProducts: 'VOLVER A PRODUCTOS',
+      pendingTitle: 'Esperando el pago',
+      pendingBody: 'Completa el checkout alojado en tu ventana de pago. Esta página se actualiza automáticamente durante dos minutos.',
+      processingTitle: 'Pago detectado',
+      processingBody: 'Hemos visto tu pago y estamos esperando la confirmación final.',
+      paidTitle: 'Pago confirmado',
+      paidBody: 'Tu bundle está listo. El acceso de descarga es temporal y limitado.',
+      expiredTitle: 'Checkout caducado',
+      expiredBody: 'La ventana de checkout caducó antes de completarse el pago. Inicia un nuevo checkout desde la página del producto.',
+      underpaidTitle: 'Pago insuficiente',
+      underpaidBody: 'Se detectó un pago, pero el importe completo aún no se ha liquidado.',
+      genericError: 'No pudimos cargar este pedido ahora mismo. Intenta actualizar en un momento.',
+      orderDetails: 'Detalles del Pedido',
+      orderId: 'ID del Pedido',
+      paymentId: 'ID del Pago',
+      amount: 'Importe',
+      createdAt: 'Creado',
+      paidAt: 'Pagado',
+      downloadsRemaining: 'Descargas Restantes',
+      downloadButton: 'DESCARGAR ZIP',
+      downloadHint: 'El enlace es privado, temporal y pensado solo para tu pedido.',
+      noDownloadsLeft: 'Este pedido ya ha usado todas las descargas disponibles.',
+      lastUpdated: 'Última actualización',
+      stillWaiting: '¿Sigues esperando? Si pagaste on-chain, la confirmación puede tardar más que la ventana de auto-actualización.',
     },
     // Story Section
     story: {
@@ -292,8 +400,31 @@ export const translations = {
     products: {
       title: 'Productos',
       buyNow: 'COMPRAR',
+      chooseFormatTitle: 'Elige Tu Formato',
+      chooseFormatBody: 'Empieza con la descarga instantanea por Bitcoin + Lightning o comparala con las ediciones fisicas premium.',
+      chooseFormatPrimary: 'INICIAR DESCARGA INSTANTANEA',
+      chooseFormatSecondary: 'VER EDICIONES FISICAS',
       shippingTitle: 'Info de Envío',
       shippingText: 'Todos los productos se envían a todo el mundo. Pueden aplicarse aduanas e impuestos según tu país.',
+      instant: {
+        title: 'Descarga Instantanea',
+        subtitle: 'BUNDLE ROM + PDF',
+        quote: 'La forma mas rapida de comprar, pagar y jugar con Bitcoin o Lightning.',
+        feature1: 'ROM de Game Boy + Manual PDF',
+        feature2: 'Checkout Bitcoin + Lightning',
+        feature3: 'Sin Email Obligatorio',
+        feature4: 'Descarga Privada y Temporal',
+        note: 'El email es opcional y se guarda con tu pedido, pero toda la compra funciona sin el.',
+        compatibility: 'Juega en Raspberry Pi, MiSTer FPGA, RetroArch o cualquier emulador de Game Boy.',
+        emailLabel: 'Email Opcional',
+        emailPlaceholder: 'tu@email.com',
+        emailHint: 'Dejalo vacio si quieres un checkout rapido y sin email.',
+        buyWithBitcoin: 'PAGAR CON BITCOIN + LIGHTNING',
+        redirecting: 'Redirigiendo al checkout seguro...',
+        checkoutTitle: 'Checkout Bitcoin + Lightning',
+        checkoutBody: 'Tu ZIP privado se desbloquea automaticamente tras la confirmacion del pago.',
+        checkoutError: 'No se pudo iniciar el checkout. Intentalo de nuevo.',
+      },
       // Collector's Edition
       collectors: {
         title: 'Edición Coleccionista',
@@ -309,14 +440,15 @@ export const translations = {
       // Digital Edition
       digital: {
         title: 'Edición Digital',
-        subtitle: 'JUEGA DONDE QUIERAS',
-        quote: 'El coleccionable perfecto para entusiastas de emuladores. No requiere Game Boy.',
+        subtitle: 'BUNDLE microSD EN CAJA',
+        quote: 'Un coleccionable fisico para jugadores de emulador que quieren caja, manual y la ROM en microSD.',
         feature1: 'Caja Premium y Manual',
         feature2: 'microSD con ROM del Juego',
-        feature3: 'Incluye Pegatina',
-        feature4: 'Funda Protectora',
-        note: 'Incluye un coleccionable decorativo en forma de cartucho. La ROM está en la tarjeta microSD incluida.',
+        feature3: 'Coleccionable Decorativo Tipo Cartucho',
+        feature4: 'Pegatina + Funda Protectora',
+        note: 'Esta edicion se envia fisicamente. La ROM del juego viene en la microSD incluida.',
         compatibility: 'Juega en Raspberry Pi, MiSTer FPGA, RetroArch o cualquier emulador de Game Boy.',
+        buyAtCopiaro: 'VER EDICION EN CAJA',
       },
       // Hero Handheld
       handheld: {
@@ -365,6 +497,8 @@ export const translations = {
         chargingIssuesDesc: 'Prueba otro cargador 5V, evita puertos en suspensión',
       },
       badges: {
+        instantAccess: 'ACCESO INSTANTANEO',
+        boxedEdition: 'EDICION EN CAJA',
         ltdEdition: 'ED. LIMITADA',
         budgetPick: 'ECONÓMICO',
         readyToPlay: 'LISTO PARA JUGAR',
@@ -400,12 +534,53 @@ export const translations = {
       partners: 'PARTNER',
       playDemo: 'DEMO SPIELEN',
       buyNow: 'KAUFEN',
+      instantDownload: 'SOFORTDOWNLOAD',
+      physicalStore: 'PHYSISCHER SHOP',
     },
     // Hero Section
     hero: {
       watchTrailer: 'TRAILER ANSEHEN',
       buyAtCopiaro: 'BEI COPIARO KAUFEN',
       copiaroSubtext: 'Unser vertrauenswürdiger Partner für physische Cartridges & Merchandise',
+      instantTitle: 'Sofortdownload',
+      instantBody: 'Bezahle mit Bitcoin oder Lightning und schalte das ROM + PDF Bundle nach Bestatigung frei.',
+      instantCta: 'BTC / LN CHECKOUT OFFNEN',
+      instantMeta: 'Privater Download. Kein Konto erforderlich.',
+      physicalTitle: 'Physische Editionen',
+      physicalBody: 'Sammler-Cartridges, Boxen mit microSD und weitere physische Releases bleiben uber unseren Fulfillment-Partner verfugbar.',
+      physicalCta: 'PHYSISCHEN SHOP OFFNEN',
+      physicalMeta: 'Box, Handbuch, Cartridge und Bitcoin-native Merchandise.',
+    },
+    checkout: {
+      title: 'Zahlungsstatus',
+      subtitle: 'Diese Seite schaltet dein digitales Bundle frei, sobald die Zahlung bestätigt ist.',
+      missingOrder: 'Die Bestellreferenz fehlt. Gehe zur Produktseite zurück und starte den Checkout erneut.',
+      loading: 'Zahlungsstatus wird geprüft...',
+      refresh: 'STATUS AKTUALISIEREN',
+      backToProducts: 'ZURÜCK ZU PRODUKTEN',
+      pendingTitle: 'Warten auf Zahlung',
+      pendingBody: 'Schließe den gehosteten Checkout im Zahlungsfenster ab. Diese Seite aktualisiert sich bis zu zwei Minuten lang automatisch.',
+      processingTitle: 'Zahlung erkannt',
+      processingBody: 'Wir haben deine Zahlung gesehen und warten auf die endgültige Bestätigung.',
+      paidTitle: 'Zahlung bestätigt',
+      paidBody: 'Dein Bundle ist bereit. Der Downloadzugang ist zeitlich begrenzt und limitiert.',
+      expiredTitle: 'Checkout abgelaufen',
+      expiredBody: 'Das Checkout-Fenster ist abgelaufen, bevor die Zahlung abgeschlossen wurde. Starte einen neuen Checkout auf der Produktseite.',
+      underpaidTitle: 'Zahlung zu niedrig',
+      underpaidBody: 'Eine Zahlung wurde erkannt, aber der volle Betrag ist noch nicht eingegangen.',
+      genericError: 'Diese Bestellung konnte gerade nicht geladen werden. Bitte gleich noch einmal aktualisieren.',
+      orderDetails: 'Bestelldetails',
+      orderId: 'Bestell-ID',
+      paymentId: 'Zahlungs-ID',
+      amount: 'Betrag',
+      createdAt: 'Erstellt',
+      paidAt: 'Bezahlt',
+      downloadsRemaining: 'Verbleibende Downloads',
+      downloadButton: 'ZIP HERUNTERLADEN',
+      downloadHint: 'Der Link ist privat, zeitlich begrenzt und nur für deine Bestellung gedacht.',
+      noDownloadsLeft: 'Für diese Bestellung sind keine Downloads mehr übrig.',
+      lastUpdated: 'Zuletzt aktualisiert',
+      stillWaiting: 'Immer noch am Warten? Wenn du on-chain bezahlt hast, kann die Bestätigung länger dauern als das Auto-Refresh-Fenster.',
     },
     // Story Section
     story: {
@@ -488,8 +663,31 @@ export const translations = {
     products: {
       title: 'Produkte',
       buyNow: 'KAUFEN',
+      chooseFormatTitle: 'Wahle Dein Format',
+      chooseFormatBody: 'Starte mit dem sofortigen Bitcoin + Lightning Download oder vergleiche ihn mit den physischen Premium-Editionen.',
+      chooseFormatPrimary: 'SOFORTDOWNLOAD STARTEN',
+      chooseFormatSecondary: 'PHYSISCHE EDITIONEN',
       shippingTitle: 'Versandinfo',
       shippingText: 'Alle Produkte werden weltweit versendet. Zoll und Einfuhrabgaben können je nach Land anfallen.',
+      instant: {
+        title: 'Sofortdownload',
+        subtitle: 'ROM + PDF BUNDLE',
+        quote: 'Der schnellste Weg, mit Bitcoin oder Lightning zu kaufen, zu bezahlen und zu spielen.',
+        feature1: 'Game Boy ROM + PDF-Handbuch',
+        feature2: 'Bitcoin + Lightning Checkout',
+        feature3: 'Keine Pflicht-E-Mail',
+        feature4: 'Privater Download mit Zeitlimit',
+        note: 'Eine E-Mail ist optional und wird mit der Bestellung gespeichert, aber der gesamte Kauf funktioniert auch ohne sie.',
+        compatibility: 'Spielbar auf Raspberry Pi, MiSTer FPGA, RetroArch oder jedem Game Boy Emulator.',
+        emailLabel: 'Optionale E-Mail',
+        emailPlaceholder: 'du@beispiel.de',
+        emailHint: 'Lass das Feld leer, wenn du einen schnellen Checkout ohne E-Mail mochtest.',
+        buyWithBitcoin: 'MIT BITCOIN + LIGHTNING BEZAHLEN',
+        redirecting: 'Weiterleitung zum sicheren Checkout...',
+        checkoutTitle: 'Bitcoin + Lightning Checkout',
+        checkoutBody: 'Dein privates ZIP wird nach Zahlungsbestatigung automatisch freigeschaltet.',
+        checkoutError: 'Checkout konnte nicht gestartet werden. Bitte versuche es erneut.',
+      },
       // Collector's Edition
       collectors: {
         title: 'Sammler-Edition',
@@ -505,14 +703,15 @@ export const translations = {
       // Digital Edition
       digital: {
         title: 'Digital Edition',
-        subtitle: 'ÜBERALL SPIELEN',
-        quote: 'Das perfekte Sammlerstück für Emulator-Enthusiasten. Kein Game Boy erforderlich.',
+        subtitle: 'BOX MIT microSD BUNDLE',
+        quote: 'Ein physisches Sammlerstuck fur Emulator-Spieler, die Box, Handbuch und die ROM auf microSD wollen.',
         feature1: 'Premium-Box & Handbuch',
         feature2: 'microSD mit Spiel-ROM',
-        feature3: 'Inklusive Aufkleber',
-        feature4: 'Schutzhülle für Box',
-        note: 'Enthält ein dekoratives Cartridge-Sammlerstück. Die ROM befindet sich auf der enthaltenen microSD-Karte.',
+        feature3: 'Dekoratives Cartridge-Sammlerstuck',
+        feature4: 'Aufkleber + Schutzhulle',
+        note: 'Diese Edition wird physisch versendet. Die Spiel-ROM befindet sich auf der enthaltenen microSD-Karte.',
         compatibility: 'Spielbar auf Raspberry Pi, MiSTer FPGA, RetroArch oder jedem Game Boy Emulator.',
+        buyAtCopiaro: 'BOX-EDITION ANSEHEN',
       },
       // Hero Handheld
       handheld: {
@@ -561,6 +760,8 @@ export const translations = {
         chargingIssuesDesc: 'Anderen 5V-Lader probieren, schlafende Ports meiden',
       },
       badges: {
+        instantAccess: 'SOFORTZUGANG',
+        boxedEdition: 'BOX-EDITION',
         ltdEdition: 'LIMITIERT',
         budgetPick: 'PREISWERT',
         readyToPlay: 'SPIELBEREIT',
@@ -592,8 +793,58 @@ export const translations = {
 
 // Use a more flexible type that allows different string values
 export interface Translations {
-  nav: { products: string; partners: string; playDemo: string; buyNow: string };
-  hero: { watchTrailer: string; buyAtCopiaro: string; copiaroSubtext: string };
+  nav: {
+    products: string;
+    partners: string;
+    playDemo: string;
+    buyNow: string;
+    instantDownload: string;
+    physicalStore: string;
+  };
+  hero: {
+    watchTrailer: string;
+    buyAtCopiaro: string;
+    copiaroSubtext: string;
+    instantTitle: string;
+    instantBody: string;
+    instantCta: string;
+    instantMeta: string;
+    physicalTitle: string;
+    physicalBody: string;
+    physicalCta: string;
+    physicalMeta: string;
+  };
+  checkout: {
+    title: string;
+    subtitle: string;
+    missingOrder: string;
+    loading: string;
+    refresh: string;
+    backToProducts: string;
+    pendingTitle: string;
+    pendingBody: string;
+    processingTitle: string;
+    processingBody: string;
+    paidTitle: string;
+    paidBody: string;
+    expiredTitle: string;
+    expiredBody: string;
+    underpaidTitle: string;
+    underpaidBody: string;
+    genericError: string;
+    orderDetails: string;
+    orderId: string;
+    paymentId: string;
+    amount: string;
+    createdAt: string;
+    paidAt: string;
+    downloadsRemaining: string;
+    downloadButton: string;
+    downloadHint: string;
+    noDownloadsLeft: string;
+    lastUpdated: string;
+    stillWaiting: string;
+  };
   story: { title: string; p1: string; p2: string; p3: string; p4: string };
   controls: {
     title: string;
@@ -638,8 +889,31 @@ export interface Translations {
   products: {
     title: string;
     buyNow: string;
+    chooseFormatTitle: string;
+    chooseFormatBody: string;
+    chooseFormatPrimary: string;
+    chooseFormatSecondary: string;
     shippingTitle: string;
     shippingText: string;
+    instant: {
+      title: string;
+      subtitle: string;
+      quote: string;
+      feature1: string;
+      feature2: string;
+      feature3: string;
+      feature4: string;
+      note: string;
+      compatibility: string;
+      emailLabel: string;
+      emailPlaceholder: string;
+      emailHint: string;
+      buyWithBitcoin: string;
+      redirecting: string;
+      checkoutTitle: string;
+      checkoutBody: string;
+      checkoutError: string;
+    };
     collectors: {
       title: string;
       subtitle: string;
@@ -661,6 +935,7 @@ export interface Translations {
       feature4: string;
       note: string;
       compatibility: string;
+      buyAtCopiaro: string;
     };
     handheld: {
       title: string;
@@ -705,7 +980,14 @@ export interface Translations {
       chargingIssues: string;
       chargingIssuesDesc: string;
     };
-    badges: { ltdEdition: string; budgetPick: string; readyToPlay: string; printEdition: string };
+    badges: {
+      instantAccess: string;
+      boxedEdition: string;
+      ltdEdition: string;
+      budgetPick: string;
+      readyToPlay: string;
+      printEdition: string;
+    };
   };
   partners: {
     title: string;

@@ -59,6 +59,7 @@ const App: React.FC = () => {
     '': Tab.GAME,
     'products': Tab.PRODUCTS,
     'partners': Tab.PARTNERS,
+    'instant-download': Tab.PRODUCTS,
     'collectors-edition': Tab.PRODUCTS,
     'digital-edition': Tab.PRODUCTS,
     'hero-handheld': Tab.PRODUCTS,
@@ -101,6 +102,22 @@ const App: React.FC = () => {
       window.history.pushState(null, '', `#${hash}`);
     } else {
       window.history.pushState(null, '', window.location.pathname + window.location.search);
+    }
+  };
+
+  const navigateToProduct = (productHash: string) => {
+    setActiveTab(Tab.PRODUCTS);
+    setMobileMenuOpen(false);
+
+    const nextHash = `#${productHash}`;
+    if (window.location.hash !== nextHash) {
+      window.location.hash = productHash;
+      return;
+    }
+
+    const element = document.getElementById(productHash);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
@@ -231,15 +248,24 @@ const App: React.FC = () => {
                             <Play size={16} />
                             <span className="font-pixel text-xs tracking-wide">{t.nav.playDemo}</span>
                         </a>
-                        {/* Prominent BUY Button - Links to main Copiaro store page */}
+                        <button
+                            onClick={() => navigateToProduct('instant-download')}
+                            className="flex items-center justify-center gap-2 px-4 py-3 md:py-2 border-2 border-black transition-all w-full md:w-auto bg-black text-white hover:bg-neutral-800 hover:scale-105"
+                        >
+                            <span className="flex items-center gap-1 text-base leading-none" aria-hidden="true">
+                                <span className="font-sans font-bold text-[#F7931A]">₿</span>
+                                <span className="font-sans text-yellow-300">⚡</span>
+                            </span>
+                            <span className="font-pixel text-xs tracking-wide">{t.nav.instantDownload}</span>
+                        </button>
                         <a
                             href={LINK_STORE_MAIN}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-4 py-3 md:py-2 border-2 border-black transition-all w-full md:w-auto bg-green-500 text-white hover:bg-green-600 hover:scale-105 animate-pulse hover:animate-none"
+                            className="flex items-center gap-2 px-4 py-3 md:py-2 border-2 border-black transition-all w-full md:w-auto bg-green-500 text-white hover:bg-green-600"
                         >
                             <ShoppingCart size={16} />
-                            <span className="font-pixel text-xs tracking-wide">{t.nav.buyNow}</span>
+                            <span className="font-pixel text-xs tracking-wide">{t.nav.physicalStore}</span>
                         </a>
                     </nav>
                 </div>

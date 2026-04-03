@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PixelCard from './ui/PixelCard';
-import { useLanguage } from '../i18n';
+import { type Language, useLanguage } from '../i18n';
+import { getApiBaseUrl } from '../lib/api';
 import { Star, ShieldCheck, ShoppingCart, Sticker, Gamepad2, Zap, HardDrive, ChevronDown, ChevronUp, HelpCircle, AlertTriangle, FolderOpen, Disc, Link, BookOpen, Image, Award, Shield } from 'lucide-react';
 
 /*
@@ -11,7 +12,6 @@ import { Star, ShieldCheck, ShoppingCart, Sticker, Gamepad2, Zap, HardDrive, Che
   Brand page: https://copiaro.com/en/hero-of-bitcoin
 
   LINK_PHYSICAL_CARTRIDGE: Physical Game Boy cartridge collector's edition
-  LINK_MICROSD_CARTRIDGE: Digital Edition with microSD card
   LINK_R36S_DEVICE: R36S handheld console with Hero of Bitcoin pre-installed
   LINK_STACKCHAIN_MAGAZINE: Stackchain Magazine with fine art print
   =============================================================================
@@ -66,6 +66,27 @@ const ProductGallery: React.FC<{
   );
 };
 
+const PaymentMark: React.FC<{ compact?: boolean; className?: string }> = ({ compact = false, className = '' }) => (
+  <span className={`inline-flex items-center gap-1 ${className}`} aria-label="Bitcoin and Lightning">
+    <span className={compact ? 'text-base font-sans font-bold text-[#F7931A]' : 'text-2xl font-sans font-bold text-[#F7931A]'}>
+      ₿
+    </span>
+    <span className={compact ? 'text-base font-sans text-yellow-300' : 'text-2xl font-sans text-yellow-300'}>
+      ⚡
+    </span>
+  </span>
+);
+
+const InstantDownloadArtwork: React.FC = () => (
+  <div className="relative z-10 flex flex-col items-center gap-4 text-center">
+    <PaymentMark className="justify-center" />
+    <div className="border-2 border-black bg-white/80 px-4 py-3">
+      <p className="font-pixel text-xs uppercase tracking-[0.2em] text-black">ROM + PDF</p>
+      <p className="font-mono text-[11px] text-gray-700 mt-2">Private Bitcoin-native delivery</p>
+    </div>
+  </div>
+);
+
 /*
   =============================================================================
   PRODUCT CARD COMPONENT
@@ -78,13 +99,15 @@ interface ProductCardProps {
   subtitle: string;
   quote: string;
   features: { icon: React.ReactNode; text: string }[];
-  buyLink: string;
+  buyLink?: string;
   badgeText: string;
   imageIcon?: React.ReactNode;
   imagePlaceholderText?: string;
   images?: string[];
   galleryCount?: number;
   compatibility?: string;
+  buyLabel?: string;
+  buyContent?: React.ReactNode;
   children?: React.ReactNode;
 }
 
@@ -101,6 +124,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
   images,
   galleryCount = 3,
   compatibility,
+  buyLabel,
+  buyContent,
   children
 }) => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -197,15 +222,17 @@ const ProductCard: React.FC<ProductCardProps> = ({
             Update the corresponding LINK_* constant at top of file when URL changes
             =========================================================================
           */}
-          <a
-            href={buyLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full bg-green-500 text-white font-pixel py-3 px-4 border-2 border-black hover:bg-green-600 hover:scale-[1.02] active:scale-[0.98] transition-all pixel-shadow-sm flex items-center justify-center gap-2 text-sm"
-          >
-            <ShoppingCart size={16} />
-            <span>BUY NOW</span>
-          </a>
+          {buyContent ?? (
+            <a
+              href={buyLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full bg-green-500 text-white font-pixel py-3 px-4 border-2 border-black hover:bg-green-600 hover:scale-[1.02] active:scale-[0.98] transition-all pixel-shadow-sm flex items-center justify-center gap-2 text-sm"
+            >
+              <ShoppingCart size={16} />
+              <span>{buyLabel ?? 'BUY NOW'}</span>
+            </a>
+          )}
 
           {compatibility && (
             <p className="text-[10px] text-gray-500 font-mono text-center">
@@ -218,9 +245,42 @@ const ProductCard: React.FC<ProductCardProps> = ({
   );
 };
 
+async function createInstantCheckout(
+  apiBaseUrl: string,
+  email: string,
+  language: Language,
+): Promise<string> {
+  const response = await fetch(`${apiBaseUrl}/api/create-checkout`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      email: email.trim() || undefined,
+      lang: language,
+    }),
+  });
+
+  const payload = (await response.json().catch(() => null)) as {
+    checkout_url?: unknown;
+    error?: unknown;
+  } | null;
+
+  if (!response.ok || typeof payload?.checkout_url !== 'string') {
+    const message = typeof payload?.error === 'string' ? payload.error : 'Could not create checkout';
+    throw new Error(message);
+  }
+
+  return payload.checkout_url;
+}
+
 const Products: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [showR36STechDetails, setShowR36STechDetails] = useState(false);
+  const [instantEmail, setInstantEmail] = useState('');
+  const [instantCheckoutLoading, setInstantCheckoutLoading] = useState(false);
+  const [instantCheckoutError, setInstantCheckoutError] = useState<string | null>(null);
+  const apiBaseUrl = getApiBaseUrl();
 
   // Handle hash navigation on mount
   useEffect(() => {
@@ -236,6 +296,32 @@ const Products: React.FC = () => {
     }
   }, []);
 
+  const jumpToProduct = (productId: string) => {
+    const nextHash = `#${productId}`;
+    if (window.location.hash !== nextHash) {
+      window.location.hash = productId;
+      return;
+    }
+
+    const element = document.getElementById(productId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const handleInstantCheckout = async () => {
+    setInstantCheckoutLoading(true);
+    setInstantCheckoutError(null);
+
+    try {
+      const checkoutUrl = await createInstantCheckout(apiBaseUrl, instantEmail, language);
+      window.location.assign(checkoutUrl);
+    } catch {
+      setInstantCheckoutLoading(false);
+      setInstantCheckoutError(t.products.instant.checkoutError);
+    }
+  };
+
   return (
     <div className="space-y-12">
       {/* Header */}
@@ -244,7 +330,139 @@ const Products: React.FC = () => {
         <div className="w-24 h-1 bg-black mx-auto"></div>
       </div>
 
-      {/* Product 1: Collector's Edition */}
+      <div className="border-4 border-black bg-black text-white pixel-shadow overflow-hidden">
+        <div className="grid lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="p-6 md:p-8">
+            <p className="font-pixel text-[10px] uppercase tracking-[0.25em] text-yellow-300 mb-3">
+              {t.products.chooseFormatTitle}
+            </p>
+            <div className="flex items-center gap-3 mb-4">
+              <PaymentMark />
+              <p className="font-mono text-sm text-neutral-200">{t.products.instant.compatibility}</p>
+            </div>
+            <p className="max-w-2xl font-mono text-sm text-neutral-200 mb-6">
+              {t.products.chooseFormatBody}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <button
+                type="button"
+                onClick={() => jumpToProduct('instant-download')}
+                className="inline-flex items-center justify-center gap-3 border-2 border-yellow-300 bg-yellow-300 px-4 py-3 font-pixel text-[10px] uppercase text-black transition-all hover:translate-x-[2px] hover:-translate-y-[2px]"
+              >
+                <PaymentMark compact className="justify-center" />
+                <span>{t.products.chooseFormatPrimary}</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => jumpToProduct('collectors-edition')}
+                className="inline-flex items-center justify-center gap-3 border-2 border-white bg-transparent px-4 py-3 font-pixel text-[10px] uppercase text-white transition-all hover:bg-white hover:text-black"
+              >
+                <ShoppingCart size={14} />
+                <span>{t.products.chooseFormatSecondary}</span>
+              </button>
+            </div>
+          </div>
+
+          <div className="border-t-4 border-black bg-yellow-300 p-6 md:border-l-4 md:border-t-0 md:p-8">
+            <p className="font-pixel text-[10px] uppercase tracking-[0.2em] text-yellow-950 mb-3">
+              {t.products.collectors.title}
+            </p>
+            <p className="font-mono text-sm text-yellow-950 mb-3">
+              {t.products.collectors.quote}
+            </p>
+            <p className="font-mono text-xs text-yellow-900 mb-4">
+              {t.products.digital.note}
+            </p>
+            <div className="space-y-2 font-mono text-xs text-yellow-950">
+              <p>{t.products.collectors.feature1}</p>
+              <p>{t.products.collectors.feature2}</p>
+              <p>{t.products.digital.feature2}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Product 1: Instant Download */}
+      {/*
+        =========================================================================
+        PRODUCT: Instant Download - Hosted BTC/LN checkout
+        =========================================================================
+        Primary site-owned checkout for ROM + PDF delivery
+        =========================================================================
+      */}
+      <ProductCard
+        id="instant-download"
+        title={t.products.instant.title}
+        subtitle={t.products.instant.subtitle}
+        quote={t.products.instant.quote}
+        features={[
+          { icon: <ShieldCheck className="text-green-600" size={18} />, text: t.products.instant.feature1 },
+          { icon: <PaymentMark compact className="min-w-[28px] justify-center" />, text: t.products.instant.feature2 },
+          { icon: <BookOpen className="text-yellow-600" size={18} />, text: t.products.instant.feature3 },
+          { icon: <Shield className="text-gray-600" size={18} />, text: t.products.instant.feature4 },
+        ]}
+        badgeText={t.products.badges.instantAccess}
+        imageIcon={<InstantDownloadArtwork />}
+        imagePlaceholderText="PRIVATE DELIVERY"
+        galleryCount={3}
+        compatibility={t.products.instant.compatibility}
+        buyContent={(
+          <div className="space-y-3">
+            <div className="border-2 border-black bg-amber-50 p-3">
+              <div className="flex items-center gap-2 mb-2">
+                <PaymentMark compact />
+                <p className="font-pixel text-[10px] uppercase text-amber-900">
+                  {t.products.instant.checkoutTitle}
+                </p>
+              </div>
+              <p className="text-xs font-mono text-amber-900 mb-3">
+                {t.products.instant.checkoutBody}
+              </p>
+              <label className="block mb-2">
+                <span className="block text-[10px] font-pixel uppercase text-gray-700 mb-2">
+                  {t.products.instant.emailLabel}
+                </span>
+                <input
+                  type="email"
+                  value={instantEmail}
+                  onChange={(event) => setInstantEmail(event.target.value)}
+                  placeholder={t.products.instant.emailPlaceholder}
+                  className="w-full border-2 border-black bg-white px-3 py-2 font-mono text-sm text-black placeholder:text-gray-400 focus:outline-none focus:ring-0"
+                  autoComplete="email"
+                  inputMode="email"
+                />
+              </label>
+              <p className="text-[10px] font-mono text-gray-600">
+                {t.products.instant.emailHint}
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={handleInstantCheckout}
+              disabled={instantCheckoutLoading}
+              className="w-full bg-black text-white font-pixel py-3 px-4 border-2 border-black hover:bg-neutral-800 hover:scale-[1.02] active:scale-[0.98] transition-all pixel-shadow-sm flex items-center justify-center gap-2 text-sm disabled:cursor-wait disabled:hover:scale-100 disabled:bg-neutral-800"
+            >
+              <PaymentMark compact className="justify-center" />
+              <span>
+                {instantCheckoutLoading ? t.products.instant.redirecting : t.products.instant.buyWithBitcoin}
+              </span>
+            </button>
+
+            {instantCheckoutError && (
+              <p className="text-[11px] font-mono text-red-700 bg-red-50 border border-red-200 px-3 py-2">
+                {instantCheckoutError}
+              </p>
+            )}
+          </div>
+        )}
+      >
+        <div className="bg-yellow-50 border border-yellow-200 p-2 rounded text-xs">
+          <strong className="text-yellow-800">Note:</strong> {t.products.instant.note}
+        </div>
+      </ProductCard>
+
+      {/* Product 2: Collector's Edition */}
       {/*
         =========================================================================
         PRODUCT: Collector's Edition - Physical Game Boy Cartridge
@@ -276,13 +494,13 @@ const Products: React.FC = () => {
         compatibility={t.products.collectors.compatibility}
       />
 
-      {/* Product 2: Digital Edition */}
+      {/* Product 3: Digital Edition */}
       {/*
         =========================================================================
-        PRODUCT: Digital Edition - Collectible with microSD
+        PRODUCT: Digital Edition - Physical boxed microSD bundle
         =========================================================================
         Images location: public/assets/product/microsd/
-        Budget-friendly option for emulator users
+        Emulator-friendly collectible with physical packaging
         =========================================================================
       */}
       <ProductCard
@@ -297,7 +515,8 @@ const Products: React.FC = () => {
           { icon: <Shield className="text-gray-600" size={18} />, text: t.products.digital.feature4 },
         ]}
         buyLink={LINK_MICROSD_CARTRIDGE}
-        badgeText={t.products.badges.budgetPick}
+        buyLabel={t.products.digital.buyAtCopiaro}
+        badgeText={t.products.badges.boxedEdition}
         images={[
           '/assets/product/microsd/1.jpg',
           '/assets/product/microsd/2.png',
@@ -311,7 +530,7 @@ const Products: React.FC = () => {
         </div>
       </ProductCard>
 
-      {/* Product 3: Hero Handheld */}
+      {/* Product 4: Hero Handheld */}
       {/*
         =========================================================================
         PRODUCT: Hero Handheld - R36S with Hero of Bitcoin pre-installed
@@ -439,7 +658,7 @@ const Products: React.FC = () => {
         )}
       </div>
 
-      {/* Product 4: Stackchain Magazine */}
+      {/* Product 5: Stackchain Magazine */}
       {/*
         =========================================================================
         PRODUCT: Stackchain Magazine - Limited Edition Print with Fine Art

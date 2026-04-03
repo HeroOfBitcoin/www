@@ -5,8 +5,16 @@
     <link>https://heroofbitcoin.xyz/#products</link>
     <description>Official Hero of Bitcoin merchandise and collectibles. Game Boy cartridges, handheld consoles, and limited edition prints.</description>
     <language>en</language>
-    <lastBuildDate>Wed, 17 Dec 2025 21:26:24 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 03 Apr 2026 08:14:48 GMT</lastBuildDate>
     <atom:link href="https://heroofbitcoin.xyz/products.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Instant Download - ROM + PDF Bundle</title>
+      <link>https://heroofbitcoin.xyz/#instant-download</link>
+      <guid isPermaLink="true">https://heroofbitcoin.xyz/#instant-download</guid>
+      <description>Pay with Bitcoin or Lightning and unlock a private ZIP download containing the Game Boy ROM and PDF manual. No email required. Works on Raspberry Pi, MiSTer FPGA, RetroArch, or any compatible Game Boy emulator.</description>
+      <pubDate>Mon, 01 Jan 2024 00:00:00 GMT</pubDate>
+    </item>
 
     <item>
       <title>Collector&apos;s Edition - Physical Game Boy Cartridge</title>
@@ -17,10 +25,10 @@
     </item>
 
     <item>
-      <title>Digital Edition - microSD Cartridge</title>
+      <title>Digital Edition - Boxed microSD Bundle</title>
       <link>https://heroofbitcoin.xyz/#digital-edition</link>
       <guid isPermaLink="true">https://heroofbitcoin.xyz/#digital-edition</guid>
-      <description>Play anywhere. The perfect collectible for emulator enthusiasts. No Game Boy required. Includes premium box, manual, microSD with game ROM, decorative cartridge collectible, sticker, and protective box cover. Play on Raspberry Pi, MiSTer FPGA, RetroArch, or any Game Boy emulator.</description>
+      <description>Physical boxed edition for emulator players. Includes premium box, manual, microSD with the game ROM, decorative cartridge collectible, sticker, and protective box cover.</description>
       <pubDate>Mon, 01 Jan 2024 00:00:00 GMT</pubDate>
     </item>
 

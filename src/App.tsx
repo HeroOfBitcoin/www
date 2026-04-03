@@ -159,14 +159,14 @@ const App: React.FC = () => {
   const NavButton = ({ tab, icon: Icon, label }: { tab: Tab; icon: any; label: string }) => (
     <button
       onClick={() => navigateToTab(tab)}
-      className={`flex items-center gap-2 px-4 py-3 md:py-2 border-2 border-black transition-all w-full md:w-auto ${
+      className={`flex w-full items-center justify-center gap-2 border-2 border-black px-3 py-3 transition-all md:w-auto md:justify-start md:px-4 md:py-2 shrink-0 ${
         activeTab === tab
           ? 'bg-white text-black pixel-shadow-sm translate-x-[-2px] translate-y-[-2px] z-10'
-          : 'bg-yellow-500 text-yellow-900 hover:bg-yellow-400'
+          : 'bg-yellow-300 text-black hover:bg-yellow-200'
       }`}
     >
       <Icon size={16} />
-      <span className="font-pixel text-xs tracking-wide">{label}</span>
+      <span className="font-pixel text-[11px] leading-none tracking-[0.08em] whitespace-nowrap">{label}</span>
     </button>
   );
 
@@ -203,10 +203,10 @@ const App: React.FC = () => {
 
             {/* Header / Navigation */}
             <header className="border-b-4 border-black bg-yellow-400 p-4 sticky top-0 z-40 shadow-sm">
-                <div className="flex flex-col gap-4 md:grid md:grid-cols-[minmax(210px,250px)_1fr] md:items-center">
+                <div className="flex flex-col gap-4 md:grid md:grid-cols-[minmax(220px,240px)_minmax(0,1fr)] md:items-center">
 
                     {/* Brand / Logo Area */}
-                    <div className="flex items-center justify-between w-full md:min-w-[210px] md:pr-3">
+                    <div className="flex items-center justify-between w-full md:min-w-[220px] md:pr-4">
                         <button
                             onClick={() => navigateToTab(Tab.GAME)}
                             className="flex items-center shrink-0 transition-transform hover:scale-105 active:scale-95"
@@ -235,39 +235,39 @@ const App: React.FC = () => {
                     </div>
 
                     {/* Navigation Tabs */}
-                    <nav className={`${mobileMenuOpen ? 'flex' : 'hidden'} md:flex flex-col gap-2 md:justify-self-end w-full md:w-auto mt-4 md:mt-0`}>
-                        <div className="flex flex-col md:flex-row md:flex-wrap gap-2 w-full md:w-auto md:justify-end md:items-center">
+                    <nav className={`${mobileMenuOpen ? 'flex' : 'hidden'} md:flex flex-col gap-2 md:justify-self-end md:items-end w-full md:w-auto mt-4 md:mt-0`}>
+                        <div className="flex flex-col md:flex-row gap-2 w-full md:w-auto md:justify-end md:items-center">
                             <LanguageSwitcher />
                             <a
                                 href="https://demo.heroofbitcoin.xyz"
-                                className="flex items-center justify-center gap-2 px-4 py-3 md:py-2 border-2 border-black transition-all w-full md:w-auto bg-red-500 text-white hover:bg-red-600"
+                                className="flex w-full shrink-0 items-center justify-center gap-2 border-2 border-black bg-red-500 px-3 py-3 text-white transition-all hover:bg-red-600 md:w-auto md:px-4 md:py-2"
                             >
                                 <Play size={16} />
-                                <span className="font-pixel text-xs tracking-wide">{t.nav.playDemo}</span>
+                                <span className="font-pixel text-[11px] leading-none tracking-[0.08em] whitespace-nowrap">{t.nav.playDemo}</span>
                             </a>
                             <a
                                 href={LINK_STORE_MAIN}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center justify-center gap-2 px-4 py-3 md:py-2 border-2 border-black transition-all w-full md:w-auto bg-green-500 text-white hover:bg-green-600"
+                                className="flex w-full shrink-0 items-center justify-center gap-2 border-2 border-black bg-green-600 px-3 py-3 text-white transition-all hover:bg-green-700 md:w-auto md:px-4 md:py-2"
                             >
                                 <ShoppingCart size={16} />
-                                <span className="font-pixel text-xs tracking-wide">{t.nav.physicalStore}</span>
+                                <span className="font-pixel text-[11px] leading-none tracking-[0.08em] whitespace-nowrap">{t.nav.physicalStore}</span>
                             </a>
                         </div>
 
-                        <div className="flex flex-col md:flex-row md:flex-wrap gap-2 w-full md:w-auto md:justify-end">
+                        <div className="flex flex-col md:flex-row gap-2 w-full md:w-auto md:justify-end md:items-center">
                             <NavButton tab={Tab.PRODUCTS} icon={Package} label={t.nav.products} />
                             <NavButton tab={Tab.PARTNERS} icon={Handshake} label={t.nav.partners} />
                             <button
                                 onClick={() => navigateToProduct('instant-download')}
-                                className="flex items-center justify-center gap-2 px-4 py-3 md:py-2 border-2 border-black transition-all w-full md:w-auto bg-black text-white hover:bg-neutral-800 hover:scale-105"
+                                className="flex w-full shrink-0 items-center justify-center gap-2 border-2 border-black bg-black px-3 py-3 text-white transition-all hover:bg-neutral-800 md:w-auto md:px-4 md:py-2"
                             >
                                 <span className="flex items-center gap-1 text-base leading-none" aria-hidden="true">
                                     <span className="font-sans font-bold text-[#F7931A]">₿</span>
                                     <span className="font-sans text-yellow-300">⚡</span>
                                 </span>
-                                <span className="font-pixel text-xs tracking-wide">{t.nav.instantDownload}</span>
+                                <span className="font-pixel text-[11px] leading-none tracking-[0.08em] whitespace-nowrap">{t.nav.instantDownload}</span>
                             </button>
                         </div>
                     </nav>

@@ -128,10 +128,9 @@ const GameManual: React.FC = () => {
 
       {/*
         =========================================================================
-        HERO SECTION: COVER + TRAILER COMBINED
+        HERO SECTION: TRAILER + BUY BLOCK
         =========================================================================
         Single cohesive yellow section with:
-        - Logo and title at top
         - Embedded trailer video
         - Copiaro buy button at bottom
         - Official seal badge
@@ -150,22 +149,6 @@ const GameManual: React.FC = () => {
             src="/assets/images/seal.png"
             alt="Official Bitcoin Seal of Quality"
             className="w-16 h-16 md:w-20 md:h-20 rotate-12 drop-shadow-md"
-          />
-        </div>
-
-        {/* Logo */}
-        <div className="text-center mb-4">
-          {/*
-            =========================================================================
-            HERO OF BITCOIN LOGO WITH AVATAR
-            =========================================================================
-            Location: public/assets/images/HoB_Logo_Avatar.png
-            =========================================================================
-          */}
-          <img
-            src="/assets/images/HoB_Logo_Avatar.png"
-            alt="Hero of Bitcoin"
-            className="mx-auto w-28 md:w-32 h-auto"
           />
         </div>
 

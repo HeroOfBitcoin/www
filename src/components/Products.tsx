@@ -35,6 +35,10 @@ const ProductGallery: React.FC<{
   selectedIndex: number;
 }> = ({ images, placeholderCount = 3, onSelect, selectedIndex }) => {
   if (images && images.length > 0) {
+    if (images.length === 1) {
+      return null;
+    }
+
     return (
       <div className="flex gap-2 mt-3">
         {images.map((src, i) => (
@@ -66,25 +70,27 @@ const ProductGallery: React.FC<{
   );
 };
 
-const PaymentMark: React.FC<{ compact?: boolean; className?: string }> = ({ compact = false, className = '' }) => (
+const PaymentMark: React.FC<{ compact?: boolean; tone?: 'light' | 'dark'; className?: string }> = ({
+  compact = false,
+  tone = 'dark',
+  className = '',
+}) => (
   <span className={`inline-flex items-center gap-1 ${className}`} aria-label="Bitcoin and Lightning">
-    <span className={compact ? 'text-base font-sans font-bold text-[#F7931A]' : 'text-2xl font-sans font-bold text-[#F7931A]'}>
+    <span
+      className={`${compact ? 'text-base' : 'text-2xl'} font-sans font-bold ${
+        tone === 'dark' ? 'text-[#F7931A]' : 'text-[#B45309]'
+      }`}
+    >
       ₿
     </span>
-    <span className={compact ? 'text-base font-sans text-yellow-300' : 'text-2xl font-sans text-yellow-300'}>
+    <span
+      className={`${compact ? 'text-base' : 'text-2xl'} font-sans ${
+        tone === 'dark' ? 'text-yellow-300' : 'text-[#92400E]'
+      }`}
+    >
       ⚡
     </span>
   </span>
-);
-
-const InstantDownloadArtwork: React.FC = () => (
-  <div className="relative z-10 flex flex-col items-center gap-4 text-center">
-    <PaymentMark className="justify-center" />
-    <div className="border-2 border-black bg-white/80 px-4 py-3">
-      <p className="font-pixel text-xs uppercase tracking-[0.2em] text-black">ROM + PDF</p>
-      <p className="font-mono text-[11px] text-gray-700 mt-2">Private Bitcoin-native delivery</p>
-    </div>
-  </div>
 );
 
 /*
@@ -104,6 +110,9 @@ interface ProductCardProps {
   imageIcon?: React.ReactNode;
   imagePlaceholderText?: string;
   images?: string[];
+  imageFit?: 'cover' | 'contain';
+  imageFrameClassName?: string;
+  imageClassName?: string;
   galleryCount?: number;
   compatibility?: string;
   buyLabel?: string;
@@ -122,6 +131,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
   imageIcon,
   imagePlaceholderText,
   images,
+  imageFit = 'cover',
+  imageFrameClassName,
+  imageClassName,
   galleryCount = 3,
   compatibility,
   buyLabel,
@@ -152,12 +164,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
           </div>
 
           {/* Main Image */}
-          <div className="bg-gray-100 border-2 border-black aspect-square relative flex items-center justify-center group overflow-hidden">
+          <div className={`bg-gray-100 border-2 border-black aspect-square relative flex items-center justify-center group overflow-hidden ${imageFrameClassName ?? ''}`}>
             {hasImages ? (
               <img
                 src={images[selectedImageIndex]}
                 alt={`${title} - View ${selectedImageIndex + 1}`}
-                className="w-full h-full object-cover"
+                className={`w-full h-full ${imageFit === 'contain' ? 'object-contain p-6 md:p-8' : 'object-cover'} ${imageClassName ?? ''}`}
               />
             ) : (
               <>
@@ -349,7 +361,7 @@ const Products: React.FC = () => {
                 onClick={() => jumpToProduct('instant-download')}
                 className="inline-flex items-center justify-center gap-3 border-2 border-yellow-300 bg-yellow-300 px-4 py-3 font-pixel text-[10px] uppercase text-black transition-all hover:translate-x-[2px] hover:-translate-y-[2px]"
               >
-                <PaymentMark compact className="justify-center" />
+                <PaymentMark compact tone="light" className="justify-center" />
                 <span>{t.products.chooseFormatPrimary}</span>
               </button>
               <button
@@ -397,20 +409,22 @@ const Products: React.FC = () => {
         quote={t.products.instant.quote}
         features={[
           { icon: <ShieldCheck className="text-green-600" size={18} />, text: t.products.instant.feature1 },
-          { icon: <PaymentMark compact className="min-w-[28px] justify-center" />, text: t.products.instant.feature2 },
+          { icon: <PaymentMark compact tone="light" className="min-w-[28px] justify-center" />, text: t.products.instant.feature2 },
           { icon: <BookOpen className="text-yellow-600" size={18} />, text: t.products.instant.feature3 },
           { icon: <Shield className="text-gray-600" size={18} />, text: t.products.instant.feature4 },
         ]}
         badgeText={t.products.badges.instantAccess}
-        imageIcon={<InstantDownloadArtwork />}
-        imagePlaceholderText="PRIVATE DELIVERY"
+        images={['/assets/images/HoB_Logo_Avatar.png']}
+        imageFit="contain"
+        imageFrameClassName="bg-[radial-gradient(circle_at_top,_#fff5b7_0%,_#f6d548_58%,_#e0b61d_100%)]"
+        imageClassName="rendering-pixelated"
         galleryCount={3}
         compatibility={t.products.instant.compatibility}
         buyContent={(
           <div className="space-y-3">
             <div className="border-2 border-black bg-amber-50 p-3">
               <div className="flex items-center gap-2 mb-2">
-                <PaymentMark compact />
+                <PaymentMark compact tone="light" />
                 <p className="font-pixel text-[10px] uppercase text-amber-900">
                   {t.products.instant.checkoutTitle}
                 </p>

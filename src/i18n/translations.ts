@@ -57,6 +57,8 @@ export const translations = {
       downloadButton: 'DOWNLOAD ZIP',
       downloadHint: 'Clicking download generates a private file URL for this order only.',
       downloadAvailableUntil: 'Download access stays active until',
+      thankYouHeadlineLine1: 'THANK YOU',
+      thankYouHeadlineLine2: 'FOR YOUR SUPPORT',
       noDownloadsLeft: 'This order has used all remaining downloads.',
       lastUpdated: 'Last updated',
       stillWaiting: 'Still waiting? If you paid on-chain, confirmation can take longer than the auto-refresh window.',
@@ -327,6 +329,8 @@ export const translations = {
       downloadButton: 'DESCARGAR ZIP',
       downloadHint: 'Al pulsar descargar se genera una URL privada del archivo solo para este pedido.',
       downloadAvailableUntil: 'El acceso de descarga permanece activo hasta',
+      thankYouHeadlineLine1: 'GRACIAS',
+      thankYouHeadlineLine2: 'POR TU APOYO',
       noDownloadsLeft: 'Este pedido ya ha usado todas las descargas disponibles.',
       lastUpdated: 'Última actualización',
       stillWaiting: '¿Sigues esperando? Si pagaste on-chain, la confirmación puede tardar más que la ventana de auto-actualización.',
@@ -597,6 +601,8 @@ export const translations = {
       downloadButton: 'ZIP HERUNTERLADEN',
       downloadHint: 'Beim Klick auf den Download wird eine private Datei-URL nur für diese Bestellung erzeugt.',
       downloadAvailableUntil: 'Der Downloadzugang bleibt aktiv bis',
+      thankYouHeadlineLine1: 'DANKE',
+      thankYouHeadlineLine2: 'FUR DEINE UNTERSTUTZUNG',
       noDownloadsLeft: 'Für diese Bestellung sind keine Downloads mehr übrig.',
       lastUpdated: 'Zuletzt aktualisiert',
       stillWaiting: 'Immer noch am Warten? Wenn du on-chain bezahlt hast, kann die Bestätigung länger dauern als das Auto-Refresh-Fenster.',
@@ -867,6 +873,8 @@ export interface Translations {
     downloadButton: string;
     downloadHint: string;
     downloadAvailableUntil: string;
+    thankYouHeadlineLine1: string;
+    thankYouHeadlineLine2: string;
     noDownloadsLeft: string;
     lastUpdated: string;
     stillWaiting: string;

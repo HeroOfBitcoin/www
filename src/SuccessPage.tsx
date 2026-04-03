@@ -346,6 +346,13 @@ const SuccessPage: React.FC = () => {
 
                     {order.status === 'paid' && (
                       <div className="border-2 border-black bg-green-50 p-4">
+                        <div className="mb-4 border-2 border-black bg-yellow-300 px-4 py-4 text-center text-black pixel-shadow-sm">
+                          <p className="font-pixel text-sm leading-relaxed md:text-lg">
+                            {checkoutText.thankYouHeadlineLine1}
+                            <br />
+                            {checkoutText.thankYouHeadlineLine2}
+                          </p>
+                        </div>
                         <p className="font-mono text-sm text-green-900 mb-2">
                           {checkoutText.downloadAvailableUntil}{' '}
                           {formatTimestamp(order.download_expires_at ?? null, language)}.

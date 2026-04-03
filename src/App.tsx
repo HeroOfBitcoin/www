@@ -203,13 +203,13 @@ const App: React.FC = () => {
 
             {/* Header / Navigation */}
             <header className="border-b-4 border-black bg-yellow-400 p-4 sticky top-0 z-40 shadow-sm">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div className="flex flex-col gap-4 md:grid md:grid-cols-[minmax(210px,250px)_1fr] md:items-center">
 
                     {/* Brand / Logo Area */}
-                    <div className="flex items-center justify-between w-full md:w-auto">
+                    <div className="flex items-center justify-between w-full md:min-w-[210px] md:pr-3">
                         <button
                             onClick={() => navigateToTab(Tab.GAME)}
-                            className="flex items-center transition-transform hover:scale-105 active:scale-95"
+                            className="flex items-center shrink-0 transition-transform hover:scale-105 active:scale-95"
                         >
                             {/*
                               =========================================================================
@@ -222,7 +222,7 @@ const App: React.FC = () => {
                             <img
                                 src="/assets/images/HoB_Logo_only.png"
                                 alt="Hero of Bitcoin"
-                                className="h-12 md:h-14 w-auto mix-blend-multiply"
+                                className="h-16 md:h-[76px] w-auto mix-blend-multiply"
                             />
                         </button>
                         {/* Mobile Menu Toggle */}
@@ -235,38 +235,41 @@ const App: React.FC = () => {
                     </div>
 
                     {/* Navigation Tabs */}
-                    <nav className={`${mobileMenuOpen ? 'flex' : 'hidden'} md:flex flex-col md:flex-row gap-2 md:gap-3 w-full md:w-auto mt-4 md:mt-0 items-center`}>
-                        {/* Language Switcher */}
-                        <LanguageSwitcher />
-                        {/* Single PRODUCTS tab for all products (cartridge, microSD, R36S) */}
-                        <NavButton tab={Tab.PRODUCTS} icon={Package} label={t.nav.products} />
-                        <NavButton tab={Tab.PARTNERS} icon={Handshake} label={t.nav.partners} />
-                        <a
-                            href="https://demo.heroofbitcoin.xyz"
-                            className="flex items-center gap-2 px-4 py-3 md:py-2 border-2 border-black transition-all w-full md:w-auto bg-red-500 text-white hover:bg-red-600"
-                        >
-                            <Play size={16} />
-                            <span className="font-pixel text-xs tracking-wide">{t.nav.playDemo}</span>
-                        </a>
-                        <button
-                            onClick={() => navigateToProduct('instant-download')}
-                            className="flex items-center justify-center gap-2 px-4 py-3 md:py-2 border-2 border-black transition-all w-full md:w-auto bg-black text-white hover:bg-neutral-800 hover:scale-105"
-                        >
-                            <span className="flex items-center gap-1 text-base leading-none" aria-hidden="true">
-                                <span className="font-sans font-bold text-[#F7931A]">₿</span>
-                                <span className="font-sans text-yellow-300">⚡</span>
-                            </span>
-                            <span className="font-pixel text-xs tracking-wide">{t.nav.instantDownload}</span>
-                        </button>
-                        <a
-                            href={LINK_STORE_MAIN}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-4 py-3 md:py-2 border-2 border-black transition-all w-full md:w-auto bg-green-500 text-white hover:bg-green-600"
-                        >
-                            <ShoppingCart size={16} />
-                            <span className="font-pixel text-xs tracking-wide">{t.nav.physicalStore}</span>
-                        </a>
+                    <nav className={`${mobileMenuOpen ? 'flex' : 'hidden'} md:flex flex-col gap-2 md:justify-self-end w-full md:w-auto mt-4 md:mt-0`}>
+                        <div className="flex flex-col md:flex-row md:flex-wrap gap-2 w-full md:w-auto md:justify-end md:items-center">
+                            <LanguageSwitcher />
+                            <a
+                                href="https://demo.heroofbitcoin.xyz"
+                                className="flex items-center justify-center gap-2 px-4 py-3 md:py-2 border-2 border-black transition-all w-full md:w-auto bg-red-500 text-white hover:bg-red-600"
+                            >
+                                <Play size={16} />
+                                <span className="font-pixel text-xs tracking-wide">{t.nav.playDemo}</span>
+                            </a>
+                            <a
+                                href={LINK_STORE_MAIN}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center justify-center gap-2 px-4 py-3 md:py-2 border-2 border-black transition-all w-full md:w-auto bg-green-500 text-white hover:bg-green-600"
+                            >
+                                <ShoppingCart size={16} />
+                                <span className="font-pixel text-xs tracking-wide">{t.nav.physicalStore}</span>
+                            </a>
+                        </div>
+
+                        <div className="flex flex-col md:flex-row md:flex-wrap gap-2 w-full md:w-auto md:justify-end">
+                            <NavButton tab={Tab.PRODUCTS} icon={Package} label={t.nav.products} />
+                            <NavButton tab={Tab.PARTNERS} icon={Handshake} label={t.nav.partners} />
+                            <button
+                                onClick={() => navigateToProduct('instant-download')}
+                                className="flex items-center justify-center gap-2 px-4 py-3 md:py-2 border-2 border-black transition-all w-full md:w-auto bg-black text-white hover:bg-neutral-800 hover:scale-105"
+                            >
+                                <span className="flex items-center gap-1 text-base leading-none" aria-hidden="true">
+                                    <span className="font-sans font-bold text-[#F7931A]">₿</span>
+                                    <span className="font-sans text-yellow-300">⚡</span>
+                                </span>
+                                <span className="font-pixel text-xs tracking-wide">{t.nav.instantDownload}</span>
+                            </button>
+                        </div>
                     </nav>
                 </div>
             </header>

@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { ArrowLeft, Download, RefreshCcw } from 'lucide-react';
 
 import PixelCard from './components/ui/PixelCard';
+import { translations, type Language } from './i18n/translations';
 import { getApiBaseUrl } from './lib/api';
 
 type CheckoutStatus = 'pending' | 'processing' | 'paid' | 'expired' | 'underpaid' | 'refunded';
@@ -22,7 +23,7 @@ interface OrderStatusResponse {
 const POLL_INTERVAL_MS = 3_000;
 const POLL_WINDOW_MS = 120_000;
 
-function formatTimestamp(value: string | null): string {
+function formatTimestamp(value: string | null, language: Language): string {
   if (!value) {
     return '—';
   }
@@ -32,7 +33,13 @@ function formatTimestamp(value: string | null): string {
     return '—';
   }
 
-  return new Intl.DateTimeFormat('en-US', {
+  const localeByLanguage: Record<Language, string> = {
+    en: 'en-US',
+    es: 'es-ES',
+    de: 'de-DE',
+  };
+
+  return new Intl.DateTimeFormat(localeByLanguage[language], {
     dateStyle: 'medium',
     timeStyle: 'short',
   }).format(date);
@@ -55,51 +62,62 @@ function statusVariant(status: CheckoutStatus): 'default' | 'info' | 'success' |
   }
 }
 
-function getStatusTitle(status: CheckoutStatus | null): string {
+function getStatusTitle(
+  status: CheckoutStatus | null,
+  checkoutText: (typeof translations)[Language]['checkout'],
+): string {
   if (!status) {
-    return 'Digital Delivery';
+    return checkoutText.headerTitle;
   }
 
   switch (status) {
     case 'pending':
-      return 'Waiting for payment';
+      return checkoutText.pendingTitle;
     case 'processing':
-      return 'Payment detected';
+      return checkoutText.processingTitle;
     case 'paid':
-      return 'Payment confirmed';
+      return checkoutText.paidTitle;
     case 'expired':
-      return 'Checkout expired';
+      return checkoutText.expiredTitle;
     case 'underpaid':
-      return 'Payment underpaid';
+      return checkoutText.underpaidTitle;
     case 'refunded':
-      return 'Payment refunded';
+      return checkoutText.refundedTitle;
   }
 }
 
-function getStatusBody(status: CheckoutStatus | null): string {
+function getStatusBody(
+  status: CheckoutStatus | null,
+  checkoutText: (typeof translations)[Language]['checkout'],
+): string {
   if (!status) {
-    return 'Checking your order and unlocking your download.';
+    return checkoutText.subtitle;
   }
 
   switch (status) {
     case 'pending':
-      return 'Complete the hosted checkout in your payment window. This page refreshes automatically for up to two minutes.';
+      return checkoutText.pendingBody;
     case 'processing':
-      return 'The network saw your payment. We are waiting for final confirmation before the ZIP unlocks.';
+      return checkoutText.processingBody;
     case 'paid':
-      return 'Your dummy test bundle is ready. Download access is temporary and limited.';
+      return checkoutText.paidBody;
     case 'expired':
-      return 'This checkout expired before the payment settled. Start a new test checkout.';
+      return checkoutText.expiredBody;
     case 'underpaid':
-      return 'A payment was detected, but the full amount has not settled yet.';
+      return checkoutText.underpaidBody;
     case 'refunded':
-      return 'This payment can no longer unlock the download.';
+      return checkoutText.refundedBody;
   }
 }
 
 const SuccessPage: React.FC = () => {
   const apiBaseUrl = useMemo(() => getApiBaseUrl(), []);
   const orderId = useMemo(() => new URLSearchParams(window.location.search).get('order_id'), []);
+  const language = useMemo<Language>(() => {
+    const param = new URLSearchParams(window.location.search).get('lang');
+    return param === 'es' || param === 'de' ? param : 'en';
+  }, []);
+  const checkoutText = useMemo(() => translations[language].checkout, [language]);
 
   const [order, setOrder] = useState<OrderStatusResponse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -110,7 +128,7 @@ const SuccessPage: React.FC = () => {
   useEffect(() => {
     if (!orderId) {
       setIsLoading(false);
-      setError('Missing order reference. Start again from the hidden checkout test page.');
+      setError(checkoutText.missingOrder);
       return;
     }
 
@@ -130,7 +148,7 @@ const SuccessPage: React.FC = () => {
           throw new Error(
             payload && typeof (payload as { error?: string }).error === 'string'
               ? (payload as { error: string }).error
-              : 'Could not load this order right now.',
+              : checkoutText.genericError,
           );
         }
 
@@ -197,9 +215,9 @@ const SuccessPage: React.FC = () => {
 
       setOrder(payload as OrderStatusResponse);
       setLastUpdatedAt(new Date().toISOString());
-      setPollingStopped(false);
-    } catch (refreshError) {
-      setError(refreshError instanceof Error ? refreshError.message : 'Could not load this order right now.');
+        setPollingStopped(false);
+      } catch (refreshError) {
+      setError(refreshError instanceof Error ? refreshError.message : checkoutText.genericError);
     } finally {
       setIsLoading(false);
     }
@@ -227,16 +245,16 @@ const SuccessPage: React.FC = () => {
                 className="h-12 md:h-14 w-auto mix-blend-multiply"
               />
               <div className="hidden md:block">
-                <p className="font-pixel text-[10px] uppercase">Digital Delivery</p>
-                <p className="text-xs font-mono text-yellow-900">Private payment confirmation and download page</p>
+                <p className="font-pixel text-[10px] uppercase">{checkoutText.headerTitle}</p>
+                <p className="text-xs font-mono text-yellow-900">{checkoutText.headerSubtitle}</p>
               </div>
             </a>
             <a
-              href="/checkout-test.html"
+              href="/#products"
               className="inline-flex items-center gap-2 px-4 py-2 border-2 border-black bg-white hover:bg-yellow-100 transition-colors font-pixel text-[10px]"
             >
               <ArrowLeft size={14} />
-              <span>TEST CHECKOUT</span>
+              <span>{checkoutText.backToProducts}</span>
             </a>
           </div>
         </header>
@@ -249,7 +267,7 @@ const SuccessPage: React.FC = () => {
                 className="inline-flex items-center gap-2 px-4 py-2 border-2 border-black bg-white hover:bg-yellow-100 transition-colors font-pixel text-[10px]"
               >
                 <ArrowLeft size={14} />
-                <span>BACK TO HOME</span>
+                <span>{checkoutText.backHome}</span>
               </a>
               <button
                 type="button"
@@ -257,14 +275,17 @@ const SuccessPage: React.FC = () => {
                 className="inline-flex items-center gap-2 px-4 py-2 border-2 border-black bg-white hover:bg-yellow-100 transition-colors font-pixel text-[10px]"
               >
                 <RefreshCcw size={14} />
-                <span>REFRESH STATUS</span>
+                <span>{checkoutText.refresh}</span>
               </button>
             </div>
 
-            <PixelCard variant={order ? statusVariant(order.status) : 'info'} title={getStatusTitle(order?.status ?? null)}>
+            <PixelCard
+              variant={order ? statusVariant(order.status) : 'info'}
+              title={getStatusTitle(order?.status ?? null, checkoutText)}
+            >
               <div className="space-y-4">
                 <p className="font-mono text-sm text-gray-700">
-                  {isLoading ? 'Checking payment status...' : getStatusBody(order?.status ?? null)}
+                  {isLoading ? checkoutText.loading : getStatusBody(order?.status ?? null, checkoutText)}
                 </p>
 
                 {error && (
@@ -275,7 +296,7 @@ const SuccessPage: React.FC = () => {
 
                 {pollingStopped && order && !isTerminalStatus(order.status) && (
                   <div className="border border-amber-200 bg-amber-50 p-3 text-sm font-mono text-amber-900">
-                    Still waiting? If you paid on-chain, confirmation can take longer than the auto-refresh window.
+                    {checkoutText.stillWaiting}
                   </div>
                 )}
 
@@ -283,41 +304,41 @@ const SuccessPage: React.FC = () => {
                   <div className="space-y-4">
                     <div className="grid md:grid-cols-2 gap-3">
                       <div className="border-2 border-black bg-white p-3">
-                        <p className="font-pixel text-[10px] uppercase mb-2">Order Details</p>
+                        <p className="font-pixel text-[10px] uppercase mb-2">{checkoutText.orderDetails}</p>
                         <dl className="space-y-2 text-sm font-mono text-gray-700">
                           <div>
-                            <dt className="font-bold">Order ID</dt>
+                            <dt className="font-bold">{checkoutText.orderId}</dt>
                             <dd className="break-all">{order.order_id}</dd>
                           </div>
                           <div>
-                            <dt className="font-bold">Payment ID</dt>
+                            <dt className="font-bold">{checkoutText.paymentId}</dt>
                             <dd className="break-all">{order.payment_id ?? '—'}</dd>
                           </div>
                           <div>
-                            <dt className="font-bold">Amount</dt>
+                            <dt className="font-bold">{checkoutText.amount}</dt>
                             <dd>{`${order.amount.toFixed(2)} ${order.currency}`}</dd>
                           </div>
                         </dl>
                       </div>
 
                       <div className="border-2 border-black bg-white p-3">
-                        <p className="font-pixel text-[10px] uppercase mb-2">Status Timing</p>
+                        <p className="font-pixel text-[10px] uppercase mb-2">{checkoutText.statusTiming}</p>
                         <dl className="space-y-2 text-sm font-mono text-gray-700">
                           <div>
-                            <dt className="font-bold">Created</dt>
-                            <dd>{formatTimestamp(order.created_at)}</dd>
+                            <dt className="font-bold">{checkoutText.createdAt}</dt>
+                            <dd>{formatTimestamp(order.created_at, language)}</dd>
                           </div>
                           <div>
-                            <dt className="font-bold">Paid At</dt>
-                            <dd>{formatTimestamp(order.paid_at)}</dd>
+                            <dt className="font-bold">{checkoutText.paidAt}</dt>
+                            <dd>{formatTimestamp(order.paid_at, language)}</dd>
                           </div>
                           <div>
-                            <dt className="font-bold">Downloads Remaining</dt>
+                            <dt className="font-bold">{checkoutText.downloadsRemaining}</dt>
                             <dd>{order.downloads_remaining ?? '—'}</dd>
                           </div>
                           <div>
-                            <dt className="font-bold">Last Updated</dt>
-                            <dd>{formatTimestamp(lastUpdatedAt)}</dd>
+                            <dt className="font-bold">{checkoutText.lastUpdated}</dt>
+                            <dd>{formatTimestamp(lastUpdatedAt, language)}</dd>
                           </div>
                         </dl>
                       </div>
@@ -326,10 +347,11 @@ const SuccessPage: React.FC = () => {
                     {order.status === 'paid' && (
                       <div className="border-2 border-black bg-green-50 p-4">
                         <p className="font-mono text-sm text-green-900 mb-2">
-                          The temporary checkout token is live until {formatTimestamp(order.download_expires_at ?? null)}.
+                          {checkoutText.downloadAvailableUntil}{' '}
+                          {formatTimestamp(order.download_expires_at ?? null, language)}.
                         </p>
                         <p className="font-mono text-sm text-green-900 mb-3">
-                          Clicking download generates a private file URL for this order only.
+                          {checkoutText.downloadHint}
                         </p>
                         <button
                           type="button"
@@ -338,10 +360,10 @@ const SuccessPage: React.FC = () => {
                           className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-4 py-3 bg-green-500 text-white font-pixel border-2 border-black hover:bg-green-600 transition-all disabled:bg-gray-400 disabled:cursor-not-allowed"
                         >
                           <Download size={16} />
-                          <span>DOWNLOAD ZIP</span>
+                          <span>{checkoutText.downloadButton}</span>
                         </button>
                         {!order.download_token && (
-                          <p className="text-sm font-mono text-red-700 mt-3">This order has used all remaining downloads.</p>
+                          <p className="text-sm font-mono text-red-700 mt-3">{checkoutText.noDownloadsLeft}</p>
                         )}
                       </div>
                     )}

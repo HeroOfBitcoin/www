@@ -28,9 +28,12 @@ export const translations = {
     checkout: {
       title: 'Payment Status',
       subtitle: 'This page unlocks your digital bundle after payment is confirmed.',
+      headerTitle: 'Digital Delivery',
+      headerSubtitle: 'Payment confirmation and private download page.',
       missingOrder: 'Missing order reference. Return to the product page and start checkout again.',
       loading: 'Checking payment status...',
       refresh: 'REFRESH STATUS',
+      backHome: 'BACK TO HOME',
       backToProducts: 'BACK TO PRODUCTS',
       pendingTitle: 'Waiting for payment',
       pendingBody: 'Complete the hosted checkout in your payment window. This page refreshes automatically for up to two minutes.',
@@ -47,14 +50,18 @@ export const translations = {
       orderId: 'Order ID',
       paymentId: 'Payment ID',
       amount: 'Amount',
+      statusTiming: 'Status Timing',
       createdAt: 'Created',
       paidAt: 'Paid At',
       downloadsRemaining: 'Downloads Remaining',
       downloadButton: 'DOWNLOAD ZIP',
-      downloadHint: 'The link is private, time-limited, and meant for your personal order only.',
+      downloadHint: 'Clicking download generates a private file URL for this order only.',
+      downloadAvailableUntil: 'Download access stays active until',
       noDownloadsLeft: 'This order has used all remaining downloads.',
       lastUpdated: 'Last updated',
       stillWaiting: 'Still waiting? If you paid on-chain, confirmation can take longer than the auto-refresh window.',
+      refundedTitle: 'Payment refunded',
+      refundedBody: 'This payment can no longer unlock the download.',
     },
     // Story Section
     story: {
@@ -291,9 +298,12 @@ export const translations = {
     checkout: {
       title: 'Estado del Pago',
       subtitle: 'Esta página desbloquea tu bundle digital cuando se confirma el pago.',
+      headerTitle: 'Entrega Digital',
+      headerSubtitle: 'Confirmación de pago y página de descarga privada.',
       missingOrder: 'Falta la referencia del pedido. Vuelve a la página del producto e inicia el checkout de nuevo.',
       loading: 'Comprobando el estado del pago...',
       refresh: 'ACTUALIZAR ESTADO',
+      backHome: 'VOLVER AL INICIO',
       backToProducts: 'VOLVER A PRODUCTOS',
       pendingTitle: 'Esperando el pago',
       pendingBody: 'Completa el checkout alojado en tu ventana de pago. Esta página se actualiza automáticamente durante dos minutos.',
@@ -310,14 +320,18 @@ export const translations = {
       orderId: 'ID del Pedido',
       paymentId: 'ID del Pago',
       amount: 'Importe',
+      statusTiming: 'Estado y Tiempo',
       createdAt: 'Creado',
       paidAt: 'Pagado',
       downloadsRemaining: 'Descargas Restantes',
       downloadButton: 'DESCARGAR ZIP',
-      downloadHint: 'El enlace es privado, temporal y pensado solo para tu pedido.',
+      downloadHint: 'Al pulsar descargar se genera una URL privada del archivo solo para este pedido.',
+      downloadAvailableUntil: 'El acceso de descarga permanece activo hasta',
       noDownloadsLeft: 'Este pedido ya ha usado todas las descargas disponibles.',
       lastUpdated: 'Última actualización',
       stillWaiting: '¿Sigues esperando? Si pagaste on-chain, la confirmación puede tardar más que la ventana de auto-actualización.',
+      refundedTitle: 'Pago reembolsado',
+      refundedBody: 'Este pago ya no puede desbloquear la descarga.',
     },
     // Story Section
     story: {
@@ -554,9 +568,12 @@ export const translations = {
     checkout: {
       title: 'Zahlungsstatus',
       subtitle: 'Diese Seite schaltet dein digitales Bundle frei, sobald die Zahlung bestätigt ist.',
+      headerTitle: 'Digitale Lieferung',
+      headerSubtitle: 'Zahlungsbestätigung und private Download-Seite.',
       missingOrder: 'Die Bestellreferenz fehlt. Gehe zur Produktseite zurück und starte den Checkout erneut.',
       loading: 'Zahlungsstatus wird geprüft...',
       refresh: 'STATUS AKTUALISIEREN',
+      backHome: 'ZURÜCK ZUR STARTSEITE',
       backToProducts: 'ZURÜCK ZU PRODUKTEN',
       pendingTitle: 'Warten auf Zahlung',
       pendingBody: 'Schließe den gehosteten Checkout im Zahlungsfenster ab. Diese Seite aktualisiert sich bis zu zwei Minuten lang automatisch.',
@@ -573,14 +590,18 @@ export const translations = {
       orderId: 'Bestell-ID',
       paymentId: 'Zahlungs-ID',
       amount: 'Betrag',
+      statusTiming: 'Status und Zeitpunkte',
       createdAt: 'Erstellt',
       paidAt: 'Bezahlt',
       downloadsRemaining: 'Verbleibende Downloads',
       downloadButton: 'ZIP HERUNTERLADEN',
-      downloadHint: 'Der Link ist privat, zeitlich begrenzt und nur für deine Bestellung gedacht.',
+      downloadHint: 'Beim Klick auf den Download wird eine private Datei-URL nur für diese Bestellung erzeugt.',
+      downloadAvailableUntil: 'Der Downloadzugang bleibt aktiv bis',
       noDownloadsLeft: 'Für diese Bestellung sind keine Downloads mehr übrig.',
       lastUpdated: 'Zuletzt aktualisiert',
       stillWaiting: 'Immer noch am Warten? Wenn du on-chain bezahlt hast, kann die Bestätigung länger dauern als das Auto-Refresh-Fenster.',
+      refundedTitle: 'Zahlung erstattet',
+      refundedBody: 'Diese Zahlung kann den Download nicht mehr freischalten.',
     },
     // Story Section
     story: {
@@ -817,9 +838,12 @@ export interface Translations {
   checkout: {
     title: string;
     subtitle: string;
+    headerTitle: string;
+    headerSubtitle: string;
     missingOrder: string;
     loading: string;
     refresh: string;
+    backHome: string;
     backToProducts: string;
     pendingTitle: string;
     pendingBody: string;
@@ -836,14 +860,18 @@ export interface Translations {
     orderId: string;
     paymentId: string;
     amount: string;
+    statusTiming: string;
     createdAt: string;
     paidAt: string;
     downloadsRemaining: string;
     downloadButton: string;
     downloadHint: string;
+    downloadAvailableUntil: string;
     noDownloadsLeft: string;
     lastUpdated: string;
     stillWaiting: string;
+    refundedTitle: string;
+    refundedBody: string;
   };
   story: { title: string; p1: string; p2: string; p3: string; p4: string };
   controls: {

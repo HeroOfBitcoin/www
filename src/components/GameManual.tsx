@@ -213,48 +213,48 @@ const GameManual: React.FC = () => {
       </div>
 
       <div className="border-4 border-black bg-white pixel-shadow overflow-hidden">
-        <div className="grid md:grid-cols-[1.1fr_0.9fr]">
-          <div className="bg-black text-white p-5 md:p-6">
-            <p className="font-pixel text-[10px] uppercase tracking-[0.2em] text-yellow-300 mb-3">
+        <div className="grid md:grid-cols-[1.04fr_0.96fr] items-stretch">
+          <div className="bg-black text-white p-6 md:p-7">
+            <p className="font-pixel text-[10px] uppercase tracking-[0.18em] text-yellow-300 mb-4">
               {t.hero.instantTitle}
             </p>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="flex items-center gap-2 text-3xl leading-none" aria-hidden="true">
+            <div className="inline-flex items-center gap-3 border-2 border-white/15 bg-white/5 px-3 py-2 mb-5">
+              <span className="flex items-center gap-2 text-[34px] leading-none" aria-hidden="true">
                 <span className="font-sans font-bold text-[#F7931A]">₿</span>
                 <span className="font-sans text-yellow-300">⚡</span>
               </span>
-              <p className="font-mono text-sm text-neutral-200">{t.hero.instantMeta}</p>
+              <p className="max-w-[16rem] font-mono text-[13px] leading-snug text-neutral-100">{t.hero.instantMeta}</p>
             </div>
-            <p className="font-mono text-sm text-neutral-200 mb-5 max-w-md">
+            <p className="font-mono text-[15px] leading-relaxed text-neutral-100 mb-6 max-w-[30rem]">
               {t.hero.instantBody}
             </p>
             <a
               href="#instant-download"
-              className="inline-flex items-center gap-3 border-2 border-yellow-300 bg-yellow-300 px-4 py-3 font-pixel text-[10px] uppercase text-black transition-all hover:translate-x-[2px] hover:-translate-y-[2px]"
+              className="inline-flex min-h-[60px] items-center gap-3 border-2 border-yellow-300 bg-yellow-300 px-5 py-3 font-pixel text-[10px] uppercase text-black transition-all hover:translate-x-[2px] hover:-translate-y-[2px]"
             >
               <span className="flex items-center gap-1 text-base leading-none" aria-hidden="true">
                 <span className="font-sans font-bold text-[#F7931A]">₿</span>
-                <span className="font-sans">⚡</span>
+                <span className="font-sans text-[#92400E]">⚡</span>
               </span>
               <span>{t.hero.instantCta}</span>
             </a>
           </div>
 
-          <div className="bg-yellow-200 p-5 md:p-6 border-t-4 md:border-t-0 md:border-l-4 border-black">
-            <p className="font-pixel text-[10px] uppercase tracking-[0.2em] text-yellow-900 mb-3">
+          <div className="bg-yellow-100 p-6 md:p-7 border-t-4 md:border-t-0 md:border-l-4 border-black">
+            <p className="font-pixel text-[10px] uppercase tracking-[0.18em] text-[#7a4d00] mb-4">
               {t.hero.physicalTitle}
             </p>
-            <p className="font-mono text-sm text-yellow-950 mb-3">
+            <p className="font-mono text-[15px] leading-relaxed text-[#3c2a00] mb-4 max-w-[18rem]">
               {t.hero.physicalBody}
             </p>
-            <p className="font-mono text-xs text-yellow-900 mb-5">
+            <p className="font-mono text-xs leading-relaxed text-[#6b4a00] mb-6 max-w-[18rem]">
               {t.hero.physicalMeta}
             </p>
             <a
               href={LINK_COPIARO_STORE}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 border-2 border-black bg-white px-4 py-3 font-pixel text-[10px] uppercase text-black transition-all hover:translate-x-[2px] hover:-translate-y-[2px]"
+              className="inline-flex min-h-[60px] items-center gap-3 border-2 border-black bg-white px-5 py-3 font-pixel text-[10px] uppercase text-black transition-all hover:translate-x-[2px] hover:-translate-y-[2px]"
             >
               <ShoppingCart size={14} />
               <span>{t.hero.physicalCta}</span>

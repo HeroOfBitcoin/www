@@ -83,7 +83,7 @@ const LanguageSwitcher: React.FC = () => {
       {/* Current language button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-1 px-2 py-1 border-2 border-black bg-white hover:bg-yellow-100 transition-all"
+        className="flex items-center gap-1 px-2 py-1 border-2 border-black bg-white hover:bg-yellow-100 transition-all md:min-h-[44px] md:px-1.5"
         title={languageNames[language]}
       >
         <div className="w-5 h-4 border border-black overflow-hidden">

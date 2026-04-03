@@ -113,11 +113,15 @@ interface ProductCardProps {
   imageFit?: 'cover' | 'contain';
   imageFrameClassName?: string;
   imageClassName?: string;
+  gridClassName?: string;
+  badgeClassName?: string;
+  detailsClassName?: string;
   galleryCount?: number;
   compatibility?: string;
   buyLabel?: string;
   buyContent?: React.ReactNode;
   children?: React.ReactNode;
+  cardClassName?: string;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
@@ -134,11 +138,15 @@ const ProductCard: React.FC<ProductCardProps> = ({
   imageFit = 'cover',
   imageFrameClassName,
   imageClassName,
+  gridClassName,
+  badgeClassName,
+  detailsClassName,
   galleryCount = 3,
   compatibility,
   buyLabel,
   buyContent,
-  children
+  children,
+  cardClassName,
 }) => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [copied, setCopied] = useState(false);
@@ -152,12 +160,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
   };
 
   return (
-    <div id={id} className="border-4 border-black bg-white p-6 pixel-shadow scroll-mt-24">
-      <div className="grid md:grid-cols-2 gap-6 items-start">
+    <div id={id} className={`border-4 border-black bg-white p-6 pixel-shadow scroll-mt-24 ${cardClassName ?? ''}`}>
+      <div className={`grid gap-6 items-start md:grid-cols-2 ${gridClassName ?? ''}`}>
         {/* Product Image with Gallery */}
         <div className="relative">
           {/* Badge - positioned outside overflow container */}
-          <div className="absolute -top-2 -right-2 bg-yellow-400 border-2 border-black px-2 py-1 rounded-full pixel-shadow-sm rotate-12 z-20">
+          <div className={`absolute -top-2 -right-2 bg-yellow-400 border-2 border-black px-2 py-1 rounded-full pixel-shadow-sm rotate-12 z-20 ${badgeClassName ?? ''}`}>
             <div className="text-center font-bold text-[10px] leading-tight whitespace-nowrap">
               {badgeText}
             </div>
@@ -169,7 +177,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
               <img
                 src={images[selectedImageIndex]}
                 alt={`${title} - View ${selectedImageIndex + 1}`}
-                className={`w-full h-full ${imageFit === 'contain' ? 'object-contain p-6 md:p-8' : 'object-cover'} ${imageClassName ?? ''}`}
+                className={`${
+                  imageFit === 'contain'
+                    ? 'max-w-full max-h-full object-contain p-6 md:p-8'
+                    : 'w-full h-full object-cover'
+                } ${imageClassName ?? ''}`}
               />
             ) : (
               <>
@@ -192,7 +204,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         </div>
 
         {/* Details */}
-        <div className="space-y-4">
+        <div className={`space-y-4 ${detailsClassName ?? ''}`}>
           <div className="flex items-start justify-between gap-2">
             <div>
               <h3 className="font-bold text-xl font-sans">{title}</h3>
@@ -247,7 +259,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           )}
 
           {compatibility && (
-            <p className="text-[10px] text-gray-500 font-mono text-center">
+            <p className="text-[10px] text-gray-700 font-mono text-center">
               {compatibility}
             </p>
           )}
@@ -343,23 +355,23 @@ const Products: React.FC = () => {
       </div>
 
       <div className="border-4 border-black bg-black text-white pixel-shadow overflow-hidden">
-        <div className="grid lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="p-6 md:p-8">
-            <p className="font-pixel text-[10px] uppercase tracking-[0.25em] text-yellow-300 mb-3">
+        <div className="grid lg:grid-cols-[1.02fr_0.98fr] items-stretch">
+          <div className="p-6 md:p-7">
+            <p className="font-pixel text-[10px] uppercase tracking-[0.22em] text-yellow-300 mb-4">
               {t.products.chooseFormatTitle}
             </p>
-            <div className="flex items-center gap-3 mb-4">
+            <div className="inline-flex items-center gap-3 border-2 border-white/15 bg-white/5 px-3 py-2 mb-5">
               <PaymentMark />
-              <p className="font-mono text-sm text-neutral-200">{t.products.instant.compatibility}</p>
+              <p className="max-w-[16rem] font-mono text-[13px] leading-snug text-neutral-100">{t.products.instant.compatibility}</p>
             </div>
-            <p className="max-w-2xl font-mono text-sm text-neutral-200 mb-6">
+            <p className="max-w-[30rem] font-mono text-[15px] leading-relaxed text-neutral-100 mb-6">
               {t.products.chooseFormatBody}
             </p>
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="grid gap-3 sm:grid-cols-2 max-w-[32rem]">
               <button
                 type="button"
                 onClick={() => jumpToProduct('instant-download')}
-                className="inline-flex items-center justify-center gap-3 border-2 border-yellow-300 bg-yellow-300 px-4 py-3 font-pixel text-[10px] uppercase text-black transition-all hover:translate-x-[2px] hover:-translate-y-[2px]"
+                className="inline-flex min-h-[76px] items-center justify-center gap-3 border-2 border-yellow-300 bg-yellow-300 px-4 py-3 font-pixel text-[10px] uppercase text-black transition-all hover:translate-x-[2px] hover:-translate-y-[2px]"
               >
                 <PaymentMark compact tone="light" className="justify-center" />
                 <span>{t.products.chooseFormatPrimary}</span>
@@ -367,7 +379,7 @@ const Products: React.FC = () => {
               <button
                 type="button"
                 onClick={() => jumpToProduct('collectors-edition')}
-                className="inline-flex items-center justify-center gap-3 border-2 border-white bg-transparent px-4 py-3 font-pixel text-[10px] uppercase text-white transition-all hover:bg-white hover:text-black"
+                className="inline-flex min-h-[76px] items-center justify-center gap-3 border-2 border-white bg-transparent px-4 py-3 font-pixel text-[10px] uppercase text-white transition-all hover:bg-white hover:text-black"
               >
                 <ShoppingCart size={14} />
                 <span>{t.products.chooseFormatSecondary}</span>
@@ -375,17 +387,17 @@ const Products: React.FC = () => {
             </div>
           </div>
 
-          <div className="border-t-4 border-black bg-yellow-300 p-6 md:border-l-4 md:border-t-0 md:p-8">
-            <p className="font-pixel text-[10px] uppercase tracking-[0.2em] text-yellow-950 mb-3">
+          <div className="border-t-4 border-black bg-yellow-100 p-6 md:border-l-4 md:border-t-0 md:p-7">
+            <p className="font-pixel text-[10px] uppercase tracking-[0.18em] text-[#7a4d00] mb-4">
               {t.products.collectors.title}
             </p>
-            <p className="font-mono text-sm text-yellow-950 mb-3">
+            <p className="max-w-[18rem] font-mono text-[15px] leading-relaxed text-[#3c2a00] mb-4">
               {t.products.collectors.quote}
             </p>
-            <p className="font-mono text-xs text-yellow-900 mb-4">
+            <p className="max-w-[18rem] font-mono text-xs leading-relaxed text-[#6b4a00] mb-5">
               {t.products.digital.note}
             </p>
-            <div className="space-y-2 font-mono text-xs text-yellow-950">
+            <div className="space-y-3 font-mono text-[13px] leading-relaxed text-[#4a3300]">
               <p>{t.products.collectors.feature1}</p>
               <p>{t.products.collectors.feature2}</p>
               <p>{t.products.digital.feature2}</p>
@@ -416,24 +428,28 @@ const Products: React.FC = () => {
         badgeText={t.products.badges.instantAccess}
         images={['/assets/images/HoB_Logo_Avatar.png']}
         imageFit="contain"
-        imageFrameClassName="bg-[radial-gradient(circle_at_top,_#fff5b7_0%,_#f6d548_58%,_#e0b61d_100%)]"
-        imageClassName="rendering-pixelated"
+        imageFrameClassName="aspect-[0.95] bg-[#f2dc6c]"
+        imageClassName="rendering-pixelated scale-[0.8]"
+        gridClassName="md:grid-cols-[0.88fr_1.12fr] md:gap-5"
+        badgeClassName="left-4 right-auto top-4 rotate-[-8deg]"
+        detailsClassName="pt-1"
+        cardClassName="bg-[#e9cf57]"
         galleryCount={3}
         compatibility={t.products.instant.compatibility}
         buyContent={(
           <div className="space-y-3">
-            <div className="border-2 border-black bg-amber-50 p-3">
-              <div className="flex items-center gap-2 mb-2">
+            <div className="border-2 border-black bg-[#fff8e6] p-4">
+              <div className="flex items-center gap-2 mb-3">
                 <PaymentMark compact tone="light" />
                 <p className="font-pixel text-[10px] uppercase text-amber-900">
                   {t.products.instant.checkoutTitle}
                 </p>
               </div>
-              <p className="text-xs font-mono text-amber-900 mb-3">
+              <p className="text-xs leading-relaxed font-mono text-[#8a5b12] mb-4">
                 {t.products.instant.checkoutBody}
               </p>
               <label className="block mb-2">
-                <span className="block text-[10px] font-pixel uppercase text-gray-700 mb-2">
+                <span className="block text-[10px] font-pixel uppercase text-gray-800 mb-2">
                   {t.products.instant.emailLabel}
                 </span>
                 <input
@@ -446,7 +462,7 @@ const Products: React.FC = () => {
                   inputMode="email"
                 />
               </label>
-              <p className="text-[10px] font-mono text-gray-600">
+              <p className="text-[10px] leading-relaxed font-mono text-gray-700">
                 {t.products.instant.emailHint}
               </p>
             </div>
@@ -455,7 +471,7 @@ const Products: React.FC = () => {
               type="button"
               onClick={handleInstantCheckout}
               disabled={instantCheckoutLoading}
-              className="w-full bg-black text-white font-pixel py-3 px-4 border-2 border-black hover:bg-neutral-800 hover:scale-[1.02] active:scale-[0.98] transition-all pixel-shadow-sm flex items-center justify-center gap-2 text-sm disabled:cursor-wait disabled:hover:scale-100 disabled:bg-neutral-800"
+              className="w-full min-h-[72px] bg-black text-white font-pixel py-3 px-4 border-2 border-black hover:bg-neutral-800 hover:scale-[1.02] active:scale-[0.98] transition-all pixel-shadow-sm flex items-center justify-center gap-2 text-sm disabled:cursor-wait disabled:hover:scale-100 disabled:bg-neutral-800"
             >
               <PaymentMark compact className="justify-center" />
               <span>
@@ -471,8 +487,8 @@ const Products: React.FC = () => {
           </div>
         )}
       >
-        <div className="bg-yellow-50 border border-yellow-200 p-2 rounded text-xs">
-          <strong className="text-yellow-800">Note:</strong> {t.products.instant.note}
+        <div className="border-l-4 border-yellow-300 bg-[#fff9dd] px-3 py-2 text-[11px] leading-relaxed text-[#6f581e]">
+          <strong className="text-[#8a6610]">Note:</strong> {t.products.instant.note}
         </div>
       </ProductCard>
 

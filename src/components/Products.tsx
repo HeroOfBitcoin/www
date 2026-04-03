@@ -423,7 +423,7 @@ const Products: React.FC = () => {
           { icon: <ShieldCheck className="text-green-600" size={18} />, text: t.products.instant.feature1 },
           { icon: <PaymentMark compact tone="light" className="min-w-[28px] justify-center" />, text: t.products.instant.feature2 },
           { icon: <BookOpen className="text-yellow-600" size={18} />, text: t.products.instant.feature3 },
-          { icon: <Shield className="text-gray-600" size={18} />, text: t.products.instant.feature4 },
+          { icon: <Zap className="text-amber-600" size={18} />, text: t.products.instant.feature4 },
         ]}
         badgeText={t.products.badges.instantAccess}
         images={['/assets/images/HoB_Logo_Avatar.png']}

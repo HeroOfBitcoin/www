@@ -5,6 +5,9 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  server: {
+    allowedHosts: ['127.0.0.1.nip.io'],
+  },
   // IMPORTANT: This ensures assets load correctly on GitHub Pages
   // Using custom domain (heroofbitcoin.xyz), this stays '/'
   // If using username.github.io/repo, change to '/repo-name/'

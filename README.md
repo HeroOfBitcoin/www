@@ -1,13 +1,56 @@
-
 # Hero of Bitcoin - Official Website
 
-The official website for **Hero of Bitcoin** featuring a retro-styled digital instruction booklet and an unofficial quick-start companion guide for the **R36S** handheld device. Built with React, TypeScript, Tailwind CSS, and Vite.
+Public React/Vite frontend for [heroofbitcoin.xyz](https://heroofbitcoin.xyz).
 
-**Live at:** [heroofbitcoin.xyz](https://heroofbitcoin.xyz)
+This repo now includes:
+
+- the live homepage and product page
+- the public `Instant Download` BTC/LN product entry point
+- the public success/download page
+- the optional `checkout-test.html` test surface
+- the rest of the Hero of Bitcoin marketing site
+
+## Current Stable Snapshot
+
+As of `2026-04-05`:
+
+- Stable frontend tag: `stable-www-2026-04-03`
+- Stable backend tag: `stable-digital-hosted-2026-04-03`
+- Latest known successful Pages deploy for the stable product-copy state:
+  - run `23943305608`
+  - commit `a26dd5d`
+- Public site: [heroofbitcoin.xyz](https://heroofbitcoin.xyz)
+- Success page: [heroofbitcoin.xyz/success.html](https://heroofbitcoin.xyz/success.html)
+- Test checkout page: [heroofbitcoin.xyz/checkout-test.html](https://heroofbitcoin.xyz/checkout-test.html)
+
+## Fresh Session Checklist
+
+When starting after a break, use the repo state and live checks instead of old chat context:
+
+1. Check both repos are clean:
+   - `git -C /Users/mars/code/hob/www status --short --branch`
+   - `git -C /Users/mars/code/hob/digital-hosted status --short --branch`
+2. Confirm the stable tags:
+   - `git show --no-patch stable-www-2026-04-03`
+   - `git -C /Users/mars/code/hob/digital-hosted show --no-patch stable-digital-hosted-2026-04-03`
+3. Verify backend health:
+   - `curl -s https://hero-of-bitcoin-digital.fly.dev/healthz`
+4. Check the latest Pages workflow run:
+   - `gh run list --repo HeroOfBitcoin/www --workflow deploy.yml --limit 1`
+5. Read the current follow-up list:
+   - `/Users/mars/code/hob/www/TODO.md`
+
+## Repo Visibility
+
+This repo is public because the current deployment model uses GitHub Pages.
+
+- Do not change repo visibility without explicit approval
+- Do not put secrets in this repo
+- Payment and storage secrets belong in the backend/Fly environment only
 
 ## Quick Start
 
-### 1. Installation
+### 1. Install
 
 ```bash
 npm install
@@ -15,12 +58,11 @@ npm install
 
 ### 2. Local Development
 
-Start the local development server:
-
 ```bash
 npm run dev
 ```
-Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
+
+Open [http://localhost:5173](http://localhost:5173) to view the site locally.
 
 ### 3. Build for Production
 
@@ -28,123 +70,136 @@ Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
 npm run build
 ```
 
-This will:
-1. Auto-generate the RSS feed (`public/products.xml`)
-2. Run TypeScript compilation
-3. Build with Vite
+This build:
 
-### 4. Generate RSS Feed Only
+1. regenerates `public/products.xml`
+2. runs TypeScript compilation
+3. builds the Vite app
+
+### 4. Preview the Production Build
 
 ```bash
-npm run generate:rss
+npm run preview
 ```
 
----
+## Product Architecture
 
-## Features
+The site now distinguishes clearly between:
 
-- **Multi-language support** (EN, ES, DE) via URL parameter (`?lang=de`)
-- **Products page** with 4 product offerings
-- **Partners page** with retail partner information
-- **RSS feed** for products (`/products.xml`)
-- **Direct linking** to specific products via hash URLs
-- **SEO optimization** with structured data for search engines and LLMs
-- **Privacy-first** - No tracking, no cookies, no data collection
-- **Mobile-optimized** - Responsive design with touch-friendly UI
+- `Instant Download` = site-owned Bitcoin + Lightning checkout for the ROM + PDF bundle
+- `Digital Edition` = boxed physical microSD bundle sold externally
+- `Collector's Edition` = physical cartridge sold externally
+- `Hero Handheld` and `Stackchain Magazine` = external physical products
 
----
+Do not merge `Instant Download` and `Digital Edition` back into one product concept.
 
-## Privacy
-
-This website collects **zero user data**:
-
-- **Self-hosted fonts** - No requests to Google Fonts
-- **Self-hosted Tailwind CSS** - Bundled locally, no CDN
-- **Privacy-enhanced YouTube** - Uses `youtube-nocookie.com`
-- **No analytics or tracking pixels**
-- **No cookies** - Only `localStorage` for language preference
-
----
-
-## Adding/Updating Products
-
-Products are defined in a single source of truth:
-
-**File:** `src/data/products.ts`
-
-When you add or modify products:
-1. Update the `products` array in `src/data/products.ts`
-2. Update translations in `src/i18n/translations.ts`
-3. Update the ProductCard in `src/components/Products.tsx`
-4. Run `npm run build` - RSS feed updates automatically
-
----
-
-## URL Structure
-
-### Direct Links
+## Key Pages and URLs
 
 | Page | URL |
 |------|-----|
-| Homepage | `heroofbitcoin.xyz` |
-| Products | `heroofbitcoin.xyz/#products` |
-| Partners | `heroofbitcoin.xyz/#partners` |
-| Collector's Edition | `heroofbitcoin.xyz/#collectors-edition` |
-| Digital Edition | `heroofbitcoin.xyz/#digital-edition` |
-| Hero Handheld | `heroofbitcoin.xyz/#hero-handheld` |
-| Stackchain Magazine | `heroofbitcoin.xyz/#stackchain-magazine` |
+| Homepage | `https://heroofbitcoin.xyz/` |
+| Products section | `https://heroofbitcoin.xyz/#products` |
+| Partners section | `https://heroofbitcoin.xyz/#partners` |
+| Instant Download | `https://heroofbitcoin.xyz/#instant-download` |
+| Collector's Edition | `https://heroofbitcoin.xyz/#collectors-edition` |
+| Digital Edition | `https://heroofbitcoin.xyz/#digital-edition` |
+| Success page | `https://heroofbitcoin.xyz/success.html` |
+| Test checkout page | `https://heroofbitcoin.xyz/checkout-test.html` |
 
-### Localized Links
+Localized URLs still work with `?lang=de` or `?lang=es`.
 
-Add `?lang=` parameter for language-specific links:
-- `heroofbitcoin.xyz/?lang=de#products` (German)
-- `heroofbitcoin.xyz/?lang=es#partners` (Spanish)
+## High-Signal Files
 
----
+- `src/App.tsx`
+- `src/components/GameManual.tsx`
+- `src/components/Products.tsx`
+- `src/SuccessPage.tsx`
+- `src/TestCheckoutPage.tsx`
+- `src/i18n/translations.ts`
+- `src/lib/api.ts`
+- `vite.config.ts`
+- `.github/workflows/deploy.yml`
 
-## Adding Assets
+## Features
 
-Place images in the public folder. See source files for detailed comments:
+- Multi-language support (`en`, `es`, `de`)
+- Live products page with 5 product offerings
+- Hosted BTC/LN checkout entry point for the digital bundle
+- Public success/download page
+- RSS feed for products at `/products.xml`
+- Direct linking to specific products via hash URLs
+- Structured data and SEO support
+- Privacy-first frontend with no analytics or tracking
 
-**Character Portraits** (`public/assets/characters/`):
-- `samson.png`, `michael.png`, `max_stacey.png`, `nayib.png`, `adam.png`, `faketoshi.png`
+## Privacy
 
-**Screenshots** (`public/assets/screenshots/`):
-- `town.png`, `collect.png`
+This website collects zero analytics data:
 
-**Product Images** (`public/assets/product/`):
-- `cartridge/1.webp, 2.webp, 3.webp` - Collector's Edition
-- `microsd/1.webp, 2.png, 3.png` - Digital Edition
-- `bundles/1.webp, 2.webp, 3.webp` - Hero Handheld
-- `magazine/1.png, 2.png, 3.png` - Stackchain Magazine
+- self-hosted fonts
+- no analytics or tracking pixels
+- no marketing cookies
+- only local browser state for language preference
 
-**Partner Logos** (`public/assets/partners/`):
-- `copiaro.jpeg`, `plebstyle.jpeg`
+## Product and Content Updates
 
----
+When working on products or product copy:
+
+1. Update translations in `src/i18n/translations.ts`
+2. Update the relevant layout in `src/components/Products.tsx`
+3. Update any surrounding homepage placement in `src/App.tsx` or `src/components/GameManual.tsx`
+4. Run `npm run build`
+5. Check `public/products.xml` if the build regenerated it
+
+If the user wants lower-risk experimentation, prefer local work or `checkout-test.html` over immediate homepage changes.
+
+## Assets
+
+Place images in `public/assets/`.
+
+Current important folders:
+
+- `public/assets/images/`
+- `public/assets/product/cartridge/`
+- `public/assets/product/microsd/`
+- `public/assets/product/r36s/`
+- `public/assets/product/magazine/`
+- `public/assets/partners/`
 
 ## Deployment
 
-This project auto-deploys to GitHub Pages via GitHub Actions on every push to `main`.
+This repo deploys to GitHub Pages on every push to `main`.
 
-**Domain:** heroofbitcoin.xyz
+Important details:
 
-### Configuration
+- Custom domain: `heroofbitcoin.xyz`
+- Workflow: `.github/workflows/deploy.yml`
+- The workflow has already been updated for Node 24 compatible GitHub Actions
 
-- `vite.config.ts` - Base path set to `/` for custom domain
-- `public/CNAME` - Contains `heroofbitcoin.xyz`
-- `.github/workflows/deploy.yml` - GitHub Actions workflow
+Useful commands:
 
----
+```bash
+gh run list --repo HeroOfBitcoin/www --workflow deploy.yml --limit 1
+gh run watch RUN_ID --repo HeroOfBitcoin/www --exit-status
+```
 
-## Tech Stack
+## Related Repo
 
-- **Framework:** React 18
-- **Language:** TypeScript
-- **Build Tool:** Vite
-- **Styling:** Tailwind CSS
-- **Icons:** Lucide React
-- **Fonts:** Press Start 2P (Headers), Inter (Body), Roboto Mono (Data)
+The private backend repo lives at:
+
+- `/Users/mars/code/hob/digital-hosted`
+
+It powers:
+
+- hosted checkout creation
+- Coinsnap webhook handling
+- order status lookups
+- private ZIP delivery via Fly + Tigris
+
+## Current Follow-Ups
+
+See:
+
+- `/Users/mars/code/hob/www/TODO.md`
 
 ## Copyright
 

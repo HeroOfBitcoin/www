@@ -38,13 +38,20 @@ jobs:
 
       - name: Package Pages artifact
         run: |
-          tar -C dist -cf - . | gzip -9 > "$RUNNER_TEMP/github-pages.tar.gz"
+          tar \
+            --dereference --hard-dereference \
+            --directory dist \
+            -cvf "$RUNNER_TEMP/artifact.tar" \
+            --exclude=.git \
+            --exclude=.github \
+            --exclude=".[^/]*" \
+            .
 
       - name: Upload artifact
         uses: actions/upload-artifact@v6
         with:
           name: github-pages
-          path: ${{ runner.temp }}/github-pages.tar.gz
+          path: ${{ runner.temp }}/artifact.tar
           retention-days: 1
           if-no-files-found: error
           compression-level: 0

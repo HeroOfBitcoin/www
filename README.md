@@ -173,7 +173,8 @@ Important details:
 
 - Custom domain: `heroofbitcoin.xyz`
 - Workflow: `.github/workflows/deploy.yml`
-- The workflow has already been updated for Node 24 compatible GitHub Actions
+- The workflow now uses native Node 24 actions and uploads the Pages artifact via `actions/upload-artifact@v6`
+- A healthy run should not emit Node 20 deprecation warnings
 
 Useful commands:
 

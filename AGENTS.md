@@ -33,7 +33,8 @@ As of `2026-04-05`:
 - `checkout-test.html` still exists as a lower-risk testing surface
 - Latest known stable frontend tag: `stable-www-2026-04-03`
 - GitHub Pages deploys from pushes to `main`
-- The GitHub Actions Pages workflow has already been updated for Node 24 compatibility
+- The GitHub Actions Pages workflow is expected to run without Node 20 deprecation warnings
+- The Pages artifact is packaged manually and uploaded with `actions/upload-artifact@v6`
 
 ## Repo Visibility Rule
 
@@ -101,6 +102,8 @@ Check the latest Pages run:
 ```bash
 gh run list --repo HeroOfBitcoin/www --workflow deploy.yml --limit 1
 ```
+
+If a future run shows a Node 20 deprecation warning again, treat that as a workflow regression.
 
 Watch a specific run:
 

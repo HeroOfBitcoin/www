@@ -268,7 +268,7 @@ export const translations = {
     // Footer
     footer: {
       fanSwag: 'CUPS, SHIRTS & CAPS',
-      copyright: '©2022-2025 Hero of Bitcoin • heroofbitcoin.xyz',
+      copyright: '©2022-2026 Hero of Bitcoin • heroofbitcoin.xyz',
       privacy: 'No tracking • No cookies • No data collection',
     },
   },
@@ -540,7 +540,7 @@ export const translations = {
     // Footer
     footer: {
       fanSwag: 'TAZAS, CAMISETAS Y GORRAS',
-      copyright: '©2022-2025 Hero of Bitcoin • heroofbitcoin.xyz',
+      copyright: '©2022-2026 Hero of Bitcoin • heroofbitcoin.xyz',
       privacy: 'Sin rastreo • Sin cookies • Sin recopilación de datos',
     },
   },
@@ -812,7 +812,7 @@ export const translations = {
     // Footer
     footer: {
       fanSwag: 'TASSEN, SHIRTS & CAPS',
-      copyright: '©2022-2025 Hero of Bitcoin • heroofbitcoin.xyz',
+      copyright: '©2022-2026 Hero of Bitcoin • heroofbitcoin.xyz',
       privacy: 'Kein Tracking • Keine Cookies • Keine Datenerfassung',
     },
   },

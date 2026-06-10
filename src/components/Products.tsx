@@ -272,6 +272,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 async function createInstantCheckout(
   apiBaseUrl: string,
   email: string,
+  couponCode: string,
   language: Language,
 ): Promise<string> {
   const response = await fetch(`${apiBaseUrl}/api/create-checkout`, {
@@ -281,6 +282,7 @@ async function createInstantCheckout(
     },
     body: JSON.stringify({
       email: email.trim() || undefined,
+      coupon_code: couponCode.trim() || undefined,
       lang: language,
     }),
   });
@@ -298,10 +300,21 @@ async function createInstantCheckout(
   return payload.checkout_url;
 }
 
+function readInitialCouponCode(): string {
+  const searchParams = new URLSearchParams(window.location.search);
+  return (
+    searchParams.get('coupon')
+    ?? searchParams.get('coupon_code')
+    ?? searchParams.get('code')
+    ?? ''
+  );
+}
+
 const Products: React.FC = () => {
   const { t, language } = useLanguage();
   const [showR36STechDetails, setShowR36STechDetails] = useState(false);
   const [instantEmail, setInstantEmail] = useState('');
+  const [instantCouponCode, setInstantCouponCode] = useState(readInitialCouponCode);
   const [instantCheckoutLoading, setInstantCheckoutLoading] = useState(false);
   const [instantCheckoutError, setInstantCheckoutError] = useState<string | null>(null);
   const apiBaseUrl = getApiBaseUrl();
@@ -338,11 +351,11 @@ const Products: React.FC = () => {
     setInstantCheckoutError(null);
 
     try {
-      const checkoutUrl = await createInstantCheckout(apiBaseUrl, instantEmail, language);
+      const checkoutUrl = await createInstantCheckout(apiBaseUrl, instantEmail, instantCouponCode, language);
       window.location.assign(checkoutUrl);
-    } catch {
+    } catch (error) {
       setInstantCheckoutLoading(false);
-      setInstantCheckoutError(t.products.instant.checkoutError);
+      setInstantCheckoutError(error instanceof Error ? error.message : t.products.instant.checkoutError);
     }
   };
 
@@ -464,6 +477,23 @@ const Products: React.FC = () => {
               </label>
               <p className="text-[10px] leading-relaxed font-mono text-gray-700">
                 {t.products.instant.emailHint}
+              </p>
+              <label className="block mt-4 mb-2">
+                <span className="block text-[10px] font-pixel uppercase text-gray-800 mb-2">
+                  {t.products.instant.couponLabel}
+                </span>
+                <input
+                  type="text"
+                  value={instantCouponCode}
+                  onChange={(event) => setInstantCouponCode(event.target.value)}
+                  placeholder={t.products.instant.couponPlaceholder}
+                  className="w-full border-2 border-black bg-white px-3 py-2 font-mono text-sm uppercase text-black placeholder:text-gray-400 focus:outline-none focus:ring-0"
+                  autoComplete="off"
+                  inputMode="text"
+                />
+              </label>
+              <p className="text-[10px] leading-relaxed font-mono text-gray-700">
+                {t.products.instant.couponHint}
               </p>
             </div>
 

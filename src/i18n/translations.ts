@@ -165,6 +165,9 @@ export const translations = {
         emailLabel: 'Optional Email',
         emailPlaceholder: 'you@example.com',
         emailHint: 'Leave this blank for a faster checkout.',
+        couponLabel: 'Coupon Code',
+        couponPlaceholder: 'BTCPRAGUE26',
+        couponHint: 'Optional. Active codes are checked at checkout.',
         buyWithBitcoin: 'PAY WITH BITCOIN + LIGHTNING',
         redirecting: 'Redirecting to secure checkout...',
         checkoutTitle: 'Bitcoin + Lightning checkout',
@@ -437,6 +440,9 @@ export const translations = {
         emailLabel: 'Email Opcional',
         emailPlaceholder: 'tu@email.com',
         emailHint: 'Dejalo vacio para un checkout mas rapido.',
+        couponLabel: 'Codigo Coupon',
+        couponPlaceholder: 'BTCPRAGUE26',
+        couponHint: 'Opcional. Los codigos activos se validan en el checkout.',
         buyWithBitcoin: 'PAGAR CON BITCOIN + LIGHTNING',
         redirecting: 'Redirigiendo al checkout seguro...',
         checkoutTitle: 'Checkout Bitcoin + Lightning',
@@ -709,6 +715,9 @@ export const translations = {
         emailLabel: 'Optionale E-Mail',
         emailPlaceholder: 'du@beispiel.de',
         emailHint: 'Lass das Feld leer, wenn du schneller zur Kasse willst.',
+        couponLabel: 'Coupon-Code',
+        couponPlaceholder: 'BTCPRAGUE26',
+        couponHint: 'Optional. Aktive Codes werden beim Checkout geprüft.',
         buyWithBitcoin: 'MIT BITCOIN + LIGHTNING BEZAHLEN',
         redirecting: 'Weiterleitung zum sicheren Checkout...',
         checkoutTitle: 'Bitcoin + Lightning Checkout',
@@ -944,6 +953,9 @@ export interface Translations {
       emailLabel: string;
       emailPlaceholder: string;
       emailHint: string;
+      couponLabel: string;
+      couponPlaceholder: string;
+      couponHint: string;
       buyWithBitcoin: string;
       redirecting: string;
       checkoutTitle: string;

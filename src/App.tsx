@@ -5,7 +5,7 @@ import Partners from './components/Partners';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import { useLanguage } from './i18n';
 import { Tab } from './types';
-import { Package, Menu, Play, ShoppingCart, Shirt, Mail, Instagram, Youtube, Handshake } from 'lucide-react';
+import { Package, Menu, Play, ShoppingCart, Shirt, Mail, Handshake } from 'lucide-react';
 
 /*
   =============================================================================
@@ -319,7 +319,7 @@ const App: React.FC = () => {
                         className="w-8 h-8 bg-white border-2 border-black flex items-center justify-center hover:bg-yellow-100 transition-colors"
                         title="Instagram"
                     >
-                        <Instagram size={16} />
+                        <span className="font-pixel text-[8px] leading-none">IG</span>
                     </a>
                     <a
                         href={LINK_X}
@@ -340,7 +340,7 @@ const App: React.FC = () => {
                         className="w-8 h-8 bg-white border-2 border-black flex items-center justify-center hover:bg-yellow-100 transition-colors"
                         title="YouTube"
                     >
-                        <Youtube size={16} />
+                        <span className="font-pixel text-[8px] leading-none">YT</span>
                     </a>
                 </div>
 

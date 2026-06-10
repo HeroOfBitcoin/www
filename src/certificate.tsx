@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+
+import CertificatePage from './CertificatePage';
 import './styles/fonts.css';
 import './styles/global.css';
-import { LanguageProvider } from './i18n';
-import App from './App';
-import CertificatePage from './CertificatePage';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
@@ -12,15 +11,8 @@ if (!rootElement) {
 }
 
 const root = ReactDOM.createRoot(rootElement);
-const isCertificatePath = window.location.pathname === '/c' || window.location.pathname === '/c/';
 root.render(
   <React.StrictMode>
-    {isCertificatePath ? (
-      <CertificatePage />
-    ) : (
-      <LanguageProvider>
-        <App />
-      </LanguageProvider>
-    )}
+    <CertificatePage />
   </React.StrictMode>
 );

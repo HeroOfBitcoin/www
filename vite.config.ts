@@ -16,6 +16,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: fileURLToPath(new URL('./index.html', import.meta.url)),
+        certificate: fileURLToPath(new URL('./c/index.html', import.meta.url)),
         success: fileURLToPath(new URL('./success.html', import.meta.url)),
         checkoutTest: fileURLToPath(new URL('./checkout-test.html', import.meta.url)),
       },

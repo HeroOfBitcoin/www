@@ -178,16 +178,31 @@ const CertificatePage: React.FC = () => {
 
             {loadState === 'not-found' && (
               <PixelCard variant="alert" title="Certificate not found">
-                <div className="flex flex-col md:flex-row gap-4">
-                  <AlertTriangle className="shrink-0 text-red-600" size={40} />
-                  <div className="space-y-3">
-                    <p className="font-mono text-sm text-gray-700">
-                      This NFC code does not match an active Hero of Bitcoin authenticity certificate.
-                    </p>
-                    <p className="font-mono text-sm text-gray-700">
-                      Check that the URL came from the physical tag attached to the graded copy. If this page
-                      still appears, treat the copy as unverified.
-                    </p>
+                <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(280px,0.95fr)] lg:items-center">
+                  <div className="space-y-4">
+                    <div className="flex items-start gap-4">
+                      <AlertTriangle className="shrink-0 text-red-600" size={40} />
+                      <div className="space-y-3">
+                        <p className="font-mono text-sm text-gray-700">
+                          This NFC code does not match an active Hero of Bitcoin authenticity certificate.
+                        </p>
+                        <p className="font-mono text-sm text-gray-700">
+                          Check that the URL came from the physical tag attached to the graded copy. If this page
+                          still appears, treat the copy as unverified.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="border-2 border-red-700 bg-red-50 p-3 font-mono text-sm text-red-800">
+                      Do not rely on this NFC tag as proof of authenticity.
+                    </div>
+                  </div>
+
+                  <div className="border-4 border-black bg-black p-2 pixel-shadow-sm">
+                    <img
+                      src="/assets/images/certificate-rejected.png"
+                      alt="Signature rejected warning artwork"
+                      className="w-full border-2 border-orange-900 bg-black"
+                    />
                   </div>
                 </div>
               </PixelCard>

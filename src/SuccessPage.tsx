@@ -11,6 +11,12 @@ interface OrderStatusResponse {
   status: CheckoutStatus;
   order_id: string;
   payment_id: string | null;
+  product_id: string;
+  product_name: string;
+  shipping_region: string | null;
+  has_digital_download: number;
+  requires_fulfillment_details: number;
+  fulfillment_details_submitted_at: string | null;
   amount: number;
   currency: string;
   created_at: string;
@@ -20,8 +26,32 @@ interface OrderStatusResponse {
   downloads_remaining?: number;
 }
 
+interface FulfillmentFormState {
+  email: string;
+  recipientName: string;
+  addressLine1: string;
+  addressLine2: string;
+  postalCode: string;
+  city: string;
+  stateOrRegion: string;
+  country: string;
+  note: string;
+}
+
 const POLL_INTERVAL_MS = 3_000;
 const POLL_WINDOW_MS = 120_000;
+
+const EMPTY_FULFILLMENT_FORM: FulfillmentFormState = {
+  email: '',
+  recipientName: '',
+  addressLine1: '',
+  addressLine2: '',
+  postalCode: '',
+  city: '',
+  stateOrRegion: '',
+  country: '',
+  note: '',
+};
 
 function formatTimestamp(value: string | null, language: Language): string {
   if (!value) {
@@ -124,6 +154,9 @@ const SuccessPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [lastUpdatedAt, setLastUpdatedAt] = useState<string | null>(null);
   const [pollingStopped, setPollingStopped] = useState(false);
+  const [fulfillmentForm, setFulfillmentForm] = useState<FulfillmentFormState>(EMPTY_FULFILLMENT_FORM);
+  const [fulfillmentSubmitting, setFulfillmentSubmitting] = useState(false);
+  const [fulfillmentError, setFulfillmentError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!orderId) {
@@ -233,6 +266,63 @@ const SuccessPage: React.FC = () => {
     );
   };
 
+  const updateFulfillmentField = (field: keyof FulfillmentFormState, value: string) => {
+    setFulfillmentForm((current) => ({
+      ...current,
+      [field]: value,
+    }));
+  };
+
+  const submitFulfillmentDetails = async () => {
+    if (!orderId) {
+      return;
+    }
+
+    setFulfillmentSubmitting(true);
+    setFulfillmentError(null);
+
+    try {
+      const response = await fetch(`${apiBaseUrl}/api/orders/${encodeURIComponent(orderId)}/fulfillment-details`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: fulfillmentForm.email,
+          recipient_name: fulfillmentForm.recipientName,
+          address_line1: fulfillmentForm.addressLine1,
+          address_line2: fulfillmentForm.addressLine2 || undefined,
+          postal_code: fulfillmentForm.postalCode,
+          city: fulfillmentForm.city,
+          state_or_region: fulfillmentForm.stateOrRegion || undefined,
+          country: fulfillmentForm.country,
+          note: fulfillmentForm.note || undefined,
+        }),
+      });
+      const payload = (await response.json().catch(() => null)) as
+        | { fulfillment_details_submitted_at?: string; error?: string }
+        | null;
+
+      if (!response.ok || !payload?.fulfillment_details_submitted_at) {
+        throw new Error(payload?.error ?? checkoutText.fulfillmentRetry);
+      }
+
+      setOrder((current) => current
+        ? {
+          ...current,
+          fulfillment_details_submitted_at: payload.fulfillment_details_submitted_at ?? null,
+        }
+        : current);
+      setFulfillmentForm(EMPTY_FULFILLMENT_FORM);
+    } catch (submitError) {
+      setFulfillmentError(
+        submitError instanceof Error ? submitError.message : checkoutText.fulfillmentRetry,
+      );
+    } finally {
+      setFulfillmentSubmitting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center py-4 md:py-8 px-2 md:px-0 relative">
       <div className="w-full max-w-4xl bg-yellow-400 min-h-[80vh] pixel-shadow border-4 border-black relative overflow-hidden">
@@ -311,6 +401,10 @@ const SuccessPage: React.FC = () => {
                             <dd className="break-all">{order.order_id}</dd>
                           </div>
                           <div>
+                            <dt className="font-bold">{checkoutText.product}</dt>
+                            <dd>{order.product_name}</dd>
+                          </div>
+                          <div>
                             <dt className="font-bold">{checkoutText.paymentId}</dt>
                             <dd className="break-all">{order.payment_id ?? '—'}</dd>
                           </div>
@@ -371,6 +465,169 @@ const SuccessPage: React.FC = () => {
                         </button>
                         {!order.download_token && (
                           <p className="text-sm font-mono text-red-700 mt-3">{checkoutText.noDownloadsLeft}</p>
+                        )}
+                      </div>
+                    )}
+
+                    {order.status === 'paid' && order.requires_fulfillment_details === 1 && (
+                      <div className="border-2 border-black bg-white p-4">
+                        <p className="font-pixel text-[10px] uppercase mb-3">
+                          {checkoutText.fulfillmentTitle}
+                        </p>
+
+                        {order.fulfillment_details_submitted_at ? (
+                          <p className="font-mono text-sm text-green-900 bg-green-50 border border-green-200 p-3">
+                            {checkoutText.fulfillmentReceived}
+                          </p>
+                        ) : (
+                          <div className="space-y-4">
+                            <p className="font-mono text-sm text-gray-700">
+                              {checkoutText.fulfillmentBody}
+                            </p>
+
+                            <div className="grid gap-3 md:grid-cols-2">
+                              <label className="block">
+                                <span className="block text-[10px] font-pixel uppercase text-gray-800 mb-2">
+                                  {checkoutText.emailLabel}
+                                </span>
+                                <input
+                                  type="email"
+                                  value={fulfillmentForm.email}
+                                  onChange={(event) => updateFulfillmentField('email', event.target.value)}
+                                  className="w-full border-2 border-black bg-white px-3 py-2 font-mono text-sm text-black focus:outline-none focus:ring-0"
+                                  autoComplete="email"
+                                  required
+                                />
+                              </label>
+                              <label className="block">
+                                <span className="block text-[10px] font-pixel uppercase text-gray-800 mb-2">
+                                  {checkoutText.recipientNameLabel}
+                                </span>
+                                <input
+                                  type="text"
+                                  value={fulfillmentForm.recipientName}
+                                  onChange={(event) => updateFulfillmentField('recipientName', event.target.value)}
+                                  className="w-full border-2 border-black bg-white px-3 py-2 font-mono text-sm text-black focus:outline-none focus:ring-0"
+                                  autoComplete="name"
+                                  required
+                                />
+                              </label>
+                            </div>
+
+                            <label className="block">
+                              <span className="block text-[10px] font-pixel uppercase text-gray-800 mb-2">
+                                {checkoutText.addressLine1Label}
+                              </span>
+                              <input
+                                type="text"
+                                value={fulfillmentForm.addressLine1}
+                                onChange={(event) => updateFulfillmentField('addressLine1', event.target.value)}
+                                className="w-full border-2 border-black bg-white px-3 py-2 font-mono text-sm text-black focus:outline-none focus:ring-0"
+                                autoComplete="address-line1"
+                                required
+                              />
+                            </label>
+
+                            <label className="block">
+                              <span className="block text-[10px] font-pixel uppercase text-gray-800 mb-2">
+                                {checkoutText.addressLine2Label}
+                              </span>
+                              <input
+                                type="text"
+                                value={fulfillmentForm.addressLine2}
+                                onChange={(event) => updateFulfillmentField('addressLine2', event.target.value)}
+                                className="w-full border-2 border-black bg-white px-3 py-2 font-mono text-sm text-black focus:outline-none focus:ring-0"
+                                autoComplete="address-line2"
+                              />
+                            </label>
+
+                            <div className="grid gap-3 md:grid-cols-2">
+                              <label className="block">
+                                <span className="block text-[10px] font-pixel uppercase text-gray-800 mb-2">
+                                  {checkoutText.postalCodeLabel}
+                                </span>
+                                <input
+                                  type="text"
+                                  value={fulfillmentForm.postalCode}
+                                  onChange={(event) => updateFulfillmentField('postalCode', event.target.value)}
+                                  className="w-full border-2 border-black bg-white px-3 py-2 font-mono text-sm text-black focus:outline-none focus:ring-0"
+                                  autoComplete="postal-code"
+                                  required
+                                />
+                              </label>
+                              <label className="block">
+                                <span className="block text-[10px] font-pixel uppercase text-gray-800 mb-2">
+                                  {checkoutText.cityLabel}
+                                </span>
+                                <input
+                                  type="text"
+                                  value={fulfillmentForm.city}
+                                  onChange={(event) => updateFulfillmentField('city', event.target.value)}
+                                  className="w-full border-2 border-black bg-white px-3 py-2 font-mono text-sm text-black focus:outline-none focus:ring-0"
+                                  autoComplete="address-level2"
+                                  required
+                                />
+                              </label>
+                            </div>
+
+                            <div className="grid gap-3 md:grid-cols-2">
+                              <label className="block">
+                                <span className="block text-[10px] font-pixel uppercase text-gray-800 mb-2">
+                                  {checkoutText.stateOrRegionLabel}
+                                </span>
+                                <input
+                                  type="text"
+                                  value={fulfillmentForm.stateOrRegion}
+                                  onChange={(event) => updateFulfillmentField('stateOrRegion', event.target.value)}
+                                  className="w-full border-2 border-black bg-white px-3 py-2 font-mono text-sm text-black focus:outline-none focus:ring-0"
+                                  autoComplete="address-level1"
+                                />
+                              </label>
+                              <label className="block">
+                                <span className="block text-[10px] font-pixel uppercase text-gray-800 mb-2">
+                                  {checkoutText.countryLabel}
+                                </span>
+                                <input
+                                  type="text"
+                                  value={fulfillmentForm.country}
+                                  onChange={(event) => updateFulfillmentField('country', event.target.value)}
+                                  className="w-full border-2 border-black bg-white px-3 py-2 font-mono text-sm text-black focus:outline-none focus:ring-0"
+                                  autoComplete="country-name"
+                                  required
+                                />
+                              </label>
+                            </div>
+
+                            <label className="block">
+                              <span className="block text-[10px] font-pixel uppercase text-gray-800 mb-2">
+                                {checkoutText.noteLabel}
+                              </span>
+                              <textarea
+                                value={fulfillmentForm.note}
+                                onChange={(event) => updateFulfillmentField('note', event.target.value)}
+                                className="min-h-[88px] w-full border-2 border-black bg-white px-3 py-2 font-mono text-sm text-black focus:outline-none focus:ring-0"
+                              />
+                            </label>
+
+                            {fulfillmentError && (
+                              <p className="text-[11px] font-mono text-red-700 bg-red-50 border border-red-200 px-3 py-2">
+                                {fulfillmentError}
+                              </p>
+                            )}
+
+                            <button
+                              type="button"
+                              onClick={submitFulfillmentDetails}
+                              disabled={fulfillmentSubmitting}
+                              className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-4 py-3 bg-black text-white font-pixel border-2 border-black hover:bg-neutral-800 transition-all disabled:bg-gray-500 disabled:cursor-wait"
+                            >
+                              <span>
+                                {fulfillmentSubmitting
+                                  ? checkoutText.fulfillmentSubmitting
+                                  : checkoutText.fulfillmentSubmit}
+                              </span>
+                            </button>
+                          </div>
                         )}
                       </div>
                     )}

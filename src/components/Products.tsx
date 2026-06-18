@@ -2,25 +2,33 @@ import React, { useState, useEffect } from 'react';
 import PixelCard from './ui/PixelCard';
 import { type Language, useLanguage } from '../i18n';
 import { getApiBaseUrl } from '../lib/api';
-import { Star, ShieldCheck, ShoppingCart, Sticker, Gamepad2, Zap, HardDrive, ChevronDown, ChevronUp, HelpCircle, AlertTriangle, FolderOpen, Disc, Link, BookOpen, Image, Award, Shield } from 'lucide-react';
+import { Star, ShieldCheck, ShoppingCart, Sticker, Gamepad2, Zap, HardDrive, ChevronDown, ChevronUp, HelpCircle, AlertTriangle, FolderOpen, Disc, Link, BookOpen, Image, Award, Shield, Truck } from 'lucide-react';
 
 /*
   =============================================================================
   COPIARO PRODUCT LINKS
   =============================================================================
   Direct links to product pages on Copiaro store.
-  Brand page: https://copiaro.com/en/hero-of-bitcoin
-
   LINK_PHYSICAL_CARTRIDGE: Physical Game Boy cartridge collector's edition
   LINK_R36S_DEVICE: R36S handheld console with Hero of Bitcoin pre-installed
-  LINK_STACKCHAIN_MAGAZINE: Stackchain Magazine with fine art print
   =============================================================================
 */
-const LINK_BRAND_PAGE = 'https://copiaro.com/en/hero-of-bitcoin';
 const LINK_PHYSICAL_CARTRIDGE = 'https://copiaro.com/hero-of-bitcoin-the-game-boxed-gameboy-version-batch2-en';
 const LINK_MICROSD_CARTRIDGE = 'https://copiaro.com/en/hero-of-bitcoin-digital-version-v2';
 const LINK_R36S_DEVICE = 'https://copiaro.com/en/hero-of-bitcoin-handheld-version-v2';
-const LINK_STACKCHAIN_MAGAZINE = LINK_BRAND_PAGE; // TODO: Update when magazine product page is available
+
+type ShippingRegion = 'de_eu' | 'world';
+
+interface PricePreview {
+  sats: number | null;
+  btc: string | null;
+  is_estimate: boolean;
+  is_informational: boolean;
+}
+
+interface PricePreviewResponse {
+  products?: Array<PricePreview & { id: string }>;
+}
 
 /*
   =============================================================================
@@ -122,6 +130,13 @@ interface ProductCardProps {
   buyContent?: React.ReactNode;
   children?: React.ReactNode;
   cardClassName?: string;
+  pricePreview?: PricePreview | null;
+  pricePreviewText?: {
+    label: string;
+    unavailable: string;
+    estimate: string;
+    informational: string;
+  };
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
@@ -147,6 +162,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
   buyContent,
   children,
   cardClassName,
+  pricePreview,
+  pricePreviewText,
 }) => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [copied, setCopied] = useState(false);
@@ -209,6 +226,16 @@ const ProductCard: React.FC<ProductCardProps> = ({
             <div>
               <h3 className="font-bold text-xl font-sans">{title}</h3>
               <p className="text-xs text-gray-500 font-mono">{subtitle}</p>
+              {pricePreviewText && (
+                <p className="mt-2 font-mono text-[11px] text-amber-900">
+                  <span className="font-bold">{pricePreviewText.label}: </span>
+                  {pricePreview?.sats
+                    ? `${pricePreview.sats.toLocaleString()} sats (${pricePreview.btc} BTC)`
+                    : pricePreviewText.unavailable}
+                  {pricePreview?.is_estimate ? ` ${pricePreviewText.estimate}` : ''}
+                  {pricePreview?.is_informational ? ` ${pricePreviewText.informational}` : ''}
+                </p>
+              )}
             </div>
             <button
               onClick={copyLink}
@@ -300,23 +327,50 @@ async function createInstantCheckout(
   return payload.checkout_url;
 }
 
-function readInitialCouponCode(): string {
-  const searchParams = new URLSearchParams(window.location.search);
-  return (
-    searchParams.get('coupon')
-    ?? searchParams.get('coupon_code')
-    ?? searchParams.get('code')
-    ?? ''
-  );
+async function createStackchainCheckout(
+  apiBaseUrl: string,
+  shippingRegion: ShippingRegion,
+  couponCode: string,
+  language: Language,
+): Promise<string> {
+  const response = await fetch(`${apiBaseUrl}/api/create-checkout`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      product_id: 'stackchain-magazine',
+      shipping_region: shippingRegion,
+      coupon_code: couponCode.trim() || undefined,
+      lang: language,
+    }),
+  });
+
+  const payload = (await response.json().catch(() => null)) as {
+    checkout_url?: unknown;
+    error?: unknown;
+  } | null;
+
+  if (!response.ok || typeof payload?.checkout_url !== 'string') {
+    const message = typeof payload?.error === 'string' ? payload.error : 'Could not create checkout';
+    throw new Error(message);
+  }
+
+  return payload.checkout_url;
 }
 
 const Products: React.FC = () => {
   const { t, language } = useLanguage();
   const [showR36STechDetails, setShowR36STechDetails] = useState(false);
   const [instantEmail, setInstantEmail] = useState('');
-  const [instantCouponCode, setInstantCouponCode] = useState(readInitialCouponCode);
+  const [instantCouponCode, setInstantCouponCode] = useState('');
   const [instantCheckoutLoading, setInstantCheckoutLoading] = useState(false);
   const [instantCheckoutError, setInstantCheckoutError] = useState<string | null>(null);
+  const [stackchainShippingRegion, setStackchainShippingRegion] = useState<ShippingRegion>('de_eu');
+  const [stackchainCouponCode, setStackchainCouponCode] = useState('');
+  const [stackchainCheckoutLoading, setStackchainCheckoutLoading] = useState(false);
+  const [stackchainCheckoutError, setStackchainCheckoutError] = useState<string | null>(null);
+  const [pricePreviews, setPricePreviews] = useState<Record<string, PricePreview>>({});
   const apiBaseUrl = getApiBaseUrl();
 
   // Handle hash navigation on mount
@@ -332,6 +386,38 @@ const Products: React.FC = () => {
       }, 100);
     }
   }, []);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadPricePreviews = async () => {
+      try {
+        const response = await fetch(`${apiBaseUrl}/api/products/prices`);
+        const payload = (await response.json().catch(() => null)) as PricePreviewResponse | null;
+        if (!response.ok || !Array.isArray(payload?.products)) {
+          return;
+        }
+
+        if (!isMounted) {
+          return;
+        }
+
+        setPricePreviews(Object.fromEntries(
+          payload.products.map((product) => [product.id, product]),
+        ));
+      } catch {
+        if (isMounted) {
+          setPricePreviews({});
+        }
+      }
+    };
+
+    void loadPricePreviews();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [apiBaseUrl]);
 
   const jumpToProduct = (productId: string) => {
     const nextHash = `#${productId}`;
@@ -358,6 +444,28 @@ const Products: React.FC = () => {
       setInstantCheckoutError(error instanceof Error ? error.message : t.products.instant.checkoutError);
     }
   };
+
+  const handleStackchainCheckout = async () => {
+    setStackchainCheckoutLoading(true);
+    setStackchainCheckoutError(null);
+
+    try {
+      const checkoutUrl = await createStackchainCheckout(
+        apiBaseUrl,
+        stackchainShippingRegion,
+        stackchainCouponCode,
+        language,
+      );
+      window.location.assign(checkoutUrl);
+    } catch (error) {
+      setStackchainCheckoutLoading(false);
+      setStackchainCheckoutError(
+        error instanceof Error ? error.message : t.products.magazine.checkoutError,
+      );
+    }
+  };
+
+  const pricePreviewText = t.products.pricePreview;
 
   return (
     <div className="space-y-12">
@@ -449,6 +557,8 @@ const Products: React.FC = () => {
         cardClassName="bg-[#e9cf57]"
         galleryCount={3}
         compatibility={t.products.instant.compatibility}
+        pricePreview={pricePreviews['instant-download'] ?? null}
+        pricePreviewText={pricePreviewText}
         buyContent={(
           <div className="space-y-3">
             <div className="border-2 border-black bg-[#fff8e6] p-4">
@@ -552,6 +662,8 @@ const Products: React.FC = () => {
         ]}
         galleryCount={3}
         compatibility={t.products.collectors.compatibility}
+        pricePreview={pricePreviews['collectors-edition'] ?? null}
+        pricePreviewText={pricePreviewText}
       />
 
       {/* Product 3: Digital Edition */}
@@ -584,6 +696,8 @@ const Products: React.FC = () => {
         ]}
         galleryCount={3}
         compatibility={t.products.digital.compatibility}
+        pricePreview={pricePreviews['digital-edition'] ?? null}
+        pricePreviewText={pricePreviewText}
       >
         <div className="bg-purple-50 border border-purple-200 p-2 rounded text-xs">
           <strong className="text-purple-700">Note:</strong> {t.products.digital.note}
@@ -618,6 +732,8 @@ const Products: React.FC = () => {
         ]}
         galleryCount={3}
         compatibility={t.products.handheld.compatibility}
+        pricePreview={pricePreviews['hero-handheld'] ?? null}
+        pricePreviewText={pricePreviewText}
       >
         {/* Controls */}
         <div className="border border-gray-200 p-3 bg-gray-50">
@@ -736,9 +852,8 @@ const Products: React.FC = () => {
           { icon: <BookOpen className="text-orange-600" size={18} />, text: t.products.magazine.feature1 },
           { icon: <Image className="text-purple-600" size={18} />, text: t.products.magazine.feature2 },
           { icon: <Award className="text-yellow-600" size={18} />, text: t.products.magazine.feature3 },
-          { icon: <Star className="text-blue-600" size={18} />, text: t.products.magazine.feature4 },
+          { icon: <Zap className="text-amber-600" size={18} />, text: t.products.magazine.feature4 },
         ]}
-        buyLink={LINK_STACKCHAIN_MAGAZINE}
         badgeText={t.products.badges.printEdition}
         images={[
           '/assets/product/magazine/1.png',
@@ -746,6 +861,92 @@ const Products: React.FC = () => {
           '/assets/product/magazine/3.png'
         ]}
         galleryCount={3}
+        pricePreview={pricePreviews['stackchain-magazine'] ?? null}
+        pricePreviewText={pricePreviewText}
+        buyContent={(
+          <div className="space-y-3">
+            <div className="border-2 border-black bg-[#fff8e6] p-4">
+              <div className="flex items-center gap-2 mb-3">
+                <PaymentMark compact tone="light" />
+                <p className="font-pixel text-[10px] uppercase text-amber-900">
+                  {t.products.magazine.checkoutTitle}
+                </p>
+              </div>
+              <p className="text-xs leading-relaxed font-mono text-[#8a5b12] mb-4">
+                {t.products.magazine.checkoutBody}
+              </p>
+              <div className="grid gap-2">
+                <label className="flex items-start gap-3 border-2 border-black bg-white p-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="stackchain-shipping"
+                    checked={stackchainShippingRegion === 'de_eu'}
+                    onChange={() => setStackchainShippingRegion('de_eu')}
+                    className="mt-1"
+                  />
+                  <span>
+                    <span className="block font-bold text-sm">{t.products.magazine.shippingEu}</span>
+                    <span className="block font-mono text-[11px] text-gray-700">{t.products.magazine.shippingEuHint}</span>
+                  </span>
+                </label>
+                <label className="flex items-start gap-3 border-2 border-black bg-white p-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="stackchain-shipping"
+                    checked={stackchainShippingRegion === 'world'}
+                    onChange={() => setStackchainShippingRegion('world')}
+                    className="mt-1"
+                  />
+                  <span>
+                    <span className="block font-bold text-sm">{t.products.magazine.shippingWorld}</span>
+                    <span className="block font-mono text-[11px] text-gray-700">{t.products.magazine.shippingWorldHint}</span>
+                  </span>
+                </label>
+              </div>
+              <label className="block mt-4 mb-2">
+                <span className="block text-[10px] font-pixel uppercase text-gray-800 mb-2">
+                  {t.products.magazine.couponLabel}
+                </span>
+                <input
+                  type="text"
+                  value={stackchainCouponCode}
+                  onChange={(event) => setStackchainCouponCode(event.target.value)}
+                  placeholder={t.products.magazine.couponPlaceholder}
+                  className="w-full border-2 border-black bg-white px-3 py-2 font-mono text-sm uppercase text-black placeholder:text-gray-400 focus:outline-none focus:ring-0"
+                  autoComplete="off"
+                  inputMode="text"
+                />
+              </label>
+              <p className="text-[10px] leading-relaxed font-mono text-gray-700">
+                {t.products.magazine.couponHint}
+              </p>
+              <div className="mt-4 flex gap-2 border-l-4 border-yellow-400 bg-white px-3 py-2 text-[11px] leading-relaxed text-gray-700">
+                <Truck size={16} className="mt-0.5 shrink-0 text-amber-700" />
+                <p>{t.products.magazine.privacyNotice}</p>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onClick={handleStackchainCheckout}
+              disabled={stackchainCheckoutLoading}
+              className="w-full min-h-[72px] bg-black text-white font-pixel py-3 px-4 border-2 border-black hover:bg-neutral-800 hover:scale-[1.02] active:scale-[0.98] transition-all pixel-shadow-sm flex items-center justify-center gap-2 text-sm disabled:cursor-wait disabled:hover:scale-100 disabled:bg-neutral-800"
+            >
+              <PaymentMark compact className="justify-center" />
+              <span>
+                {stackchainCheckoutLoading
+                  ? t.products.magazine.redirecting
+                  : t.products.magazine.buyWithBitcoin}
+              </span>
+            </button>
+
+            {stackchainCheckoutError && (
+              <p className="text-[11px] font-mono text-red-700 bg-red-50 border border-red-200 px-3 py-2">
+                {stackchainCheckoutError}
+              </p>
+            )}
+          </div>
+        )}
       >
         <p className="text-[10px] text-gray-500 font-mono">
           {t.products.magazine.note}

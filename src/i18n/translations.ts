@@ -48,6 +48,7 @@ export const translations = {
       genericError: 'Could not load this order right now. Try refreshing in a moment.',
       orderDetails: 'Order Details',
       orderId: 'Order ID',
+      product: 'Product',
       paymentId: 'Payment ID',
       amount: 'Amount',
       statusTiming: 'Status Timing',
@@ -64,6 +65,21 @@ export const translations = {
       stillWaiting: 'Still waiting? If you paid on-chain, confirmation can take longer than the auto-refresh window.',
       refundedTitle: 'Payment refunded',
       refundedBody: 'This payment can no longer unlock the download.',
+      fulfillmentTitle: 'Shipping details',
+      fulfillmentBody: 'Enter the shipping details for the physical article. They are sent to the seller and are not stored by this site.',
+      fulfillmentReceived: 'Shipping details received. The physical article can now be prepared for shipment.',
+      fulfillmentSubmit: 'SEND SHIPPING DETAILS',
+      fulfillmentSubmitting: 'Sending shipping details...',
+      fulfillmentRetry: 'Your details were not saved. Please check the fields and try again.',
+      emailLabel: 'Email',
+      recipientNameLabel: 'Recipient Name',
+      addressLine1Label: 'Address Line 1',
+      addressLine2Label: 'Address Line 2',
+      postalCodeLabel: 'Postal Code',
+      cityLabel: 'City',
+      stateOrRegionLabel: 'State / Region',
+      countryLabel: 'Country',
+      noteLabel: 'Delivery Note',
     },
     // Story Section
     story: {
@@ -152,6 +168,12 @@ export const translations = {
       chooseFormatSecondary: 'SEE PHYSICAL EDITIONS',
       shippingTitle: 'Shipping Info',
       shippingText: 'All products ship worldwide. Customs and import duties may apply depending on your country.',
+      pricePreview: {
+        label: 'BTC preview',
+        unavailable: 'Unavailable',
+        estimate: 'est.',
+        informational: 'external checkout final price may differ',
+      },
       instant: {
         title: 'Instant Download',
         subtitle: 'ROM + PDF BUNDLE',
@@ -166,8 +188,8 @@ export const translations = {
         emailPlaceholder: 'you@example.com',
         emailHint: 'Leave this blank for a faster checkout.',
         couponLabel: 'Coupon Code',
-        couponPlaceholder: 'BTCPRAGUE26',
-        couponHint: 'Optional. Active codes are checked at checkout.',
+        couponPlaceholder: 'Optional code',
+        couponHint: 'Optional. Active codes are checked at checkout and applied server-side.',
         buyWithBitcoin: 'PAY WITH BITCOIN + LIGHTNING',
         redirecting: 'Redirecting to secure checkout...',
         checkoutTitle: 'Bitcoin + Lightning checkout',
@@ -220,12 +242,25 @@ export const translations = {
       magazine: {
         title: 'Stackchain Magazine',
         subtitle: 'LIMITED TO 30 PRINTS',
-        quote: 'Exclusive interview with the creator, plus fine art print with alternative Hero of Bitcoin cover.',
+        quote: 'Exclusive creator interview, fine art print, and Hero of Bitcoin digital game download in one bundle.',
         feature1: 'Stackchain Magazine Round 5',
         feature2: 'Fine Art Print (Alt Cover)',
         feature3: 'Premium Protective Toploader',
-        feature4: 'Creator Interview Inside',
-        note: 'Limited edition collectible. Magazine and art print ship in protective toploader.',
+        feature4: 'Digital Game Download Included',
+        note: 'Limited edition collectible. Magazine and art print ship in protective toploader. The digital game unlocks after payment.',
+        checkoutTitle: 'Direct Bitcoin + Lightning checkout',
+        checkoutBody: 'Select shipping before payment. One invoice includes the magazine bundle, digital game, and shipping.',
+        shippingEu: 'Germany / EU shipping',
+        shippingEuHint: 'Adds 7.49 EUR to the invoice total.',
+        shippingWorld: 'Worldwide shipping',
+        shippingWorldHint: 'Adds 12.49 EUR to the invoice total.',
+        couponLabel: 'Coupon Code',
+        couponPlaceholder: 'Optional code',
+        couponHint: 'Optional. Active codes are checked at checkout and applied server-side.',
+        privacyNotice: 'After payment, this page asks for email and shipping address. These details are required to ship the article, sent to the seller, and not stored by the site.',
+        buyWithBitcoin: 'PAY BUNDLE WITH BITCOIN + LIGHTNING',
+        redirecting: 'Redirecting to secure checkout...',
+        checkoutError: 'Could not start checkout. Please try again.',
       },
       // Tech Details
       techDetails: {
@@ -323,6 +358,7 @@ export const translations = {
       genericError: 'No pudimos cargar este pedido ahora mismo. Intenta actualizar en un momento.',
       orderDetails: 'Detalles del Pedido',
       orderId: 'ID del Pedido',
+      product: 'Producto',
       paymentId: 'ID del Pago',
       amount: 'Importe',
       statusTiming: 'Estado y Tiempo',
@@ -339,6 +375,21 @@ export const translations = {
       stillWaiting: '¿Sigues esperando? Si pagaste on-chain, la confirmación puede tardar más que la ventana de auto-actualización.',
       refundedTitle: 'Pago reembolsado',
       refundedBody: 'Este pago ya no puede desbloquear la descarga.',
+      fulfillmentTitle: 'Datos de envio',
+      fulfillmentBody: 'Introduce los datos de envio para el articulo fisico. Se envian al vendedor y este sitio no los guarda.',
+      fulfillmentReceived: 'Datos de envio recibidos. El articulo fisico ya puede prepararse para el envio.',
+      fulfillmentSubmit: 'ENVIAR DATOS DE ENVIO',
+      fulfillmentSubmitting: 'Enviando datos de envio...',
+      fulfillmentRetry: 'Tus datos no se guardaron. Revisa los campos e intentalo de nuevo.',
+      emailLabel: 'Email',
+      recipientNameLabel: 'Nombre del destinatario',
+      addressLine1Label: 'Direccion linea 1',
+      addressLine2Label: 'Direccion linea 2',
+      postalCodeLabel: 'Codigo postal',
+      cityLabel: 'Ciudad',
+      stateOrRegionLabel: 'Estado / Region',
+      countryLabel: 'Pais',
+      noteLabel: 'Nota de entrega',
     },
     // Story Section
     story: {
@@ -427,6 +478,12 @@ export const translations = {
       chooseFormatSecondary: 'VER EDICIONES FISICAS',
       shippingTitle: 'Info de Envío',
       shippingText: 'Todos los productos se envían a todo el mundo. Pueden aplicarse aduanas e impuestos según tu país.',
+      pricePreview: {
+        label: 'Vista previa BTC',
+        unavailable: 'No disponible',
+        estimate: 'est.',
+        informational: 'el precio final del checkout externo puede variar',
+      },
       instant: {
         title: 'Descarga Instantanea',
         subtitle: 'BUNDLE ROM + PDF',
@@ -441,8 +498,8 @@ export const translations = {
         emailPlaceholder: 'tu@email.com',
         emailHint: 'Dejalo vacio para un checkout mas rapido.',
         couponLabel: 'Codigo Coupon',
-        couponPlaceholder: 'BTCPRAGUE26',
-        couponHint: 'Opcional. Los codigos activos se validan en el checkout.',
+        couponPlaceholder: 'Codigo opcional',
+        couponHint: 'Opcional. Los codigos activos se validan en el checkout y se aplican en el servidor.',
         buyWithBitcoin: 'PAGAR CON BITCOIN + LIGHTNING',
         redirecting: 'Redirigiendo al checkout seguro...',
         checkoutTitle: 'Checkout Bitcoin + Lightning',
@@ -495,12 +552,25 @@ export const translations = {
       magazine: {
         title: 'Stackchain Magazine',
         subtitle: 'LIMITADO A 30 IMPRESIONES',
-        quote: 'Entrevista exclusiva con el creador, más impresión artística con portada alternativa de Hero of Bitcoin.',
+        quote: 'Entrevista exclusiva con el creador, impresión artística y descarga digital de Hero of Bitcoin en un bundle.',
         feature1: 'Stackchain Magazine Ronda 5',
         feature2: 'Impresión Artística (Portada Alt)',
         feature3: 'Toploader Protector Premium',
-        feature4: 'Entrevista del Creador',
-        note: 'Coleccionable de edición limitada. Revista e impresión artística enviadas en toploader protector.',
+        feature4: 'Descarga Digital del Juego Incluida',
+        note: 'Coleccionable de edición limitada. Revista e impresión artística enviadas en toploader protector. El juego digital se desbloquea tras el pago.',
+        checkoutTitle: 'Checkout directo Bitcoin + Lightning',
+        checkoutBody: 'Elige el envio antes del pago. Una sola factura incluye el bundle de revista, el juego digital y el envio.',
+        shippingEu: 'Envio Alemania / UE',
+        shippingEuHint: 'Suma 7,49 EUR al total de la factura.',
+        shippingWorld: 'Envio mundial',
+        shippingWorldHint: 'Suma 12,49 EUR al total de la factura.',
+        couponLabel: 'Codigo Coupon',
+        couponPlaceholder: 'Codigo opcional',
+        couponHint: 'Opcional. Los codigos activos se validan en el checkout y se aplican en el servidor.',
+        privacyNotice: 'Despues del pago, esta pagina pide email y direccion de envio. Estos datos son necesarios para enviar el articulo, se mandan al vendedor y el sitio no los guarda.',
+        buyWithBitcoin: 'PAGAR BUNDLE CON BITCOIN + LIGHTNING',
+        redirecting: 'Redirigiendo al checkout seguro...',
+        checkoutError: 'No se pudo iniciar el checkout. Intentalo de nuevo.',
       },
       // Tech Details
       techDetails: {
@@ -598,6 +668,7 @@ export const translations = {
       genericError: 'Diese Bestellung konnte gerade nicht geladen werden. Bitte gleich noch einmal aktualisieren.',
       orderDetails: 'Bestelldetails',
       orderId: 'Bestell-ID',
+      product: 'Produkt',
       paymentId: 'Zahlungs-ID',
       amount: 'Betrag',
       statusTiming: 'Status und Zeitpunkte',
@@ -614,6 +685,21 @@ export const translations = {
       stillWaiting: 'Immer noch am Warten? Wenn du on-chain bezahlt hast, kann die Bestätigung länger dauern als das Auto-Refresh-Fenster.',
       refundedTitle: 'Zahlung erstattet',
       refundedBody: 'Diese Zahlung kann den Download nicht mehr freischalten.',
+      fulfillmentTitle: 'Versanddaten',
+      fulfillmentBody: 'Gib die Versanddaten für den physischen Artikel ein. Sie werden an den Verkäufer gesendet und nicht von dieser Website gespeichert.',
+      fulfillmentReceived: 'Versanddaten erhalten. Der physische Artikel kann jetzt für den Versand vorbereitet werden.',
+      fulfillmentSubmit: 'VERSANDDATEN SENDEN',
+      fulfillmentSubmitting: 'Versanddaten werden gesendet...',
+      fulfillmentRetry: 'Deine Daten wurden nicht gespeichert. Bitte prüfe die Felder und versuche es erneut.',
+      emailLabel: 'E-Mail',
+      recipientNameLabel: 'Empfängername',
+      addressLine1Label: 'Adresszeile 1',
+      addressLine2Label: 'Adresszeile 2',
+      postalCodeLabel: 'Postleitzahl',
+      cityLabel: 'Stadt',
+      stateOrRegionLabel: 'Bundesland / Region',
+      countryLabel: 'Land',
+      noteLabel: 'Lieferhinweis',
     },
     // Story Section
     story: {
@@ -702,6 +788,12 @@ export const translations = {
       chooseFormatSecondary: 'PHYSISCHE EDITIONEN',
       shippingTitle: 'Versandinfo',
       shippingText: 'Alle Produkte werden weltweit versendet. Zoll und Einfuhrabgaben können je nach Land anfallen.',
+      pricePreview: {
+        label: 'BTC-Vorschau',
+        unavailable: 'Nicht verfügbar',
+        estimate: 'ca.',
+        informational: 'der finale Preis im externen Checkout kann abweichen',
+      },
       instant: {
         title: 'Sofortdownload',
         subtitle: 'ROM + PDF BUNDLE',
@@ -716,8 +808,8 @@ export const translations = {
         emailPlaceholder: 'du@beispiel.de',
         emailHint: 'Lass das Feld leer, wenn du schneller zur Kasse willst.',
         couponLabel: 'Coupon-Code',
-        couponPlaceholder: 'BTCPRAGUE26',
-        couponHint: 'Optional. Aktive Codes werden beim Checkout geprüft.',
+        couponPlaceholder: 'Optionaler Code',
+        couponHint: 'Optional. Aktive Codes werden beim Checkout geprüft und serverseitig angewendet.',
         buyWithBitcoin: 'MIT BITCOIN + LIGHTNING BEZAHLEN',
         redirecting: 'Weiterleitung zum sicheren Checkout...',
         checkoutTitle: 'Bitcoin + Lightning Checkout',
@@ -770,12 +862,25 @@ export const translations = {
       magazine: {
         title: 'Stackchain Magazine',
         subtitle: 'LIMITIERT AUF 30 STÜCK',
-        quote: 'Exklusives Interview mit dem Entwickler, plus Kunstdruck mit alternativem Hero of Bitcoin Cover.',
+        quote: 'Exklusives Entwickler-Interview, Kunstdruck und Hero of Bitcoin Digitaldownload in einem Bundle.',
         feature1: 'Stackchain Magazine Runde 5',
         feature2: 'Kunstdruck (Alt. Cover)',
         feature3: 'Premium Schutzhülle',
-        feature4: 'Entwickler-Interview',
-        note: 'Limitiertes Sammlerstück. Magazin und Kunstdruck werden in Schutzhülle geliefert.',
+        feature4: 'Digitaler Spiel-Download Inklusive',
+        note: 'Limitiertes Sammlerstück. Magazin und Kunstdruck werden in Schutzhülle geliefert. Das digitale Spiel wird nach Zahlung freigeschaltet.',
+        checkoutTitle: 'Direkter Bitcoin + Lightning Checkout',
+        checkoutBody: 'Wähle den Versand vor der Zahlung. Eine Rechnung enthält Magazin-Bundle, digitales Spiel und Versand.',
+        shippingEu: 'Versand Deutschland / EU',
+        shippingEuHint: 'Erhöht den Rechnungsbetrag um 7,49 EUR.',
+        shippingWorld: 'Weltweiter Versand',
+        shippingWorldHint: 'Erhöht den Rechnungsbetrag um 12,49 EUR.',
+        couponLabel: 'Coupon-Code',
+        couponPlaceholder: 'Optionaler Code',
+        couponHint: 'Optional. Aktive Codes werden beim Checkout geprüft und serverseitig angewendet.',
+        privacyNotice: 'Nach der Zahlung fragt diese Seite nach E-Mail und Versandadresse. Diese Daten sind für den Versand nötig, werden an den Verkäufer gesendet und nicht von der Website gespeichert.',
+        buyWithBitcoin: 'BUNDLE MIT BITCOIN + LIGHTNING BEZAHLEN',
+        redirecting: 'Weiterleitung zum sicheren Checkout...',
+        checkoutError: 'Checkout konnte nicht gestartet werden. Bitte versuche es erneut.',
       },
       // Tech Details
       techDetails: {
@@ -873,6 +978,7 @@ export interface Translations {
     genericError: string;
     orderDetails: string;
     orderId: string;
+    product: string;
     paymentId: string;
     amount: string;
     statusTiming: string;
@@ -889,6 +995,21 @@ export interface Translations {
     stillWaiting: string;
     refundedTitle: string;
     refundedBody: string;
+    fulfillmentTitle: string;
+    fulfillmentBody: string;
+    fulfillmentReceived: string;
+    fulfillmentSubmit: string;
+    fulfillmentSubmitting: string;
+    fulfillmentRetry: string;
+    emailLabel: string;
+    recipientNameLabel: string;
+    addressLine1Label: string;
+    addressLine2Label: string;
+    postalCodeLabel: string;
+    cityLabel: string;
+    stateOrRegionLabel: string;
+    countryLabel: string;
+    noteLabel: string;
   };
   story: { title: string; p1: string; p2: string; p3: string; p4: string };
   controls: {
@@ -940,6 +1061,12 @@ export interface Translations {
     chooseFormatSecondary: string;
     shippingTitle: string;
     shippingText: string;
+    pricePreview: {
+      label: string;
+      unavailable: string;
+      estimate: string;
+      informational: string;
+    };
     instant: {
       title: string;
       subtitle: string;
@@ -1010,6 +1137,19 @@ export interface Translations {
       feature3: string;
       feature4: string;
       note: string;
+      checkoutTitle: string;
+      checkoutBody: string;
+      shippingEu: string;
+      shippingEuHint: string;
+      shippingWorld: string;
+      shippingWorldHint: string;
+      couponLabel: string;
+      couponPlaceholder: string;
+      couponHint: string;
+      privacyNotice: string;
+      buyWithBitcoin: string;
+      redirecting: string;
+      checkoutError: string;
     };
     techDetails: {
       title: string;

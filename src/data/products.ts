@@ -48,8 +48,8 @@ export const products: Product[] = [
   },
   {
     id: 'stackchain-magazine',
-    title: 'Stackchain Magazine - Limited Edition Print',
-    description: 'Limited to 30 prints. Exclusive interview with the creator, plus fine art print with alternative Hero of Bitcoin cover. Includes Stackchain Magazine Round 5, fine art print, and premium protective toploader.',
+    title: 'Stackchain Magazine - Limited Edition Bundle',
+    description: 'Limited to 30 prints. Includes Stackchain Magazine Round 5, fine art print with alternative Hero of Bitcoin cover, premium protective toploader, and Hero of Bitcoin digital game download.',
     pubDate: '2024-12-17',
     availability: 'limited',
     limitedQuantity: 30,

@@ -70,6 +70,7 @@ export const translations = {
       fulfillmentReceived: 'Shipping details received. The physical article can now be prepared for shipment.',
       fulfillmentSubmit: 'SEND SHIPPING DETAILS',
       fulfillmentSubmitting: 'Sending shipping details...',
+      fulfillmentSubmittingHint: 'Securely sending your details to the seller. Keep this tab open.',
       fulfillmentRetry: 'Your details were not saved. Please check the fields and try again.',
       emailLabel: 'Email',
       recipientNameLabel: 'Recipient Name',
@@ -170,9 +171,11 @@ export const translations = {
       shippingText: 'All products ship worldwide. Customs and import duties may apply depending on your country.',
       pricePreview: {
         label: 'BTC preview',
-        unavailable: 'Unavailable',
+        unavailable: 'Unavailable from external checkout',
         estimate: 'est.',
         informational: 'external checkout final price may differ',
+        stockRemaining: '{remaining} of {total} left',
+        physicalShipping: 'Physical products may add shipping fees.',
       },
       instant: {
         title: 'Instant Download',
@@ -258,6 +261,7 @@ export const translations = {
         couponPlaceholder: 'Optional code',
         couponHint: 'Optional. Active codes are checked at checkout and applied server-side.',
         privacyNotice: 'After payment, this page asks for email and shipping address. These details are required to ship the article, sent to the seller, and not stored by the site.',
+        imageOverlay: 'Digital game download included',
         buyWithBitcoin: 'PAY BUNDLE WITH BITCOIN + LIGHTNING',
         redirecting: 'Redirecting to secure checkout...',
         checkoutError: 'Could not start checkout. Please try again.',
@@ -307,7 +311,19 @@ export const translations = {
     footer: {
       fanSwag: 'CUPS, SHIRTS & CAPS',
       copyright: '©2022-2026 Hero of Bitcoin • heroofbitcoin.xyz',
-      privacy: 'No tracking • No cookies • No data collection',
+      privacy: 'No tracking • No cookies • No stored contact data',
+    },
+    contact: {
+      title: 'Contact',
+      body: 'Send a direct message. Your email and message are forwarded to the seller and are not stored by this site.',
+      emailLabel: 'Email',
+      emailPlaceholder: 'you@example.com',
+      messageLabel: 'Message',
+      messagePlaceholder: 'Write your message here.',
+      submit: 'SEND MESSAGE',
+      sending: 'SENDING...',
+      success: 'Message sent.',
+      error: 'Could not send message right now. Please try again.',
     },
   },
 
@@ -380,6 +396,7 @@ export const translations = {
       fulfillmentReceived: 'Datos de envio recibidos. El articulo fisico ya puede prepararse para el envio.',
       fulfillmentSubmit: 'ENVIAR DATOS DE ENVIO',
       fulfillmentSubmitting: 'Enviando datos de envio...',
+      fulfillmentSubmittingHint: 'Enviando tus datos de forma segura al vendedor. Manten esta pestaña abierta.',
       fulfillmentRetry: 'Tus datos no se guardaron. Revisa los campos e intentalo de nuevo.',
       emailLabel: 'Email',
       recipientNameLabel: 'Nombre del destinatario',
@@ -480,9 +497,11 @@ export const translations = {
       shippingText: 'Todos los productos se envían a todo el mundo. Pueden aplicarse aduanas e impuestos según tu país.',
       pricePreview: {
         label: 'Vista previa BTC',
-        unavailable: 'No disponible',
+        unavailable: 'No disponible desde checkout externo',
         estimate: 'est.',
         informational: 'el precio final del checkout externo puede variar',
+        stockRemaining: 'Quedan {remaining} de {total}',
+        physicalShipping: 'Los productos fisicos pueden sumar gastos de envio.',
       },
       instant: {
         title: 'Descarga Instantanea',
@@ -568,6 +587,7 @@ export const translations = {
         couponPlaceholder: 'Codigo opcional',
         couponHint: 'Opcional. Los codigos activos se validan en el checkout y se aplican en el servidor.',
         privacyNotice: 'Despues del pago, esta pagina pide email y direccion de envio. Estos datos son necesarios para enviar el articulo, se mandan al vendedor y el sitio no los guarda.',
+        imageOverlay: 'Descarga digital del juego incluida',
         buyWithBitcoin: 'PAGAR BUNDLE CON BITCOIN + LIGHTNING',
         redirecting: 'Redirigiendo al checkout seguro...',
         checkoutError: 'No se pudo iniciar el checkout. Intentalo de nuevo.',
@@ -617,7 +637,19 @@ export const translations = {
     footer: {
       fanSwag: 'TAZAS, CAMISETAS Y GORRAS',
       copyright: '©2022-2026 Hero of Bitcoin • heroofbitcoin.xyz',
-      privacy: 'Sin rastreo • Sin cookies • Sin recopilación de datos',
+      privacy: 'Sin rastreo • Sin cookies • Sin datos de contacto guardados',
+    },
+    contact: {
+      title: 'Contacto',
+      body: 'Envia un mensaje directo. Tu email y mensaje se reenvian al vendedor y este sitio no los guarda.',
+      emailLabel: 'Email',
+      emailPlaceholder: 'tu@email.com',
+      messageLabel: 'Mensaje',
+      messagePlaceholder: 'Escribe tu mensaje aqui.',
+      submit: 'ENVIAR MENSAJE',
+      sending: 'ENVIANDO...',
+      success: 'Mensaje enviado.',
+      error: 'No se pudo enviar el mensaje ahora. Intentalo de nuevo.',
     },
   },
 
@@ -690,6 +722,7 @@ export const translations = {
       fulfillmentReceived: 'Versanddaten erhalten. Der physische Artikel kann jetzt für den Versand vorbereitet werden.',
       fulfillmentSubmit: 'VERSANDDATEN SENDEN',
       fulfillmentSubmitting: 'Versanddaten werden gesendet...',
+      fulfillmentSubmittingHint: 'Deine Daten werden sicher an den Verkäufer gesendet. Bitte lasse diesen Tab offen.',
       fulfillmentRetry: 'Deine Daten wurden nicht gespeichert. Bitte prüfe die Felder und versuche es erneut.',
       emailLabel: 'E-Mail',
       recipientNameLabel: 'Empfängername',
@@ -790,9 +823,11 @@ export const translations = {
       shippingText: 'Alle Produkte werden weltweit versendet. Zoll und Einfuhrabgaben können je nach Land anfallen.',
       pricePreview: {
         label: 'BTC-Vorschau',
-        unavailable: 'Nicht verfügbar',
+        unavailable: 'Im externen Checkout nicht verfügbar',
         estimate: 'ca.',
         informational: 'der finale Preis im externen Checkout kann abweichen',
+        stockRemaining: '{remaining} von {total} übrig',
+        physicalShipping: 'Bei physischen Produkten können Versandkosten hinzukommen.',
       },
       instant: {
         title: 'Sofortdownload',
@@ -878,6 +913,7 @@ export const translations = {
         couponPlaceholder: 'Optionaler Code',
         couponHint: 'Optional. Aktive Codes werden beim Checkout geprüft und serverseitig angewendet.',
         privacyNotice: 'Nach der Zahlung fragt diese Seite nach E-Mail und Versandadresse. Diese Daten sind für den Versand nötig, werden an den Verkäufer gesendet und nicht von der Website gespeichert.',
+        imageOverlay: 'Digitaler Spiel-Download inklusive',
         buyWithBitcoin: 'BUNDLE MIT BITCOIN + LIGHTNING BEZAHLEN',
         redirecting: 'Weiterleitung zum sicheren Checkout...',
         checkoutError: 'Checkout konnte nicht gestartet werden. Bitte versuche es erneut.',
@@ -927,7 +963,19 @@ export const translations = {
     footer: {
       fanSwag: 'TASSEN, SHIRTS & CAPS',
       copyright: '©2022-2026 Hero of Bitcoin • heroofbitcoin.xyz',
-      privacy: 'Kein Tracking • Keine Cookies • Keine Datenerfassung',
+      privacy: 'Kein Tracking • Keine Cookies • Keine gespeicherten Kontaktdaten',
+    },
+    contact: {
+      title: 'Kontakt',
+      body: 'Sende eine direkte Nachricht. Deine E-Mail und Nachricht werden an den Verkäufer weitergeleitet und nicht von dieser Website gespeichert.',
+      emailLabel: 'E-Mail',
+      emailPlaceholder: 'du@beispiel.de',
+      messageLabel: 'Nachricht',
+      messagePlaceholder: 'Schreibe deine Nachricht hier.',
+      submit: 'NACHRICHT SENDEN',
+      sending: 'SENDET...',
+      success: 'Nachricht gesendet.',
+      error: 'Nachricht konnte gerade nicht gesendet werden. Bitte versuche es erneut.',
     },
   },
 } as const;
@@ -1000,6 +1048,7 @@ export interface Translations {
     fulfillmentReceived: string;
     fulfillmentSubmit: string;
     fulfillmentSubmitting: string;
+    fulfillmentSubmittingHint: string;
     fulfillmentRetry: string;
     emailLabel: string;
     recipientNameLabel: string;
@@ -1066,6 +1115,8 @@ export interface Translations {
       unavailable: string;
       estimate: string;
       informational: string;
+      stockRemaining: string;
+      physicalShipping: string;
     };
     instant: {
       title: string;
@@ -1147,6 +1198,7 @@ export interface Translations {
       couponPlaceholder: string;
       couponHint: string;
       privacyNotice: string;
+      imageOverlay: string;
       buyWithBitcoin: string;
       redirecting: string;
       checkoutError: string;
@@ -1185,4 +1237,16 @@ export interface Translations {
     plebstyle: { name: string; description: string };
   };
   footer: { fanSwag: string; copyright: string; privacy: string };
+  contact: {
+    title: string;
+    body: string;
+    emailLabel: string;
+    emailPlaceholder: string;
+    messageLabel: string;
+    messagePlaceholder: string;
+    submit: string;
+    sending: string;
+    success: string;
+    error: string;
+  };
 }

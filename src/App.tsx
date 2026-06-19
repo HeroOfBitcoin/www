@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import GameManual from './components/GameManual';
 import Products from './components/Products';
 import Partners from './components/Partners';
+import ContactForm from './components/ContactForm';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import { useLanguage } from './i18n';
 import { Tab } from './types';
@@ -292,6 +293,8 @@ const App: React.FC = () => {
 
             {/* Footer */}
             <footer className="bg-yellow-400 border-t-4 border-black p-4 text-center shrink-0">
+                <ContactForm />
+
                 {/* Fan Swag Link */}
                 <a
                     href={LINK_FAN_SWAG}

@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { ArrowLeft, Download, RefreshCcw } from 'lucide-react';
+import { ArrowLeft, Download, LoaderCircle, RefreshCcw } from 'lucide-react';
 
 import PixelCard from './components/ui/PixelCard';
 import { translations, type Language } from './i18n/translations';
@@ -613,6 +613,18 @@ const SuccessPage: React.FC = () => {
                               <p className="text-[11px] font-mono text-red-700 bg-red-50 border border-red-200 px-3 py-2">
                                 {fulfillmentError}
                               </p>
+                            )}
+
+                            {fulfillmentSubmitting && (
+                              <div
+                                className="flex items-start gap-3 border border-amber-200 bg-amber-50 px-3 py-3 text-amber-950"
+                                aria-live="polite"
+                              >
+                                <LoaderCircle className="mt-0.5 h-4 w-4 shrink-0 animate-spin" />
+                                <p className="text-[11px] font-mono leading-relaxed">
+                                  {checkoutText.fulfillmentSubmittingHint}
+                                </p>
+                              </div>
                             )}
 
                             <button

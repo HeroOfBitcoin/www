@@ -24,6 +24,8 @@ interface PricePreview {
   btc: string | null;
   is_estimate: boolean;
   is_informational: boolean;
+  stock_total?: number;
+  stock_remaining?: number;
 }
 
 interface PricePreviewResponse {
@@ -136,7 +138,10 @@ interface ProductCardProps {
     unavailable: string;
     estimate: string;
     informational: string;
+    stockRemaining: string;
+    physicalShipping: string;
   };
+  imageOverlay?: React.ReactNode;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
@@ -164,6 +169,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   cardClassName,
   pricePreview,
   pricePreviewText,
+  imageOverlay,
 }) => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [copied, setCopied] = useState(false);
@@ -209,6 +215,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 </div>
               </>
             )}
+            {imageOverlay}
           </div>
 
           {/* Gallery thumbnails */}
@@ -227,14 +234,28 @@ const ProductCard: React.FC<ProductCardProps> = ({
               <h3 className="font-bold text-xl font-sans">{title}</h3>
               <p className="text-xs text-gray-500 font-mono">{subtitle}</p>
               {pricePreviewText && (
-                <p className="mt-2 font-mono text-[11px] text-amber-900">
-                  <span className="font-bold">{pricePreviewText.label}: </span>
-                  {pricePreview?.sats
-                    ? `${pricePreview.sats.toLocaleString()} sats (${pricePreview.btc} BTC)`
-                    : pricePreviewText.unavailable}
-                  {pricePreview?.is_estimate ? ` ${pricePreviewText.estimate}` : ''}
-                  {pricePreview?.is_informational ? ` ${pricePreviewText.informational}` : ''}
-                </p>
+                <div className="mt-2 space-y-1 font-mono text-[11px] text-amber-900">
+                  <p>
+                    <span className="font-bold">{pricePreviewText.label}: </span>
+                    {pricePreview?.sats
+                      ? `${pricePreview.sats.toLocaleString()} sats (${pricePreview.btc} BTC)`
+                      : pricePreviewText.unavailable}
+                    {pricePreview?.sats && pricePreview?.is_estimate ? ` ${pricePreviewText.estimate}` : ''}
+                    {pricePreview?.is_informational ? ` ${pricePreviewText.informational}` : ''}
+                  </p>
+                  {typeof pricePreview?.stock_remaining === 'number' && typeof pricePreview.stock_total === 'number' && (
+                    <p className="font-bold text-red-700">
+                      {pricePreviewText.stockRemaining
+                        .replace('{remaining}', String(pricePreview.stock_remaining))
+                        .replace('{total}', String(pricePreview.stock_total))}
+                    </p>
+                  )}
+                  {id !== 'instant-download' && (
+                    <p className="text-[10px] leading-relaxed text-amber-800">
+                      {pricePreviewText.physicalShipping}
+                    </p>
+                  )}
+                </div>
               )}
             </div>
             <button
@@ -855,6 +876,11 @@ const Products: React.FC = () => {
           { icon: <Zap className="text-amber-600" size={18} />, text: t.products.magazine.feature4 },
         ]}
         badgeText={t.products.badges.printEdition}
+        imageOverlay={(
+          <div className="absolute bottom-3 left-3 right-3 border-2 border-black bg-yellow-300 px-3 py-2 text-center font-pixel text-[10px] leading-relaxed text-black shadow-[3px_3px_0_#000]">
+            {t.products.magazine.imageOverlay}
+          </div>
+        )}
         images={[
           '/assets/product/magazine/1.png',
           '/assets/product/magazine/2.png',

@@ -1,0 +1,9 @@
+LICENSE FOR GENERATED VISUAL ASSETS
+
+The PNG artwork and pixel-font data in this archive were generated for the Hero of Bitcoin website.
+
+The Hero of Bitcoin project and its operators are granted a perpetual, worldwide, royalty-free license to use, copy, modify, adapt, reproduce, publish, display, distribute, sublicense, and deploy these assets in private, public, and commercial contexts, including the Hero of Bitcoin website and related promotional or product interfaces.
+
+Modification is permitted. Commercial and public deployment are permitted. Attribution is not required.
+
+This license covers the generated visual assets and accompanying asset metadata in this package. It does not grant rights to unrelated third-party trademarks, software, or content that may be incorporated separately by the consuming website.

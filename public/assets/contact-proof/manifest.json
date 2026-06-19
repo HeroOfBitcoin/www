@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "nativeFrameSize": {
+    "width": 160,
+    "height": 144
+  },
+  "frameCount": 9,
+  "spritesheetLayout": {
+    "direction": "horizontal",
+    "columns": 9,
+    "rows": 1,
+    "width": 1440,
+    "height": 144
+  },
+  "stateFrames": {
+    "hashing": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "solved": 6,
+    "rejected": 7,
+    "waiting": 8
+  },
+  "pixelFontPath": "assets/pixel-font-5x7.json",
+  "variants": [
+    {
+      "id": "a",
+      "spritesheetPath": "assets/sprites/miner-variant-a-spritesheet.png",
+      "stillPath": "assets/stills/miner-variant-a-still.png",
+      "nonceOverlay": {
+        "x": 104,
+        "y": 75,
+        "width": 23,
+        "height": 7,
+        "maxDigits": 4,
+        "textColorHex": "#F2B33E"
+      }
+    },
+    {
+      "id": "b",
+      "spritesheetPath": "assets/sprites/miner-variant-b-spritesheet.png",
+      "stillPath": "assets/stills/miner-variant-b-still.png",
+      "nonceOverlay": {
+        "x": 33,
+        "y": 75,
+        "width": 23,
+        "height": 7,
+        "maxDigits": 4,
+        "textColorHex": "#F2B84A"
+      }
+    },
+    {
+      "id": "c",
+      "spritesheetPath": "assets/sprites/miner-variant-c-spritesheet.png",
+      "stillPath": "assets/stills/miner-variant-c-still.png",
+      "nonceOverlay": {
+        "x": 104,
+        "y": 75,
+        "width": 23,
+        "height": 7,
+        "maxDigits": 4,
+        "textColorHex": "#F1B947"
+      }
+    },
+    {
+      "id": "d",
+      "spritesheetPath": "assets/sprites/miner-variant-d-spritesheet.png",
+      "stillPath": "assets/stills/miner-variant-d-still.png",
+      "nonceOverlay": {
+        "x": 33,
+        "y": 75,
+        "width": 23,
+        "height": 7,
+        "maxDigits": 4,
+        "textColorHex": "#E9AC39"
+      }
+    },
+    {
+      "id": "e",
+      "spritesheetPath": "assets/sprites/miner-variant-e-spritesheet.png",
+      "stillPath": "assets/stills/miner-variant-e-still.png",
+      "nonceOverlay": {
+        "x": 104,
+        "y": 75,
+        "width": 23,
+        "height": 7,
+        "maxDigits": 4,
+        "textColorHex": "#E8AD42"
+      }
+    },
+    {
+      "id": "f",
+      "spritesheetPath": "assets/sprites/miner-variant-f-spritesheet.png",
+      "stillPath": "assets/stills/miner-variant-f-still.png",
+      "nonceOverlay": {
+        "x": 33,
+        "y": 75,
+        "width": 23,
+        "height": 7,
+        "maxDigits": 4,
+        "textColorHex": "#E6A13A"
+      }
+    }
+  ]
+}

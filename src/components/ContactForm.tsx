@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Send } from 'lucide-react';
 
 import { useLanguage } from '../i18n';
@@ -22,21 +22,75 @@ interface ContactProof {
   solution: number;
 }
 
-const MINING_SCENE_ROWS = [
-  '................................',
-  '..kkkkkkkkkk............kkkkkk..',
-  '..kyyyyyyyyk...h..h.....kyyyyk..',
-  '..kykwwwwkyk..hhhhhh....kyyyyk..',
-  '..kykwkkwkyk...h..h.....kkkkkk..',
-  '..kykwwwwkyk.hhhhhhhh......kk...',
-  '..kyyyyyyyyk...h..h.....kkkkkk..',
-  '..kkkkkkkkkk............kyyyyk..',
-  '....kk..kk....hhhhhh....kyyyyk..',
-  '....kk..kk..............kkkkkk..',
-  '................................',
+interface MinerVariant {
+  id: string;
+  spritesheetPath: string;
+  stillPath: string;
+  nonceOverlay: {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    textColorHex: string;
+  };
+}
+
+const MINER_FRAME_WIDTH = 160;
+const MINER_FRAME_HEIGHT = 144;
+const MINER_FRAME_COUNT = 9;
+const MINER_HASHING_FRAMES = [0, 1, 2, 3, 4, 5];
+
+const MINER_VARIANTS: MinerVariant[] = [
+  {
+    id: 'a',
+    spritesheetPath: '/assets/contact-proof/sprites/miner-variant-a-spritesheet.png',
+    stillPath: '/assets/contact-proof/stills/miner-variant-a-still.png',
+    nonceOverlay: { x: 104, y: 75, width: 23, height: 7, textColorHex: '#F2B33E' },
+  },
+  {
+    id: 'b',
+    spritesheetPath: '/assets/contact-proof/sprites/miner-variant-b-spritesheet.png',
+    stillPath: '/assets/contact-proof/stills/miner-variant-b-still.png',
+    nonceOverlay: { x: 33, y: 75, width: 23, height: 7, textColorHex: '#F2B84A' },
+  },
+  {
+    id: 'c',
+    spritesheetPath: '/assets/contact-proof/sprites/miner-variant-c-spritesheet.png',
+    stillPath: '/assets/contact-proof/stills/miner-variant-c-still.png',
+    nonceOverlay: { x: 104, y: 75, width: 23, height: 7, textColorHex: '#F1B947' },
+  },
+  {
+    id: 'd',
+    spritesheetPath: '/assets/contact-proof/sprites/miner-variant-d-spritesheet.png',
+    stillPath: '/assets/contact-proof/stills/miner-variant-d-still.png',
+    nonceOverlay: { x: 33, y: 75, width: 23, height: 7, textColorHex: '#E9AC39' },
+  },
+  {
+    id: 'e',
+    spritesheetPath: '/assets/contact-proof/sprites/miner-variant-e-spritesheet.png',
+    stillPath: '/assets/contact-proof/stills/miner-variant-e-still.png',
+    nonceOverlay: { x: 104, y: 75, width: 23, height: 7, textColorHex: '#E8AD42' },
+  },
+  {
+    id: 'f',
+    spritesheetPath: '/assets/contact-proof/sprites/miner-variant-f-spritesheet.png',
+    stillPath: '/assets/contact-proof/stills/miner-variant-f-still.png',
+    nonceOverlay: { x: 33, y: 75, width: 23, height: 7, textColorHex: '#E6A13A' },
+  },
 ];
 
-const MINING_SCENE_WIDTH = MINING_SCENE_ROWS[0].length;
+const DIGIT_GLYPHS: Record<string, string[]> = {
+  '0': ['01110', '10001', '10011', '10101', '11001', '10001', '01110'],
+  '1': ['00100', '01100', '00100', '00100', '00100', '00100', '01110'],
+  '2': ['01110', '10001', '00001', '00010', '00100', '01000', '11111'],
+  '3': ['11110', '00001', '00001', '01110', '00001', '00001', '11110'],
+  '4': ['00010', '00110', '01010', '10010', '11111', '00010', '00010'],
+  '5': ['11111', '10000', '10000', '11110', '00001', '00001', '11110'],
+  '6': ['01110', '10000', '10000', '11110', '10001', '10001', '01110'],
+  '7': ['11111', '00001', '00010', '00100', '01000', '01000', '01000'],
+  '8': ['01110', '10001', '10001', '01110', '10001', '10001', '01110'],
+  '9': ['01110', '10001', '10001', '01111', '00001', '00001', '01110'],
+};
 
 const SHA256_K = [
   0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
@@ -140,75 +194,106 @@ function waitForFrame(): Promise<void> {
   });
 }
 
-function getMiningPixelClass(pixel: string, index: number, progress: number): string {
-  if (pixel === '.') {
-    return 'bg-transparent';
+function selectMinerVariant(challengeId: string): MinerVariant {
+  let hash = 0;
+  for (let index = 0; index < challengeId.length; index += 1) {
+    hash = (hash * 31 + challengeId.charCodeAt(index)) >>> 0;
   }
-
-  if (pixel === 'h') {
-    const pulse = (index + Math.floor(progress / 8)) % 3;
-    return pulse === 0 ? 'bg-black' : pulse === 1 ? 'bg-white' : 'bg-[#ff7a00]';
-  }
-
-  if (pixel === 'k') {
-    return 'bg-black';
-  }
-
-  if (pixel === 'y') {
-    return 'bg-[#ffc400]';
-  }
-
-  if (pixel === 'w') {
-    return 'bg-white';
-  }
-
-  return 'bg-transparent';
+  return MINER_VARIANTS[hash % MINER_VARIANTS.length];
 }
 
-function PixelMiningScene({ progress }: { progress: number }) {
-  const blockProgress = Math.ceil((progress / 100) * 3);
+function usePrefersReducedMotion(): boolean {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const query = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(query.matches);
+    const handleChange = () => setPrefersReducedMotion(query.matches);
+    query.addEventListener('change', handleChange);
+    return () => query.removeEventListener('change', handleChange);
+  }, []);
+
+  return prefersReducedMotion;
+}
+
+function MinerNonceDigits({
+  digits,
+  variant,
+}: {
+  digits: string;
+  variant: MinerVariant;
+}) {
+  const slot = variant.nonceOverlay;
+  const normalizedDigits = digits.padStart(4, '0').slice(-4);
+  const glyphWidth = 5;
+  const glyphHeight = 7;
+  const spacing = 1;
+  const totalWidth = normalizedDigits.length * glyphWidth + (normalizedDigits.length - 1) * spacing;
+  const startX = slot.x + Math.max(0, Math.floor((slot.width - totalWidth) / 2));
+  const startY = slot.y + Math.max(0, Math.floor((slot.height - glyphHeight) / 2));
 
   return (
-    <div className="mb-3 border-2 border-black bg-white p-2" aria-hidden="true">
-      <style>
-        {`
-          @keyframes hob-miner-shake {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(1px, -1px); }
-          }
-          @keyframes hob-hash-step {
-            0%, 100% { opacity: 0.45; }
-            50% { opacity: 1; }
-          }
-        `}
-      </style>
-      <div
-        className="grid gap-[2px]"
-        style={{
-          gridTemplateColumns: `repeat(${MINING_SCENE_WIDTH}, minmax(0, 1fr))`,
-          animation: 'hob-miner-shake 420ms steps(2, end) infinite',
-        }}
-      >
-        {MINING_SCENE_ROWS.flatMap((row, rowIndex) =>
+    <svg
+      className="pointer-events-none absolute inset-0 h-full w-full"
+      viewBox={`0 0 ${MINER_FRAME_WIDTH} ${MINER_FRAME_HEIGHT}`}
+      aria-hidden="true"
+      shapeRendering="crispEdges"
+    >
+      {normalizedDigits.split('').flatMap((digit, digitIndex) => (
+        (DIGIT_GLYPHS[digit] ?? DIGIT_GLYPHS['0']).flatMap((row, rowIndex) => (
           row.split('').map((pixel, columnIndex) => {
-            const index = rowIndex * MINING_SCENE_WIDTH + columnIndex;
-            const isBlockBody = columnIndex >= 23 && columnIndex <= 27 && rowIndex >= 1 && rowIndex <= 9;
-            const blockIndex = rowIndex <= 4 ? 1 : rowIndex <= 7 ? 2 : 3;
-            const dimUnminedBlock = isBlockBody && blockIndex > blockProgress;
-            const isHashPixel = pixel === 'h';
-
+            if (pixel !== '1') {
+              return null;
+            }
             return (
-              <span
-                key={index}
-                className={`aspect-square ${getMiningPixelClass(pixel, index, progress)} ${
-                  dimUnminedBlock ? 'opacity-25' : ''
-                }`}
-                style={isHashPixel ? { animation: 'hob-hash-step 520ms steps(2, end) infinite' } : undefined}
+              <rect
+                key={`${digitIndex}-${rowIndex}-${columnIndex}`}
+                x={startX + digitIndex * (glyphWidth + spacing) + columnIndex}
+                y={startY + rowIndex}
+                width="1"
+                height="1"
+                fill={slot.textColorHex}
               />
             );
-          }),
-        )}
-      </div>
+          })
+        ))
+      ))}
+    </svg>
+  );
+}
+
+function PixelMiningScene({
+  frameIndex,
+  nonceDigits,
+  variant,
+  reducedMotion,
+}: {
+  frameIndex: number;
+  nonceDigits: string;
+  variant: MinerVariant;
+  reducedMotion: boolean;
+}) {
+  const imagePath = reducedMotion ? variant.stillPath : variant.spritesheetPath;
+  const transform = reducedMotion ? 'translateX(0)' : `translateX(-${frameIndex * (100 / MINER_FRAME_COUNT)}%)`;
+
+  return (
+    <div
+      className="relative mx-auto w-full max-w-[480px] overflow-hidden border-2 border-black bg-black"
+      style={{ aspectRatio: `${MINER_FRAME_WIDTH} / ${MINER_FRAME_HEIGHT}` }}
+      aria-hidden="true"
+    >
+      <img
+        src={imagePath}
+        alt=""
+        className="absolute left-0 top-0 h-full max-w-none select-none"
+        draggable={false}
+        style={{
+          width: reducedMotion ? '100%' : `${MINER_FRAME_COUNT * 100}%`,
+          imageRendering: 'pixelated',
+          transform,
+        }}
+      />
+      <MinerNonceDigits digits={nonceDigits} variant={variant} />
     </div>
   );
 }
@@ -229,17 +314,17 @@ async function fetchContactChallenge(apiBaseUrl: string): Promise<ContactChallen
 
 async function solveContactChallenge(
   challenge: ContactChallenge,
-  onProgress: (progress: number) => void,
+  onAttempt: (attempt: number) => void,
 ): Promise<number> {
   for (let solution = 0; solution <= MAX_POW_SOLUTION; solution += 1) {
     const digest = sha256Hex(`${challenge.challenge_id}:${solution}`);
     if (hasLeadingZeroBits(digest, challenge.difficulty)) {
-      onProgress(100);
+      onAttempt(solution);
       return solution;
     }
 
     if (solution % HASH_CHUNK_SIZE === 0) {
-      onProgress(Math.min(96, Math.floor((solution / MAX_POW_SOLUTION) * 100)));
+      onAttempt(solution);
       await waitForFrame();
     }
   }
@@ -282,29 +367,50 @@ async function sendContactMessage(
 const ContactForm: React.FC = () => {
   const { t } = useLanguage();
   const apiBaseUrl = getApiBaseUrl();
+  const prefersReducedMotion = usePrefersReducedMotion();
   const contactStartedAtRef = useRef(Date.now());
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [website, setWebsite] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [proofProgress, setProofProgress] = useState(0);
   const [isMiningProof, setIsMiningProof] = useState(false);
+  const [proofAttempt, setProofAttempt] = useState(0);
+  const [proofFrameIndex, setProofFrameIndex] = useState(0);
+  const [proofVariant, setProofVariant] = useState<MinerVariant>(MINER_VARIANTS[0]);
   const [status, setStatus] = useState<'idle' | 'sent' | 'error'>('idle');
   const [error, setError] = useState<string | null>(null);
 
   const remaining = MAX_MESSAGE_LENGTH - message.length;
+  const proofNonceDigits = String(proofAttempt % 10000).padStart(4, '0');
+
+  useEffect(() => {
+    if (!isMiningProof || prefersReducedMotion) {
+      setProofFrameIndex(0);
+      return undefined;
+    }
+
+    const interval = window.setInterval(() => {
+      setProofFrameIndex((currentFrame) => (
+        MINER_HASHING_FRAMES[(currentFrame + 1) % MINER_HASHING_FRAMES.length]
+      ));
+    }, 140);
+
+    return () => window.clearInterval(interval);
+  }, [isMiningProof, prefersReducedMotion]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsSubmitting(true);
     setIsMiningProof(true);
-    setProofProgress(0);
+    setProofAttempt(0);
+    setProofFrameIndex(0);
     setStatus('idle');
     setError(null);
 
     try {
       const challenge = await fetchContactChallenge(apiBaseUrl);
-      const solution = await solveContactChallenge(challenge, setProofProgress);
+      setProofVariant(selectMinerVariant(challenge.challenge_id));
+      const solution = await solveContactChallenge(challenge, setProofAttempt);
       setIsMiningProof(false);
       await sendContactMessage(
         apiBaseUrl,
@@ -331,8 +437,32 @@ const ContactForm: React.FC = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="mx-auto mb-4 max-w-xl border-2 border-black bg-white p-4 text-left"
+      className="relative mx-auto mb-4 max-w-xl border-2 border-black bg-white p-4 text-left"
     >
+      {isMiningProof && (
+        <div
+          className="absolute inset-0 z-20 flex items-center justify-center border-2 border-black bg-white/95 p-4"
+          role="status"
+          aria-live="polite"
+          aria-label={t.contact.mining}
+        >
+          <div className="w-full max-w-[520px] border-2 border-black bg-[#ffc400] p-3">
+            <PixelMiningScene
+              frameIndex={proofFrameIndex}
+              nonceDigits={proofNonceDigits}
+              variant={proofVariant}
+              reducedMotion={prefersReducedMotion}
+            />
+            <div className="mt-3 flex items-center justify-between gap-3">
+              <span className="font-pixel text-[9px] uppercase text-black">{t.contact.proofTitle}</span>
+              <span className="font-mono text-[10px] text-black">{proofNonceDigits}</span>
+            </div>
+            <p className="mt-2 font-mono text-[10px] leading-relaxed text-black">
+              {t.contact.proofBody}
+            </p>
+          </div>
+        </div>
+      )}
       <div className="mb-3 flex items-center justify-between gap-3">
         <h2 className="font-pixel text-[10px] uppercase text-black">{t.contact.title}</h2>
         <span className="font-mono text-[10px] text-gray-500">{remaining}</span>
@@ -387,28 +517,6 @@ const ContactForm: React.FC = () => {
         <Send size={14} />
         <span>{isMiningProof ? t.contact.mining : isSubmitting ? t.contact.sending : t.contact.submit}</span>
       </button>
-      {isSubmitting && (
-        <div className="mt-3 border-2 border-black bg-[#ffc400] p-3">
-          <PixelMiningScene progress={proofProgress} />
-          <div className="mb-2 flex items-center justify-between gap-3">
-            <span className="font-pixel text-[9px] uppercase text-black">{t.contact.proofTitle}</span>
-            <span className="font-mono text-[10px] text-black">{proofProgress}%</span>
-          </div>
-          <div className="grid gap-1" style={{ gridTemplateColumns: 'repeat(16, minmax(0, 1fr))' }} aria-hidden="true">
-            {Array.from({ length: 16 }).map((_, index) => (
-              <span
-                key={index}
-                className={`h-3 border border-black ${
-                  index < Math.ceil((proofProgress / 100) * 16) ? 'bg-black' : 'bg-white'
-                }`}
-              />
-            ))}
-          </div>
-          <p className="mt-2 font-mono text-[10px] leading-relaxed text-black">
-            {t.contact.proofBody}
-          </p>
-        </div>
-      )}
       {status === 'sent' && (
         <p className="mt-3 border border-green-200 bg-green-50 px-3 py-2 font-mono text-[11px] text-green-700">
           {t.contact.success}

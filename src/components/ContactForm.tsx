@@ -22,6 +22,22 @@ interface ContactProof {
   solution: number;
 }
 
+const MINING_SCENE_ROWS = [
+  '................................',
+  '..kkkkkkkkkk............kkkkkk..',
+  '..kyyyyyyyyk...h..h.....kyyyyk..',
+  '..kykwwwwkyk..hhhhhh....kyyyyk..',
+  '..kykwkkwkyk...h..h.....kkkkkk..',
+  '..kykwwwwkyk.hhhhhhhh......kk...',
+  '..kyyyyyyyyk...h..h.....kkkkkk..',
+  '..kkkkkkkkkk............kyyyyk..',
+  '....kk..kk....hhhhhh....kyyyyk..',
+  '....kk..kk..............kkkkkk..',
+  '................................',
+];
+
+const MINING_SCENE_WIDTH = MINING_SCENE_ROWS[0].length;
+
 const SHA256_K = [
   0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
   0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
@@ -122,6 +138,79 @@ function waitForFrame(): Promise<void> {
   return new Promise((resolve) => {
     window.requestAnimationFrame(() => resolve());
   });
+}
+
+function getMiningPixelClass(pixel: string, index: number, progress: number): string {
+  if (pixel === '.') {
+    return 'bg-transparent';
+  }
+
+  if (pixel === 'h') {
+    const pulse = (index + Math.floor(progress / 8)) % 3;
+    return pulse === 0 ? 'bg-black' : pulse === 1 ? 'bg-white' : 'bg-[#ff7a00]';
+  }
+
+  if (pixel === 'k') {
+    return 'bg-black';
+  }
+
+  if (pixel === 'y') {
+    return 'bg-[#ffc400]';
+  }
+
+  if (pixel === 'w') {
+    return 'bg-white';
+  }
+
+  return 'bg-transparent';
+}
+
+function PixelMiningScene({ progress }: { progress: number }) {
+  const blockProgress = Math.ceil((progress / 100) * 3);
+
+  return (
+    <div className="mb-3 border-2 border-black bg-white p-2" aria-hidden="true">
+      <style>
+        {`
+          @keyframes hob-miner-shake {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(1px, -1px); }
+          }
+          @keyframes hob-hash-step {
+            0%, 100% { opacity: 0.45; }
+            50% { opacity: 1; }
+          }
+        `}
+      </style>
+      <div
+        className="grid gap-[2px]"
+        style={{
+          gridTemplateColumns: `repeat(${MINING_SCENE_WIDTH}, minmax(0, 1fr))`,
+          animation: 'hob-miner-shake 420ms steps(2, end) infinite',
+        }}
+      >
+        {MINING_SCENE_ROWS.flatMap((row, rowIndex) =>
+          row.split('').map((pixel, columnIndex) => {
+            const index = rowIndex * MINING_SCENE_WIDTH + columnIndex;
+            const isBlockBody = columnIndex >= 23 && columnIndex <= 27 && rowIndex >= 1 && rowIndex <= 9;
+            const blockIndex = rowIndex <= 4 ? 1 : rowIndex <= 7 ? 2 : 3;
+            const dimUnminedBlock = isBlockBody && blockIndex > blockProgress;
+            const isHashPixel = pixel === 'h';
+
+            return (
+              <span
+                key={index}
+                className={`aspect-square ${getMiningPixelClass(pixel, index, progress)} ${
+                  dimUnminedBlock ? 'opacity-25' : ''
+                }`}
+                style={isHashPixel ? { animation: 'hob-hash-step 520ms steps(2, end) infinite' } : undefined}
+              />
+            );
+          }),
+        )}
+      </div>
+    </div>
+  );
 }
 
 async function fetchContactChallenge(apiBaseUrl: string): Promise<ContactChallenge> {
@@ -300,6 +389,7 @@ const ContactForm: React.FC = () => {
       </button>
       {isSubmitting && (
         <div className="mt-3 border-2 border-black bg-[#ffc400] p-3">
+          <PixelMiningScene progress={proofProgress} />
           <div className="mb-2 flex items-center justify-between gap-3">
             <span className="font-pixel text-[9px] uppercase text-black">{t.contact.proofTitle}</span>
             <span className="font-mono text-[10px] text-black">{proofProgress}%</span>

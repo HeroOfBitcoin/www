@@ -321,6 +321,9 @@ export const translations = {
       messageLabel: 'Message',
       messagePlaceholder: 'Write your message here.',
       submit: 'SEND MESSAGE',
+      mining: 'MINING CONTACT STAMP...',
+      proofTitle: 'Mining contact stamp',
+      proofBody: 'Your browser solves a tiny Hero of Bitcoin proof before sending. No captcha service, no tracking.',
       sending: 'SENDING...',
       success: 'Message sent.',
       error: 'Could not send message right now. Please try again.',
@@ -647,6 +650,9 @@ export const translations = {
       messageLabel: 'Mensaje',
       messagePlaceholder: 'Escribe tu mensaje aqui.',
       submit: 'ENVIAR MENSAJE',
+      mining: 'MINANDO SELLO DE CONTACTO...',
+      proofTitle: 'Minando sello de contacto',
+      proofBody: 'Tu navegador resuelve una pequena prueba Hero of Bitcoin antes de enviar. Sin captcha externo, sin rastreo.',
       sending: 'ENVIANDO...',
       success: 'Mensaje enviado.',
       error: 'No se pudo enviar el mensaje ahora. Intentalo de nuevo.',
@@ -973,6 +979,9 @@ export const translations = {
       messageLabel: 'Nachricht',
       messagePlaceholder: 'Schreibe deine Nachricht hier.',
       submit: 'NACHRICHT SENDEN',
+      mining: 'KONTAKT-STEMPEL WIRD GEMINED...',
+      proofTitle: 'Kontakt-Stempel mining',
+      proofBody: 'Dein Browser loest vor dem Senden einen kleinen Hero of Bitcoin Proof. Kein externer Captcha-Dienst, kein Tracking.',
       sending: 'SENDET...',
       success: 'Nachricht gesendet.',
       error: 'Nachricht konnte gerade nicht gesendet werden. Bitte versuche es erneut.',
@@ -1245,6 +1254,9 @@ export interface Translations {
     messageLabel: string;
     messagePlaceholder: string;
     submit: string;
+    mining: string;
+    proofTitle: string;
+    proofBody: string;
     sending: string;
     success: string;
     error: string;

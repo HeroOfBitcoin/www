@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Send } from 'lucide-react';
 
 import { useLanguage } from '../i18n';
@@ -6,7 +6,13 @@ import { getApiBaseUrl } from '../lib/api';
 
 const MAX_MESSAGE_LENGTH = 2000;
 
-async function sendContactMessage(apiBaseUrl: string, email: string, message: string) {
+async function sendContactMessage(
+  apiBaseUrl: string,
+  email: string,
+  message: string,
+  contactStartedAt: number,
+  website: string,
+) {
   const response = await fetch(`${apiBaseUrl}/api/contact`, {
     method: 'POST',
     headers: {
@@ -15,6 +21,8 @@ async function sendContactMessage(apiBaseUrl: string, email: string, message: st
     body: JSON.stringify({
       email,
       message,
+      website,
+      contact_started_at: contactStartedAt,
     }),
   });
 
@@ -27,8 +35,10 @@ async function sendContactMessage(apiBaseUrl: string, email: string, message: st
 const ContactForm: React.FC = () => {
   const { t } = useLanguage();
   const apiBaseUrl = getApiBaseUrl();
+  const contactStartedAtRef = useRef(Date.now());
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [website, setWebsite] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState<'idle' | 'sent' | 'error'>('idle');
   const [error, setError] = useState<string | null>(null);
@@ -42,9 +52,17 @@ const ContactForm: React.FC = () => {
     setError(null);
 
     try {
-      await sendContactMessage(apiBaseUrl, email.trim(), message.trim());
+      await sendContactMessage(
+        apiBaseUrl,
+        email.trim(),
+        message.trim(),
+        contactStartedAtRef.current,
+        website,
+      );
       setEmail('');
       setMessage('');
+      setWebsite('');
+      contactStartedAtRef.current = Date.now();
       setStatus('sent');
     } catch (submitError) {
       setStatus('error');
@@ -66,6 +84,18 @@ const ContactForm: React.FC = () => {
       <p className="mb-3 font-mono text-[11px] leading-relaxed text-gray-700">
         {t.contact.body}
       </p>
+      <div className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+        <label>
+          Website
+          <input
+            type="text"
+            value={website}
+            onChange={(event) => setWebsite(event.target.value)}
+            tabIndex={-1}
+            autoComplete="off"
+          />
+        </label>
+      </div>
       <label className="mb-3 block">
         <span className="mb-1 block font-pixel text-[9px] uppercase text-gray-800">
           {t.contact.emailLabel}

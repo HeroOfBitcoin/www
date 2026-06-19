@@ -315,7 +315,7 @@ export const translations = {
     },
     contact: {
       title: 'Contact',
-      body: 'Send a direct message. Your email and message are delivered to the seller\'s dedicated encrypted messenger profile and are not stored by this site.',
+      body: 'Send a direct message. Your sensitive data is never stored on third party systems and is delivered directly to an encrypted mailbox.',
       emailLabel: 'Email',
       emailPlaceholder: 'you@example.com',
       messageLabel: 'Message',
@@ -641,7 +641,7 @@ export const translations = {
     },
     contact: {
       title: 'Contacto',
-      body: 'Envia un mensaje directo. Tu email y mensaje se entregan al perfil de mensajeria cifrada dedicado del vendedor y este sitio no los guarda.',
+      body: 'Envia un mensaje directo. Tus datos sensibles nunca se guardan en sistemas de terceros y se entregan directamente a un buzon cifrado.',
       emailLabel: 'Email',
       emailPlaceholder: 'tu@email.com',
       messageLabel: 'Mensaje',
@@ -967,7 +967,7 @@ export const translations = {
     },
     contact: {
       title: 'Kontakt',
-      body: 'Sende eine direkte Nachricht. Deine E-Mail und Nachricht werden an das dedizierte verschlüsselte Messenger-Profil des Verkäufers zugestellt und nicht von dieser Website gespeichert.',
+      body: 'Sende eine direkte Nachricht. Deine sensiblen Daten werden niemals auf Drittanbieter-Systemen gespeichert und direkt an ein verschluesseltes Postfach zugestellt.',
       emailLabel: 'E-Mail',
       emailPlaceholder: 'du@beispiel.de',
       messageLabel: 'Nachricht',

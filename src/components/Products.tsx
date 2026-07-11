@@ -26,6 +26,9 @@ interface PricePreview {
   is_informational: boolean;
   stock_total?: number;
   stock_remaining?: number;
+  launch_discount_percent?: number;
+  launch_discount_remaining?: number;
+  launch_discount_limit?: number;
 }
 
 interface PricePreviewResponse {
@@ -140,6 +143,7 @@ interface ProductCardProps {
     informational: string;
     stockRemaining: string;
     physicalShipping: string;
+    launchDiscount: string;
   };
   imageOverlay?: React.ReactNode;
 }
@@ -248,6 +252,16 @@ const ProductCard: React.FC<ProductCardProps> = ({
                       {pricePreviewText.stockRemaining
                         .replace('{remaining}', String(pricePreview.stock_remaining))
                         .replace('{total}', String(pricePreview.stock_total))}
+                    </p>
+                  )}
+                  {id === 'stackchain-magazine'
+                    && typeof pricePreview?.launch_discount_percent === 'number'
+                    && typeof pricePreview.launch_discount_remaining === 'number'
+                    && pricePreview.launch_discount_remaining > 0 && (
+                    <p className="font-bold text-green-800">
+                      {pricePreviewText.launchDiscount
+                        .replace('{percent}', String(pricePreview.launch_discount_percent))
+                        .replace('{remaining}', String(pricePreview.launch_discount_remaining))}
                     </p>
                   )}
                   {id !== 'instant-download' && (

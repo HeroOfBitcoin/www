@@ -176,6 +176,7 @@ export const translations = {
         informational: 'external checkout final price may differ',
         stockRemaining: '{remaining} of {total} left',
         physicalShipping: 'Physical products may add shipping fees.',
+        launchDiscount: 'Launch drop: {percent}% off for the next {remaining} buyer(s).',
       },
       instant: {
         title: 'Instant Download',
@@ -505,6 +506,7 @@ export const translations = {
         informational: 'el precio final del checkout externo puede variar',
         stockRemaining: 'Quedan {remaining} de {total}',
         physicalShipping: 'Los productos fisicos pueden sumar gastos de envio.',
+        launchDiscount: 'Drop de lanzamiento: {percent}% descuento para los proximos {remaining} comprador(es).',
       },
       instant: {
         title: 'Descarga Instantanea',
@@ -834,6 +836,7 @@ export const translations = {
         informational: 'der finale Preis im externen Checkout kann abweichen',
         stockRemaining: '{remaining} von {total} übrig',
         physicalShipping: 'Bei physischen Produkten können Versandkosten hinzukommen.',
+        launchDiscount: 'Launch-Drop: {percent}% Rabatt fur die nachsten {remaining} Kaufer.',
       },
       instant: {
         title: 'Sofortdownload',
@@ -1126,6 +1129,7 @@ export interface Translations {
       informational: string;
       stockRemaining: string;
       physicalShipping: string;
+      launchDiscount: string;
     };
     instant: {
       title: string;

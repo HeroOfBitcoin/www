@@ -7,7 +7,7 @@ The Hero of Bitcoin website (heroofbitcoin.xyz) serves as the official product p
 - **Release trailer** with embedded YouTube video
 - **Game story and controls** documentation
 - **Character profiles** for NPCs
-- **Four product offerings** with image galleries
+- **Five product offerings** with image galleries
 - **Partners page** with retail partner information
 - **Multi-language support** (English, Spanish, German) via URL parameter
 - **RSS feed** for products at `/products.xml`
@@ -26,7 +26,6 @@ The Hero of Bitcoin website (heroofbitcoin.xyz) serves as the official product p
 | **Collector's Edition** | Live | `https://copiaro.com/hero-of-bitcoin-the-game-boxed-gameboy-version-batch2-en` |
 | **Digital Edition** | Live | `https://copiaro.com/en/hero-of-bitcoin-digital-version-v2` |
 | **Hero Handheld** | Live | `https://copiaro.com/en/hero-of-bitcoin-handheld-version-v2` |
-| **Stackchain Magazine** | Pending | Points to brand page |
 | **Fan Merchandise** | Pending | Points to brand page |
 
 ### Where to Update Links
@@ -37,7 +36,6 @@ const LINK_BRAND_PAGE = 'https://copiaro.com/en/hero-of-bitcoin';
 const LINK_PHYSICAL_CARTRIDGE = 'https://copiaro.com/hero-of-bitcoin-the-game-boxed-gameboy-version-batch2-en';
 const LINK_MICROSD_CARTRIDGE = 'https://copiaro.com/en/hero-of-bitcoin-digital-version-v2';
 const LINK_R36S_DEVICE = 'https://copiaro.com/en/hero-of-bitcoin-handheld-version-v2';
-const LINK_STACKCHAIN_MAGAZINE = LINK_BRAND_PAGE; // TODO: Update when available
 ```
 
 **File:** `src/App.tsx`
@@ -76,11 +74,11 @@ const LINK_FAN_SWAG = 'https://copiaro.com/en/hero-of-bitcoin'; // TODO: Update 
 
 ### 4. Stackchain Magazine
 - **Target:** Collectors, Bitcoin enthusiasts
-- **Contents:** Stackchain Magazine Round 5, fine art print (alt cover), premium protective toploader
-- **Limitation:** 30 prints worldwide
-- **Special:** Exclusive creator interview
+- **Contents:** Stackchain Magazine Round 5, scarce Hero of Bitcoin alternative cover print, premium protective toploader, digital Hero of Bitcoin game download
+- **Limitation:** 9 direct site-owned bundles for the current drop
+- **Special:** One Bitcoin/Lightning invoice includes the bundle and selected shipping
 - **Direct Link:** `heroofbitcoin.xyz/#stackchain-magazine`
-- **Copiaro:** Pending
+- **Checkout:** Direct site-owned checkout, not Copiaro
 
 ---
 
@@ -89,7 +87,7 @@ const LINK_FAN_SWAG = 'https://copiaro.com/en/hero-of-bitcoin'; // TODO: Update 
 ### Copiaro
 - **Website:** `https://copiaro.com`
 - **Role:** Primary fulfillment partner, international shipping
-- **Products:** All Hero of Bitcoin products
+- **Products:** External Hero of Bitcoin products
 
 ### Plebstyle
 - **Website:** `https://plebstyle.com`
@@ -172,5 +170,4 @@ RSS feed auto-generates from `src/data/products.ts` on every build.
 1. ~~Create Digital Edition product page~~ Done
 2. ~~Create Hero Handheld product page~~ Done
 3. ~~Create Collector's Edition product page~~ Done
-4. Create Stackchain Magazine product page
-5. (Optional) Create merchandise category page for cups, shirts, caps
+4. (Optional) Create merchandise category page for cups, shirts, caps

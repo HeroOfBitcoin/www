@@ -6,19 +6,19 @@ This repo now includes:
 
 - the live homepage and product page
 - the public `Instant Download` BTC/LN product entry point
+- the direct `Stackchain Magazine` bundle checkout entry point
 - the public success/download page
 - the optional `checkout-test.html` test surface
 - the rest of the Hero of Bitcoin marketing site
 
 ## Current Stable Snapshot
 
-As of `2026-04-05`:
+As of `2026-07-15`:
 
 - Stable frontend tag: `stable-www-2026-04-03`
 - Stable backend tag: `stable-digital-hosted-2026-04-03`
-- Latest known successful Pages deploy for the stable product-copy state:
-  - run `23943305608`
-  - commit `a26dd5d`
+- Latest known successful Pages deploy should be checked with:
+  - `gh run list --repo HeroOfBitcoin/www --workflow deploy.yml --limit 1`
 - Public site: [heroofbitcoin.xyz](https://heroofbitcoin.xyz)
 - Success page: [heroofbitcoin.xyz/success.html](https://heroofbitcoin.xyz/success.html)
 - Test checkout page: [heroofbitcoin.xyz/checkout-test.html](https://heroofbitcoin.xyz/checkout-test.html)
@@ -89,7 +89,8 @@ The site now distinguishes clearly between:
 - `Instant Download` = site-owned Bitcoin + Lightning checkout for the ROM + PDF bundle
 - `Digital Edition` = boxed physical microSD bundle sold externally
 - `Collector's Edition` = physical cartridge sold externally
-- `Hero Handheld` and `Stackchain Magazine` = external physical products
+- `Hero Handheld` = physical product sold externally
+- `Stackchain Magazine` = site-owned magazine + digital game bundle with selected shipping included in one Bitcoin/Lightning invoice
 
 Do not merge `Instant Download` and `Digital Edition` back into one product concept.
 
@@ -103,6 +104,7 @@ Do not merge `Instant Download` and `Digital Edition` back into one product conc
 | Instant Download | `https://heroofbitcoin.xyz/#instant-download` |
 | Collector's Edition | `https://heroofbitcoin.xyz/#collectors-edition` |
 | Digital Edition | `https://heroofbitcoin.xyz/#digital-edition` |
+| Stackchain Magazine | `https://heroofbitcoin.xyz/#stackchain-magazine` |
 | Success page | `https://heroofbitcoin.xyz/success.html` |
 | Test checkout page | `https://heroofbitcoin.xyz/checkout-test.html` |
 
@@ -124,8 +126,9 @@ Localized URLs still work with `?lang=de` or `?lang=es`.
 
 - Multi-language support (`en`, `es`, `de`)
 - Live products page with 5 product offerings
-- Hosted BTC/LN checkout entry point for the digital bundle
+- Hosted BTC/LN checkout entry points for direct site-owned products
 - Public success/download page
+- Contact form protected by a local proof-of-work challenge
 - RSS feed for products at `/products.xml`
 - Direct linking to specific products via hash URLs
 - Structured data and SEO support

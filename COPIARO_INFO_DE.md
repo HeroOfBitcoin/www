@@ -17,7 +17,7 @@ Die Hero of Bitcoin Website (heroofbitcoin.xyz) ist die offizielle Produktseite 
 - **Release-Trailer** mit eingebettetem YouTube-Video
 - **Spielgeschichte und Steuerung** als digitale Anleitung
 - **Charakter-Profile** aller NPCs im Spiel
-- **Vier Produktangebote** mit Bildergalerien und Direktlinks
+- **Fuenf Produktangebote** mit Bildergalerien und Direktlinks
 - **Mehrsprachig** - Englisch, Spanisch und Deutsch
 - **SEO-optimiert** fuer Suchmaschinen und KI-Systeme (ChatGPT, Claude, etc.)
 - **Direktlinks** zu einzelnen Produkten fuer Marketing
@@ -28,7 +28,7 @@ Die Hero of Bitcoin Website (heroofbitcoin.xyz) ist die offizielle Produktseite 
 
 Aktuell verweisen alle Produkt-Buttons auf die Hauptseite: `https://copiaro.com/brand/hob`
 
-Ich benoetige individuelle Produkt-URLs fuer jeden Artikel:
+Ich benoetige individuelle Produkt-URLs fuer die externen Copiaro-Artikel:
 
 ### Produkt 1: Collector's Edition (Physisches Cartridge)
 
@@ -72,7 +72,7 @@ Ich benoetige individuelle Produkt-URLs fuer jeden Artikel:
 
 ---
 
-### Produkt 4: Stackchain Magazine (Partner: Proof of Ink)
+### Produkt 4: Stackchain Magazine Bundle (Direktverkauf)
 
 | Sprache | Produktname auf der Website |
 |---------|----------------------------|
@@ -80,10 +80,10 @@ Ich benoetige individuelle Produkt-URLs fuer jeden Artikel:
 | Deutsch | Stackchain Magazine |
 | Spanisch | Stackchain Magazine |
 
-**Inhalt:** Stackchain Magazine Runde 5, Fine Art Print mit alternativem Hero of Bitcoin Cover, Premium Schutzhuelle (Toploader)
-**Besonderheit:** Interview mit dem Hero of Bitcoin Entwickler
-**Partner:** Proof of Ink (externes Produkt - kein Copiaro Link noetig)
-**Link:** `https://proofofink.com/product/pre-order-stackchain-magazine-round-5-with-protective-toploader/`
+**Inhalt:** Stackchain Magazine Runde 5, alternatives Hero of Bitcoin Cover, Premium Schutzhuelle (Toploader), digitaler Hero of Bitcoin Download
+**Besonderheit:** Sehr limitierter Direktverkauf ueber heroofbitcoin.xyz
+**Partner:** Kein Copiaro Link noetig
+**Link:** `https://heroofbitcoin.xyz/#stackchain-magazine`
 
 ---
 

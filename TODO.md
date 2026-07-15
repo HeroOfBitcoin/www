@@ -1,4 +1,4 @@
-# After-Holiday Next Session
+# Current Follow-Ups
 
 ## First Checks
 
@@ -11,9 +11,9 @@
 
 ## Product and Checkout Follow-Ups
 
-- Run one live end-to-end purchase test from the public product page while monitoring Fly logs and Coinsnap
-- Decide whether the success page should show the entered email, a masked email, or no email at all
-- Revisit Lightning QR and Coinsnap hosted-checkout presentation
+- Keep live checkout tests deliberate because Stackchain inventory and launch-discount counters are stateful
+- Revisit Lightning QR and Coinsnap hosted-checkout presentation if provider behavior changes
+- Monitor the direct Stackchain bundle flow after the public launch post
 
 ## Product Integrity Research
 

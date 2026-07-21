@@ -175,12 +175,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
   pricePreviewText,
   imageOverlay,
 }) => {
+  const { t } = useLanguage();
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [copied, setCopied] = useState(false);
   const hasImages = images && images.length > 0;
 
   const copyLink = () => {
-    const url = `${window.location.origin}${window.location.pathname}#${id}`;
+    const url = `${window.location.origin}${window.location.pathname}${window.location.search}#${id}`;
     navigator.clipboard.writeText(url);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -275,10 +276,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
             <button
               onClick={copyLink}
               className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded transition-colors shrink-0"
-              title="Copy link to this product"
+              title={t.products.copyLink}
+              aria-label={t.products.copyLink}
             >
               {copied ? (
-                <span className="text-green-600 text-xs font-mono">Copied!</span>
+                <span className="text-green-600 text-xs font-mono">{t.products.copied}</span>
               ) : (
                 <Link size={16} />
               )}
@@ -316,7 +318,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
               className="w-full bg-green-500 text-white font-pixel py-3 px-4 border-2 border-black hover:bg-green-600 hover:scale-[1.02] active:scale-[0.98] transition-all pixel-shadow-sm flex items-center justify-center gap-2 text-sm"
             >
               <ShoppingCart size={16} />
-              <span>{buyLabel ?? 'BUY NOW'}</span>
+              <span>{buyLabel ?? t.products.buyNow}</span>
             </a>
           )}
 
@@ -663,7 +665,7 @@ const Products: React.FC = () => {
         )}
       >
         <div className="border-l-4 border-yellow-300 bg-[#fff9dd] px-3 py-2 text-[11px] leading-relaxed text-[#6f581e]">
-          <strong className="text-[#8a6610]">Note:</strong> {t.products.instant.note}
+          <strong className="text-[#8a6610]">{t.products.noteLabel}</strong> {t.products.instant.note}
         </div>
       </ProductCard>
 
@@ -735,7 +737,7 @@ const Products: React.FC = () => {
         pricePreviewText={pricePreviewText}
       >
         <div className="bg-purple-50 border border-purple-200 p-2 rounded text-xs">
-          <strong className="text-purple-700">Note:</strong> {t.products.digital.note}
+          <strong className="text-purple-700">{t.products.noteLabel}</strong> {t.products.digital.note}
         </div>
       </ProductCard>
 

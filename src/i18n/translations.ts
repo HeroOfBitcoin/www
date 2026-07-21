@@ -1,4 +1,6 @@
-export type Language = 'en' | 'es' | 'de';
+import { koreanTranslations } from './ko';
+
+export type { Language } from './locales';
 
 export const translations = {
   en: {
@@ -151,6 +153,7 @@ export const translations = {
       music: 'Music',
       soundFx: 'Sound FX',
       community: 'Community supporters',
+      communityNames: 'Geyser team & YOU',
       sponsoredBy: 'Sponsored by',
     },
     // Legal
@@ -163,6 +166,9 @@ export const translations = {
     products: {
       title: 'Products',
       buyNow: 'BUY NOW',
+      copyLink: 'Copy link to this product',
+      copied: 'Copied!',
+      noteLabel: 'Note:',
       chooseFormatTitle: 'Choose Your Format',
       chooseFormatBody: 'Start with the instant Bitcoin + Lightning download, or compare it with the physical editions.',
       chooseFormatPrimary: 'START INSTANT DOWNLOAD',
@@ -481,6 +487,7 @@ export const translations = {
       music: 'Música',
       soundFx: 'Efectos de Sonido',
       community: 'Apoyo de la comunidad',
+      communityNames: 'Equipo Geyser y TÚ',
       sponsoredBy: 'Patrocinado por',
     },
     // Legal
@@ -493,6 +500,9 @@ export const translations = {
     products: {
       title: 'Productos',
       buyNow: 'COMPRAR',
+      copyLink: 'Copiar enlace de este producto',
+      copied: '¡Copiado!',
+      noteLabel: 'Nota:',
       chooseFormatTitle: 'Elige Tu Formato',
       chooseFormatBody: 'Empieza con la descarga instantanea por Bitcoin + Lightning o comparala con las ediciones fisicas.',
       chooseFormatPrimary: 'INICIAR DESCARGA INSTANTANEA',
@@ -811,6 +821,7 @@ export const translations = {
       music: 'Musik',
       soundFx: 'Sound-Effekte',
       community: 'Community-Unterstützer',
+      communityNames: 'Geyser-Team & DU',
       sponsoredBy: 'Gesponsert von',
     },
     // Legal
@@ -823,6 +834,9 @@ export const translations = {
     products: {
       title: 'Produkte',
       buyNow: 'KAUFEN',
+      copyLink: 'Link zu diesem Produkt kopieren',
+      copied: 'Kopiert!',
+      noteLabel: 'Hinweis:',
       chooseFormatTitle: 'Wahle Dein Format',
       chooseFormatBody: 'Starte mit dem sofortigen Bitcoin + Lightning Download oder vergleiche ihn mit den physischen Editionen.',
       chooseFormatPrimary: 'SOFORTDOWNLOAD STARTEN',
@@ -990,6 +1004,7 @@ export const translations = {
       error: 'Nachricht konnte gerade nicht gesendet werden. Bitte versuche es erneut.',
     },
   },
+  ko: koreanTranslations,
 } as const;
 
 // Use a more flexible type that allows different string values
@@ -1110,12 +1125,16 @@ export interface Translations {
     music: string;
     soundFx: string;
     community: string;
+    communityNames: string;
     sponsoredBy: string;
   };
   legal: { disclaimer1: string; disclaimer2: string; notLicensed: string };
   products: {
     title: string;
     buyNow: string;
+    copyLink: string;
+    copied: string;
+    noteLabel: string;
     chooseFormatTitle: string;
     chooseFormatBody: string;
     chooseFormatPrimary: string;

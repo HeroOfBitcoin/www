@@ -30,15 +30,26 @@
 
 /* Font utility classes */
 .font-pixel {
-  font-family: 'Press Start 2P', cursive;
+  font-family: 'Press Start 2P', 'HoB Korean Sans', cursive;
 }
 
 .font-mono {
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Roboto Mono', 'HoB Korean Sans', monospace;
 }
 
 .font-sans {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', 'HoB Korean Sans', sans-serif;
+}
+
+html[lang='ko'] .font-pixel {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.65;
+  word-break: keep-all;
+}
+
+html[lang='ko'] :where(p, li, dt, dd, label, button, a, h1, h2, h3, h4) {
+  word-break: keep-all;
 }
 
 /* Pixel-art shadows */

@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Language, translations, Translations } from './translations';
+import { isLanguage } from './locales';
 
 interface LanguageContextType {
   language: Language;
@@ -13,21 +14,22 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
   const [language, setLanguageState] = useState<Language>(() => {
     // 1. Check URL parameter first (highest priority for direct links)
     const urlParams = new URLSearchParams(window.location.search);
-    const urlLang = urlParams.get('lang') as Language;
-    if (urlLang && ['en', 'es', 'de'].includes(urlLang)) {
+    const urlLang = urlParams.get('lang');
+    if (isLanguage(urlLang)) {
       // Save to localStorage so it persists after navigation
       localStorage.setItem('hob-language', urlLang);
       return urlLang;
     }
     // 2. Check localStorage
-    const saved = localStorage.getItem('hob-language') as Language;
-    if (saved && ['en', 'es', 'de'].includes(saved)) {
+    const saved = localStorage.getItem('hob-language');
+    if (isLanguage(saved)) {
       return saved;
     }
     // 3. Check browser language
     const browserLang = navigator.language.slice(0, 2);
     if (browserLang === 'es') return 'es';
     if (browserLang === 'de') return 'de';
+    if (browserLang === 'ko') return 'ko';
     return 'en';
   });
 

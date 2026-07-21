@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "check:i18n": "tsx scripts/check-i18n.ts",
     "generate:rss": "tsx scripts/generate-rss.ts",
-    "build": "npm run generate:rss && tsc && vite build",
+    "build": "npm run check:i18n && npm run generate:rss && tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -57,6 +57,31 @@ const LINK_COPIARO_STORE = 'https://copiaro.com/brand/hob';
 */
 const YOUTUBE_TRAILER_ID = '5puiZFbMUN4';
 
+const STORY_TOKEN_LABELS: Record<string, string> = {
+  heroOfBitcoin: 'Hero of Bitcoin',
+  elSalvador: 'El Salvador',
+  bitcoinBeach: 'Bitcoin Beach',
+  hero: 'Hero',
+  presidentBukele: 'President Bukele',
+};
+
+function renderStoryParagraph(text: string): React.ReactNode[] {
+  return text.split(/(\{(?:heroOfBitcoin|elSalvador|bitcoinBeach|hero|presidentBukele)\})/g)
+    .filter(Boolean)
+    .map((part, index) => {
+      const token = part.match(/^\{(.+)\}$/)?.[1];
+      if (!token) {
+        return <React.Fragment key={`${part}-${index}`}>{part}</React.Fragment>;
+      }
+
+      return (
+        <span key={`${token}-${index}`} className="font-pixel text-yellow-600">
+          {STORY_TOKEN_LABELS[token]}
+        </span>
+      );
+    });
+}
+
 const GameManual: React.FC = () => {
   const { t } = useLanguage();
   const [showTrailer, setShowTrailer] = useState(false);
@@ -269,16 +294,16 @@ const GameManual: React.FC = () => {
         <div className="grid md:grid-cols-2 gap-8 items-start">
             <div className="space-y-6">
                 <p className="text-base md:text-lg leading-relaxed text-gray-800">
-                  <span className="font-pixel text-yellow-600">Hero of Bitcoin</span> is a story inspired by Bitcoin culture, set in the beautiful Bitcoin-sovereign nation of <span className="font-pixel text-yellow-600">El Salvador</span>.
+                  {renderStoryParagraph(t.story.p1)}
                 </p>
                 <p className="text-base md:text-lg leading-relaxed text-gray-800">
-                  You will be taken to iconic places such as <span className="font-pixel text-yellow-600">Bitcoin Beach</span>, the volcano and more, all the way to the bank's doorstep.
+                  {renderStoryParagraph(t.story.p2)}
                 </p>
                 <p className="text-base md:text-lg leading-relaxed text-gray-800">
-                  The game follows the journey of a young man called <span className="font-pixel text-yellow-600">Hero</span>, a new bitcoiner, who journeys to El Salvador wanting to help the Bitcoin fight on the frontlines.
+                  {renderStoryParagraph(t.story.p3)}
                 </p>
                 <p className="text-base md:text-lg leading-relaxed text-gray-800">
-                  You will need to help <span className="font-pixel text-yellow-600">President Bukele</span> and other bitcoiners to ensure poocoiners, bears, bankers and more do not stand in the way of Bitcoin adoption.
+                  {renderStoryParagraph(t.story.p4)}
                 </p>
             </div>
 
@@ -405,7 +430,7 @@ const GameManual: React.FC = () => {
                     <dd className="font-bold">Coffee 'Valen' - Bat</dd>
 
                     <dt className="text-gray-500">{t.credits.community}</dt>
-                    <dd className="font-bold">Geyser team & <span className="text-yellow-600">YOU</span></dd>
+                    <dd className="font-bold text-yellow-700">{t.credits.communityNames}</dd>
                 </dl>
                 <div className="mt-6 pt-4 border-t border-gray-300 text-center">
                     <span className="block text-gray-500 mb-2">{t.credits.sponsoredBy}</span>

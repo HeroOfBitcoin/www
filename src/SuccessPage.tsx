@@ -3,6 +3,7 @@ import { ArrowLeft, Download, LoaderCircle, RefreshCcw } from 'lucide-react';
 
 import PixelCard from './components/ui/PixelCard';
 import { translations, type Language } from './i18n/translations';
+import { isLanguage, LOCALE_BY_LANGUAGE } from './i18n/locales';
 import { getApiBaseUrl } from './lib/api';
 
 type CheckoutStatus = 'pending' | 'processing' | 'paid' | 'expired' | 'underpaid' | 'refunded';
@@ -63,13 +64,7 @@ function formatTimestamp(value: string | null, language: Language): string {
     return '—';
   }
 
-  const localeByLanguage: Record<Language, string> = {
-    en: 'en-US',
-    es: 'es-ES',
-    de: 'de-DE',
-  };
-
-  return new Intl.DateTimeFormat(localeByLanguage[language], {
+  return new Intl.DateTimeFormat(LOCALE_BY_LANGUAGE[language], {
     dateStyle: 'medium',
     timeStyle: 'short',
   }).format(date);
@@ -145,9 +140,21 @@ const SuccessPage: React.FC = () => {
   const orderId = useMemo(() => new URLSearchParams(window.location.search).get('order_id'), []);
   const language = useMemo<Language>(() => {
     const param = new URLSearchParams(window.location.search).get('lang');
-    return param === 'es' || param === 'de' ? param : 'en';
+    if (isLanguage(param)) {
+      return param;
+    }
+
+    const saved = localStorage.getItem('hob-language');
+    if (isLanguage(saved)) {
+      return saved;
+    }
+
+    const browserLanguage = navigator.language.slice(0, 2);
+    return isLanguage(browserLanguage) ? browserLanguage : 'en';
   }, []);
   const checkoutText = useMemo(() => translations[language].checkout, [language]);
+  const homeHref = `/?lang=${language}`;
+  const productsHref = `/?lang=${language}#products`;
 
   const [order, setOrder] = useState<OrderStatusResponse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -157,6 +164,12 @@ const SuccessPage: React.FC = () => {
   const [fulfillmentForm, setFulfillmentForm] = useState<FulfillmentFormState>(EMPTY_FULFILLMENT_FORM);
   const [fulfillmentSubmitting, setFulfillmentSubmitting] = useState(false);
   const [fulfillmentError, setFulfillmentError] = useState<string | null>(null);
+
+  useEffect(() => {
+    document.documentElement.lang = language;
+    document.title = `Hero of Bitcoin - ${checkoutText.headerTitle}`;
+    localStorage.setItem('hob-language', language);
+  }, [checkoutText.headerTitle, language]);
 
   useEffect(() => {
     if (!orderId) {
@@ -209,7 +222,7 @@ const SuccessPage: React.FC = () => {
         }
 
         setIsLoading(false);
-        setError(pollError instanceof Error ? pollError.message : 'Could not load this order right now.');
+        setError(pollError instanceof Error ? pollError.message : checkoutText.genericError);
       }
     };
 
@@ -221,7 +234,7 @@ const SuccessPage: React.FC = () => {
         window.clearTimeout(timeoutId);
       }
     };
-  }, [apiBaseUrl, orderId]);
+  }, [apiBaseUrl, checkoutText.genericError, checkoutText.missingOrder, orderId]);
 
   const refreshStatus = async () => {
     if (!orderId) {
@@ -328,7 +341,7 @@ const SuccessPage: React.FC = () => {
       <div className="w-full max-w-4xl bg-yellow-400 min-h-[80vh] pixel-shadow border-4 border-black relative overflow-hidden">
         <header className="border-b-4 border-black bg-yellow-400 p-4 sticky top-0 z-40 shadow-sm">
           <div className="flex items-center justify-between gap-4">
-            <a href="/" className="flex items-center gap-3 transition-transform hover:scale-105">
+            <a href={homeHref} className="flex items-center gap-3 transition-transform hover:scale-105">
               <img
                 src="/assets/images/HoB_Logo_only.png"
                 alt="Hero of Bitcoin"
@@ -340,7 +353,7 @@ const SuccessPage: React.FC = () => {
               </div>
             </a>
             <a
-              href="/#products"
+              href={productsHref}
               className="inline-flex items-center gap-2 px-4 py-2 border-2 border-black bg-white hover:bg-yellow-100 transition-colors font-pixel text-[10px]"
             >
               <ArrowLeft size={14} />
@@ -353,7 +366,7 @@ const SuccessPage: React.FC = () => {
           <div className="max-w-3xl mx-auto space-y-6">
             <div className="flex flex-wrap gap-3 items-center justify-between">
               <a
-                href="/"
+                href={homeHref}
                 className="inline-flex items-center gap-2 px-4 py-2 border-2 border-black bg-white hover:bg-yellow-100 transition-colors font-pixel text-[10px]"
               >
                 <ArrowLeft size={14} />

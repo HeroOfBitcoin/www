@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { Language } from '../i18n/translations';
+import { LANGUAGE_OPTIONS } from '../i18n/locales';
 import { ChevronDown } from 'lucide-react';
 
 /*
@@ -45,14 +46,27 @@ const FlagIcon: React.FC<{ lang: Language }> = ({ lang }) => {
           <rect y="8" width="16" height="4" fill="#FFCC00" />
         </svg>
       );
+    case 'ko':
+      // South Korea flag
+      return (
+        <svg viewBox="0 0 16 12" className="w-full h-full" style={{ imageRendering: 'pixelated' }}>
+          <rect width="16" height="12" fill="#FFF" />
+          <circle cx="8" cy="6" r="2.5" fill="#CD2E3A" />
+          <path d="M5.5,6 A2.5,2.5 0 0 0 10.5,6 A1.25,1.25 0 0 1 8,6 A1.25,1.25 0 0 0 5.5,6" fill="#0047A0" />
+          <g stroke="#111" strokeWidth="0.55">
+            <path d="M2.2,2.5 L4.2,1.3 M2.6,3.2 L4.6,2" />
+            <path d="M11.4,10 L13.4,8.8 M11.8,10.7 L13.8,9.5" />
+            <path d="M11.4,2 L13.4,3.2 M11.8,1.3 L13.8,2.5" />
+            <path d="M2.2,9.5 L4.2,10.7 M2.6,8.8 L4.6,10" />
+          </g>
+        </svg>
+      );
   }
 };
 
-const languageNames: Record<Language, string> = {
-  en: 'English',
-  es: 'Español',
-  de: 'Deutsch',
-};
+const languageNames = Object.fromEntries(
+  LANGUAGE_OPTIONS.map(({ code, name }) => [code, name]),
+) as Record<Language, string>;
 
 const LanguageSwitcher: React.FC = () => {
   const { language, setLanguage } = useLanguage();
@@ -76,7 +90,7 @@ const LanguageSwitcher: React.FC = () => {
     setIsOpen(false);
   };
 
-  const languages: Language[] = ['en', 'es', 'de'];
+  const languages = LANGUAGE_OPTIONS.map(({ code }) => code);
 
   return (
     <div className="relative" ref={dropdownRef}>

@@ -72,9 +72,10 @@ npm run build
 
 This build:
 
-1. regenerates `public/products.xml`
-2. runs TypeScript compilation
-3. builds the Vite app
+1. verifies locale keys, arrays, and placeholders
+2. regenerates `public/products.xml`
+3. runs TypeScript compilation
+4. builds the Vite app
 
 ### 4. Preview the Production Build
 
@@ -108,7 +109,7 @@ Do not merge `Instant Download` and `Digital Edition` back into one product conc
 | Success page | `https://heroofbitcoin.xyz/success.html` |
 | Test checkout page | `https://heroofbitcoin.xyz/checkout-test.html` |
 
-Localized URLs still work with `?lang=de` or `?lang=es`.
+Localized URLs work with `?lang=de`, `?lang=es`, or `?lang=ko`.
 
 ## High-Signal Files
 
@@ -118,13 +119,14 @@ Localized URLs still work with `?lang=de` or `?lang=es`.
 - `src/SuccessPage.tsx`
 - `src/TestCheckoutPage.tsx`
 - `src/i18n/translations.ts`
+- `src/i18n/ko.ts`
 - `src/lib/api.ts`
 - `vite.config.ts`
 - `.github/workflows/deploy.yml`
 
 ## Features
 
-- Multi-language support (`en`, `es`, `de`)
+- Multi-language support (`en`, `es`, `de`, `ko`)
 - Live products page with 5 product offerings
 - Hosted BTC/LN checkout entry points for direct site-owned products
 - Public success/download page

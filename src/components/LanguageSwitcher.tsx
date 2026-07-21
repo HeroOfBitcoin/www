@@ -37,6 +37,15 @@ const FlagIcon: React.FC<{ lang: Language }> = ({ lang }) => {
           <rect y="9" width="16" height="3" fill="#AA151B" />
         </svg>
       );
+    case 'fr':
+      // France flag
+      return (
+        <svg viewBox="0 0 16 12" className="w-full h-full" style={{ imageRendering: 'pixelated' }}>
+          <rect width="5.33" height="12" fill="#0055A4" />
+          <rect x="5.33" width="5.34" height="12" fill="#FFF" />
+          <rect x="10.67" width="5.33" height="12" fill="#EF4135" />
+        </svg>
+      );
     case 'de':
       // Germany flag
       return (

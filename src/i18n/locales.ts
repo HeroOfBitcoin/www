@@ -1,4 +1,4 @@
-export const SUPPORTED_LANGUAGES = ['en', 'es', 'de', 'ko'] as const;
+export const SUPPORTED_LANGUAGES = ['en', 'es', 'fr', 'de', 'ko'] as const;
 
 export type Language = (typeof SUPPORTED_LANGUAGES)[number];
 
@@ -9,6 +9,7 @@ export const LANGUAGE_OPTIONS: ReadonlyArray<{
 }> = [
   { code: 'en', name: 'English', locale: 'en-US' },
   { code: 'es', name: 'Español', locale: 'es-ES' },
+  { code: 'fr', name: 'Français', locale: 'fr-FR' },
   { code: 'de', name: 'Deutsch', locale: 'de-DE' },
   { code: 'ko', name: '한국어', locale: 'ko-KR' },
 ];

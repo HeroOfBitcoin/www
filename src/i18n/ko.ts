@@ -158,6 +158,7 @@ export const koreanTranslations = {
     copyLink: '이 제품 링크 복사',
     copied: '복사됨!',
     noteLabel: '안내:',
+    gameLanguageNotice: '웹사이트 번역 안내: 현재 게임 자체는 영어로만 제공됩니다. 새 런처를 개발 중입니다.',
     chooseFormatTitle: '원하는 형식을 선택하세요',
     chooseFormatBody: '비트코인 + 라이트닝 즉시 다운로드로 시작하거나 실물 에디션과 비교해 보세요.',
     chooseFormatPrimary: '즉시 다운로드 시작',

@@ -70,4 +70,9 @@ if (!/[가-힣]/.test(koreanCatalog)) {
   fail('Korean catalog contains no Hangul');
 }
 
+const frenchCatalog = JSON.stringify(catalogs.fr);
+if (!/[àâçéèêëîïôùûüÿœ]/i.test(frenchCatalog)) {
+  fail('French catalog contains no French-specific characters');
+}
+
 console.log(`✓ ${SUPPORTED_LANGUAGES.length} locale catalogs have matching keys, arrays, and placeholders`);

@@ -27,9 +27,7 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
     }
     // 3. Check browser language
     const browserLang = navigator.language.slice(0, 2);
-    if (browserLang === 'es') return 'es';
-    if (browserLang === 'de') return 'de';
-    if (browserLang === 'ko') return 'ko';
+    if (isLanguage(browserLang)) return browserLang;
     return 'en';
   });
 

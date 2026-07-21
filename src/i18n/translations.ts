@@ -1,4 +1,5 @@
 import { koreanTranslations } from './ko';
+import { frenchTranslations } from './fr';
 
 export type { Language } from './locales';
 
@@ -169,6 +170,7 @@ export const translations = {
       copyLink: 'Copy link to this product',
       copied: 'Copied!',
       noteLabel: 'Note:',
+      gameLanguageNotice: 'Website language only: the game itself is currently available in English only. A new launcher is in development.',
       chooseFormatTitle: 'Choose Your Format',
       chooseFormatBody: 'Start with the instant Bitcoin + Lightning download, or compare it with the physical editions.',
       chooseFormatPrimary: 'START INSTANT DOWNLOAD',
@@ -503,6 +505,7 @@ export const translations = {
       copyLink: 'Copiar enlace de este producto',
       copied: '¡Copiado!',
       noteLabel: 'Nota:',
+      gameLanguageNotice: 'La traducción solo se aplica al sitio web: actualmente, el juego está disponible únicamente en inglés. Hay un nuevo lanzador en desarrollo.',
       chooseFormatTitle: 'Elige Tu Formato',
       chooseFormatBody: 'Empieza con la descarga instantanea por Bitcoin + Lightning o comparala con las ediciones fisicas.',
       chooseFormatPrimary: 'INICIAR DESCARGA INSTANTANEA',
@@ -837,6 +840,7 @@ export const translations = {
       copyLink: 'Link zu diesem Produkt kopieren',
       copied: 'Kopiert!',
       noteLabel: 'Hinweis:',
+      gameLanguageNotice: 'Nur die Website ist übersetzt: Das Spiel selbst ist derzeit ausschließlich auf Englisch verfügbar. Ein neuer Launcher befindet sich in Entwicklung.',
       chooseFormatTitle: 'Wahle Dein Format',
       chooseFormatBody: 'Starte mit dem sofortigen Bitcoin + Lightning Download oder vergleiche ihn mit den physischen Editionen.',
       chooseFormatPrimary: 'SOFORTDOWNLOAD STARTEN',
@@ -1004,6 +1008,7 @@ export const translations = {
       error: 'Nachricht konnte gerade nicht gesendet werden. Bitte versuche es erneut.',
     },
   },
+  fr: frenchTranslations,
   ko: koreanTranslations,
 } as const;
 
@@ -1135,6 +1140,7 @@ export interface Translations {
     copyLink: string;
     copied: string;
     noteLabel: string;
+    gameLanguageNotice: string;
     chooseFormatTitle: string;
     chooseFormatBody: string;
     chooseFormatPrimary: string;

@@ -95,6 +95,8 @@ The site now distinguishes clearly between:
 
 Do not merge `Instant Download` and `Digital Edition` back into one product concept.
 
+Website translations do not change the game ROM language. The game itself is currently available in English only; a new launcher is in development.
+
 ## Key Pages and URLs
 
 | Page | URL |
@@ -109,7 +111,7 @@ Do not merge `Instant Download` and `Digital Edition` back into one product conc
 | Success page | `https://heroofbitcoin.xyz/success.html` |
 | Test checkout page | `https://heroofbitcoin.xyz/checkout-test.html` |
 
-Localized URLs work with `?lang=de`, `?lang=es`, or `?lang=ko`.
+Localized URLs work with `?lang=de`, `?lang=es`, `?lang=fr`, or `?lang=ko`.
 
 ## High-Signal Files
 
@@ -119,6 +121,7 @@ Localized URLs work with `?lang=de`, `?lang=es`, or `?lang=ko`.
 - `src/SuccessPage.tsx`
 - `src/TestCheckoutPage.tsx`
 - `src/i18n/translations.ts`
+- `src/i18n/fr.ts`
 - `src/i18n/ko.ts`
 - `src/lib/api.ts`
 - `vite.config.ts`
@@ -126,7 +129,7 @@ Localized URLs work with `?lang=de`, `?lang=es`, or `?lang=ko`.
 
 ## Features
 
-- Multi-language support (`en`, `es`, `de`, `ko`)
+- Multi-language support (`en`, `es`, `fr`, `de`, `ko`)
 - Live products page with 5 product offerings
 - Hosted BTC/LN checkout entry points for direct site-owned products
 - Public success/download page

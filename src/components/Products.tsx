@@ -522,9 +522,15 @@ const Products: React.FC = () => {
               <PaymentMark />
               <p className="max-w-[16rem] font-mono text-[13px] leading-snug text-neutral-100">{t.products.instant.compatibility}</p>
             </div>
-            <p className="max-w-[30rem] font-mono text-[15px] leading-relaxed text-neutral-100 mb-6">
+            <p className="max-w-[30rem] font-mono text-[15px] leading-relaxed text-neutral-100 mb-4">
               {t.products.chooseFormatBody}
             </p>
+            <div className="mb-6 flex max-w-[32rem] items-start gap-2 border-l-4 border-yellow-300 bg-white/10 px-3 py-2">
+              <AlertTriangle size={16} className="mt-0.5 shrink-0 text-yellow-300" />
+              <p className="font-mono text-[11px] leading-relaxed text-neutral-100">
+                {t.products.gameLanguageNotice}
+              </p>
+            </div>
             <div className="grid gap-3 sm:grid-cols-2 max-w-[32rem]">
               <button
                 type="button"

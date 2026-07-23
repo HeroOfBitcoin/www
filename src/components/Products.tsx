@@ -724,6 +724,7 @@ const Products: React.FC = () => {
           { icon: <Shield className="text-gray-600" size={18} />, text: t.products.collectors.feature5 },
         ]}
         buyLink={LINK_PHYSICAL_CARTRIDGE}
+        buyLabel={t.products.collectors.buyAtCopiaro}
         badgeText={t.products.badges.ltdEdition}
         images={[
           '/assets/product/cartridge/1.webp',
@@ -908,6 +909,7 @@ const Products: React.FC = () => {
           { icon: <Sticker className="text-blue-600" size={18} />, text: t.products.handheld.feature4 },
         ]}
         buyLink={LINK_R36S_DEVICE}
+        buyLabel={t.products.handheld.buyAtCopiaro}
         badgeText={t.products.badges.readyToPlay}
         images={[
           '/assets/product/r36s/1.jpg',

@@ -219,19 +219,20 @@ export const translations = {
         feature4: 'Includes Sticker',
         feature5: 'Protective Box Cover',
         compatibility: 'Compatible with Game Boy, GBC, GBA, Analogue Pocket. Region free.',
+        buyAtCopiaro: "BUY COLLECTOR'S EDITION AT COPIARO",
       },
       // Digital Edition
       digital: {
         title: 'Digital Edition',
-        subtitle: 'BOXED microSD BUNDLE',
-        quote: 'A physical collectible for emulator players who want the box, manual, and ROM on microSD.',
-        feature1: 'Premium Box & Manual',
-        feature2: 'microSD with Game ROM',
-        feature3: 'Decorative Cartridge Collectible',
+        subtitle: 'GAME BOX + BOOKLET + microSD',
+        quote: 'A boxed collector set for players who want the game on the shelf, but play on an emulator instead of a Game Boy.',
+        feature1: 'Premium Game Box',
+        feature2: 'Printed Booklet',
+        feature3: 'microSD with Game ROM',
         feature4: 'Sticker + Protective Box Cover',
-        note: 'This boxed edition ships physically. The game ROM comes on the included microSD card.',
+        note: 'This is a physical game box with booklet and microSD. It is made for collectors who want the packaging, but do not need a Game Boy cartridge.',
         compatibility: 'Play on Raspberry Pi, MiSTer FPGA, RetroArch, or any Game Boy emulator.',
-        buyAtCopiaro: 'VIEW BOXED EDITION',
+        buyAtCopiaro: 'BUY DIGITAL EDITION AT COPIARO',
       },
       graded: {
         title: 'Graded Copy',
@@ -272,6 +273,7 @@ export const translations = {
         fastFwd: 'Fast Fwd',
         copyright: 'Other system ROMs not included. Please respect copyright holders when adding additional games.',
         compatibility: 'Also supports GB, GBC, GBA, NES, SNES, Genesis, PS1, and more.',
+        buyAtCopiaro: 'BUY HERO HANDHELD AT COPIARO',
       },
       // Stackchain Magazine
       magazine: {
@@ -578,19 +580,20 @@ export const translations = {
         feature4: 'Incluye Pegatina',
         feature5: 'Funda Protectora',
         compatibility: 'Compatible con Game Boy, GBC, GBA, Analogue Pocket. Sin restricción de región.',
+        buyAtCopiaro: 'COMPRAR EDICION COLECCIONISTA EN COPIARO',
       },
       // Digital Edition
       digital: {
         title: 'Edición Digital',
-        subtitle: 'BUNDLE microSD EN CAJA',
-        quote: 'Un coleccionable fisico para jugadores de emulador que quieren caja, manual y la ROM en microSD.',
-        feature1: 'Caja Premium y Manual',
-        feature2: 'microSD con ROM del Juego',
-        feature3: 'Coleccionable Decorativo Tipo Cartucho',
+        subtitle: 'CAJA + MANUAL + microSD',
+        quote: 'Una caja de coleccionista para quienes quieren tener el juego en la estanteria, pero jugarlo en emulador en vez de Game Boy.',
+        feature1: 'Caja Premium del Juego',
+        feature2: 'Manual Impreso',
+        feature3: 'microSD con ROM del Juego',
         feature4: 'Pegatina + Funda Protectora',
-        note: 'Esta edicion se envia fisicamente. La ROM del juego viene en la microSD incluida.',
+        note: 'Es una caja fisica del juego con manual y microSD. Pensada para coleccionistas que quieren el packaging, pero no necesitan cartucho de Game Boy.',
         compatibility: 'Juega en Raspberry Pi, MiSTer FPGA, RetroArch o cualquier emulador de Game Boy.',
-        buyAtCopiaro: 'VER EDICION EN CAJA',
+        buyAtCopiaro: 'COMPRAR EDICION DIGITAL EN COPIARO',
       },
       graded: {
         title: 'Copia Graduada',
@@ -631,6 +634,7 @@ export const translations = {
         fastFwd: 'Avance Rápido',
         copyright: 'ROMs de otros sistemas no incluidas. Por favor respeta los derechos de autor al añadir juegos adicionales.',
         compatibility: 'También soporta GB, GBC, GBA, NES, SNES, Genesis, PS1 y más.',
+        buyAtCopiaro: 'COMPRAR HERO HANDHELD EN COPIARO',
       },
       // Stackchain Magazine
       magazine: {
@@ -937,19 +941,20 @@ export const translations = {
         feature4: 'Inklusive Aufkleber',
         feature5: 'Schutzhülle für Box',
         compatibility: 'Kompatibel mit Game Boy, GBC, GBA, Analogue Pocket. Regionsfrei.',
+        buyAtCopiaro: 'SAMMLER-EDITION BEI COPIARO KAUFEN',
       },
       // Digital Edition
       digital: {
         title: 'Digital Edition',
-        subtitle: 'BOX MIT microSD BUNDLE',
-        quote: 'Ein physisches Sammlerstuck fur Emulator-Spieler, die Box, Handbuch und die ROM auf microSD wollen.',
-        feature1: 'Premium-Box & Handbuch',
-        feature2: 'microSD mit Spiel-ROM',
-        feature3: 'Dekoratives Cartridge-Sammlerstuck',
+        subtitle: 'SPIELBOX + BOOKLET + microSD',
+        quote: 'Eine Sammlerbox für alle, die Hero of Bitcoin im Regal haben wollen, aber per Emulator statt auf Game Boy spielen.',
+        feature1: 'Premium-Spielbox',
+        feature2: 'Gedrucktes Booklet',
+        feature3: 'microSD mit Spiel-ROM',
         feature4: 'Aufkleber + Schutzhulle',
-        note: 'Diese Edition wird physisch versendet. Die Spiel-ROM befindet sich auf der enthaltenen microSD-Karte.',
+        note: 'Das ist eine physische Spielbox mit Booklet und microSD. Gedacht für Sammler, die Verpackung und Haptik wollen, aber kein Game Boy Cartridge brauchen.',
         compatibility: 'Spielbar auf Raspberry Pi, MiSTer FPGA, RetroArch oder jedem Game Boy Emulator.',
-        buyAtCopiaro: 'BOX-EDITION ANSEHEN',
+        buyAtCopiaro: 'DIGITAL EDITION BEI COPIARO KAUFEN',
       },
       graded: {
         title: 'Gegradete Copy',
@@ -990,6 +995,7 @@ export const translations = {
         fastFwd: 'Vorspulen',
         copyright: 'Andere System-ROMs nicht enthalten. Bitte respektiere Urheberrechte beim Hinzufügen weiterer Spiele.',
         compatibility: 'Unterstützt auch GB, GBC, GBA, NES, SNES, Genesis, PS1 und mehr.',
+        buyAtCopiaro: 'HERO HANDHELD BEI COPIARO KAUFEN',
       },
       // Stackchain Magazine
       magazine: {
@@ -1260,6 +1266,7 @@ export interface Translations {
       feature4: string;
       feature5: string;
       compatibility: string;
+      buyAtCopiaro: string;
     };
     digital: {
       title: string;
@@ -1288,6 +1295,7 @@ export interface Translations {
       fastFwd: string;
       copyright: string;
       compatibility: string;
+      buyAtCopiaro: string;
     };
     magazine: {
       title: string;

@@ -364,8 +364,9 @@ async function createInstantCheckout(
   return payload.checkout_url;
 }
 
-async function createStackchainCheckout(
+async function createPhysicalCheckout(
   apiBaseUrl: string,
+  productId: string,
   shippingRegion: ShippingRegion,
   couponCode: string,
   language: Language,
@@ -376,7 +377,7 @@ async function createStackchainCheckout(
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      product_id: 'stackchain-magazine',
+      product_id: productId,
       shipping_region: shippingRegion,
       coupon_code: couponCode.trim() || undefined,
       lang: language,
@@ -407,6 +408,9 @@ const Products: React.FC = () => {
   const [stackchainCouponCode, setStackchainCouponCode] = useState('');
   const [stackchainCheckoutLoading, setStackchainCheckoutLoading] = useState(false);
   const [stackchainCheckoutError, setStackchainCheckoutError] = useState<string | null>(null);
+  const [gradedShippingRegion, setGradedShippingRegion] = useState<ShippingRegion>('de_eu');
+  const [gradedCheckoutLoading, setGradedCheckoutLoading] = useState(false);
+  const [gradedCheckoutError, setGradedCheckoutError] = useState<string | null>(null);
   const [pricePreviews, setPricePreviews] = useState<Record<string, PricePreview>>({});
   const apiBaseUrl = getApiBaseUrl();
 
@@ -487,8 +491,9 @@ const Products: React.FC = () => {
     setStackchainCheckoutError(null);
 
     try {
-      const checkoutUrl = await createStackchainCheckout(
+      const checkoutUrl = await createPhysicalCheckout(
         apiBaseUrl,
+        'stackchain-magazine',
         stackchainShippingRegion,
         stackchainCouponCode,
         language,
@@ -502,7 +507,29 @@ const Products: React.FC = () => {
     }
   };
 
+  const handleGradedCheckout = async () => {
+    setGradedCheckoutLoading(true);
+    setGradedCheckoutError(null);
+
+    try {
+      const checkoutUrl = await createPhysicalCheckout(
+        apiBaseUrl,
+        'graded-copy',
+        gradedShippingRegion,
+        '',
+        language,
+      );
+      window.location.assign(checkoutUrl);
+    } catch (error) {
+      setGradedCheckoutLoading(false);
+      setGradedCheckoutError(
+        error instanceof Error ? error.message : t.products.graded.checkoutError,
+      );
+    }
+  };
+
   const pricePreviewText = t.products.pricePreview;
+  const gradedCopySoldOut = pricePreviews['graded-copy']?.stock_remaining === 0;
 
   return (
     <div className="space-y-12">
@@ -709,7 +736,121 @@ const Products: React.FC = () => {
         pricePreviewText={pricePreviewText}
       />
 
-      {/* Product 3: Digital Edition */}
+      {/* Product 3: Graded Copy */}
+      {/*
+        =========================================================================
+        PRODUCT: Graded Copy - Site-owned physical checkout
+        =========================================================================
+        Images location: public/assets/product/graded/
+        Verification: https://heroofbitcoin.xyz/c/?s=y91OtC9UyO60xr7DvzTdTw
+        =========================================================================
+      */}
+      <ProductCard
+        id="graded-copy"
+        title={t.products.graded.title}
+        subtitle={t.products.graded.subtitle}
+        quote={t.products.graded.quote}
+        features={[
+          { icon: <Award className="text-yellow-600" size={18} />, text: t.products.graded.feature1 },
+          { icon: <ShieldCheck className="text-green-600" size={18} />, text: t.products.graded.feature2 },
+          { icon: <Zap className="text-amber-600" size={18} />, text: t.products.graded.feature3 },
+          { icon: <Truck className="text-blue-600" size={18} />, text: t.products.graded.feature4 },
+        ]}
+        badgeText={t.products.badges.gradedCopy}
+        images={[
+          '/assets/product/graded/99-1020219002-front.jpeg',
+          '/assets/product/graded/99-1020219002-back.jpeg',
+        ]}
+        imageFrameClassName="bg-neutral-200"
+        galleryCount={2}
+        compatibility={t.products.graded.compatibility}
+        pricePreview={pricePreviews['graded-copy'] ?? null}
+        pricePreviewText={pricePreviewText}
+        buyContent={(
+          <div className="space-y-3">
+            <div className="border-2 border-black bg-[#fff8e6] p-4">
+              <div className="flex items-center gap-2 mb-3">
+                <PaymentMark compact tone="light" />
+                <p className="font-pixel text-[10px] uppercase text-amber-900">
+                  {t.products.graded.checkoutTitle}
+                </p>
+              </div>
+              <p className="text-xs leading-relaxed font-mono text-[#8a5b12] mb-4">
+                {t.products.graded.checkoutBody}
+              </p>
+              <a
+                href="https://heroofbitcoin.xyz/c/?s=y91OtC9UyO60xr7DvzTdTw"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mb-4 inline-flex items-center gap-2 border-2 border-black bg-white px-3 py-2 font-pixel text-[9px] uppercase text-black transition-colors hover:bg-yellow-100"
+              >
+                <ShieldCheck size={14} />
+                <span>{t.products.graded.verifyLink}</span>
+              </a>
+              <div className="grid gap-2">
+                <label className="flex items-start gap-3 border-2 border-black bg-white p-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="graded-shipping"
+                    checked={gradedShippingRegion === 'de_eu'}
+                    onChange={() => setGradedShippingRegion('de_eu')}
+                    className="mt-1"
+                  />
+                  <span>
+                    <span className="block font-bold text-sm">{t.products.graded.shippingEu}</span>
+                    <span className="block font-mono text-[11px] text-gray-700">{t.products.graded.shippingEuHint}</span>
+                  </span>
+                </label>
+                <label className="flex items-start gap-3 border-2 border-black bg-white p-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="graded-shipping"
+                    checked={gradedShippingRegion === 'world'}
+                    onChange={() => setGradedShippingRegion('world')}
+                    className="mt-1"
+                  />
+                  <span>
+                    <span className="block font-bold text-sm">{t.products.graded.shippingWorld}</span>
+                    <span className="block font-mono text-[11px] text-gray-700">{t.products.graded.shippingWorldHint}</span>
+                  </span>
+                </label>
+              </div>
+              <div className="mt-4 flex gap-2 border-l-4 border-yellow-400 bg-white px-3 py-2 text-[11px] leading-relaxed text-gray-700">
+                <Truck size={16} className="mt-0.5 shrink-0 text-amber-700" />
+                <p>{t.products.graded.privacyNotice}</p>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onClick={handleGradedCheckout}
+              disabled={gradedCheckoutLoading || gradedCopySoldOut}
+              className="w-full min-h-[72px] bg-black text-white font-pixel py-3 px-4 border-2 border-black hover:bg-neutral-800 hover:scale-[1.02] active:scale-[0.98] transition-all pixel-shadow-sm flex items-center justify-center gap-2 text-sm disabled:cursor-not-allowed disabled:hover:scale-100 disabled:bg-neutral-700"
+            >
+              <PaymentMark compact className="justify-center" />
+              <span>
+                {gradedCopySoldOut
+                  ? t.products.graded.soldOut
+                  : gradedCheckoutLoading
+                    ? t.products.graded.redirecting
+                    : t.products.graded.buyWithBitcoin}
+              </span>
+            </button>
+
+            {gradedCheckoutError && (
+              <p className="text-[11px] font-mono text-red-700 bg-red-50 border border-red-200 px-3 py-2">
+                {gradedCheckoutError}
+              </p>
+            )}
+          </div>
+        )}
+      >
+        <p className="text-[10px] text-gray-500 font-mono">
+          {t.products.graded.note}
+        </p>
+      </ProductCard>
+
+      {/* Product 4: Digital Edition */}
       {/*
         =========================================================================
         PRODUCT: Digital Edition - Physical boxed microSD bundle
@@ -747,7 +888,7 @@ const Products: React.FC = () => {
         </div>
       </ProductCard>
 
-      {/* Product 4: Hero Handheld */}
+      {/* Product 5: Hero Handheld */}
       {/*
         =========================================================================
         PRODUCT: Hero Handheld - R36S with Hero of Bitcoin pre-installed
@@ -877,7 +1018,7 @@ const Products: React.FC = () => {
         )}
       </div>
 
-      {/* Product 5: Stackchain Magazine */}
+      {/* Product 6: Stackchain Magazine */}
       {/*
         =========================================================================
         PRODUCT: Stackchain Magazine - Limited Edition Print with Fine Art

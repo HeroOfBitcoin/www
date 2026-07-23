@@ -65,6 +65,7 @@ const App: React.FC = () => {
     'digital-edition': Tab.PRODUCTS,
     'hero-handheld': Tab.PRODUCTS,
     'stackchain-magazine': Tab.PRODUCTS,
+    'graded-copy': Tab.PRODUCTS,
   };
 
   // Handle hash navigation on page load and browser back/forward

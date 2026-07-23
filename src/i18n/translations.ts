@@ -233,6 +233,29 @@ export const translations = {
         compatibility: 'Play on Raspberry Pi, MiSTer FPGA, RetroArch, or any Game Boy emulator.',
         buyAtCopiaro: 'VIEW BOXED EDITION',
       },
+      graded: {
+        title: 'Graded Copy',
+        subtitle: 'CGC 9.9 • ONE AVAILABLE',
+        quote: 'A verified Hero of Bitcoin Geyser Release for the tightest collector supply.',
+        feature1: 'CGC Universal Grade 9.9',
+        feature2: 'Public authenticity verification',
+        feature3: 'Digital game download included',
+        feature4: 'Tracked physical shipping after payment',
+        note: 'This listing is for the verified CGC 9.9 copy with serial 1020219002. The digital game download unlocks after payment.',
+        compatibility: 'Physical CGC slab for collectors. Digital bundle is playable on any Game Boy emulator.',
+        checkoutTitle: 'Direct Bitcoin + Lightning checkout',
+        checkoutBody: 'Choose shipping before payment. One invoice includes the graded copy, digital game, and shipping.',
+        verifyLink: 'VERIFY THIS COPY',
+        shippingEu: 'EU shipping',
+        shippingEuHint: 'Adds 7.49 EUR to the invoice total.',
+        shippingWorld: 'Worldwide shipping',
+        shippingWorldHint: 'Adds 12.49 EUR to the invoice total.',
+        privacyNotice: 'After payment, this page asks for email and shipping address. These details are required to ship the slab, sent to the seller, and not stored by the site.',
+        buyWithBitcoin: 'PAY GRADED COPY WITH BITCOIN + LIGHTNING',
+        redirecting: 'Redirecting to secure checkout...',
+        checkoutError: 'Could not start checkout. Please try again.',
+        soldOut: 'SOLD OUT',
+      },
       // Hero Handheld
       handheld: {
         title: 'Hero Handheld',
@@ -300,6 +323,7 @@ export const translations = {
         budgetPick: 'BUDGET PICK',
         readyToPlay: 'READY TO PLAY',
         printEdition: 'PRINT EDITION',
+        gradedCopy: 'CGC 9.9',
       },
     },
     // Partners Page
@@ -568,6 +592,29 @@ export const translations = {
         compatibility: 'Juega en Raspberry Pi, MiSTer FPGA, RetroArch o cualquier emulador de Game Boy.',
         buyAtCopiaro: 'VER EDICION EN CAJA',
       },
+      graded: {
+        title: 'Copia Graduada',
+        subtitle: 'CGC 9.9 • UNA DISPONIBLE',
+        quote: 'Una Hero of Bitcoin Geyser Release verificada para el suministro mas escaso de coleccionistas.',
+        feature1: 'CGC Universal Grade 9.9',
+        feature2: 'Verificacion publica de autenticidad',
+        feature3: 'Descarga digital del juego incluida',
+        feature4: 'Envio fisico con seguimiento tras el pago',
+        note: 'Este anuncio es para la copia CGC 9.9 verificada con serial 1020219002. La descarga digital del juego se desbloquea tras el pago.',
+        compatibility: 'Slab CGC fisico para coleccionistas. El bundle digital funciona en cualquier emulador de Game Boy.',
+        checkoutTitle: 'Checkout directo Bitcoin + Lightning',
+        checkoutBody: 'Elige el envio antes del pago. Una sola factura incluye la copia graduada, el juego digital y el envio.',
+        verifyLink: 'VERIFICAR ESTA COPIA',
+        shippingEu: 'Envio UE',
+        shippingEuHint: 'Suma 7,49 EUR al total de la factura.',
+        shippingWorld: 'Envio mundial',
+        shippingWorldHint: 'Suma 12,49 EUR al total de la factura.',
+        privacyNotice: 'Despues del pago, esta pagina pide email y direccion de envio. Estos datos son necesarios para enviar el slab, se mandan al vendedor y el sitio no los guarda.',
+        buyWithBitcoin: 'PAGAR COPIA GRADUADA CON BITCOIN + LIGHTNING',
+        redirecting: 'Redirigiendo al checkout seguro...',
+        checkoutError: 'No se pudo iniciar el checkout. Intentalo de nuevo.',
+        soldOut: 'AGOTADO',
+      },
       // Hero Handheld
       handheld: {
         title: 'Hero Handheld',
@@ -635,6 +682,7 @@ export const translations = {
         budgetPick: 'ECONÓMICO',
         readyToPlay: 'LISTO PARA JUGAR',
         printEdition: 'ED. IMPRESA',
+        gradedCopy: 'CGC 9.9',
       },
     },
     // Partners Page
@@ -903,6 +951,29 @@ export const translations = {
         compatibility: 'Spielbar auf Raspberry Pi, MiSTer FPGA, RetroArch oder jedem Game Boy Emulator.',
         buyAtCopiaro: 'BOX-EDITION ANSEHEN',
       },
+      graded: {
+        title: 'Gegradete Copy',
+        subtitle: 'CGC 9.9 • EINMAL VERFÜGBAR',
+        quote: 'Eine verifizierte Hero of Bitcoin Geyser Release für den engsten Sammler-Supply.',
+        feature1: 'CGC Universal Grade 9.9',
+        feature2: 'Öffentliche Echtheitsprüfung',
+        feature3: 'Digitaler Spiel-Download inklusive',
+        feature4: 'Nach Zahlung mit Tracking versendet',
+        note: 'Dieses Listing gilt für die verifizierte CGC 9.9 Copy mit Serial 1020219002. Der digitale Game-Download wird nach Zahlung freigeschaltet.',
+        compatibility: 'Physischer CGC-Slab für Sammler. Das digitale Bundle läuft auf jedem Game Boy Emulator.',
+        checkoutTitle: 'Direkter Bitcoin + Lightning Checkout',
+        checkoutBody: 'Wähle den Versand vor der Zahlung. Eine Rechnung enthält die gegradete Copy, digitales Spiel und Versand.',
+        verifyLink: 'DIESE COPY VERIFIZIEREN',
+        shippingEu: 'EU-Versand',
+        shippingEuHint: 'Erhöht den Rechnungsbetrag um 7,49 EUR.',
+        shippingWorld: 'Weltweiter Versand',
+        shippingWorldHint: 'Erhöht den Rechnungsbetrag um 12,49 EUR.',
+        privacyNotice: 'Nach der Zahlung fragt diese Seite nach E-Mail und Versandadresse. Diese Daten sind für den Versand des Slabs nötig, werden an den Verkäufer gesendet und nicht von der Website gespeichert.',
+        buyWithBitcoin: 'GEGRADETE COPY MIT BITCOIN + LIGHTNING BEZAHLEN',
+        redirecting: 'Weiterleitung zum sicheren Checkout...',
+        checkoutError: 'Checkout konnte nicht gestartet werden. Bitte versuche es erneut.',
+        soldOut: 'AUSVERKAUFT',
+      },
       // Hero Handheld
       handheld: {
         title: 'Hero Handheld',
@@ -970,6 +1041,7 @@ export const translations = {
         budgetPick: 'PREISWERT',
         readyToPlay: 'SPIELBEREIT',
         printEdition: 'DRUCKAUSGABE',
+        gradedCopy: 'CGC 9.9',
       },
     },
     // Partners Page
@@ -1241,6 +1313,29 @@ export interface Translations {
       redirecting: string;
       checkoutError: string;
     };
+    graded: {
+      title: string;
+      subtitle: string;
+      quote: string;
+      feature1: string;
+      feature2: string;
+      feature3: string;
+      feature4: string;
+      note: string;
+      compatibility: string;
+      checkoutTitle: string;
+      checkoutBody: string;
+      verifyLink: string;
+      shippingEu: string;
+      shippingEuHint: string;
+      shippingWorld: string;
+      shippingWorldHint: string;
+      privacyNotice: string;
+      buyWithBitcoin: string;
+      redirecting: string;
+      checkoutError: string;
+      soldOut: string;
+    };
     techDetails: {
       title: string;
       safeShutdown: string;
@@ -1265,6 +1360,7 @@ export interface Translations {
       budgetPick: string;
       readyToPlay: string;
       printEdition: string;
+      gradedCopy: string;
     };
   };
   partners: {

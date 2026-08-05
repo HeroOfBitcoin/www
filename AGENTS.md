@@ -5,23 +5,23 @@
 Start a new chat from the current repo state, not from memory:
 
 1. Check repo cleanliness:
-   - `git -C /Users/mars/code/hob/www status --short --branch`
-   - `git -C /Users/mars/code/hob/digital-hosted status --short --branch`
+   - `git status --short --branch`
+   - `git -C ../digital-hosted status --short --branch`
 2. Confirm the stable tags:
    - `git show --no-patch stable-www-2026-04-03`
-   - `git -C /Users/mars/code/hob/digital-hosted show --no-patch stable-digital-hosted-2026-04-03`
+   - `git -C ../digital-hosted show --no-patch stable-digital-hosted-2026-04-03`
 3. Verify the latest Pages deploy:
    - `gh run list --repo HeroOfBitcoin/www --workflow deploy.yml --limit 1`
 4. Verify backend health:
    - `curl -s https://hero-of-bitcoin-digital.fly.dev/healthz`
 5. Read the current follow-up list:
-   - `/Users/mars/code/hob/www/TODO.md`
+   - `TODO.md`
 
 ## Purpose
 
 - This repo is the public React/Vite frontend for `https://heroofbitcoin.xyz`
 - It now includes the public digital download product, hosted checkout entry point, success page, and the rest of the marketing site
-- The sibling backend repo lives at `/Users/mars/code/hob/digital-hosted`
+- The sibling backend repo lives at `../digital-hosted`.
 
 ## Current Live State
 
@@ -46,7 +46,7 @@ This repo must stay public for the current GitHub Pages setup.
 
 ## Local Commands
 
-Run these from `/Users/mars/code/hob/www`:
+Run these from this repository root:
 
 ```bash
 npm install
@@ -79,15 +79,15 @@ Do not collapse `Instant Download` and `Digital Edition` back into one ambiguous
 
 ## High-Signal Files
 
-- `/Users/mars/code/hob/www/src/App.tsx`
-- `/Users/mars/code/hob/www/src/components/GameManual.tsx`
-- `/Users/mars/code/hob/www/src/components/Products.tsx`
-- `/Users/mars/code/hob/www/src/SuccessPage.tsx`
-- `/Users/mars/code/hob/www/src/TestCheckoutPage.tsx`
-- `/Users/mars/code/hob/www/src/i18n/translations.ts`
-- `/Users/mars/code/hob/www/src/lib/api.ts`
-- `/Users/mars/code/hob/www/vite.config.ts`
-- `/Users/mars/code/hob/www/.github/workflows/deploy.yml`
+- `src/App.tsx`
+- `src/components/GameManual.tsx`
+- `src/components/Products.tsx`
+- `src/SuccessPage.tsx`
+- `src/TestCheckoutPage.tsx`
+- `src/i18n/translations.ts`
+- `src/lib/api.ts`
+- `vite.config.ts`
+- `.github/workflows/deploy.yml`
 
 ## Deploy and Validation Commands
 

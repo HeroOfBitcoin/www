@@ -29,3 +29,6 @@ npm-debug.log*
 
 # TypeScript cache
 *.tsbuildinfo
+
+# Local project state
+.state/todo_local.md

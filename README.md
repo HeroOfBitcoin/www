@@ -28,17 +28,17 @@ As of `2026-07-15`:
 When starting after a break, use the repo state and live checks instead of old chat context:
 
 1. Check both repos are clean:
-   - `git -C /Users/mars/code/hob/www status --short --branch`
-   - `git -C /Users/mars/code/hob/digital-hosted status --short --branch`
+   - `git status --short --branch`
+   - `git -C ../digital-hosted status --short --branch`
 2. Confirm the stable tags:
    - `git show --no-patch stable-www-2026-04-03`
-   - `git -C /Users/mars/code/hob/digital-hosted show --no-patch stable-digital-hosted-2026-04-03`
+   - `git -C ../digital-hosted show --no-patch stable-digital-hosted-2026-04-03`
 3. Verify backend health:
    - `curl -s https://hero-of-bitcoin-digital.fly.dev/healthz`
 4. Check the latest Pages workflow run:
    - `gh run list --repo HeroOfBitcoin/www --workflow deploy.yml --limit 1`
 5. Read the current follow-up list:
-   - `/Users/mars/code/hob/www/TODO.md`
+   - `TODO.md`
 
 ## Repo Visibility
 
@@ -195,7 +195,7 @@ gh run watch RUN_ID --repo HeroOfBitcoin/www --exit-status
 
 The private backend repo lives at:
 
-- `/Users/mars/code/hob/digital-hosted`
+- `../digital-hosted`
 
 It powers:
 
@@ -208,7 +208,7 @@ It powers:
 
 See:
 
-- `/Users/mars/code/hob/www/TODO.md`
+- `TODO.md`
 
 ## Copyright
 

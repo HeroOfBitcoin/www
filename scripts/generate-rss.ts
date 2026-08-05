@@ -31,8 +31,19 @@ const escapeXml = (str: string): string => {
     .replace(/'/g, '&apos;');
 };
 
+const latestProductDate = (): string => {
+  const timestamps = products.map((product) => new Date(product.pubDate).getTime());
+  const latestTimestamp = Math.max(...timestamps);
+
+  if (!Number.isFinite(latestTimestamp)) {
+    throw new Error('Cannot generate RSS without at least one valid product publication date.');
+  }
+
+  return new Date(latestTimestamp).toUTCString();
+};
+
 const generateRss = (): string => {
-  const now = new Date().toUTCString();
+  const lastBuildDate = latestProductDate();
 
   const items = products
     .map((product) => `
@@ -52,7 +63,7 @@ const generateRss = (): string => {
     <link>${SITE_URL}/#products</link>
     <description>Official Hero of Bitcoin merchandise and collectibles. Game Boy cartridges, handheld consoles, and limited edition prints.</description>
     <language>en</language>
-    <lastBuildDate>${now}</lastBuildDate>
+    <lastBuildDate>${lastBuildDate}</lastBuildDate>
     <atom:link href="${SITE_URL}/products.xml" rel="self" type="application/rss+xml"/>
 ${items}
   </channel>

@@ -1,4 +1,5 @@
 import { SUPPORTED_LANGUAGES, type Language } from '../src/i18n/locales';
+import { podcastTranslations } from '../src/i18n/podcast-translations';
 import { translations } from '../src/i18n/translations';
 
 type TranslationNode = string | readonly TranslationNode[] | { readonly [key: string]: TranslationNode };
@@ -65,9 +66,33 @@ for (const language of SUPPORTED_LANGUAGES) {
   compareNode(language, catalogs.en, catalogs[language]);
 }
 
+const podcastCatalogs = podcastTranslations as unknown as Record<Language, TranslationNode>;
+const podcastLanguages = Object.keys(podcastCatalogs).sort();
+if (podcastLanguages.join('|') !== supportedLanguages.join('|')) {
+  fail(`podcast catalog languages differ: expected ${supportedLanguages.join(', ')}, received ${podcastLanguages.join(', ')}`);
+}
+
+for (const language of SUPPORTED_LANGUAGES) {
+  compareNode(`podcast.${language}`, podcastCatalogs.en, podcastCatalogs[language]);
+
+  const entries = Object.entries(podcastTranslations[language]);
+  for (const [key, value] of entries) {
+    if (value.length > 260) {
+      fail(`podcast.${language}.${key} is too long for the landing-page layout (${value.length} characters)`);
+    }
+    if (/[<>]/.test(value)) {
+      fail(`podcast.${language}.${key} must contain text, not HTML`);
+    }
+  }
+}
+
 const koreanCatalog = JSON.stringify(catalogs.ko);
 if (!/[가-힣]/.test(koreanCatalog)) {
   fail('Korean catalog contains no Hangul');
+}
+
+if (!/[가-힣]/.test(JSON.stringify(podcastTranslations.ko))) {
+  fail('Korean podcast catalog contains no Hangul');
 }
 
 const frenchCatalog = JSON.stringify(catalogs.fr);
@@ -75,4 +100,8 @@ if (!/[àâçéèêëîïôùûüÿœ]/i.test(frenchCatalog)) {
   fail('French catalog contains no French-specific characters');
 }
 
-console.log(`✓ ${SUPPORTED_LANGUAGES.length} locale catalogs have matching keys, arrays, and placeholders`);
+if (!/[àâçéèêëîïôùûüÿœ]/i.test(JSON.stringify(podcastTranslations.fr))) {
+  fail('French podcast catalog contains no French-specific characters');
+}
+
+console.log(`✓ ${SUPPORTED_LANGUAGES.length} site and podcast locale catalogs have matching keys, arrays, and placeholders`);

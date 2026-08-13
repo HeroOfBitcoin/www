@@ -1,18 +1,4 @@
-@font-face {
-  font-family: 'Press Start 2P';
-  src: url('/assets/fonts/press-start-2p-latin.woff2') format('woff2');
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Inter';
-  src: url('/assets/fonts/inter-latin.woff2') format('woff2');
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-}
+@import './fonts.css';
 
 :root {
   color-scheme: dark;
@@ -99,6 +85,12 @@ img {
   justify-content: space-between;
 }
 
+.site-header__meta {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.4vw, 2.5rem);
+}
+
 .site-header__wordmark,
 .footer__wordmark {
   margin: 0;
@@ -130,6 +122,60 @@ img {
   margin: 0;
   color: rgba(255, 255, 255, 0.7);
   font-size: 0.55rem;
+}
+
+.language-picker {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.47rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.language-picker__control {
+  position: relative;
+  display: block;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(11, 10, 8, 0.72);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.38);
+}
+
+.language-picker__control::after {
+  content: '▾';
+  position: absolute;
+  top: 50%;
+  right: 0.65rem;
+  color: var(--orange);
+  font-size: 0.65rem;
+  transform: translateY(-52%);
+  pointer-events: none;
+}
+
+.language-picker select {
+  min-width: 112px;
+  min-height: 40px;
+  border: 0;
+  padding: 0.72rem 2rem 0.72rem 0.7rem;
+  appearance: none;
+  background: transparent;
+  color: var(--white);
+  cursor: pointer;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.language-picker select:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 4px;
+}
+
+.language-picker option {
+  background: var(--ink);
+  color: var(--white);
 }
 
 .hero {
@@ -186,6 +232,7 @@ img {
   color: var(--gold);
   font-size: clamp(0.55rem, 0.85vw, 0.7rem);
   line-height: 1.8;
+  overflow-wrap: anywhere;
 }
 
 .eyebrow--dark {
@@ -208,7 +255,7 @@ h1 {
   font-weight: 900;
 }
 
-h1 span {
+h1 .hero__title-line--accent {
   color: var(--orange);
 }
 
@@ -482,6 +529,23 @@ h2 {
   font-weight: 900;
 }
 
+.manifesto blockquote::before,
+.manifesto blockquote::after {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.42em;
+  vertical-align: 0.8em;
+}
+
+.manifesto blockquote::before {
+  content: '"';
+  margin-right: 0.18em;
+}
+
+.manifesto blockquote::after {
+  content: '"';
+  margin-left: 0.18em;
+}
+
 .making {
   display: grid;
   grid-template-columns: minmax(280px, 0.7fr) minmax(0, 1.3fr);
@@ -738,6 +802,57 @@ footer p:last-child {
   transform: translateY(0);
 }
 
+html[data-language='de'] h1 {
+  font-size: clamp(3rem, 5.6vw, 5.9rem);
+}
+
+html[data-language='de'] .making__intro h2,
+html[data-language='de'] .world__copy h2 {
+  font-size: clamp(2.5rem, 4.3vw, 4.8rem);
+}
+
+html[data-language='fr'] h1,
+html[data-language='es'] h1 {
+  font-size: clamp(3.15rem, 6.5vw, 6.6rem);
+}
+
+html[data-language='ko'] body {
+  font-family: 'HoB Korean Sans', Inter, Arial, sans-serif;
+  word-break: keep-all;
+}
+
+html[data-language='ko'] h1,
+html[data-language='ko'] h2,
+html[data-language='ko'] h3 {
+  font-family: 'HoB Korean Sans', Inter, Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 1.08;
+}
+
+html[data-language='ko'] h1 {
+  font-size: clamp(3.1rem, 6.4vw, 6.5rem);
+}
+
+html[data-language='ko'] .site-header__edition,
+html[data-language='ko'] .eyebrow,
+html[data-language='ko'] .receipt__label,
+html[data-language='ko'] .hero__scroll,
+html[data-language='ko'] .making__steps > li > span,
+html[data-language='ko'] .pixel-button,
+html[data-language='ko'] .story__scene figcaption,
+html[data-language='ko'] .manifesto__track,
+html[data-language='ko'] .language-picker {
+  font-family: 'HoB Korean Sans', Inter, Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+html[data-language='ko'] .manifesto blockquote::before,
+html[data-language='ko'] .manifesto blockquote::after {
+  font-family: 'HoB Korean Sans', Inter, Arial, sans-serif;
+}
+
 @keyframes opening-push {
   from { transform: scale(1.07); }
   to { transform: scale(1.025); }
@@ -761,7 +876,9 @@ footer p:last-child {
 
   .story__copy,
   .making__intro,
-  .bundle__copy {
+  .bundle__copy,
+  .making__steps {
+    min-width: 0;
     max-width: 760px;
   }
 
@@ -810,9 +927,25 @@ footer p:last-child {
   }
 
   .site-header__edition {
-    max-width: 120px;
-    text-align: right;
-    line-height: 1.5;
+    display: none;
+  }
+
+  .site-header__meta {
+    gap: 0;
+  }
+
+  .language-picker > span:first-child {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .language-picker select {
+    min-width: 108px;
+    min-height: 44px;
   }
 
   .hero {
@@ -838,6 +971,31 @@ footer p:last-child {
 
   h1 {
     font-size: clamp(3.05rem, 15vw, 5.1rem);
+  }
+
+  html[data-language='de'] .hero,
+  html[data-language='de'] .hero__content,
+  html[data-language='fr'] .hero,
+  html[data-language='fr'] .hero__content,
+  html[data-language='es'] .hero,
+  html[data-language='es'] .hero__content,
+  html[data-language='ko'] .hero,
+  html[data-language='ko'] .hero__content {
+    min-height: 980px;
+  }
+
+  html[data-language='de'] h1 {
+    font-size: clamp(2.7rem, 12.8vw, 4.4rem);
+  }
+
+  html[data-language='fr'] h1,
+  html[data-language='es'] h1,
+  html[data-language='ko'] h1 {
+    font-size: clamp(2.85rem, 13.5vw, 4.6rem);
+  }
+
+  html[data-language='ko'] h2 {
+    font-size: clamp(2.35rem, 11.5vw, 4rem);
   }
 
   .hero__lede {

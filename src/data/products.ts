@@ -54,6 +54,14 @@ export const products: Product[] = [
     availability: 'limited',
     limitedQuantity: 30,
   },
+  {
+    id: 'graded-copy',
+    title: 'Hero of Bitcoin Geyser Release: CGC 9.9',
+    description: 'A team-verified CGC 9.9 Geyser Release collector copy with NFC authenticity certificate, plus the Hero of Bitcoin digital game download. One direct Bitcoin or Lightning invoice includes selected shipping.',
+    pubDate: '2026-07-23',
+    availability: 'limited',
+    limitedQuantity: 1,
+  },
 ];
 
 export const SITE_URL = 'https://heroofbitcoin.xyz';

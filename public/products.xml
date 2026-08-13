@@ -5,7 +5,7 @@
     <link>https://heroofbitcoin.xyz/#products</link>
     <description>Official Hero of Bitcoin merchandise and collectibles. Game Boy cartridges, handheld consoles, and limited edition prints.</description>
     <language>en</language>
-    <lastBuildDate>Tue, 17 Dec 2024 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 23 Jul 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://heroofbitcoin.xyz/products.xml" rel="self" type="application/rss+xml"/>
 
     <item>
@@ -46,6 +46,14 @@
       <guid isPermaLink="true">https://heroofbitcoin.xyz/#stackchain-magazine</guid>
       <description>Limited to 30 prints. Includes Stackchain Magazine Round 5, fine art print with alternative Hero of Bitcoin cover, premium protective toploader, and Hero of Bitcoin digital game download.</description>
       <pubDate>Tue, 17 Dec 2024 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title>Hero of Bitcoin Geyser Release: CGC 9.9</title>
+      <link>https://heroofbitcoin.xyz/#graded-copy</link>
+      <guid isPermaLink="true">https://heroofbitcoin.xyz/#graded-copy</guid>
+      <description>A team-verified CGC 9.9 Geyser Release collector copy with NFC authenticity certificate, plus the Hero of Bitcoin digital game download. One direct Bitcoin or Lightning invoice includes selected shipping.</description>
+      <pubDate>Thu, 23 Jul 2026 00:00:00 GMT</pubDate>
     </item>
   </channel>
 </rss>

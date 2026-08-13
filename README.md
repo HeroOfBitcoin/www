@@ -92,6 +92,7 @@ The site now distinguishes clearly between:
 - `Collector's Edition` = physical cartridge sold externally
 - `Hero Handheld` = physical product sold externally
 - `Stackchain Magazine` = site-owned magazine + digital game bundle with selected shipping included in one Bitcoin/Lightning invoice
+- `Graded Copy` = site-owned CGC 9.9 collector copy + digital game bundle with selected shipping included in one Bitcoin/Lightning invoice
 
 Do not merge `Instant Download` and `Digital Edition` back into one product concept.
 
@@ -108,6 +109,7 @@ Website translations do not change the game ROM language. The game itself is cur
 | Collector's Edition | `https://heroofbitcoin.xyz/#collectors-edition` |
 | Digital Edition | `https://heroofbitcoin.xyz/#digital-edition` |
 | Stackchain Magazine | `https://heroofbitcoin.xyz/#stackchain-magazine` |
+| Graded Copy | `https://heroofbitcoin.xyz/#graded-copy` |
 | Success page | `https://heroofbitcoin.xyz/success.html` |
 | Test checkout page | `https://heroofbitcoin.xyz/checkout-test.html` |
 
@@ -130,7 +132,7 @@ Localized URLs work with `?lang=de`, `?lang=es`, `?lang=fr`, or `?lang=ko`.
 ## Features
 
 - Multi-language support (`en`, `es`, `fr`, `de`, `ko`)
-- Live products page with 5 product offerings
+- Live products page with 6 product offerings
 - Hosted BTC/LN checkout entry points for direct site-owned products
 - Public success/download page
 - Contact form protected by a local proof-of-work challenge

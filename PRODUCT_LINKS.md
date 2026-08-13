@@ -7,7 +7,7 @@ The Hero of Bitcoin website (heroofbitcoin.xyz) serves as the official product p
 - **Release trailer** with embedded YouTube video
 - **Game story and controls** documentation
 - **Character profiles** for NPCs
-- **Five product offerings** with image galleries
+- **Six product offerings** with image galleries
 - **Partners page** with retail partner information
 - **Multi-language support** (English, Spanish, German) via URL parameter
 - **RSS feed** for products at `/products.xml`
@@ -75,9 +75,17 @@ const LINK_FAN_SWAG = 'https://copiaro.com/en/hero-of-bitcoin'; // TODO: Update 
 ### 4. Stackchain Magazine
 - **Target:** Collectors, Bitcoin enthusiasts
 - **Contents:** Stackchain Magazine Round 5, scarce Hero of Bitcoin alternative cover print, premium protective toploader, digital Hero of Bitcoin game download
-- **Limitation:** 9 direct site-owned bundles for the current drop
+- **Limitation:** 14 direct site-owned bundles for the current drop
 - **Special:** One Bitcoin/Lightning invoice includes the bundle and selected shipping
 - **Direct Link:** `heroofbitcoin.xyz/#stackchain-magazine`
+- **Checkout:** Direct site-owned checkout, not Copiaro
+
+### 5. Graded Copy
+- **Target:** Collectors who want a team-verified Geyser Release copy
+- **Contents:** CGC 9.9 graded copy, NFC authenticity certificate, and digital Hero of Bitcoin game download
+- **Limitation:** 1 direct site-owned copy
+- **Special:** One Bitcoin/Lightning invoice includes the collector copy, digital download, and selected shipping
+- **Direct Link:** `heroofbitcoin.xyz/#graded-copy`
 - **Checkout:** Direct site-owned checkout, not Copiaro
 
 ---
@@ -109,6 +117,7 @@ const LINK_FAN_SWAG = 'https://copiaro.com/en/hero-of-bitcoin'; // TODO: Update 
 | Digital Edition | `https://heroofbitcoin.xyz/#digital-edition` |
 | Hero Handheld | `https://heroofbitcoin.xyz/#hero-handheld` |
 | Stackchain Magazine | `https://heroofbitcoin.xyz/#stackchain-magazine` |
+| Graded Copy | `https://heroofbitcoin.xyz/#graded-copy` |
 | Play Demo | `https://demo.heroofbitcoin.xyz` |
 | RSS Feed | `https://heroofbitcoin.xyz/products.xml` |
 

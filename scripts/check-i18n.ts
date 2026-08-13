@@ -1,4 +1,5 @@
 import { SUPPORTED_LANGUAGES, type Language } from '../src/i18n/locales';
+import { certificateTranslations } from '../src/i18n/certificate-translations';
 import { podcastTranslations } from '../src/i18n/podcast-translations';
 import { translations } from '../src/i18n/translations';
 
@@ -86,6 +87,16 @@ for (const language of SUPPORTED_LANGUAGES) {
   }
 }
 
+const certificateCatalogs = certificateTranslations as unknown as Record<Language, TranslationNode>;
+const certificateLanguages = Object.keys(certificateCatalogs).sort();
+if (certificateLanguages.join('|') !== supportedLanguages.join('|')) {
+  fail(`certificate catalog languages differ: expected ${supportedLanguages.join(', ')}, received ${certificateLanguages.join(', ')}`);
+}
+
+for (const language of SUPPORTED_LANGUAGES) {
+  compareNode(`certificate.${language}`, certificateCatalogs.en, certificateCatalogs[language]);
+}
+
 const koreanCatalog = JSON.stringify(catalogs.ko);
 if (!/[가-힣]/.test(koreanCatalog)) {
   fail('Korean catalog contains no Hangul');
@@ -104,4 +115,26 @@ if (!/[àâçéèêëîïôùûüÿœ]/i.test(JSON.stringify(podcastTranslations
   fail('French podcast catalog contains no French-specific characters');
 }
 
-console.log(`✓ ${SUPPORTED_LANGUAGES.length} site and podcast locale catalogs have matching keys, arrays, and placeholders`);
+const japaneseCatalog = JSON.stringify(catalogs.ja);
+if (!/[ぁ-んァ-ヶ一-龯]/.test(japaneseCatalog)) {
+  fail('Japanese catalog contains no Japanese characters');
+}
+
+if (!/[ぁ-んァ-ヶ一-龯]/.test(JSON.stringify(podcastTranslations.ja))) {
+  fail('Japanese podcast catalog contains no Japanese characters');
+}
+
+if (!/[ぁ-んァ-ヶ一-龯]/.test(JSON.stringify(certificateTranslations.ja))) {
+  fail('Japanese certificate catalog contains no Japanese characters');
+}
+
+for (const language of ['it', 'nl', 'fi'] as const) {
+  if (JSON.stringify(catalogs[language]) === JSON.stringify(catalogs.en)) {
+    fail(`${language} catalog must not duplicate English`);
+  }
+  if (JSON.stringify(podcastTranslations[language]) === JSON.stringify(podcastTranslations.en)) {
+    fail(`podcast.${language} catalog must not duplicate English`);
+  }
+}
+
+console.log(`✓ ${SUPPORTED_LANGUAGES.length} site, podcast, and certificate locale catalogs have matching keys, arrays, and placeholders`);

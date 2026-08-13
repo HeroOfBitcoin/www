@@ -52,6 +52,21 @@ html[lang='ko'] :where(p, li, dt, dd, label, button, a, h1, h2, h3, h4) {
   word-break: keep-all;
 }
 
+html[lang='ja'] :where(.font-pixel, .font-mono, .font-sans) {
+  font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', Meiryo, sans-serif;
+}
+
+html[lang='ja'] .font-pixel {
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  line-height: 1.6;
+}
+
+html[lang='ja'] :where(p, li, dt, dd, label, button, a, h1, h2, h3, h4) {
+  line-break: strict;
+  overflow-wrap: anywhere;
+}
+
 /* Pixel-art shadows */
 .pixel-shadow {
   box-shadow: 4px 4px 0px 0px #000000;

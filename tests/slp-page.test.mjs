@@ -22,7 +22,7 @@ test('podcast landing page is private-by-link and built as a dedicated entry', a
   assert.match(source, /data-checkout/);
   assert.match(source, /aria-live="polite"/);
   assert.match(viteConfig, /slp\/index\.html/);
-  for (const language of ['en', 'es', 'fr', 'de', 'ko']) {
+  for (const language of ['en', 'es', 'it', 'ja', 'de', 'ko', 'fr', 'nl', 'fi']) {
     assert.match(source, new RegExp(`<option value="${language}">`));
     assert.match(translationSource, new RegExp(`\\n  ${language}:`));
   }

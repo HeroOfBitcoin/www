@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 import CertificatePage from './CertificatePage';
+import { LanguageProvider } from './i18n';
 import './styles/fonts.css';
 import './styles/global.css';
 
@@ -13,6 +14,8 @@ if (!rootElement) {
 const root = ReactDOM.createRoot(rootElement);
 root.render(
   <React.StrictMode>
-    <CertificatePage />
+    <LanguageProvider>
+      <CertificatePage />
+    </LanguageProvider>
   </React.StrictMode>
 );

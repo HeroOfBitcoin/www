@@ -158,7 +158,7 @@ export const frenchTranslations = {
     copyLink: 'Copier le lien vers ce produit',
     copied: 'Copié !',
     noteLabel: 'Remarque :',
-    gameLanguageNotice: 'La traduction concerne le site web : le jeu lui-même est actuellement disponible uniquement en anglais. Un nouveau lanceur est en cours de développement.',
+    gameLanguageNotice: 'Le site propose désormais les neuf langues du nouveau lanceur. Le téléchargement actuel reste en anglais jusqu’à sa sortie.',
     chooseFormatTitle: 'Choisissez votre format',
     chooseFormatBody: 'Commencez avec le téléchargement immédiat payé en Bitcoin ou via Lightning, ou comparez-le aux éditions physiques.',
     chooseFormatPrimary: 'TÉLÉCHARGEMENT IMMÉDIAT',

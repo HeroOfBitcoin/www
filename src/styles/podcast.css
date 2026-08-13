@@ -23,7 +23,7 @@
 html {
   scroll-behavior: smooth;
   background: var(--ink);
-  overflow-x: clip;
+  overflow-x: hidden;
 }
 
 body {
@@ -548,8 +548,13 @@ h2 {
 
 .making {
   display: grid;
-  grid-template-columns: minmax(280px, 0.7fr) minmax(0, 1.3fr);
+  grid-template-columns: minmax(420px, 0.9fr) minmax(0, 1.1fr);
   gap: clamp(4rem, 10vw, 10rem);
+}
+
+.making__intro,
+.world__copy {
+  min-width: 0;
 }
 
 .making__steps {
@@ -834,6 +839,10 @@ html[data-language='ko'] h1 {
   font-size: clamp(3.1rem, 6.4vw, 6.5rem);
 }
 
+html[data-language='ko'] .world__copy h2 {
+  font-size: clamp(2.5rem, 3.8vw, 4.2rem);
+}
+
 html[data-language='ko'] .site-header__edition,
 html[data-language='ko'] .eyebrow,
 html[data-language='ko'] .receipt__label,
@@ -851,6 +860,39 @@ html[data-language='ko'] .language-picker {
 html[data-language='ko'] .manifesto blockquote::before,
 html[data-language='ko'] .manifesto blockquote::after {
   font-family: 'HoB Korean Sans', Inter, Arial, sans-serif;
+}
+
+html[data-language='ja'] body,
+html[data-language='ja'] h1,
+html[data-language='ja'] h2,
+html[data-language='ja'] h3 {
+  font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', Meiryo, sans-serif;
+  line-break: strict;
+  overflow-wrap: anywhere;
+}
+
+html[data-language='ja'] h1,
+html[data-language='ja'] h2,
+html[data-language='ja'] h3 {
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+}
+
+html[data-language='ja'] .site-header__edition,
+html[data-language='ja'] .eyebrow,
+html[data-language='ja'] .receipt__label,
+html[data-language='ja'] .hero__scroll,
+html[data-language='ja'] .making__steps > li > span,
+html[data-language='ja'] .pixel-button,
+html[data-language='ja'] .story__scene figcaption,
+html[data-language='ja'] .manifesto__track,
+html[data-language='ja'] .language-picker,
+html[data-language='ja'] .manifesto blockquote::before,
+html[data-language='ja'] .manifesto blockquote::after {
+  font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', Meiryo, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.02em;
 }
 
 @keyframes opening-push {
@@ -910,6 +952,17 @@ html[data-language='ko'] .manifesto blockquote::after {
 
   .final-cta__copy {
     width: min(100%, 700px);
+  }
+}
+
+@media (min-width: 1001px) and (max-width: 1200px) {
+  .making {
+    grid-template-columns: 1fr;
+  }
+
+  .making__intro,
+  .making__steps {
+    max-width: 760px;
   }
 }
 
@@ -980,7 +1033,9 @@ html[data-language='ko'] .manifesto blockquote::after {
   html[data-language='es'] .hero,
   html[data-language='es'] .hero__content,
   html[data-language='ko'] .hero,
-  html[data-language='ko'] .hero__content {
+  html[data-language='ko'] .hero__content,
+  html[data-language='ja'] .hero,
+  html[data-language='ja'] .hero__content {
     min-height: 980px;
   }
 
@@ -992,6 +1047,14 @@ html[data-language='ko'] .manifesto blockquote::after {
   html[data-language='es'] h1,
   html[data-language='ko'] h1 {
     font-size: clamp(2.85rem, 13.5vw, 4.6rem);
+  }
+
+  html[data-language='ja'] h1 {
+    font-size: clamp(2.8rem, 13vw, 4.5rem);
+  }
+
+  html[data-language='ja'] h2 {
+    font-size: clamp(2.35rem, 11.5vw, 4rem);
   }
 
   html[data-language='ko'] h2 {

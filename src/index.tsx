@@ -15,12 +15,8 @@ const root = ReactDOM.createRoot(rootElement);
 const isCertificatePath = window.location.pathname === '/c' || window.location.pathname === '/c/';
 root.render(
   <React.StrictMode>
-    {isCertificatePath ? (
-      <CertificatePage />
-    ) : (
-      <LanguageProvider>
-        <App />
-      </LanguageProvider>
-    )}
+    <LanguageProvider>
+      {isCertificatePath ? <CertificatePage /> : <App />}
+    </LanguageProvider>
   </React.StrictMode>
 );

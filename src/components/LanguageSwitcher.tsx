@@ -37,6 +37,23 @@ const FlagIcon: React.FC<{ lang: Language }> = ({ lang }) => {
           <rect y="9" width="16" height="3" fill="#AA151B" />
         </svg>
       );
+    case 'it':
+      // Italy flag
+      return (
+        <svg viewBox="0 0 16 12" className="w-full h-full" style={{ imageRendering: 'pixelated' }}>
+          <rect width="5.33" height="12" fill="#009246" />
+          <rect x="5.33" width="5.34" height="12" fill="#FFF" />
+          <rect x="10.67" width="5.33" height="12" fill="#CE2B37" />
+        </svg>
+      );
+    case 'ja':
+      // Japan flag
+      return (
+        <svg viewBox="0 0 16 12" className="w-full h-full" style={{ imageRendering: 'pixelated' }}>
+          <rect width="16" height="12" fill="#FFF" />
+          <circle cx="8" cy="6" r="3" fill="#BC002D" />
+        </svg>
+      );
     case 'fr':
       // France flag
       return (
@@ -70,12 +87,42 @@ const FlagIcon: React.FC<{ lang: Language }> = ({ lang }) => {
           </g>
         </svg>
       );
+    case 'nl':
+      // Netherlands flag
+      return (
+        <svg viewBox="0 0 16 12" className="w-full h-full" style={{ imageRendering: 'pixelated' }}>
+          <rect width="16" height="4" fill="#AE1C28" />
+          <rect y="4" width="16" height="4" fill="#FFF" />
+          <rect y="8" width="16" height="4" fill="#21468B" />
+        </svg>
+      );
+    case 'fi':
+      // Finland flag
+      return (
+        <svg viewBox="0 0 16 12" className="w-full h-full" style={{ imageRendering: 'pixelated' }}>
+          <rect width="16" height="12" fill="#FFF" />
+          <rect x="4" width="2.5" height="12" fill="#003580" />
+          <rect y="4.75" width="16" height="2.5" fill="#003580" />
+        </svg>
+      );
   }
 };
 
 const languageNames = Object.fromEntries(
   LANGUAGE_OPTIONS.map(({ code, name }) => [code, name]),
 ) as Record<Language, string>;
+
+const languageLabels: Record<Language, string> = {
+  en: 'Language: English',
+  es: 'Idioma: Español',
+  it: 'Lingua: Italiano',
+  ja: '言語：日本語',
+  de: 'Sprache: Deutsch',
+  ko: '언어: 한국어',
+  fr: 'Langue : Français',
+  nl: 'Taal: Nederlands',
+  fi: 'Kieli: Suomi',
+};
 
 const LanguageSwitcher: React.FC = () => {
   const { language, setLanguage } = useLanguage();
@@ -108,6 +155,9 @@ const LanguageSwitcher: React.FC = () => {
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-1 px-2 py-1 border-2 border-black bg-white hover:bg-yellow-100 transition-all md:min-h-[44px] md:px-1.5"
         title={languageNames[language]}
+        aria-label={languageLabels[language]}
+        aria-expanded={isOpen}
+        aria-haspopup="listbox"
       >
         <div className="w-5 h-4 border border-black overflow-hidden">
           <FlagIcon lang={language} />
@@ -117,11 +167,13 @@ const LanguageSwitcher: React.FC = () => {
 
       {/* Dropdown menu */}
       {isOpen && (
-        <div className="absolute top-full left-0 mt-1 bg-white border-2 border-black shadow-lg z-50 min-w-[100px]">
+        <div role="listbox" className="absolute top-full left-0 mt-1 bg-white border-2 border-black shadow-lg z-50 min-w-[132px] max-h-[70vh] overflow-y-auto">
           {languages.map((lang) => (
             <button
               key={lang}
               onClick={() => handleSelect(lang)}
+              role="option"
+              aria-selected={lang === language}
               className={`flex items-center gap-2 w-full px-2 py-1.5 hover:bg-yellow-100 transition-colors ${
                 lang === language ? 'bg-yellow-200' : ''
               }`}

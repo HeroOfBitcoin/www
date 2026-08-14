@@ -346,6 +346,7 @@ h1 span {
 }
 
 .pixel-button:focus-visible,
+.pixel-trailer-button:focus-visible,
 .offer-link:focus-visible {
   outline: 3px solid var(--cream);
   outline-offset: 5px;
@@ -355,7 +356,40 @@ h1 span {
   margin-top: 0.85rem;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 0.15rem 1.35rem;
+}
+
+.pixel-trailer-button {
+  min-height: 44px;
+  max-width: 100%;
+  border: 2px solid rgba(255, 197, 57, 0.84);
+  padding: 0.62rem 0.72rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: rgba(7, 8, 10, 0.82);
+  color: #ffd86a;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.47rem;
+  line-height: 1.5;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  box-shadow: 4px 4px 0 #000;
+  transition: color 150ms ease, border-color 150ms ease, transform 150ms ease, box-shadow 150ms ease;
+}
+
+.pixel-trailer-button:hover {
+  border-color: var(--cream);
+  color: var(--cream);
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #000;
+}
+
+.pixel-trailer-button__icon {
+  color: var(--orange);
+  font-size: 0.68rem;
+  line-height: 1;
 }
 
 .offer-link {
@@ -373,15 +407,6 @@ h1 span {
 .offer-link:hover {
   color: var(--gold);
   transform: translateY(-1px);
-}
-
-.offer-link--trailer {
-  color: #ffd86a;
-}
-
-.offer-link--trailer > span:first-child {
-  color: var(--orange);
-  font-size: 0.72rem;
 }
 
 .offer__note {
@@ -459,6 +484,7 @@ html[data-language='ko'] .site-header__edition,
 html[data-language='ko'] .eyebrow,
 html[data-language='ko'] .offer__label,
 html[data-language='ko'] .pixel-button,
+html[data-language='ko'] .pixel-trailer-button,
 html[data-language='ko'] .language-picker {
   font-family: 'HoB Korean Sans', Inter, Arial, sans-serif;
 }
@@ -481,6 +507,7 @@ html[data-language='ja'] .site-header__edition,
 html[data-language='ja'] .eyebrow,
 html[data-language='ja'] .offer__label,
 html[data-language='ja'] .pixel-button,
+html[data-language='ja'] .pixel-trailer-button,
 html[data-language='ja'] .language-picker {
   font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', Meiryo, sans-serif;
   font-weight: 800;

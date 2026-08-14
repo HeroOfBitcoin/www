@@ -42,6 +42,10 @@ const latestProductDate = (): string => {
   return new Date(latestTimestamp).toUTCString();
 };
 
+const productUrl = (product: (typeof products)[number]): string => (
+  product.path ? `${SITE_URL}${product.path}` : `${SITE_URL}/#${product.id}`
+);
+
 const generateRss = (): string => {
   const lastBuildDate = latestProductDate();
 
@@ -49,8 +53,8 @@ const generateRss = (): string => {
     .map((product) => `
     <item>
       <title>${escapeXml(product.title)}</title>
-      <link>${SITE_URL}/#${product.id}</link>
-      <guid isPermaLink="true">${SITE_URL}/#${product.id}</guid>
+      <link>${productUrl(product)}</link>
+      <guid isPermaLink="true">${productUrl(product)}</guid>
       <description>${escapeXml(product.description)}</description>
       <pubDate>${formatDate(product.pubDate)}</pubDate>
     </item>`)

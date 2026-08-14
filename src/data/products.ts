@@ -12,6 +12,7 @@ export interface Product {
   title: string;
   description: string;
   pubDate: string; // ISO date string
+  path?: string;
   availability?: 'limited' | 'available';
   limitedQuantity?: number;
 }
@@ -22,6 +23,7 @@ export const products: Product[] = [
     title: 'Instant Download - ROM + PDF Bundle',
     description: 'Pay with Bitcoin or Lightning and unlock a private ZIP download containing the Game Boy ROM and PDF manual. No email required. Works on Raspberry Pi, MiSTer FPGA, RetroArch, or any compatible Game Boy emulator.',
     pubDate: '2024-01-01',
+    path: '/digital/',
     availability: 'available',
   },
   {

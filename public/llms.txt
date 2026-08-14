@@ -1,0 +1,17 @@
+# Hero of Bitcoin
+
+> An independent Game Boy-compatible adventure through Bitcoin culture, set in El Salvador.
+
+## Digital game
+
+- [Hero of Bitcoin Digital](https://heroofbitcoin.xyz/digital/): Instant download paid with Bitcoin or Lightning.
+- [Release trailer](https://www.youtube.com/watch?v=5puiZFbMUN4): Official Hero of Bitcoin release trailer on YouTube.
+- [Playable demo](https://demo.heroofbitcoin.xyz): Try the game before buying.
+
+## Product facts
+
+- The download contains the game ROM, a PDF guide, and Windows launch files.
+- The game is in English. The landing page supports English, Spanish, Italian, Japanese, German, Korean, French, Dutch, and Finnish.
+- The product page shows a live BTC amount first, with smaller USD and EUR reference prices.
+- Checkout calculates the authoritative price and locks the BTC amount when it opens.
+- No account or email address is required for the digital order.

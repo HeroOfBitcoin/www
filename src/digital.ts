@@ -1,5 +1,5 @@
-import './styles/podcast.css';
-import { podcastTranslations, type PodcastTranslation } from './i18n/podcast-translations';
+import './styles/digital.css';
+import { digitalTranslations, type DigitalTranslation } from './i18n/digital-translations';
 import {
   LANGUAGE_OPTIONS,
   LOCALE_BY_LANGUAGE,
@@ -62,12 +62,12 @@ function resolveInitialLanguage(): Language {
   return 'en';
 }
 
-function textFor(copy: PodcastTranslation, key: string | undefined): string | null {
+function textFor(copy: DigitalTranslation, key: string | undefined): string | null {
   if (!key || !(key in copy)) {
     return null;
   }
 
-  return copy[key as keyof PodcastTranslation];
+  return copy[key as keyof DigitalTranslation];
 }
 
 function formatFiat(amount: number, currency: string): string {
@@ -107,13 +107,15 @@ function renderPrice(): void {
 
 function applyLanguage(language: Language): void {
   currentLanguage = language;
-  const copy = podcastTranslations[language];
+  const copy = digitalTranslations[language];
 
   document.documentElement.lang = language;
   document.documentElement.dataset.language = language;
   document.title = copy.pageTitle;
-  document.querySelector<HTMLMetaElement>('[data-page-description]')
-    ?.setAttribute('content', copy.pageDescription);
+  document.querySelectorAll<HTMLMetaElement>('[data-page-description], [data-social-description]')
+    .forEach((node) => node.setAttribute('content', copy.pageDescription));
+  document.querySelectorAll<HTMLMetaElement>('[data-social-title]')
+    .forEach((node) => node.setAttribute('content', copy.pageTitle));
 
   document.querySelectorAll<HTMLElement>('[data-i18n]').forEach((node) => {
     const text = textFor(copy, node.dataset.i18n);
@@ -160,7 +162,7 @@ function setStatus(message: string, isError = false): void {
 }
 
 function setCheckoutBusy(isBusy: boolean): void {
-  const copy = podcastTranslations[currentLanguage];
+  const copy = digitalTranslations[currentLanguage];
   checkoutButtons.forEach((button) => {
     button.disabled = isBusy;
     button.setAttribute('aria-busy', String(isBusy));
@@ -198,7 +200,7 @@ async function startCheckout(): Promise<void> {
   }
 
   setCheckoutBusy(true);
-  setStatus(podcastTranslations[currentLanguage].checkoutCreating);
+  setStatus(digitalTranslations[currentLanguage].checkoutCreating);
 
   try {
     const response = await fetch(`${apiBaseUrl}/api/create-checkout`, {
@@ -221,7 +223,7 @@ async function startCheckout(): Promise<void> {
     window.location.assign(payload.checkout_url);
   } catch {
     setCheckoutBusy(false);
-    setStatus(podcastTranslations[currentLanguage].checkoutUnavailable, true);
+    setStatus(digitalTranslations[currentLanguage].checkoutUnavailable, true);
   }
 }
 

@@ -3,140 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex,nofollow" />
-    <meta name="theme-color" content="#07080a" />
-    <meta
-      name="description"
-      data-page-description
-      content="A Game Boy adventure inspired by Bitcoin culture. Buy the digital game with Bitcoin or Lightning."
-    />
+    <meta name="robots" content="noindex,follow" />
+    <meta http-equiv="refresh" content="0;url=/digital/" />
+    <link rel="canonical" href="https://heroofbitcoin.xyz/digital/" />
     <link rel="icon" type="image/jpeg" href="/assets/images/favicon.jpg" />
-    <link
-      rel="preload"
-      href="/assets/fonts/press-start-2p-latin.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="/assets/images/trailer-thumbnail.jpg"
-      as="image"
-      fetchpriority="high"
-    />
-    <link
-      rel="preload"
-      href="/assets/images/hob-logo-official.png"
-      as="image"
-      fetchpriority="high"
-    />
-    <title>Hero of Bitcoin | The Game</title>
-    <script type="module" src="/src/podcast.ts"></script>
+    <title>Hero of Bitcoin Digital</title>
+    <script>
+      const target = new URL('/digital/', window.location.origin);
+      const language = new URL(window.location.href).searchParams.get('lang');
+      if (language) target.searchParams.set('lang', language);
+      window.location.replace(target);
+    </script>
   </head>
   <body>
-    <header class="site-header" aria-label="Hero of Bitcoin">
-      <div class="site-header__inner">
-        <img
-          class="site-header__logo"
-          src="/assets/images/hob-logo-official.png"
-          alt="Hero of Bitcoin"
-          width="1100"
-          height="580"
-          fetchpriority="high"
-        />
-        <div class="site-header__meta">
-          <p class="site-header__edition" data-i18n="headerEdition">Digital release · Game in English</p>
-          <label class="language-picker">
-            <span data-i18n="languageLabel">Language</span>
-            <span class="language-picker__control">
-              <select data-language-picker aria-label="Language">
-                <option value="en">English</option>
-                <option value="es">Español</option>
-                <option value="it">Italiano</option>
-                <option value="ja">日本語</option>
-                <option value="de">Deutsch</option>
-                <option value="ko">한국어</option>
-                <option value="fr">Français</option>
-                <option value="nl">Nederlands</option>
-                <option value="fi">Suomi</option>
-              </select>
-            </span>
-          </label>
-        </div>
-      </div>
-    </header>
-
-    <main id="main">
-      <section class="offer" aria-labelledby="hero-title">
-        <div class="offer__art" aria-hidden="true">
-          <img
-            src="/assets/images/trailer-thumbnail.jpg"
-            alt=""
-            width="1280"
-            height="720"
-            fetchpriority="high"
-          />
-        </div>
-        <div class="offer__shade" aria-hidden="true"></div>
-
-        <div class="offer__inner">
-          <div class="offer__copy" data-reveal>
-            <p class="eyebrow" data-i18n="heroAudience">For Stephan Livera Podcast listeners</p>
-            <h1 id="hero-title">
-              <span data-i18n="heroTitleLine1">A Bitcoin story.</span>
-              <span class="offer__title-accent" data-i18n="heroTitleLine2">Built to play.</span>
-            </h1>
-            <p class="offer__lede" data-i18n="heroLede">
-              Explore El Salvador, find 21 hidden bitcoin, and face the oddest corners of Bitcoin culture.
-            </p>
-            <ul class="offer__contents">
-              <li data-i18n="gameRom">Game ROM</li>
-              <li data-i18n="pdfGuide">PDF guide</li>
-              <li data-i18n="windowsFiles">Windows launch files</li>
-            </ul>
-          </div>
-
-          <div class="offer__buy" aria-label="Instant download details" data-i18n-aria="receiptAria" data-reveal>
-            <p class="offer__label" data-i18n="instantDownload">Instant download</p>
-            <strong class="offer__btc" data-btc-price aria-live="polite">— BTC</strong>
-            <p class="offer__reference">
-              <span data-reference-usd>$12.21</span>
-              <span aria-hidden="true"> / </span>
-              <span data-reference-eur>€—</span>
-              <small data-i18n="referencePrice">USD / EUR reference</small>
-            </p>
-            <p class="offer__rate-note" data-i18n="priceLockNote">
-              The Bitcoin amount is locked when checkout opens.
-            </p>
-
-            <button class="pixel-button" type="button" data-checkout>
-              <span data-i18n="buyWithBitcoin">Buy with Bitcoin + Lightning</span>
-              <span aria-hidden="true">↗</span>
-            </button>
-            <div class="offer__links">
-              <a
-                class="offer-link offer-link--trailer"
-                href="https://www.youtube.com/watch?v=5puiZFbMUN4"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span aria-hidden="true">▶</span>
-                <span data-i18n="watchTrailer">Watch release trailer</span>
-              </a>
-              <a class="offer-link" href="https://demo.heroofbitcoin.xyz" data-i18n="playDemo">Play the demo</a>
-            </div>
-            <p class="offer__note" data-i18n="receiptNote">
-              You don't need an account or email. Download the bundle after payment.
-            </p>
-            <p class="checkout-status" role="status" aria-live="polite" data-checkout-status></p>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <p>©2022-2026 Hero of Bitcoin</p>
-      <p data-i18n="legal">Game Boy is named only to describe compatibility. All trademarks belong to their owners.</p>
-    </footer>
+    <p><a href="/digital/">Continue to Hero of Bitcoin Digital</a></p>
   </body>
 </html>

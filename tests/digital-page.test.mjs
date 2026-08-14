@@ -116,18 +116,26 @@ test('digital checkout uses the server-owned instant-download contract', async (
   assert.doesNotMatch(script, /email:/);
 });
 
-test('digital pricing presents BTC first with server-derived USD and EUR references', async () => {
+test('digital pricing presents BTC first with a guarded fast preview and server reconciliation', async () => {
   const [source, script] = await Promise.all([
     read('digital/index.html'),
     read('src/digital.ts'),
   ]);
 
   assert.ok(source.indexOf('data-btc-price') < source.indexOf('data-reference-usd'));
+  assert.match(source, /data-price-usd="12\.21"/);
+  assert.match(source, /rel="preconnect" href="https:\/\/hero-of-bitcoin-digital\.fly\.dev" crossorigin/);
   assert.match(script, /product\.btc \? `\$\{product\.btc\} BTC` : '— BTC'/);
   assert.match(script, /product\.reference_usd/);
   assert.match(script, /product\.reference_eur/);
   assert.match(script, /formatFiat\(referenceUsd, 'USD'\)/);
   assert.match(script, /formatFiat\(referenceEur, 'EUR'\)/);
+  assert.match(script, /fastRateDelayMs = 180/);
+  assert.match(script, /https:\/\/mempool\.space\/api\/v1\/prices/);
+  assert.match(script, /credentials: 'omit'/);
+  assert.match(script, /referrerPolicy: 'no-referrer'/);
+  assert.match(script, /if \(!currentProductPrice\?\.btc\)/);
+  assert.match(script, /hasServerBtcPrice/);
 });
 
 test('digital language state follows URL, saved preference, and browser locale', async () => {

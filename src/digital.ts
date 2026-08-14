@@ -21,16 +21,33 @@ interface PriceResponse {
   products?: ProductPrice[];
 }
 
+interface BtcRatePayload {
+  USD?: unknown;
+  EUR?: unknown;
+}
+
+interface BtcRates {
+  usdPerBtc: number;
+  eurPerBtc: number;
+}
+
 interface CheckoutResponse {
   checkout_url?: string;
 }
 
+const fastRateUrl = 'https://mempool.space/api/v1/prices';
+const fastRateDelayMs = 180;
+const fastRateTimeoutMs = 2_000;
 const apiBaseUrl = getApiBaseUrl();
 const checkoutButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-checkout]'));
 const statusNodes = Array.from(document.querySelectorAll<HTMLElement>('[data-checkout-status]'));
 const languagePicker = document.querySelector<HTMLSelectElement>('[data-language-picker]');
+const priceNode = document.querySelector<HTMLElement>('[data-btc-price]');
+const initialPriceUsd = Number(priceNode?.dataset.priceUsd);
 let currentLanguage: Language = 'en';
 let currentProductPrice: ProductPrice | null = null;
+let fastRates: BtcRates | null = null;
+let hasServerBtcPrice = false;
 
 function readStoredLanguage(): Language | null {
   try {
@@ -76,6 +93,34 @@ function formatFiat(amount: number, currency: string): string {
     currency,
     minimumFractionDigits: 2,
   }).format(amount);
+}
+
+function readPositiveRate(value: unknown): number | null {
+  return typeof value === 'number' && Number.isFinite(value) && value > 0
+    ? value
+    : null;
+}
+
+function parseBtcRates(payload: BtcRatePayload): BtcRates | null {
+  const usdPerBtc = readPositiveRate(payload.USD);
+  const eurPerBtc = readPositiveRate(payload.EUR);
+  return usdPerBtc !== null && eurPerBtc !== null
+    ? { usdPerBtc, eurPerBtc }
+    : null;
+}
+
+function buildFastPrice(amountUsd: number, rates: BtcRates): ProductPrice {
+  const sats = Math.max(1, Math.round((amountUsd / rates.usdPerBtc) * 100_000_000));
+  const roundedBtc = sats / 100_000_000;
+
+  return {
+    id: 'instant-download',
+    amount: amountUsd,
+    currency: 'USD',
+    btc: roundedBtc.toFixed(8),
+    reference_usd: amountUsd,
+    reference_eur: Number((roundedBtc * rates.eurPerBtc).toFixed(2)),
+  };
 }
 
 function renderPrice(): void {
@@ -187,10 +232,52 @@ async function loadPrice(): Promise<void> {
       return;
     }
 
-    currentProductPrice = product;
+    hasServerBtcPrice = typeof product.btc === 'string' && product.btc.length > 0;
+    if (!hasServerBtcPrice && fastRates && product.currency === 'USD') {
+      currentProductPrice = buildFastPrice(product.amount, fastRates);
+    } else {
+      currentProductPrice = product;
+    }
     renderPrice();
   } catch {
     // The server calculates the authoritative total again when checkout starts.
+  }
+}
+
+async function loadFastPrice(): Promise<void> {
+  if (hasServerBtcPrice || !Number.isFinite(initialPriceUsd) || initialPriceUsd <= 0) {
+    return;
+  }
+
+  const controller = new AbortController();
+  const timeoutId = window.setTimeout(() => controller.abort(), fastRateTimeoutMs);
+
+  try {
+    const response = await fetch(fastRateUrl, {
+      credentials: 'omit',
+      headers: { Accept: 'application/json' },
+      referrerPolicy: 'no-referrer',
+      signal: controller.signal,
+    });
+    if (!response.ok) {
+      return;
+    }
+
+    const rates = parseBtcRates((await response.json()) as BtcRatePayload);
+    if (!rates || hasServerBtcPrice) {
+      return;
+    }
+
+    fastRates = rates;
+    const serverAmount = currentProductPrice?.currency === 'USD'
+      ? currentProductPrice.amount
+      : null;
+    currentProductPrice = buildFastPrice(serverAmount ?? initialPriceUsd, rates);
+    renderPrice();
+  } catch {
+    // The server request remains the privacy-preserving and authoritative fallback.
+  } finally {
+    window.clearTimeout(timeoutId);
   }
 }
 
@@ -264,3 +351,9 @@ if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-mot
 }
 
 void loadPrice();
+// Warm responses stay first-party; only a slow scale-to-zero wake-up uses the public rate fallback.
+window.setTimeout(() => {
+  if (!currentProductPrice?.btc) {
+    void loadFastPrice();
+  }
+}, fastRateDelayMs);

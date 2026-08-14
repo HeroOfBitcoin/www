@@ -28,11 +28,13 @@ test('digital landing page is canonical, indexable, and built as a dedicated ent
   assert.match(source, /data-reference-eur/);
   assert.match(source, /src="\/assets\/images\/hob-logo-official\.png"/);
   assert.match(source, /href="https:\/\/www\.youtube\.com\/watch\?v=5puiZFbMUN4"/);
+  assert.match(source, /class="offer__trailer"/);
   assert.match(source, /class="pixel-trailer-button"/);
   assert.match(source, /data-i18n="watchTrailer"/);
   assert.match(source, /target="_blank"[\s\S]*rel="noopener noreferrer"/);
   assert.match(source, /aria-live="polite"/);
   assert.match(source, /src="\/src\/digital\.ts"/);
+  assert.ok(source.indexOf('class="offer__trailer"') < source.indexOf('class="offer__buy"'));
   assert.equal(source.match(/<section\b/g)?.length, 1);
   assert.doesNotMatch(source, /Stephan Livera|class="(?:story|manifesto|making|world|bundle|final-cta)/);
   assert.match(viteConfig, /digital\/index\.html/);

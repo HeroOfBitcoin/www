@@ -352,12 +352,16 @@ h1 span {
   outline-offset: 5px;
 }
 
-.offer__links {
-  margin-top: 0.85rem;
+.offer__trailer {
+  margin-top: 1.4rem;
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  gap: 0.15rem 1.35rem;
+}
+
+.offer__demo {
+  margin-top: 0.45rem;
+  display: flex;
+  align-items: center;
 }
 
 .pixel-trailer-button {
@@ -629,9 +633,12 @@ html[data-language='ja'] h1 {
     min-height: 52px;
   }
 
-  .offer__links {
-    margin-top: 0.55rem;
-    gap: 0 1.1rem;
+  .offer__trailer {
+    margin-top: 0.85rem;
+  }
+
+  .offer__demo {
+    margin-top: 0.25rem;
   }
 
   .offer__note {

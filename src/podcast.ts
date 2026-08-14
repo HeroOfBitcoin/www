@@ -12,7 +12,9 @@ interface ProductPrice {
   id: string;
   amount: number | null;
   currency: string;
-  sats: number | null;
+  btc: string | null;
+  reference_usd: number | null;
+  reference_eur: number | null;
 }
 
 interface PriceResponse {
@@ -68,10 +70,6 @@ function textFor(copy: PodcastTranslation, key: string | undefined): string | nu
   return copy[key as keyof PodcastTranslation];
 }
 
-function interpolate(template: string, replacements: Record<string, string>): string {
-  return template.replace(/\{([^}]+)\}/g, (token, key: string) => replacements[key] ?? token);
-}
-
 function formatFiat(amount: number, currency: string): string {
   return new Intl.NumberFormat(LOCALE_BY_LANGUAGE[currentLanguage], {
     style: 'currency',
@@ -81,27 +79,30 @@ function formatFiat(amount: number, currency: string): string {
 }
 
 function renderPrice(): void {
-  const copy = podcastTranslations[currentLanguage];
   const product = currentProductPrice;
-  if (!product || product.amount === null) {
-    document.querySelectorAll<HTMLElement>('[data-sats]').forEach((node) => {
-      node.textContent = copy.satsUnavailable;
-    });
+  if (!product) {
     return;
   }
 
-  document.querySelectorAll<HTMLElement>('[data-price]').forEach((node) => {
-    node.textContent = formatFiat(product.amount as number, product.currency);
+  document.querySelectorAll<HTMLElement>('[data-btc-price]').forEach((node) => {
+    node.textContent = product.btc ? `${product.btc} BTC` : '— BTC';
   });
 
-  const satsText = product.sats
-    ? interpolate(copy.satsCurrent, {
-        sats: product.sats.toLocaleString(LOCALE_BY_LANGUAGE[currentLanguage]),
-      })
-    : copy.satsUnavailable;
-  document.querySelectorAll<HTMLElement>('[data-sats]').forEach((node) => {
-    node.textContent = satsText;
-  });
+  const referenceUsd = product.reference_usd
+    ?? (product.currency === 'USD' ? product.amount : null);
+  const referenceEur = product.reference_eur
+    ?? (product.currency === 'EUR' ? product.amount : null);
+
+  if (referenceUsd !== null) {
+    document.querySelectorAll<HTMLElement>('[data-reference-usd]').forEach((node) => {
+      node.textContent = formatFiat(referenceUsd, 'USD');
+    });
+  }
+  if (referenceEur !== null) {
+    document.querySelectorAll<HTMLElement>('[data-reference-eur]').forEach((node) => {
+      node.textContent = formatFiat(referenceEur, 'EUR');
+    });
+  }
 }
 
 function applyLanguage(language: Language): void {
@@ -164,7 +165,7 @@ function setCheckoutBusy(isBusy: boolean): void {
     button.disabled = isBusy;
     button.setAttribute('aria-busy', String(isBusy));
     const label = button.querySelector<HTMLElement>('[data-i18n]') ?? button;
-    const idleLabel = textFor(copy, label.dataset.i18n) ?? copy.buyBundle;
+    const idleLabel = textFor(copy, label.dataset.i18n) ?? copy.buyWithBitcoin;
     label.textContent = isBusy ? copy.checkoutBusy : idleLabel;
   });
 }

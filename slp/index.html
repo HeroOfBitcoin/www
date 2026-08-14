@@ -28,8 +28,6 @@
     <script type="module" src="/src/podcast.ts"></script>
   </head>
   <body>
-    <a class="skip-link" href="#main" data-i18n="skipToStory">Skip to the story</a>
-
     <header class="site-header" aria-label="Hero of Bitcoin">
       <div class="site-header__inner">
         <p class="site-header__wordmark" aria-label="Hero of Bitcoin">HERO <span>OF</span> BITCOIN</p>
@@ -56,8 +54,8 @@
     </header>
 
     <main id="main">
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero__art" aria-hidden="true">
+      <section class="offer" aria-labelledby="hero-title">
+        <div class="offer__art" aria-hidden="true">
           <img
             src="/assets/images/trailer-thumbnail.jpg"
             alt=""
@@ -66,170 +64,53 @@
             fetchpriority="high"
           />
         </div>
-        <div class="hero__shade"></div>
-        <div class="hero__content">
-          <div class="hero__copy" data-reveal>
+        <div class="offer__shade" aria-hidden="true"></div>
+
+        <div class="offer__inner">
+          <div class="offer__copy" data-reveal>
             <p class="eyebrow" data-i18n="heroAudience">For Stephan Livera Podcast listeners</p>
             <h1 id="hero-title">
-              <span class="hero__title-line" data-i18n="heroTitleLine1">A Bitcoin story.</span><br />
-              <span class="hero__title-line hero__title-line--accent" data-i18n="heroTitleLine2">Built to play.</span>
+              <span data-i18n="heroTitleLine1">A Bitcoin story.</span>
+              <span class="offer__title-accent" data-i18n="heroTitleLine2">Built to play.</span>
             </h1>
-            <p class="hero__lede" data-i18n="heroLede">
-              Cross El Salvador, find 21 hidden bitcoin, and help Hero face
-              bankers, bears, and poocoiners in a real Game Boy adventure.
+            <p class="offer__lede" data-i18n="heroLede">
+              Explore El Salvador, find 21 hidden bitcoin, and face the oddest corners of Bitcoin culture.
             </p>
-            <div class="hero__actions">
-              <button class="pixel-button pixel-button--primary" type="button" data-checkout>
-                <span data-i18n="buyWithBitcoin">Buy with Bitcoin + Lightning</span>
-                <span aria-hidden="true">↗</span>
-              </button>
-              <a class="text-link" href="https://demo.heroofbitcoin.xyz" data-i18n="playDemo">Play the demo</a>
-            </div>
-            <p class="checkout-status" role="status" aria-live="polite" data-checkout-status></p>
-          </div>
-
-          <aside class="hero__receipt" aria-label="Instant download details" data-i18n-aria="receiptAria" data-reveal>
-            <p class="receipt__label" data-i18n="instantDownload">Instant download</p>
-            <div class="receipt__price">
-              <strong data-price>$12.21</strong>
-            </div>
-            <p class="receipt__sats" data-sats data-i18n="satsUnavailable">Bitcoin amount is fixed when checkout opens</p>
-            <ul class="receipt__list">
+            <ul class="offer__contents">
               <li data-i18n="gameRom">Game ROM</li>
               <li data-i18n="pdfGuide">PDF guide</li>
               <li data-i18n="windowsFiles">Windows launch files</li>
             </ul>
-            <p class="receipt__note" data-i18n="receiptNote">You don't need an account or email. Download the bundle after payment.</p>
-          </aside>
-        </div>
-        <div class="hero__scroll" aria-hidden="true" data-i18n="scrollToStart">Scroll to start ↓</div>
-      </section>
-
-      <section class="story section" aria-labelledby="story-title">
-        <div class="section__number" aria-hidden="true">01</div>
-        <div class="story__copy" data-reveal>
-          <p class="eyebrow eyebrow--dark" data-i18n="storyEyebrow">The game</p>
-          <h2 id="story-title" data-i18n="storyTitle">A tiny cartridge. A long road to Bitcoin Beach.</h2>
-          <p class="story__lead" data-i18n="storyLead">Hero lands in El Salvador as a new bitcoiner. Along the way, he meets the people, places, and absurdities of Bitcoin culture.</p>
-        </div>
-        <figure class="story__scene" data-reveal>
-          <img
-            src="/assets/images/scenes/airport_color.png"
-            alt="Pixel-art scene of Hero arriving at the airport in El Salvador"
-            data-i18n-alt="storyImageAlt"
-            width="1437"
-            height="1296"
-            loading="lazy"
-          />
-          <figcaption data-i18n="storyCaption">Next stop: El Salvador</figcaption>
-        </figure>
-      </section>
-
-      <section class="manifesto" aria-label="Game premise" data-i18n-aria="premiseAria">
-        <div class="manifesto__track" aria-hidden="true">
-          <span data-i18n="trackBitcoin">21 hidden bitcoin</span><i>◆</i><span data-i18n="trackHero">One orange hero</span><i>◆</i><span data-i18n="trackFiat">Zero fiat power-ups</span>
-        </div>
-        <blockquote data-reveal data-i18n="premiseQuote">Bitcoin culture already had heroes, villains, myths, and side quests. It only needed its own game.</blockquote>
-      </section>
-
-      <section class="making section" aria-labelledby="making-title">
-        <div class="section__number" aria-hidden="true">02</div>
-        <div class="making__intro" data-reveal>
-          <p class="eyebrow eyebrow--dark" data-i18n="makingEyebrow">The development story</p>
-          <h2 id="making-title" data-i18n="makingTitle">Independent down to the last pixel.</h2>
-          <p data-i18n="makingLead">It was never a token or a branded reskin. It started with one question: could Bitcoin culture become a real old-school adventure?</p>
-        </div>
-        <ol class="making__steps">
-          <li data-reveal>
-            <span data-i18n="ideaLabel">01 / Idea</span>
-            <h3 data-i18n="ideaTitle">Start with the culture</h3>
-            <p data-i18n="ideaBody">Turn its people, places, arguments, and jokes into a world worth exploring.</p>
-          </li>
-          <li data-reveal>
-            <span data-i18n="craftLabel">02 / Craft</span>
-            <h3 data-i18n="craftTitle">Respect the limits</h3>
-            <p data-i18n="craftBody">Build inside the honest constraints of a classic handheld game.</p>
-          </li>
-          <li data-reveal>
-            <span data-i18n="releaseLabel">03 / Release</span>
-            <h3 data-i18n="releaseTitle">Sell it directly</h3>
-            <p data-i18n="releaseBody">Pay with Bitcoin or Lightning, without creating an account.</p>
-          </li>
-        </ol>
-      </section>
-
-      <section class="world" aria-labelledby="world-title">
-        <div class="world__image" data-reveal>
-          <img
-            src="/assets/images/scenes/gallery_color.png"
-            alt="A colorful pixel-art gallery scene from Hero of Bitcoin"
-            data-i18n-alt="worldImageAlt"
-            width="1275"
-            height="849"
-            loading="lazy"
-          />
-        </div>
-        <div class="world__copy" data-reveal>
-          <p class="eyebrow" data-i18n="worldEyebrow">The world</p>
-          <h2 id="world-title" data-i18n="worldTitle">Find the signal. Fight the noise.</h2>
-          <p data-i18n="worldLead">Explore El Salvador, meet familiar bitcoiners, and keep the road to adoption clear.</p>
-          <dl>
-            <div><dt data-i18n="genreLabel">Genre</dt><dd data-i18n="genreValue">Adventure</dd></div>
-            <div><dt data-i18n="gameLanguageLabel">Game language</dt><dd data-i18n="gameLanguageValue">English</dd></div>
-            <div><dt data-i18n="formatLabel">Format</dt><dd data-i18n="formatValue">GB ROM + PDF</dd></div>
-          </dl>
-        </div>
-      </section>
-
-      <section class="bundle section" aria-labelledby="bundle-title">
-        <div class="section__number" aria-hidden="true">03</div>
-        <div class="bundle__hardware" data-reveal>
-          <div class="bundle__sun"></div>
-          <img
-            src="/assets/images/Game_Boy_HoB.jpg"
-            alt="Orange handheld console displaying Hero of Bitcoin"
-            data-i18n-alt="bundleImageAlt"
-            width="1977"
-            height="1977"
-            loading="lazy"
-          />
-        </div>
-        <div class="bundle__copy" data-reveal>
-          <p class="eyebrow eyebrow--dark" data-i18n="bundleEyebrow">The digital bundle</p>
-          <h2 id="bundle-title" data-i18n="bundleTitle">Pay. Download. Start the journey.</h2>
-          <p data-i18n="bundleLead">One ZIP contains the English game ROM, PDF guide, and current Windows launch files. Play on Raspberry Pi, MiSTer FPGA, RetroArch, or another compatible Game Boy emulator.</p>
-          <div class="bundle__facts">
-            <p><strong data-i18n="privateDelivery">Private download</strong><span data-i18n="privateDeliveryBody">A temporary download link appears after payment</span></p>
-            <p><strong data-i18n="threeDownloads">Three downloads</strong><span data-i18n="threeDownloadsBody">Move the bundle to your devices</span></p>
-            <p><strong data-i18n="noTracking">No tracking</strong><span data-i18n="noTrackingBody">We don't use marketing cookies or analytics here</span></p>
           </div>
-        </div>
-      </section>
 
-      <section class="final-cta" aria-labelledby="buy-title">
-        <img
-          class="final-cta__avatar"
-          src="/assets/images/HoB_Logo_Avatar.png"
-          alt=""
-          width="7086"
-          height="7086"
-          loading="lazy"
-        />
-        <div class="final-cta__copy" data-reveal>
-          <p class="eyebrow" data-i18n="finalEyebrow">Ready, Hero?</p>
-          <h2 id="buy-title" data-i18n="finalTitle">The next block is yours.</h2>
-          <p data-i18n="finalLead">Pay with Bitcoin or Lightning and download as soon as the payment settles.</p>
-          <div class="final-cta__buyline">
-            <span><strong data-price>$12.21</strong></span>
-            <button class="pixel-button pixel-button--light" type="button" data-checkout data-i18n="buyBundle">Buy the digital bundle ↗</button>
+          <div class="offer__buy" aria-label="Instant download details" data-i18n-aria="receiptAria" data-reveal>
+            <p class="offer__label" data-i18n="instantDownload">Instant download</p>
+            <strong class="offer__btc" data-btc-price aria-live="polite">— BTC</strong>
+            <p class="offer__reference">
+              <span data-reference-usd>$12.21</span>
+              <span aria-hidden="true"> / </span>
+              <span data-reference-eur>€—</span>
+              <small data-i18n="referencePrice">USD / EUR reference</small>
+            </p>
+            <p class="offer__rate-note" data-i18n="priceLockNote">
+              The Bitcoin amount is locked when checkout opens.
+            </p>
+
+            <button class="pixel-button" type="button" data-checkout>
+              <span data-i18n="buyWithBitcoin">Buy with Bitcoin + Lightning</span>
+              <span aria-hidden="true">↗</span>
+            </button>
+            <a class="demo-link" href="https://demo.heroofbitcoin.xyz" data-i18n="playDemo">Play the demo</a>
+            <p class="offer__note" data-i18n="receiptNote">
+              You don't need an account or email. Download the bundle after payment.
+            </p>
+            <p class="checkout-status" role="status" aria-live="polite" data-checkout-status></p>
           </div>
-          <p class="checkout-status" role="status" aria-live="polite" data-checkout-status></p>
         </div>
       </section>
     </main>
 
     <footer>
-      <p class="footer__wordmark" aria-label="Hero of Bitcoin">HERO <span>OF</span> BITCOIN</p>
       <p>©2022-2026 Hero of Bitcoin</p>
       <p data-i18n="legal">Game Boy is named only to describe compatibility. All trademarks belong to their owners.</p>
     </footer>

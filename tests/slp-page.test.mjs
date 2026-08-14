@@ -20,7 +20,12 @@ test('podcast landing page is private-by-link and built as a dedicated entry', a
   assert.match(source, /data-language-picker/);
   assert.match(source, /data-page-description/);
   assert.match(source, /data-checkout/);
+  assert.match(source, /data-btc-price/);
+  assert.match(source, /data-reference-usd/);
+  assert.match(source, /data-reference-eur/);
   assert.match(source, /aria-live="polite"/);
+  assert.equal(source.match(/<section\b/g)?.length, 1);
+  assert.doesNotMatch(source, /class="(?:story|manifesto|making|world|bundle|final-cta)/);
   assert.match(viteConfig, /slp\/index\.html/);
   for (const language of ['en', 'es', 'it', 'ja', 'de', 'ko', 'fr', 'nl', 'fi']) {
     assert.match(source, new RegExp(`<option value="${language}">`));
@@ -53,6 +58,20 @@ test('podcast checkout uses the server-owned instant-download contract', async (
   assert.match(script, /window\.location\.assign/);
   assert.doesNotMatch(script, /lang: 'en'/);
   assert.doesNotMatch(script, /email:/);
+});
+
+test('podcast pricing presents BTC first with server-derived USD and EUR references', async () => {
+  const [source, script] = await Promise.all([
+    read('slp/index.html'),
+    read('src/podcast.ts'),
+  ]);
+
+  assert.ok(source.indexOf('data-btc-price') < source.indexOf('data-reference-usd'));
+  assert.match(script, /product\.btc \? `\$\{product\.btc\} BTC` : '— BTC'/);
+  assert.match(script, /product\.reference_usd/);
+  assert.match(script, /product\.reference_eur/);
+  assert.match(script, /formatFiat\(referenceUsd, 'USD'\)/);
+  assert.match(script, /formatFiat\(referenceEur, 'EUR'\)/);
 });
 
 test('podcast language state follows URL, saved preference, and browser locale', async () => {

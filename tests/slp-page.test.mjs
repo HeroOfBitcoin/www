@@ -23,6 +23,11 @@ test('podcast landing page is private-by-link and built as a dedicated entry', a
   assert.match(source, /data-btc-price/);
   assert.match(source, /data-reference-usd/);
   assert.match(source, /data-reference-eur/);
+  assert.match(source, /src="\/assets\/images\/hob-logo-official\.png"/);
+  assert.doesNotMatch(source, /site-header__wordmark/);
+  assert.match(source, /href="https:\/\/www\.youtube\.com\/watch\?v=5puiZFbMUN4"/);
+  assert.match(source, /data-i18n="watchTrailer"/);
+  assert.match(source, /target="_blank"[\s\S]*rel="noopener noreferrer"/);
   assert.match(source, /aria-live="polite"/);
   assert.equal(source.match(/<section\b/g)?.length, 1);
   assert.doesNotMatch(source, /class="(?:story|manifesto|making|world|bundle|final-cta)/);
@@ -32,6 +37,7 @@ test('podcast landing page is private-by-link and built as a dedicated entry', a
     assert.match(translationSource, new RegExp(`\\n  ${language}:`));
   }
   await access(new URL('dist/slp/index.html', root));
+  await access(new URL('public/assets/images/hob-logo-official.png', root));
 });
 
 test('podcast landing page is not linked from public discovery surfaces', async () => {

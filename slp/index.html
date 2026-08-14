@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex,nofollow" />
-    <meta name="theme-color" content="#0b0a08" />
+    <meta name="theme-color" content="#07080a" />
     <meta
       name="description"
       data-page-description
@@ -24,13 +24,26 @@
       as="image"
       fetchpriority="high"
     />
+    <link
+      rel="preload"
+      href="/assets/images/hob-logo-official.png"
+      as="image"
+      fetchpriority="high"
+    />
     <title>Hero of Bitcoin | The Game</title>
     <script type="module" src="/src/podcast.ts"></script>
   </head>
   <body>
     <header class="site-header" aria-label="Hero of Bitcoin">
       <div class="site-header__inner">
-        <p class="site-header__wordmark" aria-label="Hero of Bitcoin">HERO <span>OF</span> BITCOIN</p>
+        <img
+          class="site-header__logo"
+          src="/assets/images/hob-logo-official.png"
+          alt="Hero of Bitcoin"
+          width="1100"
+          height="580"
+          fetchpriority="high"
+        />
         <div class="site-header__meta">
           <p class="site-header__edition" data-i18n="headerEdition">Digital release · Game in English</p>
           <label class="language-picker">
@@ -100,7 +113,18 @@
               <span data-i18n="buyWithBitcoin">Buy with Bitcoin + Lightning</span>
               <span aria-hidden="true">↗</span>
             </button>
-            <a class="demo-link" href="https://demo.heroofbitcoin.xyz" data-i18n="playDemo">Play the demo</a>
+            <div class="offer__links">
+              <a
+                class="offer-link offer-link--trailer"
+                href="https://www.youtube.com/watch?v=5puiZFbMUN4"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span aria-hidden="true">▶</span>
+                <span data-i18n="watchTrailer">Watch release trailer</span>
+              </a>
+              <a class="offer-link" href="https://demo.heroofbitcoin.xyz" data-i18n="playDemo">Play the demo</a>
+            </div>
             <p class="offer__note" data-i18n="receiptNote">
               You don't need an account or email. Download the bundle after payment.
             </p>

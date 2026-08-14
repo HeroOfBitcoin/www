@@ -2,10 +2,11 @@
 
 :root {
   color-scheme: dark;
-  --ink: #0b0a08;
-  --orange: #f7931a;
-  --gold: #ffc62e;
-  --cream: #fff7e6;
+  --ink: #07080a;
+  --outline: #1d0b11;
+  --orange: #f19319;
+  --gold: #ffc539;
+  --cream: #fdffe1;
   --grid: min(90vw, 1280px);
   font-family: Inter, Arial, sans-serif;
   background: var(--ink);
@@ -55,7 +56,8 @@ img {
   position: absolute;
   inset: 0 0 auto;
   z-index: 10;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  border-bottom: 1px solid rgba(208, 226, 226, 0.28);
+  background: linear-gradient(180deg, rgba(7, 8, 10, 0.96), rgba(7, 8, 10, 0.76));
 }
 
 .site-header__inner {
@@ -68,19 +70,10 @@ img {
   gap: 1rem;
 }
 
-.site-header__wordmark {
-  margin: 0;
-  color: var(--orange);
-  font-family: 'Press Start 2P', monospace;
-  font-size: 0.68rem;
-  letter-spacing: -0.05em;
-  white-space: nowrap;
-}
-
-.site-header__wordmark span {
-  color: #aab4c8;
-  font-size: 0.5em;
-  vertical-align: 0.22em;
+.site-header__logo {
+  width: clamp(108px, 9vw, 132px);
+  height: auto;
+  filter: drop-shadow(0 5px 12px rgba(0, 0, 0, 0.9));
 }
 
 .site-header__meta {
@@ -99,7 +92,7 @@ img {
 
 .site-header__edition {
   margin: 0;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(253, 255, 225, 0.82);
   font-size: 0.52rem;
 }
 
@@ -107,7 +100,7 @@ img {
   display: flex;
   align-items: center;
   gap: 0.65rem;
-  color: rgba(255, 255, 255, 0.68);
+  color: rgba(253, 255, 225, 0.86);
   font-family: 'Press Start 2P', monospace;
   font-size: 0.46rem;
   letter-spacing: 0.07em;
@@ -117,8 +110,8 @@ img {
 .language-picker__control {
   position: relative;
   display: block;
-  border: 1px solid rgba(255, 255, 255, 0.38);
-  background: rgba(11, 10, 8, 0.72);
+  border: 1px solid rgba(208, 226, 226, 0.56);
+  background: rgba(7, 8, 10, 0.92);
   box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
 }
 
@@ -167,7 +160,7 @@ main {
   display: grid;
   isolation: isolate;
   overflow: hidden;
-  background: #241306;
+  background: var(--ink);
 }
 
 .offer__art,
@@ -181,6 +174,7 @@ main {
   height: 100%;
   object-fit: cover;
   object-position: center 41%;
+  filter: brightness(0.56) saturate(0.78) contrast(1.06);
   transform: scale(1.035);
   animation: scene-settle 12s ease-out both;
 }
@@ -188,8 +182,8 @@ main {
 .offer__shade {
   z-index: 1;
   background:
-    linear-gradient(90deg, rgba(5, 4, 3, 0.96) 0%, rgba(7, 5, 3, 0.78) 45%, rgba(6, 4, 2, 0.38) 72%, rgba(5, 4, 3, 0.66) 100%),
-    linear-gradient(0deg, rgba(8, 6, 3, 0.94), transparent 36%, rgba(0, 0, 0, 0.28));
+    linear-gradient(90deg, rgba(7, 8, 10, 0.97) 0%, rgba(7, 8, 10, 0.91) 48%, rgba(7, 8, 10, 0.82) 100%),
+    linear-gradient(0deg, rgba(7, 8, 10, 0.98), rgba(7, 8, 10, 0.2) 52%, rgba(7, 8, 10, 0.64));
 }
 
 .offer__inner {
@@ -211,7 +205,7 @@ main {
 
 .eyebrow {
   margin: 0 0 1.25rem;
-  color: var(--gold);
+  color: #ffd86a;
   font-size: clamp(0.5rem, 0.75vw, 0.65rem);
   line-height: 1.75;
   overflow-wrap: anywhere;
@@ -229,6 +223,7 @@ h1 {
   line-height: 0.94;
   letter-spacing: -0.065em;
   font-weight: 900;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.95);
 }
 
 h1 span {
@@ -242,7 +237,7 @@ h1 span {
 .offer__lede {
   max-width: 650px;
   margin: 1.65rem 0 0;
-  color: rgba(255, 247, 230, 0.82);
+  color: rgba(253, 255, 225, 0.92);
   font-size: clamp(1rem, 1.55vw, 1.25rem);
   line-height: 1.6;
 }
@@ -254,7 +249,7 @@ h1 span {
   flex-wrap: wrap;
   gap: 0.6rem 1.35rem;
   list-style: none;
-  color: rgba(255, 247, 230, 0.7);
+  color: rgba(253, 255, 225, 0.84);
   font-size: 0.84rem;
   font-weight: 750;
 }
@@ -268,12 +263,12 @@ h1 span {
 .offer__buy {
   min-width: 0;
   padding-left: clamp(2rem, 4vw, 4rem);
-  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  border-left: 2px solid rgba(255, 197, 57, 0.62);
 }
 
 .offer__label {
   margin: 0 0 1.1rem;
-  color: var(--gold);
+  color: #ffd86a;
   font-size: 0.55rem;
 }
 
@@ -289,7 +284,7 @@ h1 span {
 
 .offer__reference {
   margin: 0.8rem 0 0;
-  color: rgba(255, 247, 230, 0.78);
+  color: rgba(253, 255, 225, 0.9);
   font-size: 0.96rem;
   font-variant-numeric: tabular-nums;
 }
@@ -297,14 +292,14 @@ h1 span {
 .offer__reference small {
   display: block;
   margin-top: 0.3rem;
-  color: rgba(255, 247, 230, 0.46);
+  color: rgba(208, 226, 226, 0.76);
   font-size: 0.66rem;
   letter-spacing: 0.02em;
 }
 
 .offer__rate-note,
 .offer__note {
-  color: rgba(255, 247, 230, 0.58);
+  color: rgba(208, 226, 226, 0.78);
   font-size: 0.76rem;
   line-height: 1.5;
 }
@@ -324,7 +319,7 @@ h1 span {
   justify-content: space-between;
   gap: 1rem;
   background: var(--orange);
-  color: #160b02;
+  color: var(--outline);
   cursor: pointer;
   font-family: 'Press Start 2P', monospace;
   font-size: 0.59rem;
@@ -337,7 +332,7 @@ h1 span {
 .pixel-button:hover {
   transform: translate(3px, 3px);
   box-shadow: 4px 4px 0 #000;
-  background: #ffad3e;
+  background: var(--gold);
 }
 
 .pixel-button:active {
@@ -351,20 +346,42 @@ h1 span {
 }
 
 .pixel-button:focus-visible,
-.demo-link:focus-visible {
+.offer-link:focus-visible {
   outline: 3px solid var(--cream);
   outline-offset: 5px;
 }
 
-.demo-link {
-  min-height: 44px;
+.offer__links {
   margin-top: 0.85rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 1.35rem;
+}
+
+.offer-link {
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
+  gap: 0.45rem;
   color: var(--cream);
   font-size: 0.86rem;
   font-weight: 800;
   text-underline-offset: 0.3em;
+  transition: color 150ms ease, transform 150ms ease;
+}
+
+.offer-link:hover {
+  color: var(--gold);
+  transform: translateY(-1px);
+}
+
+.offer-link--trailer {
+  color: #ffd86a;
+}
+
+.offer-link--trailer > span:first-child {
+  color: var(--orange);
+  font-size: 0.72rem;
 }
 
 .offer__note {
@@ -394,7 +411,7 @@ footer {
   justify-content: space-between;
   gap: 2rem;
   background: var(--ink);
-  color: rgba(255, 255, 255, 0.42);
+  color: rgba(208, 226, 226, 0.76);
   font-size: 0.65rem;
   line-height: 1.45;
 }
@@ -493,8 +510,8 @@ html[data-language='ja'] h1 {
     height: 68px;
   }
 
-  .site-header__wordmark {
-    font-size: 0.57rem;
+  .site-header__logo {
+    width: 98px;
   }
 
   .site-header__edition,
@@ -522,8 +539,8 @@ html[data-language='ja'] h1 {
 
   .offer__shade {
     background:
-      linear-gradient(0deg, rgba(7, 5, 3, 0.98) 3%, rgba(7, 5, 3, 0.89) 58%, rgba(7, 5, 3, 0.2) 100%),
-      linear-gradient(90deg, rgba(0, 0, 0, 0.45), transparent);
+      linear-gradient(0deg, rgba(7, 8, 10, 0.99) 3%, rgba(7, 8, 10, 0.94) 60%, rgba(7, 8, 10, 0.76) 100%),
+      linear-gradient(90deg, rgba(7, 8, 10, 0.74), rgba(7, 8, 10, 0.38));
   }
 
   .offer__inner {
@@ -565,7 +582,7 @@ html[data-language='ja'] h1 {
 
   .offer__buy {
     padding: 1.1rem 0 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.28);
+    border-top: 2px solid rgba(255, 197, 57, 0.56);
     border-left: 0;
   }
 
@@ -585,8 +602,9 @@ html[data-language='ja'] h1 {
     min-height: 52px;
   }
 
-  .demo-link {
+  .offer__links {
     margin-top: 0.55rem;
+    gap: 0 1.1rem;
   }
 
   .offer__note {

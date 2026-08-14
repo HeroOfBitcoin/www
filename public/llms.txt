@@ -1,6 +1,6 @@
 # Hero of Bitcoin
 
-> An independent Game Boy-compatible adventure through Bitcoin culture, set in El Salvador.
+> A Game Boy-compatible adventure set in El Salvador, with 21 bitcoin hidden throughout the game.
 
 ## Digital game
 

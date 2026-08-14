@@ -20,6 +20,9 @@ test('digital landing page is canonical, indexable, and built as a dedicated ent
   assert.match(source, /property="og:url" content="https:\/\/heroofbitcoin\.xyz\/digital\/"/);
   assert.match(source, /data-social-title/);
   assert.match(source, /data-social-description/);
+  assert.match(source, /Game Boy-Compatible Bitcoin Game/);
+  assert.match(source, />Explore El Salvador\.<\/span>/);
+  assert.match(source, />Find all 21 bitcoin\.<\/span>/);
   assert.match(source, /data-language-picker/);
   assert.match(source, /data-page-description/);
   assert.match(source, /data-checkout/);
@@ -49,7 +52,24 @@ test('digital landing page is canonical, indexable, and built as a dedicated ent
   assert.equal(product.offers.price, '12.21');
   assert.equal(product.offers.priceCurrency, 'USD');
   assert.equal(game.inLanguage, 'en');
+  assert.match(game.description, /21 bitcoin hidden throughout the game/);
   assert.doesNotMatch(source, /"@type": "VideoObject"/);
+
+  const retiredCopy = [
+    'weird side',
+    'lado más raro',
+    'lato più strano',
+    '奇妙な一面',
+    'schräge Seite',
+    '기묘한 면',
+    'côté étrange',
+    'vreemde kant',
+    'outoon puoleen',
+    'Built to play',
+  ];
+  for (const phrase of retiredCopy) {
+    assert.doesNotMatch(`${source}\n${translationSource}`, new RegExp(phrase));
+  }
 
   for (const language of ['en', 'es', 'it', 'ja', 'de', 'ko', 'fr', 'nl', 'fi']) {
     assert.match(source, new RegExp(`<option value="${language}">`));
@@ -88,6 +108,7 @@ test('crawler discovery surfaces point to the canonical page without adding site
   assert.match(robots, /Sitemap: https:\/\/heroofbitcoin\.xyz\/sitemap\.xml/);
   assert.match(sitemap, /<loc>https:\/\/heroofbitcoin\.xyz\/digital\/<\/loc>/);
   assert.match(llms, /\[Hero of Bitcoin Digital\]\(https:\/\/heroofbitcoin\.xyz\/digital\/\)/);
+  assert.match(llms, /Game Boy-compatible adventure set in El Salvador/);
   assert.match(llms, /The game is in English/);
   assert.match(homepage, /"url": "https:\/\/heroofbitcoin\.xyz\/digital\/"/);
   assert.match(productsFeed, /<link>https:\/\/heroofbitcoin\.xyz\/digital\/<\/link>/);

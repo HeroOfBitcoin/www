@@ -61,7 +61,7 @@ img {
 
 .site-header__inner {
   width: var(--grid);
-  height: 76px;
+  height: 68px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -70,9 +70,9 @@ img {
 }
 
 .site-header__logo {
-  width: clamp(108px, 9vw, 132px);
+  width: clamp(190px, 18vw, 240px);
   height: auto;
-  filter: drop-shadow(0 5px 12px rgba(0, 0, 0, 0.9));
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.72));
 }
 
 .site-header__meta {
@@ -581,11 +581,11 @@ html[data-language='ja'] h1 {
   }
 
   .site-header__inner {
-    height: 68px;
+    height: 60px;
   }
 
   .site-header__logo {
-    width: 98px;
+    width: clamp(148px, 43vw, 180px);
   }
 
   .site-header__edition,

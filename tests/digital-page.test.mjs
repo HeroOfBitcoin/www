@@ -29,7 +29,7 @@ test('digital landing page is canonical, indexable, and built as a dedicated ent
   assert.match(source, /data-btc-price/);
   assert.match(source, /data-reference-usd/);
   assert.match(source, /data-reference-eur/);
-  assert.match(source, /src="\/assets\/images\/hob-logo-official\.png"/);
+  assert.match(source, /src="\/assets\/images\/hob_textlogo_horizontal\.webp"/);
   assert.match(source, /href="https:\/\/youtu\.be\/IBqAaWS--Bg"/);
   assert.match(source, /src="\/assets\/images\/digital-volcano-hero\.jpg"/);
   assert.match(source, /property="og:image" content="https:\/\/heroofbitcoin\.xyz\/assets\/images\/digital-volcano-hero\.jpg"/);
@@ -80,7 +80,7 @@ test('digital landing page is canonical, indexable, and built as a dedicated ent
 
   await access(new URL('dist/digital/index.html', root));
   await access(new URL('dist/slp/index.html', root));
-  await access(new URL('public/assets/images/hob-logo-official.png', root));
+  await access(new URL('public/assets/images/hob_textlogo_horizontal.webp', root));
   await access(new URL('public/assets/images/digital-volcano-hero.jpg', root));
 });
 

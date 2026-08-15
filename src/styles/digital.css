@@ -298,9 +298,10 @@ h1 span {
 .offer__buy {
   position: relative;
   isolation: isolate;
+  align-self: end;
   min-width: 0;
+  margin-bottom: 0;
   padding-left: clamp(2rem, 4vw, 4rem);
-  border-left: 2px solid rgba(255, 197, 57, 0.62);
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.96);
 }
 
@@ -674,9 +675,10 @@ html[data-language='ja'] h1 {
   }
 
   .offer__buy {
+    align-self: auto;
+    margin-bottom: 0;
     padding: 1.1rem 0 0;
     border-top: 2px solid rgba(255, 197, 57, 0.56);
-    border-left: 0;
   }
 
   .offer__buy::before {

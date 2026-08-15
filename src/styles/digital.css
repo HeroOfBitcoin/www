@@ -169,21 +169,41 @@ main {
   inset: 0;
 }
 
+.offer__art {
+  overflow: hidden;
+  background: #071217;
+}
+
+.offer__art::before {
+  content: '';
+  position: absolute;
+  inset: -5%;
+  background: url('/assets/images/digital-volcano-hero.jpg') center / cover no-repeat;
+  filter: blur(28px) brightness(0.42) saturate(0.88);
+  transform: scale(1.12);
+}
+
 .offer__art img {
-  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(50% - 100px);
+  width: auto;
+  max-width: none;
   height: 100%;
-  object-fit: cover;
-  object-position: center 41%;
-  filter: brightness(0.56) saturate(0.78) contrast(1.06);
-  transform: scale(1.035);
+  object-fit: contain;
+  filter: brightness(0.94) saturate(1.04) contrast(1.08);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.28) 12%, #000 30%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.28) 12%, #000 30%);
+  transform: scale(1.018);
   animation: scene-settle 12s ease-out both;
 }
 
 .offer__shade {
   z-index: 1;
   background:
-    linear-gradient(90deg, rgba(7, 8, 10, 0.97) 0%, rgba(7, 8, 10, 0.91) 48%, rgba(7, 8, 10, 0.82) 100%),
-    linear-gradient(0deg, rgba(7, 8, 10, 0.98), rgba(7, 8, 10, 0.2) 52%, rgba(7, 8, 10, 0.64));
+    linear-gradient(90deg, rgba(7, 8, 10, 0.98) 0%, rgba(7, 8, 10, 0.93) 38%, rgba(7, 8, 10, 0.46) 58%, rgba(7, 8, 10, 0.6) 72%, rgba(7, 8, 10, 0.9) 100%),
+    linear-gradient(0deg, rgba(7, 8, 10, 0.96) 0%, rgba(7, 8, 10, 0.18) 44%, rgba(7, 8, 10, 0.24) 72%, rgba(7, 8, 10, 0.64) 100%);
 }
 
 .offer__inner {
@@ -261,9 +281,21 @@ h1 span {
 }
 
 .offer__buy {
+  position: relative;
+  isolation: isolate;
   min-width: 0;
   padding-left: clamp(2rem, 4vw, 4rem);
   border-left: 2px solid rgba(255, 197, 57, 0.62);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.96);
+}
+
+.offer__buy::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: -2.2rem -3rem;
+  background: radial-gradient(ellipse at center, rgba(7, 8, 10, 0.82), rgba(7, 8, 10, 0.56) 58%, transparent 78%);
+  pointer-events: none;
 }
 
 .offer__label {
@@ -524,8 +556,8 @@ html[data-language='ja'] h1 {
 }
 
 @keyframes scene-settle {
-  from { transform: scale(1.09); }
-  to { transform: scale(1.035); }
+  from { transform: scale(1.065); }
+  to { transform: scale(1.018); }
 }
 
 @media (max-width: 760px) {
@@ -565,13 +597,19 @@ html[data-language='ja'] h1 {
   }
 
   .offer__art img {
-    object-position: 66% center;
+    left: 0;
+    width: 100%;
+    object-fit: cover;
+    object-position: 65% center;
+    filter: brightness(1.05) saturate(1.08) contrast(1.06);
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 
   .offer__shade {
     background:
-      linear-gradient(0deg, rgba(7, 8, 10, 0.99) 3%, rgba(7, 8, 10, 0.94) 60%, rgba(7, 8, 10, 0.76) 100%),
-      linear-gradient(90deg, rgba(7, 8, 10, 0.74), rgba(7, 8, 10, 0.38));
+      linear-gradient(0deg, rgba(7, 8, 10, 0.99) 3%, rgba(7, 8, 10, 0.94) 53%, rgba(7, 8, 10, 0.64) 78%, rgba(7, 8, 10, 0.42) 100%),
+      linear-gradient(90deg, rgba(7, 8, 10, 0.84), rgba(7, 8, 10, 0.38) 68%, rgba(7, 8, 10, 0.56));
   }
 
   .offer__inner {
@@ -615,6 +653,11 @@ html[data-language='ja'] h1 {
     padding: 1.1rem 0 0;
     border-top: 2px solid rgba(255, 197, 57, 0.56);
     border-left: 0;
+  }
+
+  .offer__buy::before {
+    inset: -1rem -2rem -2rem;
+    background: linear-gradient(0deg, rgba(7, 8, 10, 0.72), rgba(7, 8, 10, 0.44) 72%, transparent);
   }
 
   .offer__label {

@@ -30,7 +30,9 @@ test('digital landing page is canonical, indexable, and built as a dedicated ent
   assert.match(source, /data-reference-usd/);
   assert.match(source, /data-reference-eur/);
   assert.match(source, /src="\/assets\/images\/hob-logo-official\.png"/);
-  assert.match(source, /href="https:\/\/www\.youtube\.com\/watch\?v=5puiZFbMUN4"/);
+  assert.match(source, /href="https:\/\/youtu\.be\/IBqAaWS--Bg"/);
+  assert.match(source, /src="\/assets\/images\/digital-volcano-hero\.jpg"/);
+  assert.match(source, /property="og:image" content="https:\/\/heroofbitcoin\.xyz\/assets\/images\/digital-volcano-hero\.jpg"/);
   assert.match(source, /class="offer__trailer"/);
   assert.match(source, /class="pixel-trailer-button"/);
   assert.match(source, /data-i18n="watchTrailer"/);
@@ -79,6 +81,7 @@ test('digital landing page is canonical, indexable, and built as a dedicated ent
   await access(new URL('dist/digital/index.html', root));
   await access(new URL('dist/slp/index.html', root));
   await access(new URL('public/assets/images/hob-logo-official.png', root));
+  await access(new URL('public/assets/images/digital-volcano-hero.jpg', root));
 });
 
 test('legacy podcast URL redirects to the digital canonical and preserves language', async () => {
@@ -108,6 +111,7 @@ test('crawler discovery surfaces point to the canonical page without adding site
   assert.match(robots, /Sitemap: https:\/\/heroofbitcoin\.xyz\/sitemap\.xml/);
   assert.match(sitemap, /<loc>https:\/\/heroofbitcoin\.xyz\/digital\/<\/loc>/);
   assert.match(llms, /\[Hero of Bitcoin Digital\]\(https:\/\/heroofbitcoin\.xyz\/digital\/\)/);
+  assert.match(llms, /\[Digital release trailer\]\(https:\/\/youtu\.be\/IBqAaWS--Bg\)/);
   assert.match(llms, /Game Boy-compatible adventure set in El Salvador/);
   assert.match(llms, /The game is in English/);
   assert.match(homepage, /"url": "https:\/\/heroofbitcoin\.xyz\/digital\/"/);

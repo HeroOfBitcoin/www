@@ -5,7 +5,7 @@
 ## Digital game
 
 - [Hero of Bitcoin Digital](https://heroofbitcoin.xyz/digital/): Instant download paid with Bitcoin or Lightning.
-- [Release trailer](https://www.youtube.com/watch?v=5puiZFbMUN4): Official Hero of Bitcoin release trailer on YouTube.
+- [Digital release trailer](https://youtu.be/IBqAaWS--Bg): Official trailer for the digital version on YouTube.
 - [Playable demo](https://demo.heroofbitcoin.xyz): Try the game before buying.
 
 ## Product facts

@@ -155,9 +155,10 @@ test('digital checkout uses the server-owned instant-download contract', async (
 });
 
 test('player reviews preserve the supplied wording and use manual controls only', async () => {
-  const [source, script] = await Promise.all([
+  const [source, script, stylesheet] = await Promise.all([
     read('digital/index.html'),
     read('src/digital.ts'),
+    read('src/styles/digital.css'),
   ]);
   const reviews = [
     'Amazing game and runs perfectly on original hardware!',
@@ -176,7 +177,15 @@ test('player reviews preserve the supplied wording and use manual controls only'
   assert.match(script, /previousReviewButton\?\.addEventListener\('click'/);
   assert.match(script, /nextReviewButton\?\.addEventListener\('click'/);
   assert.match(script, /node\.hidden = reviewIndex !== activeReviewIndex/);
+  assert.match(script, /duration: 120/);
+  assert.match(script, /!reducedMotionQuery\.matches/);
+  assert.match(script, /showReview\(activeReviewIndex, false\)/);
   assert.doesNotMatch(script, /review.*setInterval|setInterval.*review/i);
+  assert.match(stylesheet, /\.player-reviews::before/);
+  assert.match(stylesheet, /\.player-reviews__button \{[\s\S]*width: 44px;[\s\S]*height: 44px;/);
+  assert.match(stylesheet, /\.player-reviews__count \{[\s\S]*font-family: Inter, Arial, sans-serif;[\s\S]*font-size: 0\.7rem;/);
+  assert.match(stylesheet, /\.player-review blockquote \{[\s\S]*font-family: Inter, Arial, sans-serif;[\s\S]*font-size: clamp\(1\.02rem, 1\.35vw, 1\.18rem\);[\s\S]*font-style: normal;[\s\S]*font-weight: 600;/);
+  assert.match(stylesheet, /\.player-review blockquote::before \{[\s\S]*content: '';[\s\S]*data:image\/svg\+xml/);
 });
 
 test('digital pricing presents BTC first with a guarded fast preview and server reconciliation', async () => {

@@ -47,6 +47,7 @@ const reviewNodes = Array.from(document.querySelectorAll<HTMLElement>('[data-rev
 const reviewIndexNode = document.querySelector<HTMLElement>('[data-review-index]');
 const previousReviewButton = document.querySelector<HTMLButtonElement>('[data-review-prev]');
 const nextReviewButton = document.querySelector<HTMLButtonElement>('[data-review-next]');
+const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 const initialPriceUsd = Number(priceNode?.dataset.priceUsd);
 let currentLanguage: Language = 'en';
 let currentProductPrice: ProductPrice | null = null;
@@ -222,17 +223,29 @@ function setCheckoutBusy(isBusy: boolean): void {
   });
 }
 
-function showReview(index: number): void {
+function showReview(index: number, shouldAnimate = true): void {
   if (reviewNodes.length === 0) {
     return;
   }
 
   activeReviewIndex = (index + reviewNodes.length) % reviewNodes.length;
   reviewNodes.forEach((node, reviewIndex) => {
+    node.getAnimations().forEach((animation) => animation.cancel());
     node.hidden = reviewIndex !== activeReviewIndex;
   });
   if (reviewIndexNode) {
     reviewIndexNode.textContent = String(activeReviewIndex + 1);
+  }
+
+  const activeReview = reviewNodes[activeReviewIndex];
+  if (shouldAnimate && activeReview && !reducedMotionQuery.matches) {
+    activeReview.animate([
+      { opacity: 0.25, transform: 'translateY(4px)' },
+      { opacity: 1, transform: 'translateY(0)' },
+    ], {
+      duration: 120,
+      easing: 'ease-out',
+    });
   }
 }
 
@@ -361,10 +374,10 @@ nextReviewButton?.addEventListener('click', () => {
 });
 
 applyLanguage(resolveInitialLanguage());
-showReview(activeReviewIndex);
+showReview(activeReviewIndex, false);
 
 const revealNodes = document.querySelectorAll<HTMLElement>('[data-reveal]');
-if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+if ('IntersectionObserver' in window && !reducedMotionQuery.matches) {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {

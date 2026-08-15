@@ -43,11 +43,16 @@ const checkoutButtons = Array.from(document.querySelectorAll<HTMLButtonElement>(
 const statusNodes = Array.from(document.querySelectorAll<HTMLElement>('[data-checkout-status]'));
 const languagePicker = document.querySelector<HTMLSelectElement>('[data-language-picker]');
 const priceNode = document.querySelector<HTMLElement>('[data-btc-price]');
+const reviewNodes = Array.from(document.querySelectorAll<HTMLElement>('[data-review]'));
+const reviewIndexNode = document.querySelector<HTMLElement>('[data-review-index]');
+const previousReviewButton = document.querySelector<HTMLButtonElement>('[data-review-prev]');
+const nextReviewButton = document.querySelector<HTMLButtonElement>('[data-review-next]');
 const initialPriceUsd = Number(priceNode?.dataset.priceUsd);
 let currentLanguage: Language = 'en';
 let currentProductPrice: ProductPrice | null = null;
 let fastRates: BtcRates | null = null;
 let hasServerBtcPrice = false;
+let activeReviewIndex = 0;
 
 function readStoredLanguage(): Language | null {
   try {
@@ -217,6 +222,20 @@ function setCheckoutBusy(isBusy: boolean): void {
   });
 }
 
+function showReview(index: number): void {
+  if (reviewNodes.length === 0) {
+    return;
+  }
+
+  activeReviewIndex = (index + reviewNodes.length) % reviewNodes.length;
+  reviewNodes.forEach((node, reviewIndex) => {
+    node.hidden = reviewIndex !== activeReviewIndex;
+  });
+  if (reviewIndexNode) {
+    reviewIndexNode.textContent = String(activeReviewIndex + 1);
+  }
+}
+
 async function loadPrice(): Promise<void> {
   try {
     const response = await fetch(`${apiBaseUrl}/api/products/prices`, {
@@ -333,7 +352,16 @@ checkoutButtons.forEach((button) => {
   button.addEventListener('click', startCheckout);
 });
 
+previousReviewButton?.addEventListener('click', () => {
+  showReview(activeReviewIndex - 1);
+});
+
+nextReviewButton?.addEventListener('click', () => {
+  showReview(activeReviewIndex + 1);
+});
+
 applyLanguage(resolveInitialLanguage());
+showReview(activeReviewIndex);
 
 const revealNodes = document.querySelectorAll<HTMLElement>('[data-reveal]');
 if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {

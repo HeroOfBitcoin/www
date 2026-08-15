@@ -36,12 +36,25 @@ test('digital landing page is canonical, indexable, and built as a dedicated ent
   assert.match(source, /class="offer__trailer"/);
   assert.match(source, /class="pixel-trailer-button"/);
   assert.match(source, /data-i18n="watchTrailer"/);
+  assert.match(source, /data-i18n="playerReviews"/);
+  assert.match(source, /data-review-prev/);
+  assert.match(source, /data-review-next/);
+  assert.match(source, /data-review-index/);
   assert.match(source, /target="_blank"[\s\S]*rel="noopener noreferrer"/);
   assert.match(source, /aria-live="polite"/);
   assert.match(source, /src="\/src\/digital\.ts"/);
   assert.ok(source.indexOf('class="offer__trailer"') < source.indexOf('class="offer__buy"'));
   assert.equal(source.match(/<section\b/g)?.length, 1);
   assert.doesNotMatch(source, /Stephan Livera|class="(?:story|manifesto|making|world|bundle|final-cta)/);
+  const reviewFigures = Array.from(source.matchAll(/<figure class="player-review"([^>]*)>([\s\S]*?)<\/figure>/g));
+  assert.equal(reviewFigures.length, 7);
+  assert.deepEqual(
+    reviewFigures.flatMap((review, index) => review[1].includes('data-translated="true"') ? [index + 1] : []),
+    [3, 5],
+  );
+  reviewFigures.forEach((review, index) => {
+    assert.equal(review[2].includes('data-i18n="translatedReview"'), [3, 5].includes(index + 1));
+  });
   assert.match(viteConfig, /digital\/index\.html/);
   assert.match(viteConfig, /slp\/index\.html/);
 
@@ -139,6 +152,31 @@ test('digital checkout uses the server-owned instant-download contract', async (
   assert.match(script, /window\.location\.assign/);
   assert.doesNotMatch(script, /lang: 'en'/);
   assert.doesNotMatch(script, /email:/);
+});
+
+test('player reviews preserve the supplied wording and use manual controls only', async () => {
+  const [source, script] = await Promise.all([
+    read('digital/index.html'),
+    read('src/digital.ts'),
+  ]);
+  const reviews = [
+    'Amazing game and runs perfectly on original hardware!',
+    'Love the chiptunes and pixelart',
+    'We finished the game over the weekend and the kids beat my time easily',
+    'A real Game Boy cartridge in 2026! I bought the physical version for my collection',
+    'Packaging and manual feel like directly off a 1990s shelf!',
+    'Gifted the digital version to my son who never touched a Game Boy and he enjoyed it.',
+    'With a limited release of ≈420 physical boxes including the cartridge, I had to get one for my Bitcoin collection',
+  ];
+
+  for (const review of reviews) {
+    assert.ok(source.includes(`<blockquote>${review}</blockquote>`), `missing exact review: ${review}`);
+  }
+
+  assert.match(script, /previousReviewButton\?\.addEventListener\('click'/);
+  assert.match(script, /nextReviewButton\?\.addEventListener\('click'/);
+  assert.match(script, /node\.hidden = reviewIndex !== activeReviewIndex/);
+  assert.doesNotMatch(script, /review.*setInterval|setInterval.*review/i);
 });
 
 test('digital pricing presents BTC first with a guarded fast preview and server reconciliation', async () => {

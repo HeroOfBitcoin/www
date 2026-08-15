@@ -216,6 +216,60 @@
             </p>
             <p class="checkout-status" role="status" aria-live="polite" data-checkout-status></p>
           </div>
+
+          <aside class="player-reviews" aria-labelledby="player-reviews-title" data-reviews data-reveal>
+            <div class="player-reviews__header">
+              <h2 id="player-reviews-title" data-i18n="playerReviews">Player reviews</h2>
+              <div class="player-reviews__controls">
+                <button
+                  class="player-reviews__button"
+                  type="button"
+                  aria-label="Previous review"
+                  data-i18n-aria="previousReview"
+                  data-review-prev
+                >
+                  ←
+                </button>
+                <span class="player-reviews__count" aria-hidden="true">
+                  <span data-review-index>1</span> / 7
+                </span>
+                <button
+                  class="player-reviews__button"
+                  type="button"
+                  aria-label="Next review"
+                  data-i18n-aria="nextReview"
+                  data-review-next
+                >
+                  →
+                </button>
+              </div>
+            </div>
+            <div class="player-reviews__viewport" aria-live="polite" aria-atomic="true">
+              <figure class="player-review" data-review>
+                <blockquote>Amazing game and runs perfectly on original hardware!</blockquote>
+              </figure>
+              <figure class="player-review" data-review hidden>
+                <blockquote>Love the chiptunes and pixelart</blockquote>
+              </figure>
+              <figure class="player-review" data-review data-translated="true" hidden>
+                <blockquote>We finished the game over the weekend and the kids beat my time easily</blockquote>
+                <figcaption data-i18n="translatedReview">Translated review</figcaption>
+              </figure>
+              <figure class="player-review" data-review hidden>
+                <blockquote>A real Game Boy cartridge in 2026! I bought the physical version for my collection</blockquote>
+              </figure>
+              <figure class="player-review" data-review data-translated="true" hidden>
+                <blockquote>Packaging and manual feel like directly off a 1990s shelf!</blockquote>
+                <figcaption data-i18n="translatedReview">Translated review</figcaption>
+              </figure>
+              <figure class="player-review" data-review hidden>
+                <blockquote>Gifted the digital version to my son who never touched a Game Boy and he enjoyed it.</blockquote>
+              </figure>
+              <figure class="player-review" data-review hidden>
+                <blockquote>With a limited release of ≈420 physical boxes including the cartridge, I had to get one for my Bitcoin collection</blockquote>
+              </figure>
+            </div>
+          </aside>
         </div>
       </section>
     </main>

@@ -40,6 +40,7 @@ test('digital landing page is canonical, indexable, and built as a dedicated ent
   assert.match(source, /data-review-prev/);
   assert.match(source, /data-review-next/);
   assert.match(source, /data-review-index/);
+  assert.match(source, /data-review-total/);
   assert.match(source, /target="_blank"[\s\S]*rel="noopener noreferrer"/);
   assert.match(source, /aria-live="polite"/);
   assert.match(source, /src="\/src\/digital\.ts"/);
@@ -47,7 +48,7 @@ test('digital landing page is canonical, indexable, and built as a dedicated ent
   assert.equal(source.match(/<section\b/g)?.length, 1);
   assert.doesNotMatch(source, /Stephan Livera|class="(?:story|manifesto|making|world|bundle|final-cta)/);
   const reviewFigures = Array.from(source.matchAll(/<figure class="player-review"([^>]*)>([\s\S]*?)<\/figure>/g));
-  assert.equal(reviewFigures.length, 7);
+  assert.equal(reviewFigures.length, 9);
   assert.deepEqual(
     reviewFigures.flatMap((review, index) => review[1].includes('data-translated="true"') ? [index + 1] : []),
     [3, 5],
@@ -55,6 +56,10 @@ test('digital landing page is canonical, indexable, and built as a dedicated ent
   reviewFigures.forEach((review, index) => {
     assert.equal(review[2].includes('data-i18n="translatedReview"'), [3, 5].includes(index + 1));
   });
+  assert.equal(reviewFigures[7][1].includes('data-review-source="long-form-review"'), true);
+  assert.equal(reviewFigures[8][1].includes('data-review-source="long-form-review"'), true);
+  assert.match(reviewFigures[7][2], /data-i18n="reviewExcerptPart1"/);
+  assert.match(reviewFigures[8][2], /data-i18n="reviewExcerptPart2"/);
   assert.match(viteConfig, /digital\/index\.html/);
   assert.match(viteConfig, /slp\/index\.html/);
 
@@ -168,6 +173,8 @@ test('player reviews preserve the supplied wording and use manual controls only'
     'Packaging and manual feel like directly off a 1990s shelf!',
     'Gifted the digital version to my son who never touched a Game Boy and he enjoyed it.',
     'With a limited release of ≈420 physical boxes including the cartridge, I had to get one for my Bitcoin collection',
+    'Hero of Bitcoin feels like a lost Game Boy cartridge built for the Bitcoin era. Its crisp pixel art, retro soundtrack, El Salvador setting, and Bitcoin-inspired humor give the game a unique identity.',
+    'Collecting 21 hidden Bitcoin adds replay value, while familiar personalities and enemies drawn from fiat culture keep the adventure entertaining. A clever, original, and genuinely fun indie game.',
   ];
 
   for (const review of reviews) {
@@ -177,6 +184,7 @@ test('player reviews preserve the supplied wording and use manual controls only'
   assert.match(script, /previousReviewButton\?\.addEventListener\('click'/);
   assert.match(script, /nextReviewButton\?\.addEventListener\('click'/);
   assert.match(script, /node\.hidden = reviewIndex !== activeReviewIndex/);
+  assert.match(script, /reviewTotalNode\.textContent = String\(reviewNodes\.length\)/);
   assert.match(script, /duration: 120/);
   assert.match(script, /!reducedMotionQuery\.matches/);
   assert.match(script, /showReview\(activeReviewIndex, false\)/);

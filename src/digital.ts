@@ -45,6 +45,7 @@ const languagePicker = document.querySelector<HTMLSelectElement>('[data-language
 const priceNode = document.querySelector<HTMLElement>('[data-btc-price]');
 const reviewNodes = Array.from(document.querySelectorAll<HTMLElement>('[data-review]'));
 const reviewIndexNode = document.querySelector<HTMLElement>('[data-review-index]');
+const reviewTotalNode = document.querySelector<HTMLElement>('[data-review-total]');
 const previousReviewButton = document.querySelector<HTMLButtonElement>('[data-review-prev]');
 const nextReviewButton = document.querySelector<HTMLButtonElement>('[data-review-next]');
 const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -235,6 +236,9 @@ function showReview(index: number, shouldAnimate = true): void {
   });
   if (reviewIndexNode) {
     reviewIndexNode.textContent = String(activeReviewIndex + 1);
+  }
+  if (reviewTotalNode) {
+    reviewTotalNode.textContent = String(reviewNodes.length);
   }
 
   const activeReview = reviewNodes[activeReviewIndex];

@@ -48,7 +48,7 @@ test('digital landing page is canonical, indexable, and built as a dedicated ent
   assert.equal(source.match(/<section\b/g)?.length, 1);
   assert.doesNotMatch(source, /Stephan Livera|class="(?:story|manifesto|making|world|bundle|final-cta)/);
   const reviewFigures = Array.from(source.matchAll(/<figure class="player-review"([^>]*)>([\s\S]*?)<\/figure>/g));
-  assert.equal(reviewFigures.length, 9);
+  assert.equal(reviewFigures.length, 10);
   assert.deepEqual(
     reviewFigures.flatMap((review, index) => review[1].includes('data-translated="true"') ? [index + 1] : []),
     [3, 5],
@@ -175,6 +175,7 @@ test('player reviews preserve the supplied wording and use manual controls only'
     'With a limited release of ≈420 physical boxes including the cartridge, I had to get one for my Bitcoin collection',
     'Hero of Bitcoin feels like a lost Game Boy cartridge built for the Bitcoin era. Its crisp pixel art, retro soundtrack, El Salvador setting, and Bitcoin-inspired humor give the game a unique identity.',
     'Collecting 21 hidden Bitcoin adds replay value, while familiar personalities and enemies drawn from fiat culture keep the adventure entertaining. A clever, original, and genuinely fun indie game.',
+    'great game - lots of entertainment and education rolled up together while also being nostalgic. Hoping for a HoB2 down the road!',
   ];
 
   for (const review of reviews) {

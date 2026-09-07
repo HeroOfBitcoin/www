@@ -35,7 +35,8 @@ body {
 
 button,
 a,
-select {
+select,
+input {
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -487,7 +488,75 @@ h1 span {
 }
 
 .offer__rate-note {
-  margin: 0.65rem 0 1.5rem;
+  margin: 0.65rem 0 0.15rem;
+}
+
+.offer__discount {
+  margin: 0 0 0.75rem;
+}
+
+.offer__discount summary {
+  width: fit-content;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: rgba(253, 255, 225, 0.86);
+  cursor: pointer;
+  font-size: 0.76rem;
+  font-weight: 800;
+  list-style: none;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 197, 57, 0.7);
+  text-underline-offset: 0.28em;
+}
+
+.offer__discount summary::-webkit-details-marker {
+  display: none;
+}
+
+.offer__discount summary::before {
+  content: '+';
+  color: var(--orange);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.52rem;
+  text-decoration: none;
+}
+
+.offer__discount[open] summary::before {
+  content: '−';
+}
+
+.offer__discount summary:focus-visible,
+.offer__discount input:focus-visible {
+  outline: 3px solid var(--cream);
+  outline-offset: 3px;
+}
+
+.offer__discount input {
+  width: 100%;
+  height: 44px;
+  border: 1px solid rgba(255, 197, 57, 0.62);
+  border-radius: 0;
+  padding: 0 0.75rem;
+  background: rgba(7, 8, 10, 0.82);
+  color: var(--cream);
+  font-family: Inter, Arial, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.offer__discount input::placeholder {
+  color: rgba(208, 226, 226, 0.58);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.offer__discount input:disabled {
+  cursor: wait;
+  opacity: 0.62;
 }
 
 .pixel-button {
@@ -831,7 +900,7 @@ html[data-language='ja'] h1 {
   }
 
   .offer__rate-note {
-    margin-bottom: 1rem;
+    margin-bottom: 0.15rem;
   }
 
   .pixel-button {

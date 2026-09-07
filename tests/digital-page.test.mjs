@@ -41,6 +41,9 @@ test('digital landing page is canonical, indexable, and built as a dedicated ent
   assert.match(source, /data-review-next/);
   assert.match(source, /data-review-index/);
   assert.match(source, /data-review-total/);
+  assert.match(source, /<details class="offer__discount" data-discount>/);
+  assert.match(source, /data-discount-code/);
+  assert.match(source, /maxlength="64"/);
   assert.match(source, /target="_blank"[\s\S]*rel="noopener noreferrer"/);
   assert.match(source, /aria-live="polite"/);
   assert.match(source, /src="\/src\/digital\.ts"/);
@@ -154,9 +157,35 @@ test('digital checkout uses the server-owned instant-download contract', async (
   assert.match(script, /\/api\/create-checkout/);
   assert.match(script, /product_id: 'instant-download'/);
   assert.match(script, /lang: currentLanguage/);
+  assert.match(script, /coupon_code: couponCode \|\| undefined/);
+  assert.match(script, /response\.status === 400 && couponCode/);
+  assert.match(script, /discountCodeInput\.disabled = isBusy/);
+  assert.match(script, /discountCodeInput\?\.addEventListener\('keydown'/);
+  assert.match(script, /event\.key === 'Enter'/);
+  assert.match(script, /data-i18n-placeholder/);
   assert.match(script, /window\.location\.assign/);
   assert.doesNotMatch(script, /lang: 'en'/);
   assert.doesNotMatch(script, /email:/);
+});
+
+test('digital discount entry stays compact and uses the existing server-owned coupon flow', async () => {
+  const [source, script, stylesheet, translations] = await Promise.all([
+    read('digital/index.html'),
+    read('src/digital.ts'),
+    read('src/styles/digital.css'),
+    read('src/i18n/digital-translations.ts'),
+  ]);
+
+  assert.match(source, /<summary data-i18n="discountToggle">Discount code\?<\/summary>/);
+  assert.match(source, /data-i18n-aria="discountCode"/);
+  assert.match(source, /data-i18n-placeholder="discountPlaceholder"/);
+  assert.match(source, />\s*Final price at checkout\.\s*<\/p>/);
+  assert.doesNotMatch(source, /Final BTC amount is set when checkout opens/);
+  assert.match(script, /const couponCode = discountCodeInput\?\.value\.trim\(\) \?\? ''/);
+  assert.match(script, /errorMessage = copy\.checkoutInvalidDiscount/);
+  assert.match(stylesheet, /\.offer__discount summary \{[\s\S]*min-height: 44px/);
+  assert.match(stylesheet, /\.offer__discount input \{[\s\S]*height: 44px/);
+  assert.match(translations, /checkoutInvalidDiscount/);
 });
 
 test('player reviews preserve the supplied wording and use manual controls only', async () => {

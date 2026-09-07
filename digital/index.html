@@ -201,8 +201,24 @@
               <small data-i18n="referencePrice">USD / EUR estimate</small>
             </p>
             <p class="offer__rate-note" data-i18n="priceLockNote">
-              Final BTC amount is set when checkout opens.
+              Final price at checkout.
             </p>
+
+            <details class="offer__discount" data-discount>
+              <summary data-i18n="discountToggle">Discount code?</summary>
+              <input
+                type="text"
+                maxlength="64"
+                autocomplete="off"
+                autocapitalize="characters"
+                spellcheck="false"
+                aria-label="Discount code"
+                data-i18n-aria="discountCode"
+                placeholder="Enter code"
+                data-i18n-placeholder="discountPlaceholder"
+                data-discount-code
+              />
+            </details>
 
             <button class="pixel-button" type="button" data-checkout>
               <span data-i18n="buyWithBitcoin">Buy with Bitcoin or Lightning</span>

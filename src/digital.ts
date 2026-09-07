@@ -41,6 +41,7 @@ const fastRateTimeoutMs = 2_000;
 const apiBaseUrl = getApiBaseUrl();
 const checkoutButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-checkout]'));
 const statusNodes = Array.from(document.querySelectorAll<HTMLElement>('[data-checkout-status]'));
+const discountCodeInput = document.querySelector<HTMLInputElement>('[data-discount-code]');
 const languagePicker = document.querySelector<HTMLSelectElement>('[data-language-picker]');
 const priceNode = document.querySelector<HTMLElement>('[data-btc-price]');
 const reviewNodes = Array.from(document.querySelectorAll<HTMLElement>('[data-review]'));
@@ -181,6 +182,12 @@ function applyLanguage(language: Language): void {
       node.setAttribute('aria-label', text);
     }
   });
+  document.querySelectorAll<HTMLInputElement>('[data-i18n-placeholder]').forEach((node) => {
+    const text = textFor(copy, node.dataset.i18nPlaceholder);
+    if (text !== null) {
+      node.placeholder = text;
+    }
+  });
   document.querySelectorAll<HTMLImageElement>('[data-i18n-alt]').forEach((node) => {
     const text = textFor(copy, node.dataset.i18nAlt);
     if (text !== null) {
@@ -222,6 +229,9 @@ function setCheckoutBusy(isBusy: boolean): void {
     const idleLabel = textFor(copy, label.dataset.i18n) ?? copy.buyWithBitcoin;
     label.textContent = isBusy ? copy.checkoutBusy : idleLabel;
   });
+  if (discountCodeInput) {
+    discountCodeInput.disabled = isBusy;
+  }
 }
 
 function showReview(index: number, shouldAnimate = true): void {
@@ -322,8 +332,12 @@ async function startCheckout(): Promise<void> {
     return;
   }
 
+  const copy = digitalTranslations[currentLanguage];
+  const couponCode = discountCodeInput?.value.trim() ?? '';
+  let errorMessage = copy.checkoutUnavailable;
+
   setCheckoutBusy(true);
-  setStatus(digitalTranslations[currentLanguage].checkoutCreating);
+  setStatus(copy.checkoutCreating);
 
   try {
     const response = await fetch(`${apiBaseUrl}/api/create-checkout`, {
@@ -335,18 +349,22 @@ async function startCheckout(): Promise<void> {
       body: JSON.stringify({
         product_id: 'instant-download',
         lang: currentLanguage,
+        coupon_code: couponCode || undefined,
       }),
     });
     const payload = (await response.json().catch(() => null)) as CheckoutResponse | null;
 
     if (!response.ok || typeof payload?.checkout_url !== 'string') {
+      if (response.status === 400 && couponCode) {
+        errorMessage = copy.checkoutInvalidDiscount;
+      }
       throw new Error('Checkout unavailable');
     }
 
     window.location.assign(payload.checkout_url);
   } catch {
     setCheckoutBusy(false);
-    setStatus(digitalTranslations[currentLanguage].checkoutUnavailable, true);
+    setStatus(errorMessage, true);
   }
 }
 
@@ -367,6 +385,13 @@ if (languagePicker) {
 
 checkoutButtons.forEach((button) => {
   button.addEventListener('click', startCheckout);
+});
+
+discountCodeInput?.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    void startCheckout();
+  }
 });
 
 previousReviewButton?.addEventListener('click', () => {

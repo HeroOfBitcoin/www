@@ -1,4 +1,5 @@
 import './styles/digital.css';
+import { DigitalCheckoutController, submitDigitalCheckoutOnEnter } from './digital-checkout';
 import { digitalTranslations, type DigitalTranslation } from './i18n/digital-translations';
 import {
   LANGUAGE_OPTIONS,
@@ -29,10 +30,6 @@ interface BtcRatePayload {
 interface BtcRates {
   usdPerBtc: number;
   eurPerBtc: number;
-}
-
-interface CheckoutResponse {
-  checkout_url?: string;
 }
 
 const fastRateUrl = 'https://mempool.space/api/v1/prices';
@@ -232,6 +229,9 @@ function setCheckoutBusy(isBusy: boolean): void {
   if (discountCodeInput) {
     discountCodeInput.disabled = isBusy;
   }
+  if (languagePicker) {
+    languagePicker.disabled = isBusy;
+  }
 }
 
 function showReview(index: number, shouldAnimate = true): void {
@@ -327,45 +327,25 @@ async function loadFastPrice(): Promise<void> {
   }
 }
 
+const checkoutController = new DigitalCheckoutController({
+  apiBaseUrl,
+  fetcher: window.fetch.bind(window),
+  navigate: (url) => window.location.assign(url),
+  setBusy: setCheckoutBusy,
+  setStatus,
+});
+
 async function startCheckout(): Promise<void> {
-  if (checkoutButtons.some((button) => button.disabled)) {
-    return;
-  }
-
   const copy = digitalTranslations[currentLanguage];
-  const couponCode = discountCodeInput?.value.trim() ?? '';
-  let errorMessage = copy.checkoutUnavailable;
-
-  setCheckoutBusy(true);
-  setStatus(copy.checkoutCreating);
-
-  try {
-    const response = await fetch(`${apiBaseUrl}/api/create-checkout`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify({
-        product_id: 'instant-download',
-        lang: currentLanguage,
-        coupon_code: couponCode || undefined,
-      }),
-    });
-    const payload = (await response.json().catch(() => null)) as CheckoutResponse | null;
-
-    if (!response.ok || typeof payload?.checkout_url !== 'string') {
-      if (response.status === 400 && couponCode) {
-        errorMessage = copy.checkoutInvalidDiscount;
-      }
-      throw new Error('Checkout unavailable');
-    }
-
-    window.location.assign(payload.checkout_url);
-  } catch {
-    setCheckoutBusy(false);
-    setStatus(errorMessage, true);
-  }
+  await checkoutController.start({
+    language: currentLanguage,
+    couponCode: discountCodeInput?.value ?? '',
+    copy: {
+      creating: copy.checkoutCreating,
+      invalidDiscount: copy.checkoutInvalidDiscount,
+      unavailable: copy.checkoutUnavailable,
+    },
+  });
 }
 
 if (languagePicker) {
@@ -388,9 +368,12 @@ checkoutButtons.forEach((button) => {
 });
 
 discountCodeInput?.addEventListener('keydown', (event) => {
-  if (event.key === 'Enter') {
-    event.preventDefault();
-    void startCheckout();
+  submitDigitalCheckoutOnEnter(event, () => void startCheckout());
+});
+
+window.addEventListener('pageshow', (event) => {
+  if (event.persisted) {
+    checkoutController.reset();
   }
 });
 
@@ -416,6 +399,7 @@ if ('IntersectionObserver' in window && !reducedMotionQuery.matches) {
     });
   }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
   revealNodes.forEach((node) => observer.observe(node));
+  document.documentElement.dataset.revealReady = 'true';
 } else {
   revealNodes.forEach((node) => node.setAttribute('data-visible', 'true'));
 }

@@ -44,6 +44,8 @@ test('digital landing page is canonical, indexable, and built as a dedicated ent
   assert.match(source, /<details class="offer__discount" data-discount>/);
   assert.match(source, /data-discount-code/);
   assert.match(source, /maxlength="64"/);
+  assert.match(source, /data-i18n="gameLanguage">Game in English<\/li>/);
+  assert.match(source, /<noscript>[\s\S]*JavaScript is required to start checkout\.[\s\S]*<\/noscript>/);
   assert.match(source, /target="_blank"[\s\S]*rel="noopener noreferrer"/);
   assert.match(source, /aria-live="polite"/);
   assert.match(source, /src="\/src\/digital\.ts"/);
@@ -151,21 +153,28 @@ test('crawler discovery surfaces point to the canonical page without adding site
 });
 
 test('digital checkout uses the server-owned instant-download contract', async () => {
-  const script = await read('src/digital.ts');
+  const [script, checkout] = await Promise.all([
+    read('src/digital.ts'),
+    read('src/digital-checkout.ts'),
+  ]);
 
   assert.match(script, /\/api\/products\/prices/);
-  assert.match(script, /\/api\/create-checkout/);
-  assert.match(script, /product_id: 'instant-download'/);
-  assert.match(script, /lang: currentLanguage/);
-  assert.match(script, /coupon_code: couponCode \|\| undefined/);
-  assert.match(script, /response\.status === 400 && couponCode/);
+  assert.match(checkout, /\/api\/create-checkout/);
+  assert.match(checkout, /product_id: 'instant-download'/);
+  assert.match(checkout, /lang: language/);
+  assert.match(checkout, /trimmedCouponCode \? \{ coupon_code: trimmedCouponCode \} : \{\}/);
+  assert.match(checkout, /response\.status === 400 && Boolean\(payload\.coupon_code\)/);
   assert.match(script, /discountCodeInput\.disabled = isBusy/);
+  assert.match(script, /languagePicker\.disabled = isBusy/);
   assert.match(script, /discountCodeInput\?\.addEventListener\('keydown'/);
-  assert.match(script, /event\.key === 'Enter'/);
+  assert.match(script, /submitDigitalCheckoutOnEnter\(event/);
+  assert.match(script, /window\.addEventListener\('pageshow'/);
+  assert.match(script, /event\.persisted/);
+  assert.match(script, /checkoutController\.reset\(\)/);
   assert.match(script, /data-i18n-placeholder/);
   assert.match(script, /window\.location\.assign/);
-  assert.doesNotMatch(script, /lang: 'en'/);
-  assert.doesNotMatch(script, /email:/);
+  assert.doesNotMatch(`${script}\n${checkout}`, /lang: 'en'/);
+  assert.doesNotMatch(`${script}\n${checkout}`, /email:/);
 });
 
 test('digital discount entry stays compact and uses the existing server-owned coupon flow', async () => {
@@ -181,8 +190,8 @@ test('digital discount entry stays compact and uses the existing server-owned co
   assert.match(source, /data-i18n-placeholder="discountPlaceholder"/);
   assert.match(source, />\s*Final price at checkout\.\s*<\/p>/);
   assert.doesNotMatch(source, /Final BTC amount is set when checkout opens/);
-  assert.match(script, /const couponCode = discountCodeInput\?\.value\.trim\(\) \?\? ''/);
-  assert.match(script, /errorMessage = copy\.checkoutInvalidDiscount/);
+  assert.match(script, /couponCode: discountCodeInput\?\.value \?\? ''/);
+  assert.match(script, /invalidDiscount: copy\.checkoutInvalidDiscount/);
   assert.match(stylesheet, /\.offer__discount summary \{[\s\S]*min-height: 44px/);
   assert.match(stylesheet, /\.offer__discount input \{[\s\S]*height: 44px/);
   assert.match(translations, /checkoutInvalidDiscount/);
@@ -208,8 +217,10 @@ test('player reviews preserve the supplied wording and use manual controls only'
   ];
 
   for (const review of reviews) {
-    assert.ok(source.includes(`<blockquote>${review}</blockquote>`), `missing exact review: ${review}`);
+    assert.ok(source.includes(`<blockquote lang="en">${review}</blockquote>`), `missing exact review: ${review}`);
   }
+
+  assert.equal(source.match(/<blockquote lang="en">/g)?.length, 10);
 
   assert.match(script, /previousReviewButton\?\.addEventListener\('click'/);
   assert.match(script, /nextReviewButton\?\.addEventListener\('click'/);
@@ -265,4 +276,7 @@ test('digital language state follows URL, saved preference, and browser locale',
   assert.match(stylesheet, /HoB Korean Sans/);
   assert.match(stylesheet, /data-language='ko'/);
   assert.match(stylesheet, /pixel-trailer-button/);
+  assert.match(stylesheet, /@media \(max-width: 1000px\)[\s\S]*grid-template-areas:[\s\S]*'copy'[\s\S]*'buy'[\s\S]*'reviews'/);
+  assert.match(stylesheet, /html\[data-reveal-ready='true'\] \[data-reveal\]/);
+  assert.match(script, /document\.documentElement\.dataset\.revealReady = 'true'/);
 });

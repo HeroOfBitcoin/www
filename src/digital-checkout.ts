@@ -56,6 +56,10 @@ export function buildDigitalCheckoutPayload(language: Language, couponCode: stri
   };
 }
 
+export function normalizeCouponCodeEntry(value: string): string {
+  return value.toUpperCase();
+}
+
 export class DigitalCheckoutController {
   private isBusy = false;
   private generation = 0;
@@ -100,7 +104,7 @@ export class DigitalCheckoutController {
       }
 
       if (!response.ok || typeof responsePayload?.checkout_url !== 'string') {
-        const isInvalidDiscount = response.status === 400 && Boolean(payload.coupon_code);
+        const isInvalidDiscount = [400, 409].includes(response.status) && Boolean(payload.coupon_code);
         if (isInvalidDiscount) {
           errorMessage = input.copy.invalidDiscount;
         }

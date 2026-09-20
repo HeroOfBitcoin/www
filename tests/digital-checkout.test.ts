@@ -3,6 +3,7 @@ import test from 'node:test';
 
 import {
   DigitalCheckoutController,
+  normalizeCouponCodeEntry,
   submitDigitalCheckoutOnEnter,
   type DigitalCheckoutDependencies,
   type DigitalCheckoutInput,
@@ -85,6 +86,11 @@ test('runtime checkout keyboard handler submits only on Enter', () => {
   assert.equal(submitted, 1);
 });
 
+test('coupon entry visibly normalizes letters to uppercase without breaking existing punctuation', () => {
+  assert.equal(normalizeCouponCodeEntry('btchel2026game'), 'BTCHEL2026GAME');
+  assert.equal(normalizeCouponCodeEntry('save-21_test'), 'SAVE-21_TEST');
+});
+
 test('runtime checkout blocks duplicate starts while a request is pending', async () => {
   let requests = 0;
   let resolveRequest: ((value: ReturnType<typeof response>) => void) | undefined;
@@ -119,6 +125,13 @@ test('runtime checkout localizes coupon errors and permits a retry', async () =>
   assert.deepEqual(state.busy, [true, false]);
   assert.equal(await state.controller.start(input('de', 'good-code')), true);
   assert.equal(requests, 2);
+});
+
+test('runtime checkout treats an exhausted claim as a coupon error', async () => {
+  const state = harness(async () => response(409, { error: 'Claim limit reached' }));
+
+  assert.equal(await state.controller.start(input('en', 'BTCHEL2026GAME')), false);
+  assert.deepEqual(state.statuses.at(-1), { message: 'invalid discount', isError: true });
 });
 
 test('runtime checkout handles provider, network, and malformed responses without navigation', async () => {

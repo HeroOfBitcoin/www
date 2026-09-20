@@ -665,7 +665,7 @@ const Products: React.FC = () => {
                 <input
                   type="text"
                   value={instantCouponCode}
-                  onChange={(event) => setInstantCouponCode(event.target.value)}
+                  onChange={(event) => setInstantCouponCode(event.target.value.toUpperCase())}
                   placeholder={t.products.instant.couponPlaceholder}
                   className="w-full border-2 border-black bg-white px-3 py-2 font-mono text-sm uppercase text-black placeholder:text-gray-400 focus:outline-none focus:ring-0"
                   autoComplete="off"

@@ -163,10 +163,14 @@ test('digital checkout uses the server-owned instant-download contract', async (
   assert.match(checkout, /product_id: 'instant-download'/);
   assert.match(checkout, /lang: language/);
   assert.match(checkout, /trimmedCouponCode \? \{ coupon_code: trimmedCouponCode \} : \{\}/);
-  assert.match(checkout, /response\.status === 400 && Boolean\(payload\.coupon_code\)/);
+  assert.match(checkout, /\[400, 409\]\.includes\(response\.status\) && Boolean\(payload\.coupon_code\)/);
   assert.match(script, /discountCodeInput\.disabled = isBusy/);
   assert.match(script, /languagePicker\.disabled = isBusy/);
   assert.match(script, /discountCodeInput\?\.addEventListener\('keydown'/);
+  assert.match(script, /discountCodeInput\?\.addEventListener\('input'/);
+  assert.match(script, /searchParams\.get\('claim'\)/);
+  assert.match(script, /\^\[A-Z0-9\]\{12,64\}\$/);
+  assert.match(script, /discountDetails\.open = true/);
   assert.match(script, /submitDigitalCheckoutOnEnter\(event/);
   assert.match(script, /window\.addEventListener\('pageshow'/);
   assert.match(script, /event\.persisted/);
@@ -195,6 +199,14 @@ test('digital discount entry stays compact and uses the existing server-owned co
   assert.match(stylesheet, /\.offer__discount summary \{[\s\S]*min-height: 44px/);
   assert.match(stylesheet, /\.offer__discount input \{[\s\S]*height: 44px/);
   assert.match(translations, /checkoutInvalidDiscount/);
+});
+
+test('homepage instant download accepts the same uppercase claim code', async () => {
+  const products = await read('src/components/Products.tsx');
+
+  assert.match(products, /coupon_code: couponCode\.trim\(\) \|\| undefined/);
+  assert.match(products, /setInstantCouponCode\(event\.target\.value\.toUpperCase\(\)\)/);
+  assert.match(products, /lang: language/);
 });
 
 test('player reviews preserve the supplied wording and use manual controls only', async () => {

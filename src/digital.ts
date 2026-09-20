@@ -1,5 +1,9 @@
 import './styles/digital.css';
-import { DigitalCheckoutController, submitDigitalCheckoutOnEnter } from './digital-checkout';
+import {
+  DigitalCheckoutController,
+  normalizeCouponCodeEntry,
+  submitDigitalCheckoutOnEnter,
+} from './digital-checkout';
 import { digitalTranslations, type DigitalTranslation } from './i18n/digital-translations';
 import {
   LANGUAGE_OPTIONS,
@@ -53,6 +57,19 @@ let currentProductPrice: ProductPrice | null = null;
 let fastRates: BtcRates | null = null;
 let hasServerBtcPrice = false;
 let activeReviewIndex = 0;
+
+function applyClaimCodeFromUrl(): void {
+  const claimCode = new URL(window.location.href).searchParams.get('claim')?.trim().toUpperCase();
+  if (!discountCodeInput || !claimCode || !/^[A-Z0-9]{12,64}$/.test(claimCode)) {
+    return;
+  }
+
+  discountCodeInput.value = claimCode;
+  const discountDetails = discountCodeInput.closest<HTMLDetailsElement>('[data-discount]');
+  if (discountDetails) {
+    discountDetails.open = true;
+  }
+}
 
 function readStoredLanguage(): Language | null {
   try {
@@ -370,6 +387,9 @@ checkoutButtons.forEach((button) => {
 discountCodeInput?.addEventListener('keydown', (event) => {
   submitDigitalCheckoutOnEnter(event, () => void startCheckout());
 });
+discountCodeInput?.addEventListener('input', () => {
+  discountCodeInput.value = normalizeCouponCodeEntry(discountCodeInput.value);
+});
 
 window.addEventListener('pageshow', (event) => {
   if (event.persisted) {
@@ -385,6 +405,7 @@ nextReviewButton?.addEventListener('click', () => {
   showReview(activeReviewIndex + 1);
 });
 
+applyClaimCodeFromUrl();
 applyLanguage(resolveInitialLanguage());
 showReview(activeReviewIndex, false);
 

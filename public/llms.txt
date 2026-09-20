@@ -10,8 +10,8 @@
 
 ## Product facts
 
-- The download contains the game ROM, a PDF guide, and Windows launch files.
-- The game is in English. The landing page supports English, Spanish, Italian, Japanese, German, Korean, French, Dutch, and Finnish.
+- The download contains the launcher for Windows (x86-64), macOS (Apple Silicon) and Linux (x86-64), plus an English Game Boy ROM and English PDF quick-start guide.
+- The launcher offers English, Dutch and Finnish. Physical game editions are in English. The landing page supports English, Spanish, Italian, Japanese, German, Korean, French, Dutch, and Finnish.
 - The product page shows a live BTC amount first, with smaller USD and EUR reference prices.
 - Checkout calculates the authoritative price and locks the BTC amount when it opens.
 - No account or email address is required for the digital order.

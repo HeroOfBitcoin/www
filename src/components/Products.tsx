@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import PixelCard from './ui/PixelCard';
+import ProductLanguages, { type GameLanguage } from './ProductLanguages';
 import { type Language, useLanguage } from '../i18n';
 import { getApiBaseUrl } from '../lib/api';
+import { digitalTranslations } from '../i18n/digital-translations';
 import { Star, ShieldCheck, ShoppingCart, Sticker, Gamepad2, Zap, HardDrive, ChevronDown, ChevronUp, HelpCircle, AlertTriangle, FolderOpen, Disc, Link, BookOpen, Image, Award, Shield, Truck } from 'lucide-react';
 
 /*
@@ -116,6 +118,7 @@ interface ProductCardProps {
   id: string;
   title: string;
   subtitle: string;
+  gameLanguages?: readonly GameLanguage[];
   quote: string;
   features: { icon: React.ReactNode; text: string }[];
   buyLink?: string;
@@ -152,6 +155,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   id,
   title,
   subtitle,
+  gameLanguages,
   quote,
   features,
   buyLink,
@@ -287,6 +291,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
             </button>
           </div>
 
+          {gameLanguages && <ProductLanguages languages={gameLanguages} />}
+
           <p className="font-serif italic text-gray-600 border-l-4 border-yellow-400 pl-3 text-sm">
             "{quote}"
           </p>
@@ -399,6 +405,7 @@ async function createPhysicalCheckout(
 
 const Products: React.FC = () => {
   const { t, language } = useLanguage();
+  const digitalCopy = digitalTranslations[language];
   const [showR36STechDetails, setShowR36STechDetails] = useState(false);
   const [instantEmail, setInstantEmail] = useState('');
   const [instantCouponCode, setInstantCouponCode] = useState('');
@@ -552,11 +559,15 @@ const Products: React.FC = () => {
             <p className="max-w-[30rem] font-mono text-[15px] leading-relaxed text-neutral-100 mb-4">
               {t.products.chooseFormatBody}
             </p>
-            <div className="mb-6 flex max-w-[32rem] items-start gap-2 border-l-4 border-yellow-300 bg-white/10 px-3 py-2">
-              <AlertTriangle size={16} className="mt-0.5 shrink-0 text-yellow-300" />
-              <p className="font-mono text-[11px] leading-relaxed text-neutral-100">
-                {t.products.gameLanguageNotice}
-              </p>
+            <div className="mb-6 max-w-[32rem] space-y-3 border-l-4 border-yellow-300 bg-white/10 px-3 py-3">
+              <div>
+                <p className="mb-1 font-mono text-xs text-neutral-200">{t.products.instant.title}</p>
+                <ProductLanguages languages={['en', 'nl', 'fi']} />
+              </div>
+              <div>
+                <p className="mb-1 font-mono text-xs text-neutral-200">{t.products.collectors.title}</p>
+                <ProductLanguages languages={['en']} />
+              </div>
             </div>
             <div className="grid gap-3 sm:grid-cols-2 max-w-[32rem]">
               <button
@@ -607,14 +618,16 @@ const Products: React.FC = () => {
       */}
       <ProductCard
         id="instant-download"
+        gameLanguages={['en', 'nl', 'fi']}
         title={t.products.instant.title}
-        subtitle={t.products.instant.subtitle}
+        subtitle="Windows / macOS / Linux"
         quote={t.products.instant.quote}
         features={[
-          { icon: <ShieldCheck className="text-green-600" size={18} />, text: t.products.instant.feature1 },
+          { icon: <ShieldCheck className="text-green-600" size={18} />, text: digitalCopy.launcherFiles },
           { icon: <PaymentMark compact tone="light" className="min-w-[28px] justify-center" />, text: t.products.instant.feature2 },
-          { icon: <BookOpen className="text-yellow-600" size={18} />, text: t.products.instant.feature3 },
+          { icon: <BookOpen className="text-yellow-600" size={18} />, text: digitalCopy.pdfGuide },
           { icon: <Zap className="text-amber-600" size={18} />, text: t.products.instant.feature4 },
+          { icon: <Disc className="text-purple-600" size={18} />, text: digitalCopy.gameRom },
         ]}
         badgeText={t.products.badges.instantAccess}
         images={['/assets/images/HoB_Logo_Avatar.png']}
@@ -713,6 +726,7 @@ const Products: React.FC = () => {
       */}
       <ProductCard
         id="collectors-edition"
+        gameLanguages={['en']}
         title={t.products.collectors.title}
         subtitle={t.products.collectors.subtitle}
         quote={t.products.collectors.quote}
@@ -748,6 +762,7 @@ const Products: React.FC = () => {
       */}
       <ProductCard
         id="graded-copy"
+        gameLanguages={['en']}
         title={t.products.graded.title}
         subtitle={t.products.graded.subtitle}
         quote={t.products.graded.quote}
@@ -862,6 +877,7 @@ const Products: React.FC = () => {
       */}
       <ProductCard
         id="digital-edition"
+        gameLanguages={['en']}
         title={t.products.digital.title}
         subtitle={t.products.digital.subtitle}
         quote={t.products.digital.quote}
@@ -899,6 +915,7 @@ const Products: React.FC = () => {
       */}
       <ProductCard
         id="hero-handheld"
+        gameLanguages={['en']}
         title={t.products.handheld.title}
         subtitle={t.products.handheld.subtitle}
         quote={t.products.handheld.quote}

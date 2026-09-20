@@ -44,7 +44,8 @@ test('digital landing page is canonical, indexable, and built as a dedicated ent
   assert.match(source, /<details class="offer__discount" data-discount>/);
   assert.match(source, /data-discount-code/);
   assert.match(source, /maxlength="64"/);
-  assert.match(source, /data-i18n="gameLanguage">Game in English<\/li>/);
+  assert.match(source, /data-game-languages="en,nl,fi"/);
+  assert.match(source, /data-i18n="gameLanguage">Launcher languages<\/p>/);
   assert.match(source, /<noscript>[\s\S]*JavaScript is required to start checkout\.[\s\S]*<\/noscript>/);
   assert.match(source, /target="_blank"[\s\S]*rel="noopener noreferrer"/);
   assert.match(source, /aria-live="polite"/);
@@ -76,7 +77,7 @@ test('digital landing page is canonical, indexable, and built as a dedicated ent
   assert.equal(product.url, 'https://heroofbitcoin.xyz/digital/');
   assert.equal(product.offers.price, '12.21');
   assert.equal(product.offers.priceCurrency, 'USD');
-  assert.equal(game.inLanguage, 'en');
+  assert.deepEqual(game.inLanguage, ['en', 'nl', 'fi']);
   assert.match(game.description, /21 bitcoin hidden throughout the game/);
   assert.doesNotMatch(source, /"@type": "VideoObject"/);
 
@@ -136,7 +137,7 @@ test('crawler discovery surfaces point to the canonical page without adding site
   assert.match(llms, /\[Hero of Bitcoin Digital\]\(https:\/\/heroofbitcoin\.xyz\/digital\/\)/);
   assert.match(llms, /\[Digital release trailer\]\(https:\/\/youtu\.be\/IBqAaWS--Bg\)/);
   assert.match(llms, /Game Boy-compatible adventure set in El Salvador/);
-  assert.match(llms, /The game is in English/);
+  assert.match(llms, /The launcher offers English, Dutch and Finnish/);
   assert.match(homepage, /"url": "https:\/\/heroofbitcoin\.xyz\/digital\/"/);
   assert.match(productsFeed, /<link>https:\/\/heroofbitcoin\.xyz\/digital\/<\/link>/);
 

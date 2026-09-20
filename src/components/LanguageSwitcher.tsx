@@ -13,20 +13,12 @@ import { ChevronDown } from 'lucide-react';
   =============================================================================
 */
 
-const FlagIcon: React.FC<{ lang: Language }> = ({ lang }) => {
+export const FlagIcon: React.FC<{ lang: Language }> = ({ lang }) => {
   switch (lang) {
     case 'en':
       // UK flag
       return (
-        <svg viewBox="0 0 16 12" className="w-full h-full" style={{ imageRendering: 'pixelated' }}>
-          <rect width="16" height="12" fill="#012169" />
-          <path d="M0,0 L16,12 M16,0 L0,12" stroke="#FFF" strokeWidth="2" />
-          <path d="M0,0 L16,12 M16,0 L0,12" stroke="#C8102E" strokeWidth="1" />
-          <rect x="6" y="0" width="4" height="12" fill="#FFF" />
-          <rect x="0" y="4" width="16" height="4" fill="#FFF" />
-          <rect x="7" y="0" width="2" height="12" fill="#C8102E" />
-          <rect x="0" y="5" width="16" height="2" fill="#C8102E" />
-        </svg>
+        <img src="/assets/flags/en.svg" alt="" className="w-full h-full" />
       );
     case 'es':
       // Spain flag
@@ -90,20 +82,12 @@ const FlagIcon: React.FC<{ lang: Language }> = ({ lang }) => {
     case 'nl':
       // Netherlands flag
       return (
-        <svg viewBox="0 0 16 12" className="w-full h-full" style={{ imageRendering: 'pixelated' }}>
-          <rect width="16" height="4" fill="#AE1C28" />
-          <rect y="4" width="16" height="4" fill="#FFF" />
-          <rect y="8" width="16" height="4" fill="#21468B" />
-        </svg>
+        <img src="/assets/flags/nl.svg" alt="" className="w-full h-full" />
       );
     case 'fi':
       // Finland flag
       return (
-        <svg viewBox="0 0 16 12" className="w-full h-full" style={{ imageRendering: 'pixelated' }}>
-          <rect width="16" height="12" fill="#FFF" />
-          <rect x="4" width="2.5" height="12" fill="#003580" />
-          <rect y="4.75" width="16" height="2.5" fill="#003580" />
-        </svg>
+        <img src="/assets/flags/fi.svg" alt="" className="w-full h-full" />
       );
   }
 };

@@ -1,0 +1,5 @@
+.game-languages { margin-top: 1rem; color: #fdffe1; font-size: 0.84rem; }
+.game-languages p { margin: 0 0 0.5rem; font-size: 0.75rem; opacity: 0.85; }
+.game-languages ul { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin: 0; padding: 0; list-style: none; }
+.game-languages li { display: inline-flex; align-items: center; gap: 0.4rem; white-space: nowrap; }
+.game-languages img { border: 1px solid #ffffff60; }

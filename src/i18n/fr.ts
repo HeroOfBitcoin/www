@@ -46,6 +46,7 @@ export const frenchTranslations = {
     orderId: 'Identifiant de commande',
     product: 'Produit',
     paymentId: 'Identifiant de paiement',
+    transaction: "Transaction Bitcoin",
     amount: 'Montant',
     statusTiming: 'Suivi',
     createdAt: 'Créée le',

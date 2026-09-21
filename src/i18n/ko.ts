@@ -46,6 +46,7 @@ export const koreanTranslations = {
     orderId: '주문 ID',
     product: '제품',
     paymentId: '결제 ID',
+    transaction: "비트코인 거래",
     amount: '금액',
     statusTiming: '처리 시간',
     createdAt: '주문 생성',

@@ -46,6 +46,7 @@ export const italianTranslations = {
     orderId: 'ID ordine',
     product: 'Prodotto',
     paymentId: 'ID pagamento',
+    transaction: "Transazione Bitcoin",
     amount: 'Importo',
     statusTiming: 'Tempi',
     createdAt: 'Creato',

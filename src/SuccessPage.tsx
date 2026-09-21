@@ -24,6 +24,7 @@ interface OrderStatusResponse {
   created_at: string;
   paid_at: string | null;
   download_token?: string;
+  onchain_transaction_ids?: string[];
   download_access_revoked?: boolean;
   download_expires_at?: string;
   downloads_remaining?: number;
@@ -421,6 +422,19 @@ const SuccessPage: React.FC = () => {
                             <dt className="font-bold">{checkoutText.paymentId}</dt>
                             <dd className="break-all">{order.payment_id ?? '—'}</dd>
                           </div>
+                          {Array.isArray(order.onchain_transaction_ids) && order.onchain_transaction_ids
+                            .filter((id) => typeof id === 'string' && /^[a-f0-9]{64}$/i.test(id))
+                            .map((id) => (
+                              <div key={id}>
+                                <dt className="font-bold">{checkoutText.transaction}</dt>
+                                <dd>
+                                  <a href={`https://mempool.space/tx/${id}`} target="_blank" rel="noopener noreferrer"
+                                    className="underline underline-offset-2 hover:text-black" title={id}>
+                                    mempool.space ↗ <span className="text-xs">{id.slice(0, 8)}…{id.slice(-8)}</span>
+                                  </a>
+                                </dd>
+                              </div>
+                            ))}
                           <div>
                             <dt className="font-bold">{checkoutText.amount}</dt>
                             <dd>{`${order.amount.toFixed(2)} ${order.currency}`}</dd>

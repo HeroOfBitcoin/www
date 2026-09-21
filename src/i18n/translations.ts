@@ -56,6 +56,7 @@ export const translations = {
       orderId: 'Order ID',
       product: 'Product',
       paymentId: 'Payment ID',
+      transaction: "Bitcoin transaction",
       amount: 'Amount',
       statusTiming: 'Status Timing',
       createdAt: 'Created',
@@ -403,6 +404,7 @@ export const translations = {
       orderId: 'ID del Pedido',
       product: 'Producto',
       paymentId: 'ID del Pago',
+      transaction: "Transacción de Bitcoin",
       amount: 'Importe',
       statusTiming: 'Estado y Tiempo',
       createdAt: 'Creado',
@@ -750,6 +752,7 @@ export const translations = {
       orderId: 'Bestell-ID',
       product: 'Produkt',
       paymentId: 'Zahlungs-ID',
+      transaction: "Bitcoin-Transaktion",
       amount: 'Betrag',
       statusTiming: 'Status und Zeitpunkte',
       createdAt: 'Erstellt',
@@ -1103,6 +1106,7 @@ export interface Translations {
     orderId: string;
     product: string;
     paymentId: string;
+    transaction: string;
     amount: string;
     statusTiming: string;
     createdAt: string;

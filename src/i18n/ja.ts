@@ -46,6 +46,7 @@ export const japaneseTranslations = {
     orderId: '注文ID',
     product: '製品',
     paymentId: '決済ID',
+    transaction: "Bitcoinトランザクション",
     amount: '金額',
     statusTiming: '時刻',
     createdAt: '作成',

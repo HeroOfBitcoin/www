@@ -46,6 +46,7 @@ export const finnishTranslations = {
     orderId: 'Tilaustunnus',
     product: 'Tuote',
     paymentId: 'Maksutunnus',
+    transaction: "Bitcoin-siirto",
     amount: 'Summa',
     statusTiming: 'Ajat',
     createdAt: 'Luotu',

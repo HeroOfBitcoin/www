@@ -225,6 +225,12 @@ The homepage and `/digital/` share `src/checkout.ts`. The backend sets prices,
 shipping, stock and claim eligibility. The frontend blocks duplicate submissions
 and restores the controls after a browser-back navigation.
 
+The confirmation page checks pending payments every three seconds for two minutes,
+then every 30 seconds until a final status arrives. Temporary connection errors
+retry after 30 seconds. When Coinsnap supplies on-chain transaction IDs, the order
+details link to each transaction on mempool.space in a new tab. Lightning payments
+have no explorer link. Explorer availability does not control download access.
+
 The confirmation page fetches fresh download credentials when the buyer presses
 Download. A failed request leaves the buyer on the confirmation page with a retry
 message. Download limits and access revocation remain enforced by the backend.

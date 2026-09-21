@@ -46,6 +46,7 @@ export const dutchTranslations = {
     orderId: 'Bestelnummer',
     product: 'Product',
     paymentId: 'Betaalnummer',
+    transaction: "Bitcoin-transactie",
     amount: 'Bedrag',
     statusTiming: 'Tijdstippen',
     createdAt: 'Aangemaakt',

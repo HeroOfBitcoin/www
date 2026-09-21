@@ -293,3 +293,9 @@ test('digital language state follows URL, saved preference, and browser locale',
   assert.match(stylesheet, /html\[data-reveal-ready='true'\] \[data-reveal\]/);
   assert.match(script, /document\.documentElement\.dataset\.revealReady = 'true'/);
 });
+
+test('production build contains no public checkout test page', async () => {
+  const config = await read('vite.config.ts');
+  assert.doesNotMatch(config, /checkoutTest|checkout-test/);
+  await assert.rejects(access(new URL('dist/checkout-test.html', root)), { code: 'ENOENT' });
+});

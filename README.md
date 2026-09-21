@@ -8,7 +8,6 @@ This repo now includes:
 - the public `Instant Download` BTC/LN product entry point
 - the direct `Stackchain Magazine` bundle checkout entry point
 - the public success/download page
-- the optional `checkout-test.html` test surface
 - the rest of the Hero of Bitcoin marketing site
 
 ## Current Stable Snapshot
@@ -21,7 +20,6 @@ As of `2026-07-15`:
   - `gh run list --repo HeroOfBitcoin/www --workflow deploy.yml --limit 1`
 - Public site: [heroofbitcoin.xyz](https://heroofbitcoin.xyz)
 - Success page: [heroofbitcoin.xyz/success.html](https://heroofbitcoin.xyz/success.html)
-- Test checkout page: [heroofbitcoin.xyz/checkout-test.html](https://heroofbitcoin.xyz/checkout-test.html)
 
 ## Fresh Session Checklist
 
@@ -133,7 +131,6 @@ does not issue codes or change payment or fulfillment rules.
 | Stackchain Magazine | `https://heroofbitcoin.xyz/#stackchain-magazine` |
 | Graded Copy | `https://heroofbitcoin.xyz/#graded-copy` |
 | Success page | `https://heroofbitcoin.xyz/success.html` |
-| Test checkout page | `https://heroofbitcoin.xyz/checkout-test.html` |
 
 Localized URLs work with `?lang=de`, `?lang=es`, `?lang=fr`, or `?lang=ko`.
 
@@ -143,7 +140,6 @@ Localized URLs work with `?lang=de`, `?lang=es`, `?lang=fr`, or `?lang=ko`.
 - `src/components/GameManual.tsx`
 - `src/components/Products.tsx`
 - `src/SuccessPage.tsx`
-- `src/TestCheckoutPage.tsx`
 - `src/i18n/translations.ts`
 - `src/i18n/fr.ts`
 - `src/i18n/ko.ts`
@@ -182,7 +178,6 @@ When working on products or product copy:
 4. Run `npm run build`
 5. Check `public/products.xml` if the build regenerated it
 
-If the user wants lower-risk experimentation, prefer local work or `checkout-test.html` over immediate homepage changes.
 
 ## Assets
 
@@ -237,3 +232,9 @@ See:
 ## Copyright
 
 ©2022-2026 Hero of Bitcoin. All rights reserved.
+
+## Test environments
+
+Run checkout tests locally with the backend’s mock payment provider. Do not ship
+test pages in the production build. Any explicitly authorized, temporary public
+test surface must be removed as part of the same test run.

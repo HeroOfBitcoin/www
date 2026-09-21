@@ -30,7 +30,6 @@ As of `2026-04-05`:
 - Public homepage and product page are live
 - `Instant Download` is a live public product, not just a hidden test flow
 - `success.html` is live
-- `checkout-test.html` still exists as a lower-risk testing surface
 - Latest known stable frontend tag: `stable-www-2026-04-03`
 - GitHub Pages deploys from pushes to `main`
 - The GitHub Actions Pages workflow is expected to run without Node 20 deprecation warnings
@@ -72,9 +71,10 @@ Do not collapse `Instant Download` and `Digital Edition` back into one ambiguous
 
 ## Publishing Rules
 
+- Run experiments and checkout tests locally. Do not include test pages in production builds.
+- Any explicitly authorized temporary public test surface must be removed during the same test run.
+
 - Assume homepage and product-copy edits are production changes
-- If the user wants experimentation without shipping the homepage immediately, prefer local work or `checkout-test.html`
-- Hidden/test-page changes are lower-risk than homepage and product-listing changes, but still validate them before pushing
 - Ask before changing repo visibility, domain, or deployment model
 
 ## High-Signal Files
@@ -83,7 +83,6 @@ Do not collapse `Instant Download` and `Digital Edition` back into one ambiguous
 - `src/components/GameManual.tsx`
 - `src/components/Products.tsx`
 - `src/SuccessPage.tsx`
-- `src/TestCheckoutPage.tsx`
 - `src/i18n/translations.ts`
 - `src/lib/api.ts`
 - `vite.config.ts`

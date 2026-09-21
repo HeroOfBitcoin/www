@@ -23,6 +23,7 @@ interface OrderStatusResponse {
   created_at: string;
   paid_at: string | null;
   download_token?: string;
+  download_access_revoked?: boolean;
   download_expires_at?: string;
   downloads_remaining?: number;
 }
@@ -38,6 +39,18 @@ interface FulfillmentFormState {
   country: string;
   note: string;
 }
+
+const DOWNLOAD_ACCESS_REVOKED: Record<Language, string> = {
+  en: 'This download link is no longer valid.',
+  es: 'Este enlace de descarga ya no es válido.',
+  it: 'Questo link per il download non è più valido.',
+  ja: 'このダウンロードリンクは無効になりました。',
+  de: 'Dieser Downloadlink ist nicht mehr gültig.',
+  ko: '이 다운로드 링크는 더 이상 유효하지 않습니다.',
+  fr: 'Ce lien de téléchargement n’est plus valide.',
+  nl: 'Deze downloadlink is niet meer geldig.',
+  fi: 'Tämä latauslinkki ei ole enää voimassa.',
+};
 
 const POLL_INTERVAL_MS = 3_000;
 const POLL_WINDOW_MS = 120_000;
@@ -388,7 +401,9 @@ const SuccessPage: React.FC = () => {
             >
               <div className="space-y-4">
                 <p className="font-mono text-sm text-gray-700">
-                  {isLoading ? checkoutText.loading : getStatusBody(order?.status ?? null, checkoutText)}
+                  {isLoading ? checkoutText.loading : order?.download_access_revoked
+                    ? DOWNLOAD_ACCESS_REVOKED[language]
+                    : getStatusBody(order?.status ?? null, checkoutText)}
                 </p>
 
                 {error && (
@@ -451,7 +466,7 @@ const SuccessPage: React.FC = () => {
                       </div>
                     </div>
 
-                    {order.status === 'paid' && (
+                    {order.status === 'paid' && !order.download_access_revoked && (
                       <div className="border-2 border-black bg-green-50 p-4">
                         <div className="mb-4 border-2 border-black bg-yellow-300 px-4 py-4 text-center text-black pixel-shadow-sm">
                           <p className="font-pixel text-sm leading-relaxed md:text-lg">

@@ -20,8 +20,8 @@ export interface Product {
 export const products: Product[] = [
   {
     id: 'instant-download',
-    title: 'Instant Download - Launcher + ROM + PDF Bundle',
-    description: 'Pay with Bitcoin or Lightning and download the Hero of Bitcoin launcher for Windows, macOS and Linux. Play in English, Dutch or Finnish. The ZIP also includes an English Game Boy ROM and English PDF quick-start guide. No email required.',
+    title: 'Hero of Bitcoin - Digital Game Download',
+    description: 'Download Hero of Bitcoin for Windows, macOS and Linux. Play in English, Dutch or Finnish. English PDF quick-start guide included. Pay with Bitcoin or Lightning. No email required.',
     pubDate: '2024-01-01',
     path: '/digital/',
     availability: 'available',

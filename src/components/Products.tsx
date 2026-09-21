@@ -554,7 +554,7 @@ const Products: React.FC = () => {
             </p>
             <div className="inline-flex items-center gap-3 border-2 border-white/15 bg-white/5 px-3 py-2 mb-5">
               <PaymentMark />
-              <p className="max-w-[16rem] font-mono text-[13px] leading-snug text-neutral-100">{t.products.instant.compatibility}</p>
+              <p className="max-w-[16rem] font-mono text-[13px] leading-snug text-neutral-100">{digitalCopy.heroLede}</p>
             </div>
             <p className="max-w-[30rem] font-mono text-[15px] leading-relaxed text-neutral-100 mb-4">
               {t.products.chooseFormatBody}
@@ -613,7 +613,7 @@ const Products: React.FC = () => {
         =========================================================================
         PRODUCT: Instant Download - Hosted BTC/LN checkout
         =========================================================================
-        Primary site-owned checkout for ROM + PDF delivery
+        Primary site-owned checkout for the digital game
         =========================================================================
       */}
       <ProductCard
@@ -623,11 +623,10 @@ const Products: React.FC = () => {
         subtitle="Windows / macOS / Linux"
         quote={t.products.instant.quote}
         features={[
-          { icon: <ShieldCheck className="text-green-600" size={18} />, text: digitalCopy.launcherFiles },
+          { icon: <ShieldCheck className="text-green-600" size={18} />, text: digitalCopy.gamePlatforms },
           { icon: <PaymentMark compact tone="light" className="min-w-[28px] justify-center" />, text: t.products.instant.feature2 },
           { icon: <BookOpen className="text-yellow-600" size={18} />, text: digitalCopy.pdfGuide },
           { icon: <Zap className="text-amber-600" size={18} />, text: t.products.instant.feature4 },
-          { icon: <Disc className="text-purple-600" size={18} />, text: digitalCopy.gameRom },
         ]}
         badgeText={t.products.badges.instantAccess}
         images={['/assets/images/HoB_Logo_Avatar.png']}
@@ -639,7 +638,7 @@ const Products: React.FC = () => {
         detailsClassName="pt-1"
         cardClassName="bg-[#e9cf57]"
         galleryCount={3}
-        compatibility={t.products.instant.compatibility}
+        compatibility={digitalCopy.heroLede}
         pricePreview={pricePreviews['instant-download'] ?? null}
         pricePreviewText={pricePreviewText}
         buyContent={(

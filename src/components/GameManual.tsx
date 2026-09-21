@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Glasses, TrendingUp, Mic2, Landmark, Hash, Ghost, ImageOff, Play, ShoppingCart, BookOpen } from 'lucide-react';
 import { useLanguage } from '../i18n';
+import { digitalTranslations } from '../i18n/digital-translations';
 import { Character } from '../types';
 
 /**
@@ -83,7 +84,8 @@ function renderStoryParagraph(text: string): React.ReactNode[] {
 }
 
 const GameManual: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const digitalCopy = digitalTranslations[language];
   const [showTrailer, setShowTrailer] = useState(false);
 
   // Get character data with translations
@@ -251,7 +253,7 @@ const GameManual: React.FC = () => {
               <p className="max-w-[16rem] font-mono text-[13px] leading-snug text-neutral-100">{t.hero.instantMeta}</p>
             </div>
             <p className="font-mono text-[15px] leading-relaxed text-neutral-100 mb-6 max-w-[30rem]">
-              {t.hero.instantBody}
+              {digitalCopy.heroLede}
             </p>
             <a
               href="#instant-download"

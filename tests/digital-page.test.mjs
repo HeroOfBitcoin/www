@@ -156,13 +156,13 @@ test('crawler discovery surfaces point to the canonical page without adding site
 test('digital checkout uses the server-owned instant-download contract', async () => {
   const [script, checkout] = await Promise.all([
     read('src/digital.ts'),
-    read('src/digital-checkout.ts'),
+    read('src/checkout.ts'),
   ]);
 
   assert.match(script, /\/api\/products\/prices/);
   assert.match(checkout, /\/api\/create-checkout/);
-  assert.match(checkout, /product_id: 'instant-download'/);
-  assert.match(checkout, /lang: language/);
+  assert.match(checkout, /product_id: input\.productId \?\? 'instant-download'/);
+  assert.match(checkout, /lang: input\.language/);
   assert.match(checkout, /trimmedCouponCode \? \{ coupon_code: trimmedCouponCode \} : \{\}/);
   assert.match(checkout, /\[400, 409\]\.includes\(response\.status\) && Boolean\(payload\.coupon_code\)/);
   assert.match(script, /discountCodeInput\.disabled = isBusy/);
@@ -172,7 +172,7 @@ test('digital checkout uses the server-owned instant-download contract', async (
   assert.match(script, /searchParams\.get\('claim'\)/);
   assert.match(script, /\^\[A-Z0-9\]\{12,64\}\$/);
   assert.match(script, /discountDetails\.open = true/);
-  assert.match(script, /submitDigitalCheckoutOnEnter\(event/);
+  assert.match(script, /submitCheckoutOnEnter\(event/);
   assert.match(script, /window\.addEventListener\('pageshow'/);
   assert.match(script, /event\.persisted/);
   assert.match(script, /checkoutController\.reset\(\)/);
@@ -205,9 +205,9 @@ test('digital discount entry stays compact and uses the existing server-owned co
 test('homepage instant download accepts the same uppercase claim code', async () => {
   const products = await read('src/components/Products.tsx');
 
-  assert.match(products, /coupon_code: couponCode\.trim\(\) \|\| undefined/);
+  assert.match(products, /new CheckoutController\(/);
   assert.match(products, /setInstantCouponCode\(event\.target\.value\.toUpperCase\(\)\)/);
-  assert.match(products, /lang: language/);
+  assert.match(products, /checkoutController\.start/);
 });
 
 test('player reviews preserve the supplied wording and use manual controls only', async () => {
@@ -278,9 +278,8 @@ test('digital language state follows URL, saved preference, and browser locale',
     read('src/styles/digital.css'),
   ]);
 
-  assert.match(script, /searchParams\.get\('lang'\)/);
-  assert.match(script, /localStorage\.getItem\('hob-language'\)/);
-  assert.match(script, /navigator\.languages/);
+  assert.match(script, /resolveLanguage/);
+  assert.match(script, /rememberLanguage\(language\)/);
   assert.match(script, /searchParams\.set\('lang', language\)/);
   assert.match(script, /document\.documentElement\.lang = language/);
   assert.match(script, /document\.title = copy\.pageTitle/);

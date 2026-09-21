@@ -1,11 +1,4 @@
-/*
-  =============================================================================
-  PRODUCTS DATA
-  =============================================================================
-  Single source of truth for all product information.
-  Used by both the Products component and RSS feed generator.
-  =============================================================================
-*/
+// Product summaries for the public RSS feed. Shop copy lives in the i18n catalogs.
 
 export interface Product {
   id: string;
@@ -29,7 +22,7 @@ export const products: Product[] = [
   {
     id: 'collectors-edition',
     title: "Collector's Edition - Physical Game Boy Cartridge",
-    description: 'Limited to ~450 units. A tangible piece of Bitcoin history, playable on original hardware. Includes premium box, manual, orange Game Boy cartridge, sticker, and protective box cover. Compatible with Game Boy, GBC, GBA, and Analogue Pocket. Digital game included for Windows (x86-64), macOS (Apple Silicon) and Linux (x86-64), in English, Dutch and Finnish.',
+    description: 'Limited to ~450 units. Playable on original hardware. Includes box, manual, orange Game Boy cartridge, sticker, and protective box cover. Compatible with Game Boy, GBC, GBA, and Analogue Pocket. Digital game included for Windows (x86-64), macOS (Apple Silicon) and Linux (x86-64), in English, Dutch and Finnish.',
     pubDate: '2024-01-01',
     availability: 'limited',
     limitedQuantity: 450,
@@ -37,14 +30,14 @@ export const products: Product[] = [
   {
     id: 'digital-edition',
     title: 'Digital Edition - Boxed microSD Bundle',
-    description: 'Physical boxed edition for emulator players. Includes premium box, manual, microSD with the game ROM, decorative cartridge collectible, sticker, and protective box cover. Digital game included for Windows (x86-64), macOS (Apple Silicon) and Linux (x86-64), in English, Dutch and Finnish.',
+    description: 'Physical boxed edition for emulator players. Includes box, manual, microSD with the game ROM, decorative cartridge collectible, sticker, and protective box cover. Digital game included for Windows (x86-64), macOS (Apple Silicon) and Linux (x86-64), in English, Dutch and Finnish.',
     pubDate: '2024-01-01',
     availability: 'available',
   },
   {
     id: 'hero-handheld',
     title: 'Hero Handheld - R36S Console Bundle',
-    description: 'Ready to play. Hero of Bitcoin pre-installed. Power on and play instantly. Includes ArkOS pre-installed, microSD card, and sticker. Also supports GB, GBC, GBA, NES, SNES, Genesis, PS1, and more.',
+    description: 'R36S handheld with Hero of Bitcoin and ArkOS pre-installed. Includes microSD card, and sticker. Also supports GB, GBC, GBA, NES, SNES, Genesis, PS1, and more.',
     pubDate: '2024-01-01',
     availability: 'available',
   },

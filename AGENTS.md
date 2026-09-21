@@ -7,15 +7,13 @@ Start a new chat from the current repo state, not from memory:
 1. Check repo cleanliness:
    - `git status --short --branch`
    - `git -C ../digital-hosted status --short --branch`
-2. Confirm the stable tags:
-   - `git show --no-patch stable-www-2026-04-03`
-   - `git -C ../digital-hosted show --no-patch stable-digital-hosted-2026-04-03`
+2. Compare current commits with the latest deployment workflow SHAs; stable tags are historical snapshots.
 3. Verify the latest Pages deploy:
    - `gh run list --repo HeroOfBitcoin/www --workflow deploy.yml --limit 1`
 4. Verify backend health:
    - `curl -s https://hero-of-bitcoin-digital.fly.dev/healthz`
 5. Read the current follow-up list:
-   - `TODO.md`
+   - `.state/todo_local.md` (ignored private state)
 
 ## Purpose
 
@@ -25,12 +23,11 @@ Start a new chat from the current repo state, not from memory:
 
 ## Current Live State
 
-As of `2026-04-05`:
+Production architecture:
 
 - Public homepage and product page are live
 - `Instant Download` is a live public product, not just a hidden test flow
 - `success.html` is live
-- Latest known stable frontend tag: `stable-www-2026-04-03`
 - GitHub Pages deploys from pushes to `main`
 - The GitHub Actions Pages workflow is expected to run without Node 20 deprecation warnings
 - The Pages artifact is packaged manually and uploaded with `actions/upload-artifact@v6`
@@ -62,10 +59,11 @@ Notes:
 
 ## Product Architecture to Preserve
 
-- `Instant Download` = site-owned Bitcoin + Lightning checkout for the ROM + PDF bundle
+- `Instant Download` = site-owned Bitcoin + Lightning checkout for the Windows/macOS/Linux game bundle and English PDF guide
 - `Digital Edition` = boxed physical microSD bundle sold externally
 - `Collector's Edition` = physical cartridge edition sold externally
-- `Hero Handheld` and `Stackchain Magazine` remain external physical products
+- `Hero Handheld` remains an external physical product; desktop launcher compatibility does not apply
+- `Stackchain Magazine` and `Graded Copy` use site-owned checkout with server-calculated shipping
 
 Do not collapse `Instant Download` and `Digital Edition` back into one ambiguous product.
 
@@ -117,10 +115,7 @@ curl -sk https://heroofbitcoin.xyz/
 curl -sk https://heroofbitcoin.xyz/success.html
 ```
 
-## After-Holiday Follow-Ups
+## Private work state
 
-- Run a live end-to-end purchase test from the public product page while monitoring backend logs
-- Decide whether the success page should show email confirmation or a masked email
-- Revisit Lightning QR presentation and Coinsnap hosted-checkout UX
-- Research compatibility-safe ROM watermarking or fingerprinting
-- Continue copy and image polish only if the user explicitly wants more refinement
+Keep internal plans and follow-ups in ignored `.state/todo_local.md`. Public docs
+should describe durable product behavior and reproducible commands.

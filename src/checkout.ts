@@ -1,15 +1,19 @@
 import type { Language } from './i18n/locales';
 
-export interface DigitalCheckoutCopy {
+export interface CheckoutCopy {
   creating: string;
   invalidDiscount: string;
   unavailable: string;
 }
 
-export interface DigitalCheckoutInput {
+export type CheckoutProduct = 'instant-download' | 'stackchain-magazine' | 'graded-copy';
+
+export interface CheckoutInput {
+  productId?: CheckoutProduct;
+  shippingRegion?: 'de_eu' | 'world';
   language: Language;
   couponCode: string;
-  copy: DigitalCheckoutCopy;
+  copy: CheckoutCopy;
 }
 
 interface CheckoutResponse {
@@ -22,7 +26,7 @@ interface FetchResponse {
   json(): Promise<unknown>;
 }
 
-export interface DigitalCheckoutDependencies {
+export interface CheckoutDependencies {
   apiBaseUrl: string;
   fetcher: (url: string, init: RequestInit) => Promise<FetchResponse>;
   navigate: (url: string) => void;
@@ -30,7 +34,7 @@ export interface DigitalCheckoutDependencies {
   setStatus: (message: string, isError?: boolean) => void;
 }
 
-export function submitDigitalCheckoutOnEnter(
+export function submitCheckoutOnEnter(
   event: Pick<KeyboardEvent, 'key' | 'preventDefault'>,
   startCheckout: () => void,
 ): boolean {
@@ -43,15 +47,12 @@ export function submitDigitalCheckoutOnEnter(
   return true;
 }
 
-export function buildDigitalCheckoutPayload(language: Language, couponCode: string): {
-  product_id: 'instant-download';
-  lang: Language;
-  coupon_code?: string;
-} {
-  const trimmedCouponCode = couponCode.trim();
+export function buildCheckoutPayload(input: CheckoutInput) {
+  const trimmedCouponCode = input.couponCode.trim();
   return {
-    product_id: 'instant-download',
-    lang: language,
+    product_id: input.productId ?? 'instant-download',
+    lang: input.language,
+    ...(input.shippingRegion ? { shipping_region: input.shippingRegion } : {}),
     ...(trimmedCouponCode ? { coupon_code: trimmedCouponCode } : {}),
   };
 }
@@ -60,11 +61,11 @@ export function normalizeCouponCodeEntry(value: string): string {
   return value.toUpperCase();
 }
 
-export class DigitalCheckoutController {
+export class CheckoutController {
   private isBusy = false;
   private generation = 0;
 
-  constructor(private readonly dependencies: DigitalCheckoutDependencies) {}
+  constructor(private readonly dependencies: CheckoutDependencies) {}
 
   reset(): void {
     this.generation += 1;
@@ -73,13 +74,13 @@ export class DigitalCheckoutController {
     this.dependencies.setStatus('');
   }
 
-  async start(input: DigitalCheckoutInput): Promise<boolean> {
+  async start(input: CheckoutInput): Promise<boolean> {
     if (this.isBusy) {
       return false;
     }
 
     const attempt = ++this.generation;
-    const payload = buildDigitalCheckoutPayload(input.language, input.couponCode);
+    const payload = buildCheckoutPayload(input);
     let errorMessage = input.copy.unavailable;
     this.isBusy = true;
     this.dependencies.setBusy(true);

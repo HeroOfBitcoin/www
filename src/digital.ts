@@ -2,15 +2,17 @@ import './styles/digital.css';
 import './styles/game-languages.css';
 import './styles/game-platforms.css';
 import {
-  DigitalCheckoutController,
+  CheckoutController,
   normalizeCouponCodeEntry,
-  submitDigitalCheckoutOnEnter,
-} from './digital-checkout';
+  submitCheckoutOnEnter,
+} from './checkout';
 import { digitalTranslations, type DigitalTranslation } from './i18n/digital-translations';
 import {
   LANGUAGE_OPTIONS,
   LOCALE_BY_LANGUAGE,
   isLanguage,
+  resolveLanguage,
+  rememberLanguage,
   type Language,
 } from './i18n/locales';
 import { getApiBaseUrl } from './lib/api';
@@ -71,36 +73,6 @@ function applyClaimCodeFromUrl(): void {
   if (discountDetails) {
     discountDetails.open = true;
   }
-}
-
-function readStoredLanguage(): Language | null {
-  try {
-    const storedLanguage = window.localStorage.getItem('hob-language');
-    return isLanguage(storedLanguage) ? storedLanguage : null;
-  } catch {
-    return null;
-  }
-}
-
-function resolveInitialLanguage(): Language {
-  const urlLanguage = new URL(window.location.href).searchParams.get('lang');
-  if (isLanguage(urlLanguage)) {
-    return urlLanguage;
-  }
-
-  const storedLanguage = readStoredLanguage();
-  if (storedLanguage) {
-    return storedLanguage;
-  }
-
-  for (const browserLocale of navigator.languages) {
-    const browserLanguage = browserLocale.toLowerCase().split('-')[0];
-    if (isLanguage(browserLanguage)) {
-      return browserLanguage;
-    }
-  }
-
-  return 'en';
 }
 
 function textFor(copy: DigitalTranslation, key: string | undefined): string | null {
@@ -216,11 +188,7 @@ function applyLanguage(language: Language): void {
     languagePicker.setAttribute('aria-label', copy.languageLabel);
   }
 
-  try {
-    window.localStorage.setItem('hob-language', language);
-  } catch {
-    // The URL remains the durable language state when storage is unavailable.
-  }
+  rememberLanguage(language);
 
   const url = new URL(window.location.href);
   url.searchParams.set('lang', language);
@@ -346,7 +314,7 @@ async function loadFastPrice(): Promise<void> {
   }
 }
 
-const checkoutController = new DigitalCheckoutController({
+const checkoutController = new CheckoutController({
   apiBaseUrl,
   fetcher: window.fetch.bind(window),
   navigate: (url) => window.location.assign(url),
@@ -387,7 +355,7 @@ checkoutButtons.forEach((button) => {
 });
 
 discountCodeInput?.addEventListener('keydown', (event) => {
-  submitDigitalCheckoutOnEnter(event, () => void startCheckout());
+  submitCheckoutOnEnter(event, () => void startCheckout());
 });
 discountCodeInput?.addEventListener('input', () => {
   discountCodeInput.value = normalizeCouponCodeEntry(discountCodeInput.value);
@@ -408,7 +376,7 @@ nextReviewButton?.addEventListener('click', () => {
 });
 
 applyClaimCodeFromUrl();
-applyLanguage(resolveInitialLanguage());
+applyLanguage(resolveLanguage());
 showReview(activeReviewIndex, false);
 
 const revealNodes = document.querySelectorAll<HTMLElement>('[data-reveal]');

@@ -24,11 +24,10 @@ export const translations = {
       buyAtCopiaro: 'BUY AT COPIARO',
       copiaroSubtext: 'Our trusted partner for physical cartridges & merchandise',
       instantTitle: 'Instant Download',
-      instantBody: 'Pay with Bitcoin or Lightning and unlock the ROM + PDF bundle right after payment.',
       instantCta: 'OPEN BTC / LN CHECKOUT',
       instantMeta: 'Instant access. No account required.',
       physicalTitle: 'Physical Editions',
-      physicalBody: 'Collector cartridges, boxed microSD bundles, and other physical releases stay available via our fulfillment partner.',
+      physicalBody: 'Game Boy cartridges, boxed microSD editions and merchandise are available from Copiaro.',
       physicalCta: 'BROWSE PHYSICAL STORE',
       physicalMeta: 'Box, manual, cartridge, and Bitcoin-native merchandise.',
     },
@@ -47,7 +46,7 @@ export const translations = {
       processingTitle: 'Payment detected',
       processingBody: 'We have seen your payment and are waiting for final confirmation.',
       paidTitle: 'Payment confirmed',
-      paidBody: 'Your bundle is ready. Download access is temporary and limited.',
+      paidBody: 'Payment confirmed. Keep this page for your order details and downloads.',
       expiredTitle: 'Checkout expired',
       expiredBody: 'The checkout window expired before payment completed. Start a new checkout from the product page.',
       underpaidTitle: 'Payment underpaid',
@@ -63,8 +62,7 @@ export const translations = {
       paidAt: 'Paid At',
       downloadsRemaining: 'Downloads Remaining',
       downloadButton: 'DOWNLOAD ZIP',
-      downloadHint: 'Clicking download generates a private file URL for this order only.',
-      downloadAvailableUntil: 'Download access stays active until',
+      downloadHint: 'Extract the ZIP, then follow the included PDF guide to start the game.',
       thankYouHeadlineLine1: 'THANK YOU',
       thankYouHeadlineLine2: 'FOR YOUR SUPPORT',
       noDownloadsLeft: 'This order has used all remaining downloads.',
@@ -88,11 +86,14 @@ export const translations = {
       stateOrRegionLabel: 'State / Region',
       countryLabel: 'Country',
       noteLabel: 'Delivery Note',
+
+      downloadError: "Could not start the download. Please try again.",
+      preparingDownload: "PREPARING DOWNLOAD…",
     },
     // Story Section
     story: {
       title: 'The Story',
-      p1: '{heroOfBitcoin} is a story inspired by Bitcoin culture, set in the beautiful Bitcoin-sovereign nation of {elSalvador}.',
+      p1: '{heroOfBitcoin} is an adventure inspired by Bitcoin culture, set in {elSalvador}.',
       p2: 'You will be taken to iconic places such as {bitcoinBeach}, the volcano and more, all the way to the bank\'s doorstep.',
       p3: 'The game follows the journey of a young man called {hero}, a new bitcoiner, who journeys to El Salvador wanting to help the Bitcoin fight on the frontlines.',
       p4: 'You will need to help {presidentBukele} and other bitcoiners to ensure poocoiners, bears, bankers and more do not stand in the way of Bitcoin adoption.',
@@ -164,7 +165,7 @@ export const translations = {
     // Legal
     legal: {
       disclaimer1: 'Please note that the \'Game Boy©\' name is mentioned to demonstrate console compatibility. All trademarks are the property of their respective owners.',
-      disclaimer2: 'Cartridge plays on Game Boy© hardware and Analogue Pocket. Digital edition runs on any emulator.',
+      disclaimer2: "The cartridge works on Game Boy hardware and Analogue Pocket.",
       notLicensed: 'Not licensed by Nintendo©.',
     },
     // Products Page
@@ -174,7 +175,6 @@ export const translations = {
       copyLink: 'Copy link to this product',
       copied: 'Copied!',
       noteLabel: 'Note:',
-      gameLanguageNotice: 'This site now supports all nine launcher languages. The current download remains the English bundle until the new launcher ships.',
       chooseFormatTitle: 'Choose Your Format',
       chooseFormatBody: 'Start with the instant Bitcoin + Lightning download, or compare it with the physical editions.',
       chooseFormatPrimary: 'START INSTANT DOWNLOAD',
@@ -183,7 +183,7 @@ export const translations = {
       shippingText: 'All products ship worldwide. Customs and import duties may apply depending on your country.',
       pricePreview: {
         label: 'BTC preview',
-        unavailable: 'Unavailable from external checkout',
+        unavailable: 'Price unavailable',
         estimate: 'est.',
         informational: 'external checkout final price may differ',
         stockRemaining: '{remaining} of {total} left',
@@ -192,20 +192,11 @@ export const translations = {
       },
       instant: {
         title: 'Instant Download',
-        subtitle: 'ROM + PDF BUNDLE',
-        quote: 'The fastest way to buy and play with Bitcoin or Lightning.',
-        feature1: 'ROM file + PDF guide',
+        quote: 'Download the game and play on your computer.',
         feature2: 'Bitcoin + Lightning checkout',
-        feature3: 'Optional email',
         feature4: 'Unlocks right after payment',
-        note: 'Email is optional. Your bundle unlocks without creating an account.',
-        compatibility: 'Play on Raspberry Pi, MiSTer FPGA, RetroArch, or any Game Boy emulator.',
-        emailLabel: 'Optional Email',
-        emailPlaceholder: 'you@example.com',
-        emailHint: 'Leave this blank for a faster checkout.',
-        couponLabel: 'Coupon Code',
-        couponPlaceholder: 'Optional code',
-        couponHint: 'Optional. Active codes are checked at checkout and applied server-side.',
+        note: 'No account or email address required.',
+        couponHint: 'Enter a code if you have one.',
         buyWithBitcoin: 'PAY WITH BITCOIN + LIGHTNING',
         redirecting: 'Redirecting to secure checkout...',
         checkoutTitle: 'Bitcoin + Lightning checkout',
@@ -216,10 +207,9 @@ export const translations = {
       collectors: {
         title: "Collector's Edition",
         subtitle: 'LIMITED TO ~450 UNITS',
-        quote: 'A tangible piece of Bitcoin history, playable on original hardware.',
+        quote: 'The game on an orange Game Boy cartridge, with a box and printed manual.',
         feature1: 'Premium Box & Manual',
         feature2: 'Orange Game Boy Cartridge',
-        feature3: 'ROM Available on Request',
         feature4: 'Includes Sticker',
         feature5: 'Protective Box Cover',
         compatibility: 'Compatible with Game Boy, GBC, GBA, Analogue Pocket. Region free.',
@@ -235,21 +225,17 @@ export const translations = {
         feature3: 'microSD with Game ROM',
         feature4: 'Sticker + Protective Box Cover',
         note: 'This is a physical game box with booklet and microSD. It is made for collectors who want the packaging, but do not need a Game Boy cartridge.',
-        compatibility: 'Play on Raspberry Pi, MiSTer FPGA, RetroArch, or any Game Boy emulator.',
+        compatibility: 'Play on Raspberry Pi, MiSTer FPGA, RetroArch, or a compatible Game Boy emulator.',
         buyAtCopiaro: 'BUY DIGITAL EDITION AT COPIARO',
       },
       graded: {
         title: 'Graded Copy',
         subtitle: 'CGC 9.9 • ONE AVAILABLE',
-        quote: 'A verified Hero of Bitcoin Geyser Release for the tightest collector supply.',
+        quote: 'Hero of Bitcoin Geyser Release, graded 9.9 by CGC.',
         feature1: 'CGC Universal Grade 9.9',
         feature2: 'Public authenticity verification',
-        feature3: 'Digital game download included',
         feature4: 'Tracked physical shipping after payment',
-        note: 'This listing is for the verified CGC 9.9 copy with serial 1020219002. The digital game download unlocks after payment.',
-        compatibility: 'Physical CGC slab for collectors. Digital bundle is playable on any Game Boy emulator.',
         checkoutTitle: 'Direct Bitcoin + Lightning checkout',
-        checkoutBody: 'Choose shipping before payment. One invoice includes the graded copy, digital game, and shipping.',
         verifyLink: 'VERIFY THIS COPY',
         shippingEu: 'EU shipping',
         shippingEuHint: 'Adds 7.49 EUR to the invoice total.',
@@ -297,7 +283,7 @@ export const translations = {
         shippingWorldHint: 'Adds 12.49 EUR to the invoice total.',
         couponLabel: 'Coupon Code',
         couponPlaceholder: 'Optional code',
-        couponHint: 'Optional. Active codes are checked at checkout and applied server-side.',
+        couponHint: 'Enter a code if you have one.',
         privacyNotice: 'After payment, this page asks for email and shipping address. These details are required to ship the article, sent to the seller, and not stored by the site.',
         imageOverlay: 'Digital game download included',
         buyWithBitcoin: 'PAY BUNDLE WITH BITCOIN + LIGHTNING',
@@ -308,15 +294,15 @@ export const translations = {
       techDetails: {
         title: 'Hero Handheld Technical Details & Troubleshooting',
         safeShutdown: 'Safe Shutdown:',
-        safeShutdownDesc: 'Never pull card while saving. Use START → Quit → Shutdown or SELECT+START twice.',
+        safeShutdownDesc: "Exit the game, then use START → Quit → Shutdown. Wait for the device to turn off before removing the card.",
         power: 'Power & Charging',
         powerItems: ['USB-A to USB-C only', '5V (1-2A) charger', 'Avoid fast chargers'],
         microsd: 'microSD Handling',
         microsdItems: ["Don't reformat card", 'Use EASYROMS partition', 'Always eject safely'],
         addingGames: 'Adding Games',
-        addingItems: ['Path: EASYROMS/roms/', 'Match folder (nes → /nes)', 'Bios files included'],
+        addingItems: ["Path: EASYROMS/","Match folder (nes → /nes)"],
         wontBoot: "Won't Boot",
-        wontBootDesc: 'Hold POWER+A 15s, release, press Power',
+        wontBootDesc: "Charge the device. With the power off, check that the system microSD card is seated correctly.",
         gamesMissing: 'Games Missing',
         gamesMissingDesc: 'Check extensions, unzip, rescan in Options',
         chargingIssues: 'Charging Issues',
@@ -335,26 +321,26 @@ export const translations = {
     // Partners Page
     partners: {
       title: 'Our Partners',
-      subtitle: 'Trusted retailers bringing Hero of Bitcoin to the world',
+      subtitle: 'Where to buy Hero of Bitcoin',
       visitStore: 'Visit Store',
       copiaro: {
         name: 'Copiaro',
-        description: 'Copiaro is an established, international Bitcoin retailer and fulfillment partner, offering professional service, reliable worldwide shipping, and a curated selection of high-quality Bitcoin products. A premium choice for customers who want a smooth, trusted buying experience.',
+        description: 'Copiaro sells and ships Hero of Bitcoin physical editions and merchandise.',
       },
       plebstyle: {
         name: 'Plebstyle',
-        description: 'Plebstyle is a Bitcoin-native, independent shop run with passion and care, offering thoughtfully designed products created by a Bitcoiner for the Bitcoin community. Best suited for customers within the EU who value authenticity, craftsmanship, and direct community support.',
+        description: 'Plebstyle is an independent Bitcoin shop for customers in the EU.',
       },
     },
     // Footer
     footer: {
       fanSwag: 'CUPS, SHIRTS & CAPS',
       copyright: '©2022-2026 Hero of Bitcoin • heroofbitcoin.xyz',
-      privacy: 'No tracking • No cookies • No stored contact data',
+      privacy: 'No analytics • No advertising cookies',
     },
     contact: {
       title: 'Contact',
-      body: 'Send a direct message. Your sensitive data is never stored on third party systems and is delivered directly to an encrypted mailbox.',
+      body: 'Send us a message. We use your email address to reply.',
       emailLabel: 'Email',
       emailPlaceholder: 'you@example.com',
       messageLabel: 'Message',
@@ -385,11 +371,10 @@ export const translations = {
       buyAtCopiaro: 'COMPRAR EN COPIARO',
       copiaroSubtext: 'Nuestro socio de confianza para cartuchos físicos y merchandising',
       instantTitle: 'Descarga instantánea',
-      instantBody: 'Paga con Bitcoin o Lightning y desbloquea el bundle ROM + PDF justo después del pago.',
       instantCta: 'ABRIR CHECKOUT BTC / LN',
       instantMeta: 'Acceso al instante. Sin cuenta obligatoria.',
       physicalTitle: 'Ediciones físicas',
-      physicalBody: 'Los cartuchos de colección, bundles con microSD y otros lanzamientos físicos siguen disponibles a través de nuestro socio logístico.',
+      physicalBody: 'En Copiaro encontrarás cartuchos de Game Boy, ediciones en caja con microSD y otros artículos.',
       physicalCta: 'VER TIENDA FÍSICA',
       physicalMeta: 'Caja, manual, cartucho y merchandising Bitcoin-native.',
     },
@@ -408,7 +393,7 @@ export const translations = {
       processingTitle: 'Pago detectado',
       processingBody: 'Hemos visto tu pago y estamos esperando la confirmación final.',
       paidTitle: 'Pago confirmado',
-      paidBody: 'Tu bundle está listo. El acceso de descarga es temporal y limitado.',
+      paidBody: 'Pago confirmado. Guarda esta página para consultar tu pedido y tus descargas.',
       expiredTitle: 'Checkout caducado',
       expiredBody: 'La ventana de checkout caducó antes de completarse el pago. Inicia un nuevo checkout desde la página del producto.',
       underpaidTitle: 'Pago insuficiente',
@@ -424,8 +409,7 @@ export const translations = {
       paidAt: 'Pagado',
       downloadsRemaining: 'Descargas Restantes',
       downloadButton: 'DESCARGAR ZIP',
-      downloadHint: 'Al pulsar descargar se genera una URL privada del archivo solo para este pedido.',
-      downloadAvailableUntil: 'El acceso de descarga permanece activo hasta',
+      downloadHint: 'Extrae el ZIP y sigue la guía PDF incluida para iniciar el juego.',
       thankYouHeadlineLine1: 'GRACIAS',
       thankYouHeadlineLine2: 'POR TU APOYO',
       noDownloadsLeft: 'Este pedido ya ha usado todas las descargas disponibles.',
@@ -449,11 +433,14 @@ export const translations = {
       stateOrRegionLabel: 'Estado / Región',
       countryLabel: 'País',
       noteLabel: 'Nota de entrega',
+
+      downloadError: "No se pudo iniciar la descarga. Inténtalo de nuevo.",
+      preparingDownload: "PREPARANDO DESCARGA…",
     },
     // Story Section
     story: {
       title: 'La Historia',
-      p1: '{heroOfBitcoin} es una historia inspirada en la cultura Bitcoin, ambientada en la hermosa nación soberana de Bitcoin: {elSalvador}.',
+      p1: '{heroOfBitcoin} es una aventura inspirada en la cultura Bitcoin y ambientada en {elSalvador}.',
       p2: 'Serás llevado a lugares icónicos como {bitcoinBeach}, el volcán y más, hasta llegar a las puertas del banco.',
       p3: 'El juego sigue el viaje de un joven llamado {hero}, un nuevo bitcoiner que viaja a El Salvador queriendo ayudar en la lucha por Bitcoin en primera línea.',
       p4: 'Tendrás que ayudar al {presidentBukele} y otros bitcoiners para asegurar que los poocoiners, osos, banqueros y más no se interpongan en el camino de la adopción de Bitcoin.',
@@ -525,7 +512,7 @@ export const translations = {
     // Legal
     legal: {
       disclaimer1: 'El nombre \'Game Boy©\' se menciona para demostrar compatibilidad. Todas las marcas son propiedad de sus respectivos dueños.',
-      disclaimer2: 'El cartucho funciona en hardware Game Boy© y Analogue Pocket. La edición digital funciona en cualquier emulador.',
+      disclaimer2: "El cartucho funciona en Game Boy y Analogue Pocket.",
       notLicensed: 'No licenciado por Nintendo©.',
     },
     // Products Page
@@ -535,7 +522,6 @@ export const translations = {
       copyLink: 'Copiar enlace de este producto',
       copied: '¡Copiado!',
       noteLabel: 'Nota:',
-      gameLanguageNotice: 'El sitio ya admite los nueve idiomas del nuevo launcher. La descarga actual sigue en inglés hasta que se publique el nuevo launcher.',
       chooseFormatTitle: 'Elige Tu Formato',
       chooseFormatBody: 'Empieza con la descarga instantánea por Bitcoin + Lightning o compárala con las ediciones físicas.',
       chooseFormatPrimary: 'INICIAR DESCARGA INSTANTÁNEA',
@@ -544,7 +530,7 @@ export const translations = {
       shippingText: 'Todos los productos se envían a todo el mundo. Pueden aplicarse aduanas e impuestos según tu país.',
       pricePreview: {
         label: 'Vista previa BTC',
-        unavailable: 'No disponible desde checkout externo',
+        unavailable: 'Precio no disponible',
         estimate: 'est.',
         informational: 'el precio final del checkout externo puede variar',
         stockRemaining: 'Quedan {remaining} de {total}',
@@ -553,20 +539,11 @@ export const translations = {
       },
       instant: {
         title: 'Descarga instantánea',
-        subtitle: 'BUNDLE ROM + PDF',
-        quote: 'La forma más rápida de comprar y jugar con Bitcoin o Lightning.',
-        feature1: 'ROM + guía en PDF',
+        quote: 'Descarga el juego y juega en tu ordenador.',
         feature2: 'Checkout Bitcoin + Lightning',
-        feature3: 'Email opcional',
         feature4: 'Se desbloquea tras el pago',
-        note: 'El email es opcional. Tu bundle se desbloquea sin crear una cuenta.',
-        compatibility: 'Juega en Raspberry Pi, MiSTer FPGA, RetroArch o cualquier emulador de Game Boy.',
-        emailLabel: 'Email Opcional',
-        emailPlaceholder: 'tu@email.com',
-        emailHint: 'Déjalo vacío para pagar más rápido.',
-        couponLabel: 'Código de descuento',
-        couponPlaceholder: 'Código opcional',
-        couponHint: 'Opcional. Los códigos activos se validan en el checkout y se aplican en el servidor.',
+        note: 'No necesitas cuenta ni correo electrónico.',
+        couponHint: 'Introduce tu código si tienes uno.',
         buyWithBitcoin: 'PAGAR CON BITCOIN + LIGHTNING',
         redirecting: 'Redirigiendo al checkout seguro...',
         checkoutTitle: 'Checkout Bitcoin + Lightning',
@@ -577,10 +554,9 @@ export const translations = {
       collectors: {
         title: 'Edición Coleccionista',
         subtitle: 'LIMITADO A ~450 UNIDADES',
-        quote: 'Una pieza tangible de la historia de Bitcoin, jugable en hardware original.',
+        quote: 'El juego en un cartucho naranja de Game Boy, con caja y manual impreso.',
         feature1: 'Caja Premium y Manual',
         feature2: 'Cartucho Naranja de Game Boy',
-        feature3: 'ROM Disponible bajo Petición',
         feature4: 'Incluye Pegatina',
         feature5: 'Funda Protectora',
         compatibility: 'Compatible con Game Boy, GBC, GBA, Analogue Pocket. Sin restricción de región.',
@@ -596,21 +572,17 @@ export const translations = {
         feature3: 'microSD con ROM del Juego',
         feature4: 'Pegatina + Funda Protectora',
         note: 'Es una caja física del juego con manual y microSD. Pensada para coleccionistas que quieren el packaging, pero no necesitan cartucho de Game Boy.',
-        compatibility: 'Juega en Raspberry Pi, MiSTer FPGA, RetroArch o cualquier emulador de Game Boy.',
+        compatibility: 'Juega en Raspberry Pi, MiSTer FPGA, RetroArch o un emulador compatible con Game Boy.',
         buyAtCopiaro: 'COMPRAR EDICIÓN DIGITAL EN COPIARO',
       },
       graded: {
         title: 'Copia Graduada',
         subtitle: 'CGC 9.9 • UNA DISPONIBLE',
-        quote: 'Una Hero of Bitcoin Geyser Release verificada para la tirada de colección más escasa.',
+        quote: 'Hero of Bitcoin Geyser Release, con una calificación CGC de 9.9.',
         feature1: 'CGC Universal Grade 9.9',
         feature2: 'Verificacion publica de autenticidad',
-        feature3: 'Descarga digital del juego incluida',
         feature4: 'Envío físico con seguimiento tras el pago',
-        note: 'Este anuncio es para la copia CGC 9.9 verificada con serial 1020219002. La descarga digital del juego se desbloquea tras el pago.',
-        compatibility: 'Slab CGC físico para coleccionistas. El bundle digital funciona en cualquier emulador de Game Boy.',
         checkoutTitle: 'Checkout directo Bitcoin + Lightning',
-        checkoutBody: 'Elige el envío antes del pago. Una sola factura incluye la copia graduada, el juego digital y el envío.',
         verifyLink: 'VERIFICAR ESTA COPIA',
         shippingEu: 'Envío UE',
         shippingEuHint: 'Suma 7,49 EUR al total de la factura.',
@@ -658,7 +630,7 @@ export const translations = {
         shippingWorldHint: 'Suma 12,49 EUR al total de la factura.',
         couponLabel: 'Código de descuento',
         couponPlaceholder: 'Código opcional',
-        couponHint: 'Opcional. Los códigos activos se validan en el checkout y se aplican en el servidor.',
+        couponHint: 'Introduce tu código si tienes uno.',
         privacyNotice: 'Después del pago, esta página pide email y dirección de envío. Son necesarios para enviar el artículo, se mandan al vendedor y el sitio no los guarda.',
         imageOverlay: 'Descarga digital del juego incluida',
         buyWithBitcoin: 'PAGAR BUNDLE CON BITCOIN + LIGHTNING',
@@ -669,15 +641,15 @@ export const translations = {
       techDetails: {
         title: 'Detalles Técnicos y Solución de Problemas del Hero Handheld',
         safeShutdown: 'Apagado Seguro:',
-        safeShutdownDesc: 'Nunca quites la tarjeta mientras guardas. Usa START → Salir → Apagar o SELECT+START dos veces.',
+        safeShutdownDesc: "Sal del juego y usa START → Quit → Shutdown. Espera a que el dispositivo se apague antes de retirar la tarjeta.",
         power: 'Energía y Carga',
         powerItems: ['Solo USB-A a USB-C', 'Cargador 5V (1-2A)', 'Evita cargadores rápidos'],
         microsd: 'Manejo de microSD',
         microsdItems: ['No reformatees la tarjeta', 'Usa partición EASYROMS', 'Siempre expulsa de forma segura'],
         addingGames: 'Añadir Juegos',
-        addingItems: ['Ruta: EASYROMS/roms/', 'Carpeta correspondiente (nes → /nes)', 'Archivos Bios incluidos'],
+        addingItems: ["Ruta: EASYROMS/","Carpeta correspondiente (nes → /nes)"],
         wontBoot: 'No Enciende',
-        wontBootDesc: 'Mantén POWER+A 15s, suelta, presiona Power',
+        wontBootDesc: "Carga el dispositivo. Con el dispositivo apagado, comprueba que la microSD del sistema esté bien insertada.",
         gamesMissing: 'Juegos Faltantes',
         gamesMissingDesc: 'Verifica extensiones, descomprime, reescanea en Opciones',
         chargingIssues: 'Problemas de Carga',
@@ -696,26 +668,26 @@ export const translations = {
     // Partners Page
     partners: {
       title: 'Nuestros Socios',
-      subtitle: 'Minoristas de confianza que llevan Hero of Bitcoin al mundo',
+      subtitle: 'Dónde comprar Hero of Bitcoin',
       visitStore: 'Visitar Tienda',
       copiaro: {
         name: 'Copiaro',
-        description: 'Copiaro es un minorista internacional de Bitcoin establecido y socio de cumplimiento, que ofrece servicio profesional, envío mundial confiable y una selección curada de productos Bitcoin de alta calidad. Una opción premium para clientes que desean una experiencia de compra fluida y confiable.',
+        description: 'Copiaro vende y envía las ediciones físicas y los artículos de Hero of Bitcoin.',
       },
       plebstyle: {
         name: 'Plebstyle',
-        description: 'Plebstyle es una tienda independiente nativa de Bitcoin, gestionada con pasión y cuidado, que ofrece productos diseñados con esmero, creados por un Bitcoiner para la comunidad Bitcoin. Ideal para clientes dentro de la UE que valoran la autenticidad, la artesanía y el apoyo directo a la comunidad.',
+        description: 'Plebstyle es una tienda Bitcoin independiente para clientes de la UE.',
       },
     },
     // Footer
     footer: {
       fanSwag: 'TAZAS, CAMISETAS Y GORRAS',
       copyright: '©2022-2026 Hero of Bitcoin • heroofbitcoin.xyz',
-      privacy: 'Sin rastreo • Sin cookies • Sin datos de contacto guardados',
+      privacy: 'Sin analítica • Sin cookies publicitarias',
     },
     contact: {
       title: 'Contacto',
-      body: 'Envía un mensaje directo. Tus datos sensibles nunca se guardan en sistemas de terceros y llegan directamente a un buzón cifrado.',
+      body: 'Envíanos un mensaje. Usaremos tu correo electrónico para responderte.',
       emailLabel: 'Email',
       emailPlaceholder: 'tu@email.com',
       messageLabel: 'Mensaje',
@@ -746,11 +718,10 @@ export const translations = {
       buyAtCopiaro: 'BEI COPIARO KAUFEN',
       copiaroSubtext: 'Unser vertrauenswürdiger Partner für physische Cartridges & Merchandise',
       instantTitle: 'Sofortdownload',
-      instantBody: 'Bezahle mit Bitcoin oder Lightning und schalte das ROM + PDF Bundle direkt nach der Zahlung frei.',
       instantCta: 'BTC / LN CHECKOUT ÖFFNEN',
       instantMeta: 'Sofortiger Zugriff. Kein Konto erforderlich.',
       physicalTitle: 'Physische Editionen',
-      physicalBody: 'Sammler-Cartridges, Boxen mit microSD und weitere physische Releases bleiben über unseren Fulfillment-Partner verfügbar.',
+      physicalBody: 'Game-Boy-Cartridges, Boxen mit microSD und Merchandise bekommst du bei Copiaro.',
       physicalCta: 'PHYSISCHEN SHOP ÖFFNEN',
       physicalMeta: 'Box, Handbuch, Cartridge und Bitcoin-native Merchandise.',
     },
@@ -769,7 +740,7 @@ export const translations = {
       processingTitle: 'Zahlung erkannt',
       processingBody: 'Wir haben deine Zahlung gesehen und warten auf die endgültige Bestätigung.',
       paidTitle: 'Zahlung bestätigt',
-      paidBody: 'Dein Bundle ist bereit. Der Downloadzugang ist zeitlich begrenzt und limitiert.',
+      paidBody: 'Zahlung bestätigt. Bewahre den Link zu dieser Seite für deine Bestelldetails und Downloads auf.',
       expiredTitle: 'Checkout abgelaufen',
       expiredBody: 'Das Checkout-Fenster ist abgelaufen, bevor die Zahlung abgeschlossen wurde. Starte einen neuen Checkout auf der Produktseite.',
       underpaidTitle: 'Zahlung zu niedrig',
@@ -785,8 +756,7 @@ export const translations = {
       paidAt: 'Bezahlt',
       downloadsRemaining: 'Verbleibende Downloads',
       downloadButton: 'ZIP HERUNTERLADEN',
-      downloadHint: 'Beim Klick auf den Download wird eine private Datei-URL nur für diese Bestellung erzeugt.',
-      downloadAvailableUntil: 'Der Downloadzugang bleibt aktiv bis',
+      downloadHint: 'Entpacke die ZIP-Datei und folge der beiliegenden PDF-Anleitung, um das Spiel zu starten.',
       thankYouHeadlineLine1: 'DANKE',
       thankYouHeadlineLine2: 'FÜR DEINE UNTERSTÜTZUNG',
       noDownloadsLeft: 'Für diese Bestellung sind keine Downloads mehr übrig.',
@@ -810,11 +780,14 @@ export const translations = {
       stateOrRegionLabel: 'Bundesland / Region',
       countryLabel: 'Land',
       noteLabel: 'Lieferhinweis',
+
+      downloadError: "Der Download konnte nicht gestartet werden. Bitte versuche es erneut.",
+      preparingDownload: "DOWNLOAD WIRD VORBEREITET…",
     },
     // Story Section
     story: {
       title: 'Die Geschichte',
-      p1: '{heroOfBitcoin} ist eine Geschichte, inspiriert von der Bitcoin-Kultur, angesiedelt in der wunderschönen Bitcoin-souveränen Nation {elSalvador}.',
+      p1: '{heroOfBitcoin} ist ein von der Bitcoin-Kultur inspiriertes Abenteuer in {elSalvador}.',
       p2: 'Du wirst zu ikonischen Orten wie {bitcoinBeach}, dem Vulkan und mehr geführt, bis hin zur Türschwelle der Bank.',
       p3: 'Das Spiel folgt der Reise eines jungen Mannes namens {hero}, einem neuen Bitcoiner, der nach El Salvador reist, um beim Bitcoin-Kampf an vorderster Front zu helfen.',
       p4: 'Du musst {presidentBukele} und anderen Bitcoinern helfen, damit Poocoiners, Bären, Banker und mehr der Bitcoin-Adoption nicht im Weg stehen.',
@@ -886,7 +859,7 @@ export const translations = {
     // Legal
     legal: {
       disclaimer1: 'Der Name \'Game Boy©\' wird zur Demonstration der Kompatibilität erwähnt. Alle Marken sind Eigentum ihrer jeweiligen Inhaber.',
-      disclaimer2: 'Cartridge spielbar auf Game Boy© Hardware und Analogue Pocket. Digital Edition läuft auf jedem Emulator.',
+      disclaimer2: "Das Modul ist auf Game Boy und Analogue Pocket spielbar.",
       notLicensed: 'Nicht von Nintendo© lizenziert.',
     },
     // Products Page
@@ -896,7 +869,6 @@ export const translations = {
       copyLink: 'Link zu diesem Produkt kopieren',
       copied: 'Kopiert!',
       noteLabel: 'Hinweis:',
-      gameLanguageNotice: 'Die Website unterstützt jetzt alle neun Sprachen des neuen Launchers. Bis zu dessen Release bleibt der aktuelle Download auf Englisch.',
       chooseFormatTitle: 'Wähle dein Format',
       chooseFormatBody: 'Starte mit dem sofortigen Bitcoin + Lightning Download oder vergleiche ihn mit den physischen Editionen.',
       chooseFormatPrimary: 'SOFORTDOWNLOAD STARTEN',
@@ -905,7 +877,7 @@ export const translations = {
       shippingText: 'Alle Produkte werden weltweit versendet. Zoll und Einfuhrabgaben können je nach Land anfallen.',
       pricePreview: {
         label: 'BTC-Vorschau',
-        unavailable: 'Im externen Checkout nicht verfügbar',
+        unavailable: 'Preis derzeit nicht verfügbar',
         estimate: 'ca.',
         informational: 'der finale Preis im externen Checkout kann abweichen',
         stockRemaining: '{remaining} von {total} übrig',
@@ -914,20 +886,11 @@ export const translations = {
       },
       instant: {
         title: 'Sofortdownload',
-        subtitle: 'ROM + PDF BUNDLE',
-        quote: 'Der schnellste Weg, mit Bitcoin oder Lightning zu kaufen und zu spielen.',
-        feature1: 'ROM + PDF-Anleitung',
+        quote: 'Lade das Spiel herunter und spiele auf deinem Computer.',
         feature2: 'Bitcoin + Lightning Checkout',
-        feature3: 'Optionale E-Mail',
         feature4: 'Wird nach der Zahlung freigeschaltet',
-        note: 'Eine E-Mail ist optional. Dein Bundle wird ohne Konto freigeschaltet.',
-        compatibility: 'Spielbar auf Raspberry Pi, MiSTer FPGA, RetroArch oder jedem Game Boy Emulator.',
-        emailLabel: 'Optionale E-Mail',
-        emailPlaceholder: 'du@beispiel.de',
-        emailHint: 'Lass das Feld leer, wenn du schneller zur Kasse willst.',
-        couponLabel: 'Coupon-Code',
-        couponPlaceholder: 'Optionaler Code',
-        couponHint: 'Optional. Aktive Codes werden beim Checkout geprüft und serverseitig angewendet.',
+        note: 'Kein Konto und keine E-Mail-Adresse erforderlich.',
+        couponHint: 'Gib deinen Code ein, falls du einen hast.',
         buyWithBitcoin: 'MIT BITCOIN + LIGHTNING BEZAHLEN',
         redirecting: 'Weiterleitung zum sicheren Checkout...',
         checkoutTitle: 'Bitcoin + Lightning Checkout',
@@ -938,10 +901,9 @@ export const translations = {
       collectors: {
         title: 'Sammler-Edition',
         subtitle: 'LIMITIERT AUF ~450 STÜCK',
-        quote: 'Ein greifbares Stück Bitcoin-Geschichte, spielbar auf Original-Hardware.',
+        quote: 'Das Spiel auf einer orangefarbenen Game-Boy-Cartridge, mit Box und gedrucktem Handbuch.',
         feature1: 'Premium-Box & Handbuch',
         feature2: 'Oranges Game Boy Cartridge',
-        feature3: 'ROM auf Anfrage verfügbar',
         feature4: 'Inklusive Aufkleber',
         feature5: 'Schutzhülle für Box',
         compatibility: 'Kompatibel mit Game Boy, GBC, GBA, Analogue Pocket. Regionsfrei.',
@@ -957,21 +919,17 @@ export const translations = {
         feature3: 'microSD mit Spiel-ROM',
         feature4: 'Aufkleber + Schutzhülle',
         note: 'Das ist eine physische Spielbox mit Booklet und microSD. Gedacht für Sammler, die Verpackung und Haptik wollen, aber kein Game Boy Cartridge brauchen.',
-        compatibility: 'Spielbar auf Raspberry Pi, MiSTer FPGA, RetroArch oder jedem Game Boy Emulator.',
+        compatibility: 'Spielbar auf Raspberry Pi, MiSTer FPGA, RetroArch oder einem kompatiblen Game-Boy-Emulator.',
         buyAtCopiaro: 'DIGITAL EDITION BEI COPIARO KAUFEN',
       },
       graded: {
         title: 'Gegradete Copy',
         subtitle: 'CGC 9.9 • EINMAL VERFÜGBAR',
-        quote: 'Eine verifizierte Hero of Bitcoin Geyser Release für den engsten Sammler-Supply.',
+        quote: 'Hero of Bitcoin Geyser Release mit der CGC-Bewertung 9.9.',
         feature1: 'CGC Universal Grade 9.9',
         feature2: 'Öffentliche Echtheitsprüfung',
-        feature3: 'Digitaler Spiel-Download inklusive',
         feature4: 'Nach Zahlung mit Tracking versendet',
-        note: 'Dieses Listing gilt für die verifizierte CGC 9.9 Copy mit Serial 1020219002. Der digitale Game-Download wird nach Zahlung freigeschaltet.',
-        compatibility: 'Physischer CGC-Slab für Sammler. Das digitale Bundle läuft auf jedem Game Boy Emulator.',
         checkoutTitle: 'Direkter Bitcoin + Lightning Checkout',
-        checkoutBody: 'Wähle den Versand vor der Zahlung. Eine Rechnung enthält die gegradete Copy, digitales Spiel und Versand.',
         verifyLink: 'DIESE COPY VERIFIZIEREN',
         shippingEu: 'EU-Versand',
         shippingEuHint: 'Erhöht den Rechnungsbetrag um 7,49 EUR.',
@@ -1019,7 +977,7 @@ export const translations = {
         shippingWorldHint: 'Erhöht den Rechnungsbetrag um 12,49 EUR.',
         couponLabel: 'Coupon-Code',
         couponPlaceholder: 'Optionaler Code',
-        couponHint: 'Optional. Aktive Codes werden beim Checkout geprüft und serverseitig angewendet.',
+        couponHint: 'Gib deinen Code ein, falls du einen hast.',
         privacyNotice: 'Nach der Zahlung fragt diese Seite nach E-Mail und Versandadresse. Diese Daten sind für den Versand nötig, werden an den Verkäufer gesendet und nicht von der Website gespeichert.',
         imageOverlay: 'Digitaler Spiel-Download inklusive',
         buyWithBitcoin: 'BUNDLE MIT BITCOIN + LIGHTNING BEZAHLEN',
@@ -1030,15 +988,15 @@ export const translations = {
       techDetails: {
         title: 'Hero Handheld Technische Details & Fehlerbehebung',
         safeShutdown: 'Sicheres Ausschalten:',
-        safeShutdownDesc: 'Niemals Karte während des Speicherns entfernen. Nutze START → Beenden → Ausschalten oder SELECT+START zweimal.',
+        safeShutdownDesc: "Beende das Spiel und nutze START → Quit → Shutdown. Warte, bis das Gerät aus ist, bevor du die Karte entfernst.",
         power: 'Strom & Laden',
         powerItems: ['Nur USB-A zu USB-C', '5V (1-2A) Ladegerät', 'Schnellladegeräte vermeiden'],
         microsd: 'microSD Handhabung',
         microsdItems: ['Karte nicht neu formatieren', 'EASYROMS Partition nutzen', 'Immer sicher auswerfen'],
         addingGames: 'Spiele Hinzufügen',
-        addingItems: ['Pfad: EASYROMS/roms/', 'Passender Ordner (nes → /nes)', 'Bios-Dateien enthalten'],
+        addingItems: ["Pfad: EASYROMS/","Passender Ordner (nes → /nes)"],
         wontBoot: 'Startet Nicht',
-        wontBootDesc: 'POWER+A 15s halten, loslassen, Power drücken',
+        wontBootDesc: "Lade das Gerät auf. Prüfe bei ausgeschaltetem Gerät, ob die System-microSD richtig sitzt.",
         gamesMissing: 'Spiele Fehlen',
         gamesMissingDesc: 'Erweiterungen prüfen, entpacken, in Optionen neu scannen',
         chargingIssues: 'Ladeprobleme',
@@ -1057,26 +1015,26 @@ export const translations = {
     // Partners Page
     partners: {
       title: 'Unsere Partner',
-      subtitle: 'Vertrauenswürdige Händler, die Hero of Bitcoin in die Welt bringen',
+      subtitle: 'Hier bekommst du Hero of Bitcoin',
       visitStore: 'Shop Besuchen',
       copiaro: {
         name: 'Copiaro',
-        description: 'Copiaro ist ein etablierter, internationaler Bitcoin-Händler und Fulfillment-Partner, der professionellen Service, zuverlässigen weltweiten Versand und eine kuratierte Auswahl hochwertiger Bitcoin-Produkte bietet. Eine Premium-Wahl für Kunden, die ein reibungsloses, vertrauenswürdiges Kauferlebnis wünschen.',
+        description: 'Copiaro verkauft und versendet die physischen Editionen und Merchandise von Hero of Bitcoin.',
       },
       plebstyle: {
         name: 'Plebstyle',
-        description: 'Plebstyle ist ein Bitcoin-nativer, unabhängiger Shop, der mit Leidenschaft und Sorgfalt geführt wird und durchdacht gestaltete Produkte anbietet, die von einem Bitcoiner für die Bitcoin-Community geschaffen wurden. Ideal für Kunden in der EU, die Authentizität, Handwerkskunst und direkte Community-Unterstützung schätzen.',
+        description: 'Plebstyle ist ein unabhängiger Bitcoin-Shop für Kunden in der EU.',
       },
     },
     // Footer
     footer: {
       fanSwag: 'TASSEN, SHIRTS & CAPS',
       copyright: '©2022-2026 Hero of Bitcoin • heroofbitcoin.xyz',
-      privacy: 'Kein Tracking • Keine Cookies • Keine gespeicherten Kontaktdaten',
+      privacy: 'Keine Analyse-Tools • Keine Werbe-Cookies',
     },
     contact: {
       title: 'Kontakt',
-      body: 'Sende eine direkte Nachricht. Deine sensiblen Daten werden nie auf Drittanbieter-Systemen gespeichert und direkt an ein verschlüsseltes Postfach zugestellt.',
+      body: 'Schreib uns eine Nachricht. Deine E-Mail-Adresse verwenden wir für die Antwort.',
       emailLabel: 'E-Mail',
       emailPlaceholder: 'du@beispiel.de',
       messageLabel: 'Nachricht',
@@ -1113,7 +1071,6 @@ export interface Translations {
     buyAtCopiaro: string;
     copiaroSubtext: string;
     instantTitle: string;
-    instantBody: string;
     instantCta: string;
     instantMeta: string;
     physicalTitle: string;
@@ -1153,7 +1110,6 @@ export interface Translations {
     downloadsRemaining: string;
     downloadButton: string;
     downloadHint: string;
-    downloadAvailableUntil: string;
     thankYouHeadlineLine1: string;
     thankYouHeadlineLine2: string;
     noDownloadsLeft: string;
@@ -1177,6 +1133,8 @@ export interface Translations {
     stateOrRegionLabel: string;
     countryLabel: string;
     noteLabel: string;
+    downloadError: string;
+    preparingDownload: string;
   };
   story: { title: string; p1: string; p2: string; p3: string; p4: string };
   controls: {
@@ -1226,7 +1184,6 @@ export interface Translations {
     copyLink: string;
     copied: string;
     noteLabel: string;
-    gameLanguageNotice: string;
     chooseFormatTitle: string;
     chooseFormatBody: string;
     chooseFormatPrimary: string;
@@ -1244,19 +1201,10 @@ export interface Translations {
     };
     instant: {
       title: string;
-      subtitle: string;
       quote: string;
-      feature1: string;
       feature2: string;
-      feature3: string;
       feature4: string;
       note: string;
-      compatibility: string;
-      emailLabel: string;
-      emailPlaceholder: string;
-      emailHint: string;
-      couponLabel: string;
-      couponPlaceholder: string;
       couponHint: string;
       buyWithBitcoin: string;
       redirecting: string;
@@ -1270,7 +1218,6 @@ export interface Translations {
       quote: string;
       feature1: string;
       feature2: string;
-      feature3: string;
       feature4: string;
       feature5: string;
       compatibility: string;
@@ -1335,12 +1282,8 @@ export interface Translations {
       quote: string;
       feature1: string;
       feature2: string;
-      feature3: string;
       feature4: string;
-      note: string;
-      compatibility: string;
       checkoutTitle: string;
-      checkoutBody: string;
       verifyLink: string;
       shippingEu: string;
       shippingEuHint: string;

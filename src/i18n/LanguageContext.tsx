@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Language, translations, Translations } from './translations';
-import { isLanguage } from './locales';
+import { resolveLanguage, rememberLanguage } from './locales';
 
 interface LanguageContextType {
   language: Language;
@@ -11,29 +11,11 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [language, setLanguageState] = useState<Language>(() => {
-    // 1. Check URL parameter first (highest priority for direct links)
-    const urlParams = new URLSearchParams(window.location.search);
-    const urlLang = urlParams.get('lang');
-    if (isLanguage(urlLang)) {
-      // Save to localStorage so it persists after navigation
-      localStorage.setItem('hob-language', urlLang);
-      return urlLang;
-    }
-    // 2. Check localStorage
-    const saved = localStorage.getItem('hob-language');
-    if (isLanguage(saved)) {
-      return saved;
-    }
-    // 3. Check browser language
-    const browserLang = navigator.language.slice(0, 2);
-    if (isLanguage(browserLang)) return browserLang;
-    return 'en';
-  });
+  const [language, setLanguageState] = useState<Language>(resolveLanguage);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
-    localStorage.setItem('hob-language', lang);
+    rememberLanguage(lang);
     document.documentElement.lang = lang;
     // Update URL parameter without page reload
     const url = new URL(window.location.href);
@@ -43,6 +25,7 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
 
   useEffect(() => {
     document.documentElement.lang = language;
+    rememberLanguage(language);
     // Ensure URL has lang parameter on initial load
     const url = new URL(window.location.href);
     if (url.searchParams.get('lang') !== language) {

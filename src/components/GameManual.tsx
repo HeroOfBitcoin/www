@@ -46,7 +46,7 @@ const CharacterPortrait: React.FC<{ char: Character }> = ({ char }) => {
   Update this URL when the direct product page becomes available.
   =============================================================================
 */
-const LINK_COPIARO_STORE = 'https://copiaro.com/brand/hob';
+const LINK_COPIARO_STORE = 'https://copiaro.com/en/hero-of-bitcoin';
 
 /*
   =============================================================================
@@ -183,8 +183,10 @@ const GameManual: React.FC = () => {
           <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
             {!showTrailer ? (
               /* Thumbnail with Play Button */
-              <div
-                className="absolute inset-0 cursor-pointer group"
+              <button
+                className="absolute inset-0 w-full cursor-pointer group"
+                type="button"
+                aria-label={t.hero.watchTrailer}
                 onClick={() => setShowTrailer(true)}
               >
                 {/* Self-hosted YouTube Thumbnail - No external requests */}
@@ -208,7 +210,7 @@ const GameManual: React.FC = () => {
                 <div className="absolute top-3 left-3 bg-yellow-400 px-2 py-1 border-2 border-black">
                   <span className="font-pixel text-[10px] text-black">{t.hero.watchTrailer}</span>
                 </div>
-              </div>
+              </button>
             ) : (
               /* Privacy-enhanced YouTube embed - no cookies until video plays */
               <iframe

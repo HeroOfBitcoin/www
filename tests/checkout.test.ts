@@ -2,12 +2,12 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 
 import {
-  DigitalCheckoutController,
+  CheckoutController,
   normalizeCouponCodeEntry,
-  submitDigitalCheckoutOnEnter,
-  type DigitalCheckoutDependencies,
-  type DigitalCheckoutInput,
-} from '../src/digital-checkout';
+  submitCheckoutOnEnter,
+  type CheckoutDependencies,
+  type CheckoutInput,
+} from '../src/checkout';
 import type { Language } from '../src/i18n/locales';
 
 const languages: Language[] = ['en', 'es', 'it', 'ja', 'de', 'ko', 'fr', 'nl', 'fi'];
@@ -17,7 +17,7 @@ const copy = {
   unavailable: 'unavailable',
 };
 
-function input(language: Language = 'en', couponCode = ''): DigitalCheckoutInput {
+function input(language: Language = 'en', couponCode = ''): CheckoutInput {
   return { language, couponCode, copy };
 }
 
@@ -31,11 +31,11 @@ function response(status: number, payload: unknown, rejectJson = false) {
   };
 }
 
-function harness(fetcher: DigitalCheckoutDependencies['fetcher']) {
+function harness(fetcher: CheckoutDependencies['fetcher']) {
   const busy: boolean[] = [];
   const statuses: Array<{ message: string; isError: boolean }> = [];
   const navigations: string[] = [];
-  const controller = new DigitalCheckoutController({
+  const controller = new CheckoutController({
     apiBaseUrl: 'https://checkout.example',
     fetcher,
     navigate: (url) => navigations.push(url),
@@ -80,8 +80,8 @@ test('runtime checkout keyboard handler submits only on Enter', () => {
     preventDefault: () => { prevented += 1; },
   });
 
-  assert.equal(submitDigitalCheckoutOnEnter(event('Tab'), () => { submitted += 1; }), false);
-  assert.equal(submitDigitalCheckoutOnEnter(event('Enter'), () => { submitted += 1; }), true);
+  assert.equal(submitCheckoutOnEnter(event('Tab'), () => { submitted += 1; }), false);
+  assert.equal(submitCheckoutOnEnter(event('Enter'), () => { submitted += 1; }), true);
   assert.equal(prevented, 1);
   assert.equal(submitted, 1);
 });
@@ -135,7 +135,7 @@ test('runtime checkout treats an exhausted claim as a coupon error', async () =>
 });
 
 test('runtime checkout handles provider, network, and malformed responses without navigation', async () => {
-  const cases: Array<[string, DigitalCheckoutDependencies['fetcher']]> = [
+  const cases: Array<[string, CheckoutDependencies['fetcher']]> = [
     ['provider', async () => response(502, { error: 'upstream unavailable' })],
     ['network', async () => { throw new TypeError('network failed'); }],
     ['json', async () => response(201, null, true)],
@@ -165,4 +165,19 @@ test('runtime checkout reset invalidates a stale request restored from browser c
   assert.deepEqual(state.navigations, []);
   assert.deepEqual(state.busy, [true, false]);
   assert.deepEqual(state.statuses.at(-1), { message: '', isError: false });
+});
+
+
+test('physical checkout preserves product and shipping region without client prices', async () => {
+  for (const productId of ['stackchain-magazine', 'graded-copy'] as const) {
+    for (const shippingRegion of ['de_eu', 'world'] as const) {
+      let body: unknown;
+      const state = harness(async (_url, init) => {
+        body = JSON.parse(String(init.body));
+        return response(201, { checkout_url: 'https://checkout.example/pay' });
+      });
+      assert.equal(await state.controller.start({ ...input('fi', ' SAVE21 '), productId, shippingRegion }), true);
+      assert.deepEqual(body, { product_id: productId, shipping_region: shippingRegion, lang: 'fi', coupon_code: 'SAVE21' });
+    }
+  }
 });

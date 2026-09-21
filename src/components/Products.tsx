@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import PixelCard from './ui/PixelCard';
 import GameDownloadInfo from './GameDownloadInfo';
 import GamePlatforms from './GamePlatforms';
 import ProductLanguages, { type GameLanguage } from './ProductLanguages';
-import { type Language, useLanguage } from '../i18n';
+import { useLanguage } from '../i18n';
 import { getApiBaseUrl } from '../lib/api';
+import { CheckoutController, submitCheckoutOnEnter, type CheckoutProduct } from '../checkout';
 import { digitalTranslations } from '../i18n/digital-translations';
 import { Star, ShieldCheck, ShoppingCart, Sticker, Gamepad2, Zap, HardDrive, ChevronDown, ChevronUp, HelpCircle, AlertTriangle, FolderOpen, Disc, Link, BookOpen, Image, Award, Shield, Truck } from 'lucide-react';
 
@@ -350,87 +351,37 @@ const ProductCard: React.FC<ProductCardProps> = ({
   );
 };
 
-async function createInstantCheckout(
-  apiBaseUrl: string,
-  email: string,
-  couponCode: string,
-  language: Language,
-): Promise<string> {
-  const response = await fetch(`${apiBaseUrl}/api/create-checkout`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      email: email.trim() || undefined,
-      coupon_code: couponCode.trim() || undefined,
-      lang: language,
-    }),
-  });
-
-  const payload = (await response.json().catch(() => null)) as {
-    checkout_url?: unknown;
-    error?: unknown;
-  } | null;
-
-  if (!response.ok || typeof payload?.checkout_url !== 'string') {
-    const message = typeof payload?.error === 'string' ? payload.error : 'Could not create checkout';
-    throw new Error(message);
-  }
-
-  return payload.checkout_url;
-}
-
-async function createPhysicalCheckout(
-  apiBaseUrl: string,
-  productId: string,
-  shippingRegion: ShippingRegion,
-  couponCode: string,
-  language: Language,
-): Promise<string> {
-  const response = await fetch(`${apiBaseUrl}/api/create-checkout`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      product_id: productId,
-      shipping_region: shippingRegion,
-      coupon_code: couponCode.trim() || undefined,
-      lang: language,
-    }),
-  });
-
-  const payload = (await response.json().catch(() => null)) as {
-    checkout_url?: unknown;
-    error?: unknown;
-  } | null;
-
-  if (!response.ok || typeof payload?.checkout_url !== 'string') {
-    const message = typeof payload?.error === 'string' ? payload.error : 'Could not create checkout';
-    throw new Error(message);
-  }
-
-  return payload.checkout_url;
-}
-
 const Products: React.FC = () => {
   const { t, language } = useLanguage();
   const digitalCopy = digitalTranslations[language];
   const [showR36STechDetails, setShowR36STechDetails] = useState(false);
-  const [instantEmail, setInstantEmail] = useState('');
   const [instantCouponCode, setInstantCouponCode] = useState('');
-  const [instantCheckoutLoading, setInstantCheckoutLoading] = useState(false);
-  const [instantCheckoutError, setInstantCheckoutError] = useState<string | null>(null);
   const [stackchainShippingRegion, setStackchainShippingRegion] = useState<ShippingRegion>('de_eu');
   const [stackchainCouponCode, setStackchainCouponCode] = useState('');
-  const [stackchainCheckoutLoading, setStackchainCheckoutLoading] = useState(false);
-  const [stackchainCheckoutError, setStackchainCheckoutError] = useState<string | null>(null);
   const [gradedShippingRegion, setGradedShippingRegion] = useState<ShippingRegion>('de_eu');
-  const [gradedCheckoutLoading, setGradedCheckoutLoading] = useState(false);
-  const [gradedCheckoutError, setGradedCheckoutError] = useState<string | null>(null);
   const [pricePreviews, setPricePreviews] = useState<Record<string, PricePreview>>({});
   const apiBaseUrl = getApiBaseUrl();
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const [checkoutErrors, setCheckoutErrors] = useState<Partial<Record<CheckoutProduct, string>>>({});
+  const activeProduct = useRef<CheckoutProduct>('instant-download');
+  const checkoutController = useMemo(() => new CheckoutController({
+    apiBaseUrl,
+    fetcher: window.fetch.bind(window),
+    navigate: (url) => window.location.assign(url),
+    setBusy: setCheckoutLoading,
+    setStatus: (message, isError) => setCheckoutErrors(isError ? { [activeProduct.current]: message } : {}),
+  }), [apiBaseUrl]);
+
+  useEffect(() => {
+    const restore = (event: PageTransitionEvent) => {
+      if (event.persisted) checkoutController.reset();
+    };
+    window.addEventListener('pageshow', restore);
+    return () => {
+      window.removeEventListener('pageshow', restore);
+      checkoutController.reset();
+    };
+  }, [checkoutController]);
 
   // Handle hash navigation on mount
   useEffect(() => {
@@ -491,62 +442,24 @@ const Products: React.FC = () => {
     }
   };
 
-  const handleInstantCheckout = async () => {
-    setInstantCheckoutLoading(true);
-    setInstantCheckoutError(null);
-
-    try {
-      const checkoutUrl = await createInstantCheckout(apiBaseUrl, instantEmail, instantCouponCode, language);
-      window.location.assign(checkoutUrl);
-    } catch (error) {
-      setInstantCheckoutLoading(false);
-      setInstantCheckoutError(error instanceof Error ? error.message : t.products.instant.checkoutError);
-    }
-  };
-
-  const handleStackchainCheckout = async () => {
-    setStackchainCheckoutLoading(true);
-    setStackchainCheckoutError(null);
-
-    try {
-      const checkoutUrl = await createPhysicalCheckout(
-        apiBaseUrl,
-        'stackchain-magazine',
-        stackchainShippingRegion,
-        stackchainCouponCode,
-        language,
-      );
-      window.location.assign(checkoutUrl);
-    } catch (error) {
-      setStackchainCheckoutLoading(false);
-      setStackchainCheckoutError(
-        error instanceof Error ? error.message : t.products.magazine.checkoutError,
-      );
-    }
-  };
-
-  const handleGradedCheckout = async () => {
-    setGradedCheckoutLoading(true);
-    setGradedCheckoutError(null);
-
-    try {
-      const checkoutUrl = await createPhysicalCheckout(
-        apiBaseUrl,
-        'graded-copy',
-        gradedShippingRegion,
-        '',
-        language,
-      );
-      window.location.assign(checkoutUrl);
-    } catch (error) {
-      setGradedCheckoutLoading(false);
-      setGradedCheckoutError(
-        error instanceof Error ? error.message : t.products.graded.checkoutError,
-      );
-    }
+  const startCheckout = (productId: CheckoutProduct, couponCode = '', shippingRegion?: ShippingRegion) => {
+    if (checkoutLoading) return;
+    activeProduct.current = productId;
+    void checkoutController.start({
+      productId, couponCode, shippingRegion, language,
+      copy: {
+        creating: digitalCopy.checkoutCreating,
+        invalidDiscount: digitalCopy.checkoutInvalidDiscount,
+        unavailable: digitalCopy.checkoutUnavailable,
+      },
+    });
   };
 
   const pricePreviewText = t.products.pricePreview;
+  const instantCheckoutError = checkoutErrors['instant-download'];
+  const stackchainCheckoutError = checkoutErrors['stackchain-magazine'];
+  const gradedCheckoutError = checkoutErrors['graded-copy'];
+  const stackchainSoldOut = pricePreviews['stackchain-magazine']?.stock_remaining === 0;
   const gradedCopySoldOut = pricePreviews['graded-copy']?.stock_remaining === 0;
 
   return (
@@ -607,13 +520,10 @@ const Products: React.FC = () => {
             <p className="max-w-[18rem] font-mono text-[15px] leading-relaxed text-[#3c2a00] mb-4">
               {t.products.collectors.quote}
             </p>
-            <p className="max-w-[18rem] font-mono text-xs leading-relaxed text-[#6b4a00] mb-5">
-              {t.products.digital.note}
-            </p>
             <div className="space-y-3 font-mono text-[13px] leading-relaxed text-[#4a3300]">
               <p>{t.products.collectors.feature1}</p>
               <p>{t.products.collectors.feature2}</p>
-              <p>{t.products.digital.feature2}</p>
+              <p>{t.products.collectors.feature5}</p>
             </div>
           </div>
         </div>
@@ -660,23 +570,6 @@ const Products: React.FC = () => {
               <p className="text-xs leading-relaxed font-mono text-[#8a5b12] mb-4">
                 {t.products.instant.checkoutBody}
               </p>
-              <label className="block mb-2">
-                <span className="block text-[10px] font-pixel uppercase text-gray-800 mb-2">
-                  {t.products.instant.emailLabel}
-                </span>
-                <input
-                  type="email"
-                  value={instantEmail}
-                  onChange={(event) => setInstantEmail(event.target.value)}
-                  placeholder={t.products.instant.emailPlaceholder}
-                  className="w-full border-2 border-black bg-white px-3 py-2 font-mono text-sm text-black placeholder:text-gray-400 focus:outline-none focus:ring-0"
-                  autoComplete="email"
-                  inputMode="email"
-                />
-              </label>
-              <p className="text-[10px] leading-relaxed font-mono text-gray-700">
-                {t.products.instant.emailHint}
-              </p>
               <label className="block mt-4 mb-2">
                 <span className="block text-[10px] font-pixel uppercase text-gray-800 mb-2">
                   {digitalCopy.discountCode}
@@ -684,6 +577,9 @@ const Products: React.FC = () => {
                 <input
                   type="text"
                   value={instantCouponCode}
+                  maxLength={64}
+                  disabled={checkoutLoading}
+                  onKeyDown={(event) => submitCheckoutOnEnter(event, () => startCheckout('instant-download', instantCouponCode))}
                   onChange={(event) => setInstantCouponCode(event.target.value.toUpperCase())}
                   placeholder={digitalCopy.discountPlaceholder}
                   className="w-full border-2 border-black bg-white px-3 py-2 font-mono text-sm uppercase text-black placeholder:text-gray-400 focus:outline-none focus:ring-0"
@@ -698,13 +594,13 @@ const Products: React.FC = () => {
 
             <button
               type="button"
-              onClick={handleInstantCheckout}
-              disabled={instantCheckoutLoading}
+              onClick={() => startCheckout('instant-download', instantCouponCode)}
+              disabled={checkoutLoading}
               className="w-full min-h-[72px] bg-black text-white font-pixel py-3 px-4 border-2 border-black hover:bg-neutral-800 hover:scale-[1.02] active:scale-[0.98] transition-all pixel-shadow-sm flex items-center justify-center gap-2 text-sm disabled:cursor-wait disabled:hover:scale-100 disabled:bg-neutral-800"
             >
               <PaymentMark compact className="justify-center" />
               <span>
-                {instantCheckoutLoading ? t.products.instant.redirecting : t.products.instant.buyWithBitcoin}
+                {checkoutLoading ? t.products.instant.redirecting : t.products.instant.buyWithBitcoin}
               </span>
             </button>
 
@@ -739,7 +635,6 @@ const Products: React.FC = () => {
         features={[
           { icon: <ShieldCheck className="text-green-600" size={18} />, text: t.products.collectors.feature1 },
           { icon: <Star className="text-yellow-600" size={18} />, text: t.products.collectors.feature2 },
-          { icon: <Disc className="text-purple-600" size={18} />, text: t.products.collectors.feature3 },
           { icon: <Sticker className="text-blue-600" size={18} />, text: t.products.collectors.feature4 },
           { icon: <Shield className="text-gray-600" size={18} />, text: t.products.collectors.feature5 },
         ]}
@@ -840,15 +735,15 @@ const Products: React.FC = () => {
 
             <button
               type="button"
-              onClick={handleGradedCheckout}
-              disabled={gradedCheckoutLoading || gradedCopySoldOut}
+              onClick={() => startCheckout('graded-copy', '', gradedShippingRegion)}
+              disabled={checkoutLoading || gradedCopySoldOut}
               className="w-full min-h-[72px] bg-black text-white font-pixel py-3 px-4 border-2 border-black hover:bg-neutral-800 hover:scale-[1.02] active:scale-[0.98] transition-all pixel-shadow-sm flex items-center justify-center gap-2 text-sm disabled:cursor-not-allowed disabled:hover:scale-100 disabled:bg-neutral-700"
             >
               <PaymentMark compact className="justify-center" />
               <span>
                 {gradedCopySoldOut
                   ? t.products.graded.soldOut
-                  : gradedCheckoutLoading
+                  : checkoutLoading
                     ? t.products.graded.redirecting
                     : t.products.graded.buyWithBitcoin}
               </span>
@@ -1117,7 +1012,12 @@ const Products: React.FC = () => {
                 <input
                   type="text"
                   value={stackchainCouponCode}
-                  onChange={(event) => setStackchainCouponCode(event.target.value)}
+                  maxLength={64}
+                  disabled={checkoutLoading || stackchainSoldOut}
+                  onKeyDown={(event) => submitCheckoutOnEnter(event, () => {
+                    if (!stackchainSoldOut) startCheckout('stackchain-magazine', stackchainCouponCode, stackchainShippingRegion);
+                  })}
+                  onChange={(event) => setStackchainCouponCode(event.target.value.toUpperCase())}
                   placeholder={t.products.magazine.couponPlaceholder}
                   className="w-full border-2 border-black bg-white px-3 py-2 font-mono text-sm uppercase text-black placeholder:text-gray-400 focus:outline-none focus:ring-0"
                   autoComplete="off"
@@ -1135,13 +1035,15 @@ const Products: React.FC = () => {
 
             <button
               type="button"
-              onClick={handleStackchainCheckout}
-              disabled={stackchainCheckoutLoading}
+              onClick={() => startCheckout('stackchain-magazine', stackchainCouponCode, stackchainShippingRegion)}
+              disabled={checkoutLoading || stackchainSoldOut}
               className="w-full min-h-[72px] bg-black text-white font-pixel py-3 px-4 border-2 border-black hover:bg-neutral-800 hover:scale-[1.02] active:scale-[0.98] transition-all pixel-shadow-sm flex items-center justify-center gap-2 text-sm disabled:cursor-wait disabled:hover:scale-100 disabled:bg-neutral-800"
             >
               <PaymentMark compact className="justify-center" />
               <span>
-                {stackchainCheckoutLoading
+                {stackchainSoldOut
+                  ? t.products.graded.soldOut
+                  : checkoutLoading
                   ? t.products.magazine.redirecting
                   : t.products.magazine.buyWithBitcoin}
               </span>

@@ -10,33 +10,16 @@ This repo now includes:
 - the public success/download page
 - the rest of the Hero of Bitcoin marketing site
 
-## Current Stable Snapshot
+## Check the current release
 
-As of `2026-07-15`:
+Use Git and the deployment workflows to identify the deployed revision; old stable
+tags are historical snapshots. Check both repositories with `git status --short --branch`,
+then inspect the latest Pages run and backend health:
 
-- Stable frontend tag: `stable-www-2026-04-03`
-- Stable backend tag: `stable-digital-hosted-2026-04-03`
-- Latest known successful Pages deploy should be checked with:
-  - `gh run list --repo HeroOfBitcoin/www --workflow deploy.yml --limit 1`
-- Public site: [heroofbitcoin.xyz](https://heroofbitcoin.xyz)
-- Success page: [heroofbitcoin.xyz/success.html](https://heroofbitcoin.xyz/success.html)
-
-## Fresh Session Checklist
-
-When starting after a break, use the repo state and live checks instead of old chat context:
-
-1. Check both repos are clean:
-   - `git status --short --branch`
-   - `git -C ../digital-hosted status --short --branch`
-2. Confirm the stable tags:
-   - `git show --no-patch stable-www-2026-04-03`
-   - `git -C ../digital-hosted show --no-patch stable-digital-hosted-2026-04-03`
-3. Verify backend health:
-   - `curl -s https://hero-of-bitcoin-digital.fly.dev/healthz`
-4. Check the latest Pages workflow run:
-   - `gh run list --repo HeroOfBitcoin/www --workflow deploy.yml --limit 1`
-5. Read the current follow-up list:
-   - `TODO.md`
+```bash
+gh run list --repo HeroOfBitcoin/www --workflow deploy.yml --limit 1
+curl -fsS https://hero-of-bitcoin-digital.fly.dev/healthz
+```
 
 ## Repo Visibility
 
@@ -51,7 +34,7 @@ This repo is public because the current deployment model uses GitHub Pages.
 ### 1. Install
 
 ```bash
-npm install
+npm ci
 ```
 
 ### 2. Local Development
@@ -157,16 +140,19 @@ Localized URLs work with `?lang=de`, `?lang=es`, `?lang=fr`, or `?lang=ko`.
 - RSS feed for products at `/products.xml`
 - Direct linking to specific products via hash URLs
 - Structured data and SEO support
-- Privacy-first frontend with no analytics or tracking
+- No analytics or advertising cookies in the frontend
 
 ## Privacy
 
-This website collects zero analytics data:
+The frontend uses:
 
 - self-hosted fonts
 - no analytics or tracking pixels
-- no marketing cookies
-- only local browser state for language preference
+- no advertising cookies set by the site
+- local browser state for language preference
+
+Checkout and contact forms send the information needed to process the request.
+Playing a trailer loads YouTube; checkout and retailer links open external services.
 
 ## Product and Content Updates
 
@@ -175,7 +161,7 @@ When working on products or product copy:
 1. Update translations in `src/i18n/translations.ts`
 2. Update the relevant layout in `src/components/Products.tsx`
 3. Update any surrounding homepage placement in `src/App.tsx` or `src/components/GameManual.tsx`
-4. Run `npm run build`
+4. Run `npm run verify`
 5. Check `public/products.xml` if the build regenerated it
 
 
@@ -223,12 +209,6 @@ It powers:
 - order status lookups
 - private ZIP delivery via Fly + Tigris
 
-## Current Follow-Ups
-
-See:
-
-- `TODO.md`
-
 ## Copyright
 
 ©2022-2026 Hero of Bitcoin. All rights reserved.
@@ -238,3 +218,20 @@ See:
 Run checkout tests locally with the backend’s mock payment provider. Do not ship
 test pages in the production build. Any explicitly authorized, temporary public
 test surface must be removed as part of the same test run.
+
+## Checkout and download behavior
+
+The homepage and `/digital/` share `src/checkout.ts`. The backend sets prices,
+shipping, stock and claim eligibility. The frontend blocks duplicate submissions
+and restores the controls after a browser-back navigation.
+
+The confirmation page fetches fresh download credentials when the buyer presses
+Download. A failed request leaves the buyer on the confirmation page with a retry
+message. Download limits and access revocation remain enforced by the backend.
+Shipping fields use browser validation before submission. Browser storage is optional;
+the language can always be selected through the URL.
+
+`npm run verify` runs the build, catalog checks and source tests. Exercise browser
+checkout flows against the backend's local mock provider, including payment return,
+download, failures, shipping and browser-back recovery. Real Lightning payment
+acceptance is a separate, deliberate live purchase.

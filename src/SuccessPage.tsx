@@ -1,10 +1,10 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState, useRef } from 'react';
 import { ArrowLeft, Download, LoaderCircle, RefreshCcw } from 'lucide-react';
 
 import PixelCard from './components/ui/PixelCard';
 import GameDownloadInfo from './components/GameDownloadInfo';
 import { translations, type Language } from './i18n/translations';
-import { isLanguage, LOCALE_BY_LANGUAGE } from './i18n/locales';
+import { resolveLanguage, rememberLanguage, LOCALE_BY_LANGUAGE } from './i18n/locales';
 import { getApiBaseUrl } from './lib/api';
 
 type CheckoutStatus = 'pending' | 'processing' | 'paid' | 'expired' | 'underpaid' | 'refunded';
@@ -149,23 +149,21 @@ function getStatusBody(
   }
 }
 
+async function loadOrderStatus(apiBaseUrl: string, orderId: string, signal?: AbortSignal): Promise<OrderStatusResponse> {
+  const response = await fetch(`${apiBaseUrl}/api/order-status?id=${encodeURIComponent(orderId)}`, {
+    cache: 'no-store', signal,
+  });
+  const payload = await response.json().catch(() => null);
+  if (!response.ok || !payload || !['pending', 'processing', 'paid', 'expired', 'underpaid', 'refunded'].includes(payload.status)) {
+    throw new Error('Order status unavailable');
+  }
+  return payload;
+}
+
 const SuccessPage: React.FC = () => {
   const apiBaseUrl = useMemo(() => getApiBaseUrl(), []);
   const orderId = useMemo(() => new URLSearchParams(window.location.search).get('order_id'), []);
-  const language = useMemo<Language>(() => {
-    const param = new URLSearchParams(window.location.search).get('lang');
-    if (isLanguage(param)) {
-      return param;
-    }
-
-    const saved = localStorage.getItem('hob-language');
-    if (isLanguage(saved)) {
-      return saved;
-    }
-
-    const browserLanguage = navigator.language.slice(0, 2);
-    return isLanguage(browserLanguage) ? browserLanguage : 'en';
-  }, []);
+  const language = useMemo<Language>(resolveLanguage, []);
   const checkoutText = useMemo(() => translations[language].checkout, [language]);
   const homeHref = `/?lang=${language}`;
   const productsHref = `/?lang=${language}#products`;
@@ -174,6 +172,9 @@ const SuccessPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [lastUpdatedAt, setLastUpdatedAt] = useState<string | null>(null);
+  const [pollEpoch, setPollEpoch] = useState(0);
+  const [downloading, setDownloading] = useState(false);
+  const downloadInFlight = useRef(false);
   const [pollingStopped, setPollingStopped] = useState(false);
   const [fulfillmentForm, setFulfillmentForm] = useState<FulfillmentFormState>(EMPTY_FULFILLMENT_FORM);
   const [fulfillmentSubmitting, setFulfillmentSubmitting] = useState(false);
@@ -182,7 +183,7 @@ const SuccessPage: React.FC = () => {
   useEffect(() => {
     document.documentElement.lang = language;
     document.title = `Hero of Bitcoin - ${checkoutText.headerTitle}`;
-    localStorage.setItem('hob-language', language);
+    rememberLanguage(language);
   }, [checkoutText.headerTitle, language]);
 
   useEffect(() => {
@@ -192,31 +193,20 @@ const SuccessPage: React.FC = () => {
       return;
     }
 
+    setPollingStopped(false);
+    const abortController = new AbortController();
     let isMounted = true;
     let timeoutId: number | undefined;
     const startedAt = Date.now();
 
     const poll = async () => {
       try {
-        const response = await fetch(`${apiBaseUrl}/api/order-status?id=${encodeURIComponent(orderId)}`);
-        const payload = (await response.json().catch(() => null)) as
-          | OrderStatusResponse
-          | { error?: string }
-          | null;
-
-        if (!response.ok || !payload || typeof (payload as OrderStatusResponse).status !== 'string') {
-          throw new Error(
-            payload && typeof (payload as { error?: string }).error === 'string'
-              ? (payload as { error: string }).error
-              : checkoutText.genericError,
-          );
-        }
+        const nextOrder = await loadOrderStatus(apiBaseUrl, orderId, abortController.signal);
 
         if (!isMounted) {
           return;
         }
 
-        const nextOrder = payload as OrderStatusResponse;
         setOrder(nextOrder);
         setError(null);
         setIsLoading(false);
@@ -230,13 +220,13 @@ const SuccessPage: React.FC = () => {
         } else if (!isTerminalStatus(nextOrder.status)) {
           setPollingStopped(true);
         }
-      } catch (pollError) {
+      } catch {
         if (!isMounted) {
           return;
         }
 
         setIsLoading(false);
-        setError(pollError instanceof Error ? pollError.message : checkoutText.genericError);
+        setError(checkoutText.genericError);
       }
     };
 
@@ -244,53 +234,47 @@ const SuccessPage: React.FC = () => {
 
     return () => {
       isMounted = false;
+      abortController.abort();
       if (timeoutId) {
         window.clearTimeout(timeoutId);
       }
     };
-  }, [apiBaseUrl, checkoutText.genericError, checkoutText.missingOrder, orderId]);
+  }, [apiBaseUrl, checkoutText.genericError, checkoutText.missingOrder, orderId, pollEpoch]);
 
-  const refreshStatus = async () => {
-    if (!orderId) {
-      return;
-    }
-
+  const refreshStatus = () => {
     setIsLoading(true);
     setError(null);
-
-    try {
-      const response = await fetch(`${apiBaseUrl}/api/order-status?id=${encodeURIComponent(orderId)}`);
-      const payload = (await response.json().catch(() => null)) as
-        | OrderStatusResponse
-        | { error?: string }
-        | null;
-
-      if (!response.ok || !payload || typeof (payload as OrderStatusResponse).status !== 'string') {
-        throw new Error(
-          payload && typeof (payload as { error?: string }).error === 'string'
-            ? (payload as { error: string }).error
-            : 'Could not load this order right now.',
-        );
-      }
-
-      setOrder(payload as OrderStatusResponse);
-      setLastUpdatedAt(new Date().toISOString());
-        setPollingStopped(false);
-      } catch (refreshError) {
-      setError(refreshError instanceof Error ? refreshError.message : checkoutText.genericError);
-    } finally {
-      setIsLoading(false);
-    }
+    setPollEpoch((current) => current + 1);
   };
 
-  const downloadBundle = () => {
-    if (!orderId || !order?.download_token) {
-      return;
+  const downloadBundle = async () => {
+    if (!orderId || downloadInFlight.current) return;
+    downloadInFlight.current = true;
+    setDownloading(true);
+    setError(null);
+    try {
+      // Refresh short-lived credentials even if this page has been open for hours.
+      const current = await loadOrderStatus(apiBaseUrl, orderId);
+      setOrder(current);
+      setLastUpdatedAt(new Date().toISOString());
+      if (!current.download_token) return;
+      const response = await fetch(
+        `${apiBaseUrl}/api/download?id=${encodeURIComponent(orderId)}&token=${encodeURIComponent(current.download_token)}`,
+        { headers: { Accept: 'application/json' }, cache: 'no-store' },
+      );
+      const payload = await response.json().catch(() => null);
+      if (!response.ok || typeof payload?.download_url !== 'string') {
+        throw new Error('Download unavailable');
+      }
+      setOrder({ ...current, downloads_remaining: Math.max(0, (current.downloads_remaining ?? 1) - 1),
+        download_token: (current.downloads_remaining ?? 1) > 1 ? current.download_token : undefined });
+      window.location.assign(payload.download_url);
+    } catch {
+      setError(checkoutText.downloadError);
+    } finally {
+      downloadInFlight.current = false;
+      setDownloading(false);
     }
-
-    window.location.assign(
-      `${apiBaseUrl}/api/download?id=${encodeURIComponent(orderId)}&token=${encodeURIComponent(order.download_token)}`,
-    );
   };
 
   const updateFulfillmentField = (field: keyof FulfillmentFormState, value: string) => {
@@ -331,7 +315,7 @@ const SuccessPage: React.FC = () => {
         | null;
 
       if (!response.ok || !payload?.fulfillment_details_submitted_at) {
-        throw new Error(payload?.error ?? checkoutText.fulfillmentRetry);
+        throw new Error(checkoutText.fulfillmentRetry);
       }
 
       setOrder((current) => current
@@ -341,10 +325,8 @@ const SuccessPage: React.FC = () => {
         }
         : current);
       setFulfillmentForm(EMPTY_FULFILLMENT_FORM);
-    } catch (submitError) {
-      setFulfillmentError(
-        submitError instanceof Error ? submitError.message : checkoutText.fulfillmentRetry,
-      );
+    } catch {
+      setFulfillmentError(checkoutText.fulfillmentRetry);
     } finally {
       setFulfillmentSubmitting(false);
     }
@@ -389,6 +371,7 @@ const SuccessPage: React.FC = () => {
               <button
                 type="button"
                 onClick={refreshStatus}
+                disabled={isLoading || downloading}
                 className="inline-flex items-center gap-2 px-4 py-2 border-2 border-black bg-white hover:bg-yellow-100 transition-colors font-pixel text-[10px]"
               >
                 <RefreshCcw size={14} />
@@ -467,7 +450,7 @@ const SuccessPage: React.FC = () => {
                       </div>
                     </div>
 
-                    {order.status === 'paid' && !order.download_access_revoked && (
+                    {order.status === 'paid' && order.has_digital_download === 1 && !order.download_access_revoked && (
                       <div className="border-2 border-black bg-green-50 p-4">
                         <div className="mb-4 border-2 border-black bg-yellow-300 px-4 py-4 text-center text-black pixel-shadow-sm">
                           <p className="font-pixel text-sm leading-relaxed md:text-lg">
@@ -476,10 +459,6 @@ const SuccessPage: React.FC = () => {
                             {checkoutText.thankYouHeadlineLine2}
                           </p>
                         </div>
-                        <p className="font-mono text-sm text-green-900 mb-2">
-                          {checkoutText.downloadAvailableUntil}{' '}
-                          {formatTimestamp(order.download_expires_at ?? null, language)}.
-                        </p>
                         <p className="font-mono text-sm text-green-900 mb-3">
                           {checkoutText.downloadHint}
                         </p>
@@ -487,11 +466,11 @@ const SuccessPage: React.FC = () => {
                         <button
                           type="button"
                           onClick={downloadBundle}
-                          disabled={!order.download_token}
+                          disabled={!order.download_token || downloading}
                           className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-4 py-3 bg-green-500 text-white font-pixel border-2 border-black hover:bg-green-600 transition-all disabled:bg-gray-400 disabled:cursor-not-allowed"
                         >
                           <Download size={16} />
-                          <span>{checkoutText.downloadButton}</span>
+                          <span>{downloading ? checkoutText.preparingDownload : checkoutText.downloadButton}</span>
                         </button>
                         {!order.download_token && (
                           <p className="text-sm font-mono text-red-700 mt-3">{checkoutText.noDownloadsLeft}</p>
@@ -510,7 +489,10 @@ const SuccessPage: React.FC = () => {
                             {checkoutText.fulfillmentReceived}
                           </p>
                         ) : (
-                          <div className="space-y-4">
+                          <form className="space-y-4" onSubmit={(event) => {
+                            event.preventDefault();
+                            if (!fulfillmentSubmitting) void submitFulfillmentDetails();
+                          }}>
                             <p className="font-mono text-sm text-gray-700">
                               {checkoutText.fulfillmentBody}
                             </p>
@@ -658,8 +640,7 @@ const SuccessPage: React.FC = () => {
                             )}
 
                             <button
-                              type="button"
-                              onClick={submitFulfillmentDetails}
+                              type="submit"
                               disabled={fulfillmentSubmitting}
                               className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-4 py-3 bg-black text-white font-pixel border-2 border-black hover:bg-neutral-800 transition-all disabled:bg-gray-500 disabled:cursor-wait"
                             >
@@ -669,7 +650,7 @@ const SuccessPage: React.FC = () => {
                                   : checkoutText.fulfillmentSubmit}
                               </span>
                             </button>
-                          </div>
+                          </form>
                         )}
                       </div>
                     )}

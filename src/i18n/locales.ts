@@ -26,3 +26,27 @@ export const LOCALE_BY_LANGUAGE: Record<Language, string> = Object.fromEntries(
 export function isLanguage(value: string | null | undefined): value is Language {
   return SUPPORTED_LANGUAGES.includes(value as Language);
 }
+
+export function resolveLanguage(): Language {
+  const param = new URLSearchParams(window.location.search).get('lang');
+  if (isLanguage(param)) return param;
+  try {
+    const saved = window.localStorage.getItem('hob-language');
+    if (isLanguage(saved)) return saved;
+  } catch {
+    // Language selection also works when browser storage is blocked.
+  }
+  for (const locale of navigator.languages) {
+    const language = locale.toLowerCase().split('-')[0];
+    if (isLanguage(language)) return language;
+  }
+  return 'en';
+}
+
+export function rememberLanguage(language: Language): void {
+  try {
+    window.localStorage.setItem('hob-language', language);
+  } catch {
+    // The URL preserves the choice without requiring local storage.
+  }
+}

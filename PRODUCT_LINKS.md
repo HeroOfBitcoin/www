@@ -1,182 +1,31 @@
-# Hero of Bitcoin - Website & Product Links Guide
+# Website and product links
 
-## Website Overview
+The six product cards live in `src/components/Products.tsx`. Their copy is in the
+nine website language catalogs under `src/i18n/`; the product feed summaries are
+in `src/data/products.ts`. Update the matching structured data in `index.html`
+when product facts change. The public digital page is `/digital/`.
 
-The Hero of Bitcoin website (heroofbitcoin.xyz) serves as the official product page and digital instruction manual for the Hero of Bitcoin Game Boy game. It features:
+| Product | Website anchor | Purchase |
+| --- | --- | --- |
+| Instant Download | `#instant-download` | Site-owned Bitcoin/Lightning checkout |
+| Collector's Edition | `#collectors-edition` | Copiaro |
+| Digital Edition | `#digital-edition` | Copiaro; physical box with microSD |
+| Hero Handheld | `#hero-handheld` | Copiaro; preconfigured R36S |
+| Stackchain Magazine | `#stackchain-magazine` | Site-owned Bitcoin/Lightning checkout |
+| Graded Copy | `#graded-copy` | Site-owned Bitcoin/Lightning checkout |
 
-- **Release trailer** with embedded YouTube video
-- **Game story and controls** documentation
-- **Character profiles** for NPCs
-- **Six product offerings** with image galleries
-- **Partners page** with retail partner information
-- **Multi-language support** (English, Spanish, German) via URL parameter
-- **RSS feed** for products at `/products.xml`
-- **SEO optimization** for search engines and LLMs
-- **Direct linking** to specific products
+The desktop digital game accompanies all listed products except Hero Handheld.
+It supports Windows x86-64, macOS Apple Silicon and Linux x86-64, with English,
+Dutch and Finnish game languages. Physical game editions are English. The
+handheld's existing software is separate from desktop launcher support.
 
----
+Product inclusion text does not prescribe QR, claim-code or microSD fulfillment.
+Stock, prices, discounts, shipping and claim eligibility come from the backend.
+The website does not issue codes or calculate payment totals.
 
-## Product Link Configuration
+Copiaro links are declared in `Products.tsx`, `GameManual.tsx` and `App.tsx`;
+partner links are in `Partners.tsx`. Keep outbound retailer links distinct from
+site-owned checkout. `?lang=en`, `es`, `it`, `ja`, `de`, `ko`, `fr`, `nl` or `fi`
+selects the website language, independently of the game's three release languages.
 
-### Current Copiaro Links
-
-| Product | Status | Copiaro URL |
-|---------|--------|-------------|
-| **Brand Page** | Live | `https://copiaro.com/en/hero-of-bitcoin` |
-| **Collector's Edition** | Live | `https://copiaro.com/hero-of-bitcoin-the-game-boxed-gameboy-version-batch2-en` |
-| **Digital Edition** | Live | `https://copiaro.com/en/hero-of-bitcoin-digital-version-v2` |
-| **Hero Handheld** | Live | `https://copiaro.com/en/hero-of-bitcoin-handheld-version-v2` |
-| **Fan Merchandise** | Pending | Points to brand page |
-
-### Where to Update Links
-
-**File:** `src/components/Products.tsx`
-```typescript
-const LINK_BRAND_PAGE = 'https://copiaro.com/en/hero-of-bitcoin';
-const LINK_PHYSICAL_CARTRIDGE = 'https://copiaro.com/hero-of-bitcoin-the-game-boxed-gameboy-version-batch2-en';
-const LINK_MICROSD_CARTRIDGE = 'https://copiaro.com/en/hero-of-bitcoin-digital-version-v2';
-const LINK_R36S_DEVICE = 'https://copiaro.com/en/hero-of-bitcoin-handheld-version-v2';
-```
-
-**File:** `src/App.tsx`
-```typescript
-const LINK_STORE_MAIN = 'https://copiaro.com/en/hero-of-bitcoin';
-const LINK_FAN_SWAG = 'https://copiaro.com/en/hero-of-bitcoin'; // TODO: Update when available
-```
-
----
-
-## Product Details
-
-### 1. Collector's Edition
-- **Target:** Collectors, Game Boy enthusiasts
-- **Contents:** Physical orange Game Boy cartridge, premium box, manual, sticker, protective box cover
-- **Limitation:** ~450 units worldwide
-- **Compatibility:** Game Boy, GBC, GBA, Analogue Pocket
-- **Special:** ROM available on request
-- **Direct Link:** `heroofbitcoin.xyz/#collectors-edition`
-- **Copiaro:** `copiaro.com/hero-of-bitcoin-the-game-boxed-gameboy-version-batch2-en`
-
-### 2. Digital Edition
-- **Target:** Budget-conscious buyers, emulator users
-- **Contents:** Decorative cartridge collectible, microSD with ROM, box, manual, sticker, protective box cover
-- **Compatibility:** Raspberry Pi, MiSTer FPGA, RetroArch, any GB emulator
-- **Direct Link:** `heroofbitcoin.xyz/#digital-edition`
-- **Copiaro:** `copiaro.com/en/hero-of-bitcoin-digital-version-v2`
-
-### 3. Hero Handheld
-- **Target:** Casual gamers, gift buyers
-- **Contents:** R36S handheld console with Hero of Bitcoin pre-installed, microSD, sticker
-- **Features:** ArkOS, ready to play out of box
-- **Note:** Supports other retro systems (copyright disclaimer included)
-- **Direct Link:** `heroofbitcoin.xyz/#hero-handheld`
-- **Copiaro:** `copiaro.com/en/hero-of-bitcoin-handheld-version-v2`
-
-### 4. Stackchain Magazine
-- **Target:** Collectors, Bitcoin enthusiasts
-- **Contents:** Stackchain Magazine Round 5, scarce Hero of Bitcoin alternative cover print, premium protective toploader, digital Hero of Bitcoin game download
-- **Limitation:** 14 direct site-owned bundles for the current drop
-- **Special:** One Bitcoin/Lightning invoice includes the bundle and selected shipping
-- **Direct Link:** `heroofbitcoin.xyz/#stackchain-magazine`
-- **Checkout:** Direct site-owned checkout, not Copiaro
-
-### 5. Graded Copy
-- **Target:** Collectors who want a team-verified Geyser Release copy
-- **Contents:** CGC 9.9 graded copy, NFC authenticity certificate, and digital Hero of Bitcoin game download
-- **Limitation:** 1 direct site-owned copy
-- **Special:** One Bitcoin/Lightning invoice includes the collector copy, digital download, and selected shipping
-- **Direct Link:** `heroofbitcoin.xyz/#graded-copy`
-- **Checkout:** Direct site-owned checkout, not Copiaro
-
----
-
-## Partners
-
-### Copiaro
-- **Website:** `https://copiaro.com`
-- **Role:** Primary fulfillment partner, international shipping
-- **Products:** External Hero of Bitcoin products
-
-### Plebstyle
-- **Website:** `https://plebstyle.com`
-- **Role:** EU-focused partner, community-driven
-- **Products:** Select Hero of Bitcoin merchandise
-
----
-
-## Direct Links for Marketing
-
-### Product Pages
-
-| Purpose | URL |
-|---------|-----|
-| Homepage | `https://heroofbitcoin.xyz` |
-| All Products | `https://heroofbitcoin.xyz/#products` |
-| Partners | `https://heroofbitcoin.xyz/#partners` |
-| Collector's Edition | `https://heroofbitcoin.xyz/#collectors-edition` |
-| Digital Edition | `https://heroofbitcoin.xyz/#digital-edition` |
-| Hero Handheld | `https://heroofbitcoin.xyz/#hero-handheld` |
-| Stackchain Magazine | `https://heroofbitcoin.xyz/#stackchain-magazine` |
-| Graded Copy | `https://heroofbitcoin.xyz/#graded-copy` |
-| Play Demo | `https://demo.heroofbitcoin.xyz` |
-| RSS Feed | `https://heroofbitcoin.xyz/products.xml` |
-
-### Localized Links
-
-Add `?lang=` parameter for language-specific pages:
-
-| Language | Products Page | Partners Page |
-|----------|---------------|---------------|
-| English | `heroofbitcoin.xyz/#products` | `heroofbitcoin.xyz/#partners` |
-| German | `heroofbitcoin.xyz/?lang=de#products` | `heroofbitcoin.xyz/?lang=de#partners` |
-| Spanish | `heroofbitcoin.xyz/?lang=es#products` | `heroofbitcoin.xyz/?lang=es#partners` |
-
----
-
-## Social Media Links
-
-- **Email:** HeroOfBitcoin@pm.me
-- **Instagram:** instagram.com/heroofbitcoin
-- **X (Twitter):** x.com/HeroOfBitcoin
-- **YouTube:** youtube.com/@HeroOfBitcoin
-
----
-
-## Privacy & Technical Implementation
-
-### Privacy Features (No Tracking)
-The website collects **zero user data**:
-
-- **Self-hosted fonts** - Google Fonts downloaded locally (`public/assets/fonts/`)
-- **Self-hosted Tailwind CSS** - Bundled with PostCSS, no CDN
-- **Self-hosted YouTube thumbnail** - No external request until video plays
-- **Privacy-enhanced YouTube** - Uses `youtube-nocookie.com` for embeds
-- **No analytics** - No Google Analytics, no tracking pixels
-- **No cookies** - Only `localStorage` for language preference
-
-Footer displays: "No tracking • No cookies • No data collection"
-
-### Mobile Optimization
-- Responsive design with `md:` breakpoints
-- Minimum 44px tap targets for accessibility
-- Reduced shadows on mobile for cleaner look
-- Native scrolling on touch devices
-- Hamburger menu for mobile navigation
-
-### Build System
-```bash
-npm run dev          # Start dev server
-npm run build        # Generate RSS + TypeScript + Vite build
-npm run generate:rss # Regenerate RSS feed only
-```
-
-RSS feed auto-generates from `src/data/products.ts` on every build.
-
----
-
-## Action Items for Copiaro
-
-1. ~~Create Digital Edition product page~~ Done
-2. ~~Create Hero Handheld product page~~ Done
-3. ~~Create Collector's Edition product page~~ Done
-4. (Optional) Create merchandise category page for cups, shirts, caps
+See [README.md](README.md) for build, privacy, testing and deployment behavior.

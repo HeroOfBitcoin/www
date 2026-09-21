@@ -190,7 +190,7 @@ test('digital discount entry stays compact and uses the existing server-owned co
     read('src/i18n/digital-translations.ts'),
   ]);
 
-  assert.match(source, /<summary data-i18n="discountToggle">Discount code\?<\/summary>/);
+  assert.match(source, /<summary data-i18n="discountToggle">Discount or claim code\?<\/summary>/);
   assert.match(source, /data-i18n-aria="discountCode"/);
   assert.match(source, /data-i18n-placeholder="discountPlaceholder"/);
   assert.match(source, />\s*Final price at checkout\.\s*<\/p>/);

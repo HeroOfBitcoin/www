@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PixelCard from './ui/PixelCard';
+import GameDownloadInfo from './GameDownloadInfo';
+import GamePlatforms from './GamePlatforms';
 import ProductLanguages, { type GameLanguage } from './ProductLanguages';
 import { type Language, useLanguage } from '../i18n';
 import { getApiBaseUrl } from '../lib/api';
@@ -179,7 +181,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   pricePreviewText,
   imageOverlay,
 }) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [copied, setCopied] = useState(false);
   const hasImages = images && images.length > 0;
@@ -291,7 +293,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
             </button>
           </div>
 
-          {gameLanguages && <ProductLanguages languages={gameLanguages} />}
+          {gameLanguages && (
+            <div>
+              <p className="mb-2 font-mono text-xs">{digitalTranslations[language].physicalLanguage}</p>
+              <ProductLanguages languages={gameLanguages} />
+            </div>
+          )}
 
           <p className="font-serif italic text-gray-600 border-l-4 border-yellow-400 pl-3 text-sm">
             "{quote}"
@@ -553,8 +560,7 @@ const Products: React.FC = () => {
               {t.products.chooseFormatTitle}
             </p>
             <div className="inline-flex items-center gap-3 border-2 border-white/15 bg-white/5 px-3 py-2 mb-5">
-              <PaymentMark />
-              <p className="max-w-[16rem] font-mono text-[13px] leading-snug text-neutral-100">{digitalCopy.heroLede}</p>
+              <GamePlatforms />
             </div>
             <p className="max-w-[30rem] font-mono text-[15px] leading-relaxed text-neutral-100 mb-4">
               {t.products.chooseFormatBody}
@@ -618,14 +624,11 @@ const Products: React.FC = () => {
       */}
       <ProductCard
         id="instant-download"
-        gameLanguages={['en', 'nl', 'fi']}
         title={t.products.instant.title}
-        subtitle="Windows / macOS / Linux"
+        subtitle={digitalCopy.headerEdition}
         quote={t.products.instant.quote}
         features={[
-          { icon: <ShieldCheck className="text-green-600" size={18} />, text: digitalCopy.gamePlatforms },
           { icon: <PaymentMark compact tone="light" className="min-w-[28px] justify-center" />, text: t.products.instant.feature2 },
-          { icon: <BookOpen className="text-yellow-600" size={18} />, text: digitalCopy.pdfGuide },
           { icon: <Zap className="text-amber-600" size={18} />, text: t.products.instant.feature4 },
         ]}
         badgeText={t.products.badges.instantAccess}
@@ -638,7 +641,6 @@ const Products: React.FC = () => {
         detailsClassName="pt-1"
         cardClassName="bg-[#e9cf57]"
         galleryCount={3}
-        compatibility={digitalCopy.heroLede}
         pricePreview={pricePreviews['instant-download'] ?? null}
         pricePreviewText={pricePreviewText}
         buyContent={(
@@ -672,13 +674,13 @@ const Products: React.FC = () => {
               </p>
               <label className="block mt-4 mb-2">
                 <span className="block text-[10px] font-pixel uppercase text-gray-800 mb-2">
-                  {t.products.instant.couponLabel}
+                  {digitalCopy.discountCode}
                 </span>
                 <input
                   type="text"
                   value={instantCouponCode}
                   onChange={(event) => setInstantCouponCode(event.target.value.toUpperCase())}
-                  placeholder={t.products.instant.couponPlaceholder}
+                  placeholder={digitalCopy.discountPlaceholder}
                   className="w-full border-2 border-black bg-white px-3 py-2 font-mono text-sm uppercase text-black placeholder:text-gray-400 focus:outline-none focus:ring-0"
                   autoComplete="off"
                   inputMode="text"
@@ -709,6 +711,7 @@ const Products: React.FC = () => {
           </div>
         )}
       >
+        <GameDownloadInfo language={language} />
         <div className="border-l-4 border-yellow-300 bg-[#fff9dd] px-3 py-2 text-[11px] leading-relaxed text-[#6f581e]">
           <strong className="text-[#8a6610]">{t.products.noteLabel}</strong> {t.products.instant.note}
         </div>
@@ -768,7 +771,7 @@ const Products: React.FC = () => {
         features={[
           { icon: <Award className="text-yellow-600" size={18} />, text: t.products.graded.feature1 },
           { icon: <ShieldCheck className="text-green-600" size={18} />, text: t.products.graded.feature2 },
-          { icon: <Zap className="text-amber-600" size={18} />, text: t.products.graded.feature3 },
+          { icon: <Zap className="text-amber-600" size={18} />, text: digitalCopy.gradedClaim },
           { icon: <Truck className="text-blue-600" size={18} />, text: t.products.graded.feature4 },
         ]}
         badgeText={t.products.badges.gradedCopy}
@@ -778,7 +781,6 @@ const Products: React.FC = () => {
         ]}
         imageFrameClassName="bg-neutral-200"
         galleryCount={2}
-        compatibility={t.products.graded.compatibility}
         pricePreview={pricePreviews['graded-copy'] ?? null}
         pricePreviewText={pricePreviewText}
         buyContent={(
@@ -791,7 +793,7 @@ const Products: React.FC = () => {
                 </p>
               </div>
               <p className="text-xs leading-relaxed font-mono text-[#8a5b12] mb-4">
-                {t.products.graded.checkoutBody}
+                {digitalCopy.gradedClaimNote}
               </p>
               <a
                 href="https://heroofbitcoin.xyz/c/?s=y91OtC9UyO60xr7DvzTdTw"
@@ -860,9 +862,12 @@ const Products: React.FC = () => {
           </div>
         )}
       >
-        <p className="text-[10px] text-gray-500 font-mono">
-          {t.products.graded.note}
-        </p>
+        <p className="text-xs font-mono">CGC 9.9 · 1020219002</p>
+        <GameDownloadInfo language={language} />
+        <p className="text-xs leading-relaxed">{digitalCopy.claimHelp}</p>
+        <a className="inline-block text-sm font-bold underline underline-offset-4" href={`/digital/?lang=${language}`}>
+          {digitalCopy.redeemClaim}
+        </a>
       </ProductCard>
 
       {/* Product 4: Digital Edition */}
@@ -1155,6 +1160,7 @@ const Products: React.FC = () => {
           </div>
         )}
       >
+        <GameDownloadInfo language={language} />
         <p className="text-[10px] text-gray-500 font-mono">
           {t.products.magazine.note}
         </p>

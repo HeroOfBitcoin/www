@@ -2,6 +2,8 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { ArrowLeft, Download, LoaderCircle, RefreshCcw } from 'lucide-react';
 
 import PixelCard from './components/ui/PixelCard';
+import GameDownloadInfo from './components/GameDownloadInfo';
+import { digitalTranslations } from './i18n/digital-translations';
 import { translations, type Language } from './i18n/translations';
 import { isLanguage, LOCALE_BY_LANGUAGE } from './i18n/locales';
 import { getApiBaseUrl } from './lib/api';
@@ -482,6 +484,10 @@ const SuccessPage: React.FC = () => {
                         <p className="font-mono text-sm text-green-900 mb-3">
                           {checkoutText.downloadHint}
                         </p>
+                        <GameDownloadInfo language={language} />
+                        {order.product_id === 'graded-copy' && (
+                          <p className="font-mono text-sm mb-3">{digitalTranslations[language].gradedClaimNote}</p>
+                        )}
                         <button
                           type="button"
                           onClick={downloadBundle}

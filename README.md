@@ -87,16 +87,31 @@ npm run preview
 
 The site now distinguishes clearly between:
 
-- `Instant Download` = site-owned Bitcoin + Lightning checkout for the ROM + PDF bundle
+- `Instant Download` = site-owned Bitcoin + Lightning checkout for the game with its launcher and English PDF guide
 - `Digital Edition` = boxed physical microSD bundle sold externally
 - `Collector's Edition` = physical cartridge sold externally
 - `Hero Handheld` = physical product sold externally
 - `Stackchain Magazine` = site-owned magazine + digital game bundle with selected shipping included in one Bitcoin/Lightning invoice
-- `Graded Copy` = site-owned CGC 9.9 collector copy + digital game bundle with selected shipping included in one Bitcoin/Lightning invoice
+- `Graded Copy` = site-owned CGC 9.9 collector copy with a claim code for the current digital game and launcher; selected shipping is included in the Bitcoin/Lightning invoice
 
 Do not merge `Instant Download` and `Digital Edition` back into one product concept.
 
-Website translations do not change the game ROM language. The game itself is currently available in English only; a new launcher is in development.
+The digital game includes Windows (x86-64), macOS (Apple Silicon) and Linux
+(x86-64) applications. The launcher selects the game language, configures a
+controller and starts the included game offline. Game languages are English,
+Dutch and Finnish. The English PDF guide is included, as is an extra English ROM
+in the ZIP. Physical game editions remain English; the nine website interface
+languages do not imply nine languages in the customer download.
+
+`GameDownloadInfo` and `GamePlatforms` present these facts on the homepage,
+shop and eligible download confirmations. The standalone `/digital/` page uses
+the same translation catalog and pixel-art SVGs under `public/assets/platforms/`.
+Both variants display architecture requirements beside the OS names.
+
+Graded Copy includes a claim code for this download. Buyers enter it in the
+"Discount or claim code" field on `/digital/`. The existing backend validates
+and redeems codes; the website does not issue codes or change payment or
+fulfillment rules.
 
 ## Key Pages and URLs
 
@@ -131,7 +146,7 @@ Localized URLs work with `?lang=de`, `?lang=es`, `?lang=fr`, or `?lang=ko`.
 
 ## Features
 
-- Multi-language support (`en`, `es`, `fr`, `de`, `ko`)
+- Multi-language support (`en`, `es`, `it`, `ja`, `de`, `ko`, `fr`, `nl`, `fi`)
 - Live products page with 6 product offerings
 - Hosted BTC/LN checkout entry points for direct site-owned products
 - Public success/download page

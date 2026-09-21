@@ -1,5 +1,6 @@
 import './styles/digital.css';
 import './styles/game-languages.css';
+import './styles/game-platforms.css';
 import {
   DigitalCheckoutController,
   normalizeCouponCodeEntry,

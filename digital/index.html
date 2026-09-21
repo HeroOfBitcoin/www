@@ -104,7 +104,7 @@
           "name": "Hero of Bitcoin",
           "description": "A Game Boy-compatible adventure set in El Salvador, with 21 bitcoin hidden throughout the game.",
           "genre": ["Adventure", "Retro"],
-          "gamePlatform": ["Game Boy", "Game Boy Color", "Game Boy Advance", "Analogue Pocket", "Emulator"],
+          "gamePlatform": ["Windows", "macOS", "Linux"],
           "inLanguage": ["en", "nl", "fi"],
           "publisher": {
             "@type": "Organization",
@@ -170,13 +170,18 @@
               <span data-i18n="heroTitleLine1">Explore El Salvador.</span>
               <span class="offer__title-accent" data-i18n="heroTitleLine2">Find all 21 bitcoin.</span>
             </h1>
-            <p class="offer__lede" data-i18n="heroLede">
-              Play on Windows, macOS or Linux.
+            <p class="offer__lede" data-i18n="launcherFeatures">
+              Choose your language and play offline with a keyboard or controller.
             </p>
-            <ul class="offer__contents">
-              <li data-i18n="gamePlatforms">Game for Windows, macOS and Linux</li>
-              <li data-i18n="pdfGuide">English PDF guide</li>
-            </ul>
+            <div class="game-download-info">
+              <p class="game-download-info__title" data-i18n="launcherTitle">Game and launcher included</p>
+              <ul class="game-platforms" data-game-platforms="windows,macos,linux">
+                <li><img src="/assets/platforms/windows.svg" width="32" height="32" alt="" /><span>Windows<small>x86-64</small></span></li>
+                <li><img src="/assets/platforms/macos.svg" width="32" height="32" alt="" /><span>macOS<small>Apple Silicon</small></span></li>
+                <li><img src="/assets/platforms/linux.svg" width="32" height="32" alt="" /><span>Linux<small>x86-64</small></span></li>
+              </ul>
+              <p class="game-download-info__guide" data-i18n="pdfGuide">English PDF guide</p>
+            </div>
             <div class="game-languages" data-game-languages="en,nl,fi">
               <p data-i18n="gameLanguage">Game languages</p>
               <ul>
@@ -212,14 +217,14 @@
             </p>
 
             <details class="offer__discount" data-discount>
-              <summary data-i18n="discountToggle">Discount code?</summary>
+              <summary data-i18n="discountToggle">Discount or claim code?</summary>
               <input
                 type="text"
                 maxlength="64"
                 autocomplete="off"
                 autocapitalize="characters"
                 spellcheck="false"
-                aria-label="Discount code"
+                aria-label="Discount or claim code"
                 data-i18n-aria="discountCode"
                 placeholder="Enter code"
                 data-i18n-placeholder="discountPlaceholder"

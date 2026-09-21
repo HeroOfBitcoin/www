@@ -54,7 +54,8 @@ const DOWNLOAD_ACCESS_REVOKED: Record<Language, string> = {
 };
 
 const POLL_INTERVAL_MS = 3_000;
-const POLL_WINDOW_MS = 120_000;
+const FAST_POLL_WINDOW_MS = 120_000;
+const SLOW_POLL_INTERVAL_MS = 30_000;
 
 const EMPTY_FULFILLMENT_FORM: FulfillmentFormState = {
   email: '',
@@ -175,7 +176,7 @@ const SuccessPage: React.FC = () => {
   const [pollEpoch, setPollEpoch] = useState(0);
   const [downloading, setDownloading] = useState(false);
   const downloadInFlight = useRef(false);
-  const [pollingStopped, setPollingStopped] = useState(false);
+  const [slowPolling, setSlowPolling] = useState(false);
   const [fulfillmentForm, setFulfillmentForm] = useState<FulfillmentFormState>(EMPTY_FULFILLMENT_FORM);
   const [fulfillmentSubmitting, setFulfillmentSubmitting] = useState(false);
   const [fulfillmentError, setFulfillmentError] = useState<string | null>(null);
@@ -193,7 +194,7 @@ const SuccessPage: React.FC = () => {
       return;
     }
 
-    setPollingStopped(false);
+    setSlowPolling(false);
     const abortController = new AbortController();
     let isMounted = true;
     let timeoutId: number | undefined;
@@ -212,13 +213,11 @@ const SuccessPage: React.FC = () => {
         setIsLoading(false);
         setLastUpdatedAt(new Date().toISOString());
 
-        const shouldContinuePolling =
-          !isTerminalStatus(nextOrder.status) && Date.now() - startedAt < POLL_WINDOW_MS;
-
-        if (shouldContinuePolling) {
-          timeoutId = window.setTimeout(poll, POLL_INTERVAL_MS);
-        } else if (!isTerminalStatus(nextOrder.status)) {
-          setPollingStopped(true);
+        if (!isTerminalStatus(nextOrder.status)) {
+          // On-chain confirmation can take much longer than two minutes.
+          const useSlowPolling = Date.now() - startedAt >= FAST_POLL_WINDOW_MS;
+          setSlowPolling(useSlowPolling);
+          timeoutId = window.setTimeout(poll, useSlowPolling ? SLOW_POLL_INTERVAL_MS : POLL_INTERVAL_MS);
         }
       } catch {
         if (!isMounted) {
@@ -227,6 +226,8 @@ const SuccessPage: React.FC = () => {
 
         setIsLoading(false);
         setError(checkoutText.genericError);
+        // A temporary outage must not leave a paid customer waiting indefinitely.
+        timeoutId = window.setTimeout(poll, SLOW_POLL_INTERVAL_MS);
       }
     };
 
@@ -396,7 +397,7 @@ const SuccessPage: React.FC = () => {
                   </div>
                 )}
 
-                {pollingStopped && order && !isTerminalStatus(order.status) && (
+                {slowPolling && order && !isTerminalStatus(order.status) && (
                   <div className="border border-amber-200 bg-amber-50 p-3 text-sm font-mono text-amber-900">
                     {checkoutText.stillWaiting}
                   </div>

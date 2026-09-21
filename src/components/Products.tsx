@@ -313,6 +313,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
             ))}
           </ul>
 
+          <GameDownloadInfo language={language} compact={id !== 'instant-download'} />
+
           {/* Product-specific content */}
           {children}
 
@@ -559,7 +561,8 @@ const Products: React.FC = () => {
             <p className="font-pixel text-[10px] uppercase tracking-[0.22em] text-yellow-300 mb-4">
               {t.products.chooseFormatTitle}
             </p>
-            <div className="inline-flex items-center gap-3 border-2 border-white/15 bg-white/5 px-3 py-2 mb-5">
+            <div className="inline-block border-2 border-white/15 bg-white/5 px-3 py-2 mb-5">
+              <p className="text-sm font-bold">{digitalCopy.launcherTitle}</p>
               <GamePlatforms />
             </div>
             <p className="max-w-[30rem] font-mono text-[15px] leading-relaxed text-neutral-100 mb-4">
@@ -567,11 +570,11 @@ const Products: React.FC = () => {
             </p>
             <div className="mb-6 max-w-[32rem] space-y-3 border-l-4 border-yellow-300 bg-white/10 px-3 py-3">
               <div>
-                <p className="mb-1 font-mono text-xs text-neutral-200">{t.products.instant.title}</p>
+                <p className="mb-1 font-mono text-xs text-neutral-200">{digitalCopy.gameLanguage}</p>
                 <ProductLanguages languages={['en', 'nl', 'fi']} />
               </div>
               <div>
-                <p className="mb-1 font-mono text-xs text-neutral-200">{t.products.collectors.title}</p>
+                <p className="mb-1 font-mono text-xs text-neutral-200">{digitalCopy.physicalLanguage}</p>
                 <ProductLanguages languages={['en']} />
               </div>
             </div>
@@ -711,7 +714,6 @@ const Products: React.FC = () => {
           </div>
         )}
       >
-        <GameDownloadInfo language={language} />
         <div className="border-l-4 border-yellow-300 bg-[#fff9dd] px-3 py-2 text-[11px] leading-relaxed text-[#6f581e]">
           <strong className="text-[#8a6610]">{t.products.noteLabel}</strong> {t.products.instant.note}
         </div>
@@ -771,7 +773,6 @@ const Products: React.FC = () => {
         features={[
           { icon: <Award className="text-yellow-600" size={18} />, text: t.products.graded.feature1 },
           { icon: <ShieldCheck className="text-green-600" size={18} />, text: t.products.graded.feature2 },
-          { icon: <Zap className="text-amber-600" size={18} />, text: digitalCopy.gradedClaim },
           { icon: <Truck className="text-blue-600" size={18} />, text: t.products.graded.feature4 },
         ]}
         badgeText={t.products.badges.gradedCopy}
@@ -792,9 +793,6 @@ const Products: React.FC = () => {
                   {t.products.graded.checkoutTitle}
                 </p>
               </div>
-              <p className="text-xs leading-relaxed font-mono text-[#8a5b12] mb-4">
-                {digitalCopy.gradedClaimNote}
-              </p>
               <a
                 href="https://heroofbitcoin.xyz/c/?s=y91OtC9UyO60xr7DvzTdTw"
                 target="_blank"
@@ -863,11 +861,6 @@ const Products: React.FC = () => {
         )}
       >
         <p className="text-xs font-mono">CGC 9.9 · 1020219002</p>
-        <GameDownloadInfo language={language} />
-        <p className="text-xs leading-relaxed">{digitalCopy.claimHelp}</p>
-        <a className="inline-block text-sm font-bold underline underline-offset-4" href={`/digital/?lang=${language}`}>
-          {digitalCopy.redeemClaim}
-        </a>
       </ProductCard>
 
       {/* Product 4: Digital Edition */}
@@ -1160,7 +1153,6 @@ const Products: React.FC = () => {
           </div>
         )}
       >
-        <GameDownloadInfo language={language} />
         <p className="text-[10px] text-gray-500 font-mono">
           {t.products.magazine.note}
         </p>

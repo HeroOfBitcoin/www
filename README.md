@@ -92,9 +92,14 @@ The site now distinguishes clearly between:
 - `Collector's Edition` = physical cartridge sold externally
 - `Hero Handheld` = physical product sold externally
 - `Stackchain Magazine` = site-owned magazine + digital game bundle with selected shipping included in one Bitcoin/Lightning invoice
-- `Graded Copy` = site-owned CGC 9.9 collector copy with a claim code for the current digital game and launcher; selected shipping is included in the Bitcoin/Lightning invoice
+- `Graded Copy` = site-owned CGC 9.9 collector copy with the digital game included; selected shipping is included in the Bitcoin/Lightning invoice
 
 Do not merge `Instant Download` and `Digital Edition` back into one product concept.
+
+All six products listed on this site include the digital game, regardless of
+whether access is supplied in the package or by download. Physical product
+cards use a compact inclusion notice with OS icons, architecture requirements
+and digital game languages, separate from the physical edition language.
 
 The digital game includes Windows (x86-64), macOS (Apple Silicon) and Linux
 (x86-64) applications. The launcher selects the game language, configures a
@@ -108,10 +113,10 @@ shop and eligible download confirmations. The standalone `/digital/` page uses
 the same translation catalog and pixel-art SVGs under `public/assets/platforms/`.
 Both variants display architecture requirements beside the OS names.
 
-Graded Copy includes a claim code for this download. Buyers enter it in the
-"Discount or claim code" field on `/digital/`. The existing backend validates
-and redeems codes; the website does not issue codes or change payment or
-fulfillment rules.
+Buyers with a claim code can enter it in the "Discount or claim code" field on
+`/digital/`. Product inclusion notices do not prescribe how the digital game
+is supplied. The existing backend validates and redeems codes; the website
+does not issue codes or change payment or fulfillment rules.
 
 ## Key Pages and URLs
 

@@ -96,10 +96,12 @@ The site now distinguishes clearly between:
 
 Do not merge `Instant Download` and `Digital Edition` back into one product concept.
 
-All six products listed on this site include the digital game, regardless of
-whether access is supplied in the package or by download. Physical product
-cards use a compact inclusion notice with OS icons, architecture requirements
-and digital game languages, separate from the physical edition language.
+Instant Download, Collector's Edition, Digital Edition, Graded Copy and
+Stackchain Magazine display the included desktop digital game, regardless of
+how access is supplied. Their product cards show OS icons, architecture
+requirements and digital game languages separately from the physical edition
+language. Hero Handheld shows its own pre-installed game information; desktop
+launcher platforms and language selection do not describe handheld support.
 
 The digital game includes Windows (x86-64), macOS (Apple Silicon) and Linux
 (x86-64) applications. The launcher selects the game language, configures a

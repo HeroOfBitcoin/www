@@ -313,7 +313,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
             ))}
           </ul>
 
-          <GameDownloadInfo language={language} compact={id !== 'instant-download'} />
+          {id !== 'hero-handheld' && (
+            <GameDownloadInfo language={language} compact={id !== 'instant-download'} />
+          )}
 
           {/* Product-specific content */}
           {children}

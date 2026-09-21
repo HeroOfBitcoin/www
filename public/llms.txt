@@ -12,7 +12,8 @@
 
 - The digital game runs on Windows (x86-64), macOS (Apple Silicon) and Linux (x86-64). An English PDF quick-start guide is included.
 - The included launcher selects the game language, configures a controller and starts the included game offline.
-- All six listed products include the digital game with its launcher, regardless of how access is supplied. Buyers with a claim code can redeem it on /digital/ in the discount or claim code field.
+- Instant Download, Collector's Edition, Digital Edition, Graded Copy and Stackchain Magazine include the desktop digital game. Buyers with a claim code can redeem it on /digital/ in the discount or claim code field.
+- Hero Handheld has its own pre-installed game. The desktop launcher platforms and language selection do not describe the handheld software.
 - The digital game can be played in English, Dutch and Finnish. Physical game editions are in English. The landing page supports English, Spanish, Italian, Japanese, German, Korean, French, Dutch, and Finnish.
 - The product page shows a live BTC amount first, with smaller USD and EUR reference prices.
 - Checkout calculates the authoritative price and locks the BTC amount when it opens.

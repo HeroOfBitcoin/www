@@ -44,7 +44,7 @@ export const products: Product[] = [
   {
     id: 'hero-handheld',
     title: 'Hero Handheld - R36S Console Bundle',
-    description: 'Ready to play. Hero of Bitcoin pre-installed. Power on and play instantly. Includes ArkOS pre-installed, microSD card, and sticker. Also supports GB, GBC, GBA, NES, SNES, Genesis, PS1, and more. Digital game included for Windows (x86-64), macOS (Apple Silicon) and Linux (x86-64), in English, Dutch and Finnish.',
+    description: 'Ready to play. Hero of Bitcoin pre-installed. Power on and play instantly. Includes ArkOS pre-installed, microSD card, and sticker. Also supports GB, GBC, GBA, NES, SNES, Genesis, PS1, and more.',
     pubDate: '2024-01-01',
     availability: 'available',
   },

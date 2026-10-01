@@ -1,55 +1,66 @@
-.lugano {background:#08283c;color:#fff6e6}
-.lugano-header {display:flex;align-items:center;gap:1.4rem;padding:1rem clamp(1rem,4vw,4rem);min-height:90px}
-.lugano-header>a {margin-right:auto}
-.lugano-header img {width:clamp(170px,25vw,330px);height:auto}
-.lugano-header>span {font-size:.8rem;font-weight:700;letter-spacing:.1em}
-.lugano-language {font-size:.7rem;display:grid;gap:.25rem}
-.lugano-language select {background:#08283c;color:#fff6e6;border:1px solid #75929f;padding:.4rem;min-height:36px}
-.lugano-offer {position:relative;min-height:700px;display:flex;align-items:center;justify-content:flex-end;overflow:hidden}
-.lugano-art {position:absolute;inset:0;width:60%;height:100%;object-fit:cover;object-position:50% 70%;image-rendering:pixelated}
-.lugano-buy {position:relative;width:min(560px,48%);margin:2rem clamp(1rem,4vw,4rem);padding:2rem;background:#08283cf5;animation:lugano-enter .35s ease-out}
-body.lugano .lugano-buy h1 {font-family:Inter,sans-serif;font-size:clamp(1.5rem,2.6vw,2.6rem);line-height:1.12;letter-spacing:-.02em;text-shadow:none;font-weight:700;margin:0 0 1rem}
-.lugano-buy>p {font-size:.95rem;line-height:1.5}
-.lugano .game-platforms {display:flex;justify-content:space-between;gap:1rem;margin:1rem 0}
-.lugano .game-platforms>span {display:grid;grid-template-columns:28px 1fr;column-gap:.5rem;font-size:.9rem}
-.lugano .game-platforms img {grid-row:span 2}
-.lugano .game-platforms small {font-size:.67rem;color:#d6e3e8}
-.lugano-languages {font-size:.8rem;line-height:1.6;margin:1rem 0}
-.lugano-languages strong {display:block}
-.lugano-price {display:grid;gap:.3rem;margin-top:1rem}
-.lugano-price>strong {font-size:1.65rem}
-.lugano-price>span {font-size:.85rem;color:#d6e3e8;display:flex;gap:.7rem}
-.lugano .lugano-fine {font-size:.75rem;margin:.6rem 0}
-.lugano .pixel-button {width:100%;font-family:Inter,sans-serif;font-size:1rem;padding:1rem;background:#f8a04b;color:#08283c}
-.lugano-demo {display:block;text-align:center;padding:.8rem;margin-top:.4rem;color:#fff6e6;text-decoration:underline;transition:color .15s}
-.lugano-demo:hover {color:#f8a04b}
-.lugano [data-checkout-status] {margin:0;font-size:.85rem}
-.lugano [data-checkout-status][data-error=true] {color:#ffcdac}
-.lugano-products {display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem;padding:4rem clamp(1.2rem,6vw,6rem);background:#fff6e6;color:#08283c}
-.lugano-products h2 {font-family:Inter,sans-serif;font-size:1.3rem;margin:0 0 .5rem}
-.lugano-products p {font-size:.95rem;line-height:1.5}
-.lugano-products a {color:#08283c;font-size:.85rem;text-underline-offset:4px}
-.lugano-scan {padding:3rem;display:flex;align-items:center;justify-content:center;gap:2rem}
-.lugano-scan img {background:white}
-.lugano-scan a {color:#f8a04b}
-.lugano footer {border-top:1px solid #3e596b;margin:0;color:#d6e3e8}
-@keyframes lugano-enter {from {opacity:0;transform:translateY(8px)} to {opacity:1;transform:none}}
-@media(max-width:700px) {
- .lugano-header {padding:.7rem 1rem;min-height:64px;gap:.6rem}
- .lugano-header>span {display:none}
- .lugano-header img {width:180px}
- .lugano-language>span {display:none}
- .lugano-offer {display:block;min-height:0;padding-top:150px}
- .lugano-art {width:100%;height:150px;object-position:center 82%}
- .lugano-buy {width:auto;margin:0;padding:1.1rem 1.2rem;background:#08283c}
- body.lugano .lugano-buy h1 {font-size:1.5rem;margin-bottom:.6rem}
- .lugano-buy>p {font-size:.85rem;margin:.5rem 0}
- .lugano .game-platforms {margin:.8rem 0;gap:.4rem}
- .lugano .game-platforms>span {font-size:.8rem;column-gap:.25rem}
- .lugano-languages {margin:.5rem 0}
- .lugano-price {margin-top:.6rem}
- .lugano-products {grid-template-columns:1fr;padding:2rem 1.2rem;gap:2rem}
- .lugano-scan {padding:2rem 1.2rem;gap:1rem;font-size:.8rem}
- .lugano-scan img {width:100px;height:100px}
+.lugano { display: block; background: #08283c; color: #fff6e6; }
+.lugano a { text-underline-offset: .25em; }
+.lugano :is(a, button, select):focus-visible { outline: 3px solid #ffbc75; outline-offset: 5px; }
+.lugano-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 4vw; min-height: 84px; }
+.lugano-header img { width: clamp(170px, 23vw, 280px); height: auto; }
+.lugano-language { font-size: .75rem; display: flex; align-items: center; gap: .6rem; }
+.lugano-language select { font: inherit; background: #08283c; color: #fff6e6; border: 1px solid #75929f; padding: .5rem; min-height: 44px; }
+.lugano-offer { position: relative; isolation: isolate; min-height: 700px; display: flex; align-items: center; overflow: hidden; }
+.lugano-art { position: absolute; z-index: -2; inset: 0 0 0 auto; width: 69%; height: 100%; object-fit: cover; object-position: 68% 85%; image-rendering: pixelated; }
+.lugano-offer::before { content: ''; position: absolute; z-index: -1; inset: 0; background: linear-gradient(90deg, #08283c 30%, #08283cf2 40%, #08283c7a 53%, transparent 68%); }
+.lugano-buy { width: min(550px, 48%); margin: 2.5rem 0 3rem 5vw; animation: lugano-enter .35s ease-out; }
+.lugano-event { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1.5rem; margin-bottom: 1.7rem; }
+.lugano-event img { width: 190px; height: auto; }
+.lugano-event p { margin: 0; font-size: .8rem; line-height: 1.6; color: #d6e3e8; }
+.lugano-event a { display: block; }
+body.lugano .lugano-buy h1 { font-family: inherit; font-size: clamp(2.2rem, 3.8vw, 3.5rem); line-height: 1.06; letter-spacing: -.04em; text-shadow: none; font-weight: 800; margin: 0 0 1rem; max-width: 11em; }
+.lugano-intro { max-width: 31rem; font-size: 1rem; line-height: 1.55; color: #d6e3e8; }
+.lugano-download { margin: 1.6rem 0 0; padding-top: 1rem; border-top: 1px solid #75929f80; font-size: .85rem; font-weight: 700; }
+.lugano .game-platforms { display: flex; justify-content: space-between; gap: .8rem; margin: .85rem 0; }
+.lugano .game-platforms>span { display: grid; grid-template-columns: 28px 1fr; column-gap: .5rem; font-size: .85rem; }
+.lugano .game-platforms img { grid-row: span 2; }
+.lugano .game-platforms small { font-size: .68rem; color: #d6e3e8; }
+.lugano-languages { font-size: .8rem; line-height: 1.6; margin: .85rem 0; }
+.lugano-languages strong { display: block; font-weight: 600; }
+.lugano-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem 1rem; margin-top: 1rem; }
+.lugano-price>strong { font-size: 1.6rem; font-variant-numeric: tabular-nums; }
+.lugano-price>span { font-size: .8rem; color: #d6e3e8; display: flex; gap: .7rem; }
+.lugano .lugano-fine { font-size: .75rem; margin: .6rem 0; line-height: 1.5; }
+.lugano .pixel-button { width: 100%; font-family: inherit; font-size: .95rem; font-weight: 700; padding: .85rem 1rem; background: #f8a04b; color: #08283c; }
+.lugano-demo { display: block; text-align: center; padding: .8rem; margin-top: .4rem; color: #fff6e6; text-decoration: underline; transition: color .15s; }
+.lugano-demo:hover { color: #f8a04b; }
+.lugano [data-checkout-status] { margin: 0; font-size: .85rem; line-height: 1.5; }
+.lugano [data-checkout-status][data-error=true] { color: #ffcdac; }
+.lugano-products { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3rem; padding: 3.5rem 5vw; background: #fff6e6; color: #08283c; }
+.lugano-products h2 { font-family: inherit; font-size: 1.25rem; margin: 0 0 .5rem; }
+.lugano-products p { font-size: .95rem; line-height: 1.5; }
+.lugano-products a { display: inline-flex; align-items: center; min-height: 44px; color: #08283c; font-size: .9rem; }
+.lugano-products a:focus-visible { outline-color: #08283c; }
+.lugano-scan { padding: 2.5rem 5vw; display: flex; align-items: center; justify-content: center; gap: 2rem; }
+.lugano-scan img { background: white; flex: none; }
+.lugano-scan p { font-size: .9rem; line-height: 1.5; }
+.lugano-scan a { color: #ffbc75; overflow-wrap: anywhere; }
+.lugano footer { border-top: 1px solid #3e596b; margin: 0; padding: 1.25rem 5vw; background: #062234; color: #d6e3e8; }
+@keyframes lugano-enter { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@media (max-width: 800px) {
+  .lugano-header { padding: .65rem 1rem; min-height: 68px; }
+  .lugano-header img { width: 170px; }
+  .lugano-language>span { position: absolute; width: 1px; height: 1px; clip-path: inset(50%); overflow: hidden; }
+  .lugano-offer { display: block; min-height: 0; padding-top: 175px; }
+  .lugano-art { width: 100%; height: 210px; object-position: center 79%; }
+  .lugano-offer::before { background: linear-gradient(0deg, #08283c 0%, transparent 100%); inset: 145px 0 auto; height: 65px; }
+  .lugano-buy { width: auto; margin: 0; padding: 1rem 1.2rem 1.5rem; }
+  .lugano-event { gap: .5rem 1rem; margin-bottom: 1rem; }
+  .lugano-event img { width: 145px; }
+  .lugano-event p { font-size: .7rem; }
+  body.lugano .lugano-buy h1 { font-size: 2rem; max-width: none; }
+  .lugano-intro { font-size: .9rem; }
+  .lugano-download { margin-top: 1rem; }
+  .lugano .game-platforms { gap: .5rem; }
+  .lugano .game-platforms>span { font-size: .78rem; column-gap: .25rem; }
+  .lugano-products { grid-template-columns: 1fr; padding: 2rem 1.2rem; gap: 1.5rem; }
+  .lugano-products>div+div { border-top: 1px solid #08283c30; padding-top: 1.5rem; }
+  .lugano-scan { padding: 2rem 1.2rem; gap: 1rem; }
+  .lugano-scan img { width: 90px; height: 90px; }
 }
-@media(prefers-reduced-motion:reduce) {.lugano-buy {animation:none}.lugano-demo {transition:none}}
+@media (prefers-reduced-motion: reduce) { .lugano-buy { animation: none; } .lugano-demo { transition: none; } }

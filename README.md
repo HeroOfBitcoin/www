@@ -241,3 +241,17 @@ the language can always be selected through the URL.
 checkout flows against the backend's local mock provider, including payment return,
 download, failures, shipping and browser-back recovery. Real Lightning payment
 acceptance is a separate, deliberate live purchase.
+
+## Lugano conference page
+
+`/lugano/` presents Hero of Bitcoin at Plan ₿ Forum 2026, with the organizer’s
+official event logo and links. The existing Lugano illustration and printed
+`https://heroofbitcoin.xyz/lugano` destination are retained. Asset provenance is
+in `public/assets/lugano/README.md`.
+
+`src/lugano.ts` uses the existing digital checkout and pricing controller.
+Event copy lives in `src/i18n/lugano-translations.ts`, covering the nine site
+languages; product links preserve the selected language. Page language is
+separate from game availability: the desktop download lists EN/NL/FI and exact
+OS architectures, while the cartridge is English and handheld details link
+to the separate product. The page makes no sponsorship or endorsement claim.

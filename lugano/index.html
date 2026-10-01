@@ -3,21 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Play Hero of Bitcoin at Lugano. Try the free demo or get the full game for Windows, Apple Silicon Mac and Linux." />
+  <meta name="description" content="Hero of Bitcoin at Plan ₿ Forum, Lugano, 23–24 October 2026. Try the demo or get the full game for Windows, Apple Silicon Mac and Linux." />
   <meta name="theme-color" content="#08283c" />
   <link rel="canonical" href="https://heroofbitcoin.xyz/lugano/" />
   <link rel="icon" href="/assets/images/favicon.jpg" />
-  <title>Hero of Bitcoin | Lugano 2026</title>
-  <meta property="og:title" content="Hero of Bitcoin | Lugano 2026" />
-  <meta property="og:description" content="Play the demo. Get the full game. Hero of Bitcoin in Lugano." />
+  <title>Hero of Bitcoin | Plan ₿ Forum Lugano 2026</title>
+  <meta property="og:title" content="Hero of Bitcoin | Plan ₿ Forum Lugano 2026" />
+  <meta property="og:description" content="Hero of Bitcoin at Plan ₿ Forum, Lugano, 23–24 October 2026. Try the demo or get the full game for Windows, Apple Silicon Mac and Linux." />
   <meta property="og:image" content="https://heroofbitcoin.xyz/assets/lugano/hero-lugano.png" />
   <meta property="og:url" content="https://heroofbitcoin.xyz/lugano/" />
   <script type="module" src="/src/lugano.ts"></script>
 </head>
 <body class="lugano">
   <header class="lugano-header">
-    <a href="/" aria-label="Hero of Bitcoin home"><img src="/assets/images/hob_textlogo_horizontal.webp" width="1280" height="312" alt="Hero of Bitcoin" /></a>
-    <span>LUGANO 2026</span>
+    <a href="/" aria-label="Hero of Bitcoin"><img src="/assets/images/hob_textlogo_horizontal.webp" width="1280" height="312" alt="Hero of Bitcoin" /></a>
     <label class="lugano-language"><span data-i18n="languageLabel">Language</span>
       <select data-language-picker aria-label="Language">
         <option value="en">English</option><option value="it">Italiano</option><option value="de">Deutsch</option><option value="es">Español</option><option value="fr">Français</option><option value="nl">Nederlands</option><option value="fi">Suomi</option><option value="ja">日本語</option><option value="ko">한국어</option>
@@ -26,10 +25,15 @@
   </header>
   <main>
     <section class="lugano-offer" aria-labelledby="lugano-title">
-      <img class="lugano-art" src="/assets/lugano/hero-lugano.png" width="1500" height="1536" alt="Hero eating gelato beside Lake Lugano" fetchpriority="high" />
+      <img class="lugano-art" src="/assets/lugano/hero-lugano.png" width="1500" height="1536" alt="Hero eating gelato beside Lake Lugano" data-lugano-alt="artAlt" fetchpriority="high" />
       <div class="lugano-buy">
-        <h1 id="lugano-title">A Bitcoin adventure.<br>Made for Game Boy.</h1>
-        <p data-i18n="launcherFeatures">Choose your language and play offline with a keyboard or controller.</p>
+        <div class="lugano-event">
+          <a href="https://planb.lugano.ch/planb-forum/" target="_blank" rel="noopener noreferrer"><img src="/assets/lugano/planb-forum-2026.svg" width="240" height="58" alt="Plan ₿ Forum 2026" /></a>
+          <p><span data-event-date>23–24 October 2026</span> · Lugano<br><a href="https://planb.lugano.ch/planb-forum/" target="_blank" rel="noopener noreferrer" data-lugano="eventLink">Official event website ↗</a></p>
+        </div>
+        <h1 id="lugano-title" data-lugano="heading">Hero goes to Lugano.</h1>
+        <p class="lugano-intro" data-lugano="intro">A Bitcoin adventure made for Game Boy. Try the demo or get the full game for your computer.</p>
+        <p class="lugano-download" data-lugano="downloadLabel">Full game for your computer</p>
         <div class="game-platforms" data-game-platforms="windows,macos,linux">
           <span><img src="/assets/platforms/windows.svg" width="28" height="28" alt="" />Windows<small>x86-64</small></span>
           <span><img src="/assets/platforms/macos.svg" width="28" height="28" alt="" />macOS<small>Apple Silicon</small></span>
@@ -45,13 +49,13 @@
         <noscript><p>For checkout, enable JavaScript or visit <a href="/digital/">the digital game page</a>.</p></noscript>
       </div>
     </section>
-    <section class="lugano-products" aria-label="Ways to play">
-      <div><h2>Digital</h2><p>The full game for your computer.</p><a href="/digital/">Download details →</a></div>
-      <div><h2>Hero Handheld</h2><p>A handheld with the game ready to play.</p><a href="/#products">See the handheld →</a></div>
-      <div><h2>Real Game Boy Cartridge</h2><p>A boxed cartridge for your Game Boy.</p><a href="/#products">See the cartridge →</a></div>
+    <section class="lugano-products" aria-label="Ways to play" data-lugano-aria="waysToPlay">
+      <div><h2 data-lugano="digitalTitle">Digital game</h2><p data-i18n="launcherFeatures">Choose your language and play offline with a keyboard or controller.</p><a href="/digital/" data-language-link data-lugano="digitalLink">Download details →</a></div>
+      <div><h2>Hero Handheld</h2><p data-lugano="handheldText">A handheld with the game ready to play.</p><a href="/#hero-handheld" data-language-link data-lugano="handheldLink">See the handheld →</a></div>
+      <div><h2 data-lugano="cartridgeTitle">Game Boy cartridge</h2><p data-lugano="cartridgeText">A boxed cartridge for your Game Boy. Game in English.</p><a href="/#collectors-edition" data-language-link data-lugano="cartridgeLink">See the cartridge →</a></div>
     </section>
-    <aside class="lugano-scan"><img src="/assets/lugano/purchase-qr.svg" width="140" height="140" alt="QR code: heroofbitcoin.xyz/lugano" /><div><strong>Keep playing after the demo.</strong><p><a href="https://heroofbitcoin.xyz/lugano">heroofbitcoin.xyz/lugano</a></p></div></aside>
+    <aside class="lugano-scan"><img src="/assets/lugano/purchase-qr.svg" width="120" height="120" alt="QR: heroofbitcoin.xyz/lugano" loading="lazy" /><div><strong data-lugano="qrTitle">Keep playing after the demo.</strong><p data-lugano="qrText">Scan to open this page on your phone.</p><p><a href="https://heroofbitcoin.xyz/lugano">heroofbitcoin.xyz/lugano</a></p></div></aside>
   </main>
-  <footer><p>©2022–2026 Hero of Bitcoin</p><p data-i18n="legal">Game Boy is named only to describe compatibility. All trademarks belong to their owners.</p></footer>
+  <footer><p>©2022–2026 Hero of Bitcoin · <a href="https://planb.lugano.ch/planb-forum/" target="_blank" rel="noopener noreferrer">Plan ₿ Forum 2026 ↗</a></p><p data-i18n="legal">Game Boy is named only to describe compatibility. All trademarks belong to their owners.</p></footer>
 </body>
 </html>

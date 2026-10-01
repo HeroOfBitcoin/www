@@ -31,4 +31,6 @@ npm-debug.log*
 *.tsbuildinfo
 
 # Local project state
-.state/todo_local.md
+.state/
+.playwright-cli/
+output/playwright/

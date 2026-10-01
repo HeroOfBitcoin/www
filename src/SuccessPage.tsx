@@ -3,6 +3,8 @@ import { ArrowLeft, Download, LoaderCircle, RefreshCcw } from 'lucide-react';
 
 import PixelCard from './components/ui/PixelCard';
 import GameDownloadInfo from './components/GameDownloadInfo';
+import DownloadLinkActions from './components/DownloadLinkActions';
+import { downloadLinkTranslations } from './i18n/download-link-translations';
 import { translations, type Language } from './i18n/translations';
 import { resolveLanguage, rememberLanguage, LOCALE_BY_LANGUAGE } from './i18n/locales';
 import { getApiBaseUrl } from './lib/api';
@@ -26,6 +28,8 @@ interface OrderStatusResponse {
   download_token?: string;
   onchain_transaction_ids?: string[];
   download_access_revoked?: boolean;
+  download_access_expired?: boolean;
+  download_access_expires_at?: string;
   download_expires_at?: string;
   downloads_remaining?: number;
 }
@@ -181,6 +185,26 @@ const SuccessPage: React.FC = () => {
   const [fulfillmentForm, setFulfillmentForm] = useState<FulfillmentFormState>(EMPTY_FULFILLMENT_FORM);
   const [fulfillmentSubmitting, setFulfillmentSubmitting] = useState(false);
   const [fulfillmentError, setFulfillmentError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (order?.status !== 'paid' || !order.download_access_expires_at || order.download_access_expired || order.download_access_revoked) return;
+    const deadline = Date.parse(order.download_access_expires_at);
+    if (!Number.isFinite(deadline)) return;
+    // Recheck against the server when access ends, or when returning to this tab.
+    let timeoutId: number;
+    const scheduleExpiry = () => {
+      const remainingMs = deadline - Date.now();
+      // Browser timers cannot exceed a signed 32-bit delay; long configured lifetimes need another timer.
+      timeoutId = window.setTimeout(remainingMs > 2_147_483_647 ? scheduleExpiry : () => setPollEpoch((current) => current + 1), Math.max(0, Math.min(remainingMs, 2_147_483_647)));
+    };
+    scheduleExpiry();
+    const onVisible = () => { if (document.visibilityState === 'visible') setPollEpoch((current) => current + 1); };
+    document.addEventListener('visibilitychange', onVisible);
+    return () => {
+      window.clearTimeout(timeoutId);
+      document.removeEventListener('visibilitychange', onVisible);
+    };
+  }, [order?.status, order?.download_access_expires_at, order?.download_access_expired, order?.download_access_revoked]);
 
   useEffect(() => {
     document.documentElement.lang = language;
@@ -389,6 +413,7 @@ const SuccessPage: React.FC = () => {
                 <p className="font-mono text-sm text-gray-700">
                   {isLoading ? checkoutText.loading : order?.download_access_revoked
                     ? DOWNLOAD_ACCESS_REVOKED[language]
+                    : order?.download_access_expired ? downloadLinkTranslations[language].expired
                     : getStatusBody(order?.status ?? null, checkoutText)}
                 </p>
 
@@ -406,6 +431,39 @@ const SuccessPage: React.FC = () => {
 
                 {order && (
                   <div className="space-y-4">
+                    {order.status === 'paid' && order.has_digital_download === 1 && !order.download_access_revoked && (
+                      <div className="border-2 border-black bg-green-50 p-4">
+                        <div className="mb-4 border-2 border-black bg-yellow-300 px-3 py-2 text-center text-black pixel-shadow-sm">
+                          <p className="font-pixel text-[10px] leading-relaxed md:text-sm">
+                            {checkoutText.thankYouHeadlineLine1}
+                            <br />
+                            {checkoutText.thankYouHeadlineLine2}
+                          </p>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={downloadBundle}
+                          disabled={!order.download_token || downloading || isLoading || order.download_access_expired}
+                          className="w-full md:w-auto inline-flex items-center justify-center gap-1 md:gap-2 px-3 md:px-4 py-3 bg-green-500 text-white font-pixel text-[10px] md:text-base border-2 border-black hover:bg-green-600 transition-all disabled:bg-gray-400 disabled:cursor-not-allowed"
+                        >
+                          <Download size={16} className="hidden min-[360px]:block shrink-0" />
+                          <span className="min-w-0 break-words">{downloading ? checkoutText.preparingDownload : checkoutText.downloadButton}</span>
+                        </button>
+                        <p className="font-mono text-sm font-bold mt-3">{checkoutText.downloadsRemaining}: {order.downloads_remaining ?? '—'}</p>
+                        {order.download_access_expired ? (
+                          <p className="text-sm font-mono text-red-700 mt-3">{downloadLinkTranslations[language].expired}</p>
+                        ) : !order.download_token ? (
+                          <p className="text-sm font-mono text-red-700 mt-3">{checkoutText.noDownloadsLeft}</p>
+                        ) : orderId && (
+                          <DownloadLinkActions orderId={orderId} language={language} expiresAt={order.download_access_expires_at} />
+                        )}
+                        <div className="border-t-2 border-black/20 pt-4 mt-4">
+                          <p className="font-mono text-sm text-green-900 mb-3">{checkoutText.downloadHint}</p>
+                          <GameDownloadInfo language={language} />
+                        </div>
+                      </div>
+                    )}
+
                     <div className="grid md:grid-cols-2 gap-3">
                       <div className="border-2 border-black bg-white p-3">
                         <p className="font-pixel text-[10px] uppercase mb-2">{checkoutText.orderDetails}</p>
@@ -464,34 +522,6 @@ const SuccessPage: React.FC = () => {
                         </dl>
                       </div>
                     </div>
-
-                    {order.status === 'paid' && order.has_digital_download === 1 && !order.download_access_revoked && (
-                      <div className="border-2 border-black bg-green-50 p-4">
-                        <div className="mb-4 border-2 border-black bg-yellow-300 px-4 py-4 text-center text-black pixel-shadow-sm">
-                          <p className="font-pixel text-sm leading-relaxed md:text-lg">
-                            {checkoutText.thankYouHeadlineLine1}
-                            <br />
-                            {checkoutText.thankYouHeadlineLine2}
-                          </p>
-                        </div>
-                        <p className="font-mono text-sm text-green-900 mb-3">
-                          {checkoutText.downloadHint}
-                        </p>
-                        <GameDownloadInfo language={language} />
-                        <button
-                          type="button"
-                          onClick={downloadBundle}
-                          disabled={!order.download_token || downloading}
-                          className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-4 py-3 bg-green-500 text-white font-pixel border-2 border-black hover:bg-green-600 transition-all disabled:bg-gray-400 disabled:cursor-not-allowed"
-                        >
-                          <Download size={16} />
-                          <span>{downloading ? checkoutText.preparingDownload : checkoutText.downloadButton}</span>
-                        </button>
-                        {!order.download_token && (
-                          <p className="text-sm font-mono text-red-700 mt-3">{checkoutText.noDownloadsLeft}</p>
-                        )}
-                      </div>
-                    )}
 
                     {order.status === 'paid' && order.requires_fulfillment_details === 1 && (
                       <div className="border-2 border-black bg-white p-4">

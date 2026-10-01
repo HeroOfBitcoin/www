@@ -19,6 +19,7 @@ export default defineConfig({
         certificate: fileURLToPath(new URL('./c/index.html', import.meta.url)),
         success: fileURLToPath(new URL('./success.html', import.meta.url)),
         digital: fileURLToPath(new URL('./digital/index.html', import.meta.url)),
+        lugano: fileURLToPath(new URL('./lugano/index.html', import.meta.url)),
         slp: fileURLToPath(new URL('./slp/index.html', import.meta.url)),
       },
     },

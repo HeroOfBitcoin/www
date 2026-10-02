@@ -1,27 +1,32 @@
 /* All information is readable without animation, observers, or a fixed viewport height. */
 html:has(body.lugano) { background: #08283c; overflow-x: visible; }
-body.lugano { display: block; min-width: 0; overflow-x: visible; background: #08283c; color: #fff6e6; font-size: 1rem; line-height: 1.5; }
+body.lugano { display: block; min-width: 0; overflow-x: visible; background: #08283c; color: #fff6e6; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 1rem; line-height: 1.5; }
 .lugano :is(h1, h2, h3, p, a, strong, span, small, label) { overflow-wrap: anywhere; }
 .lugano a { text-underline-offset: .25em; }
 .lugano :is(a, button, select, [tabindex='-1']):focus-visible { outline: 3px solid #ffbc75; outline-offset: 5px; }
 .lugano-skip-link { position: absolute; inset: .75rem auto auto .75rem; z-index: 10; max-width: calc(100% - 1.5rem); padding: .75rem 1rem; background: #fff6e6; color: #08283c; transform: translateY(calc(-100% - 1rem)); }
 .lugano-skip-link:focus { transform: none; outline-color: #08283c; }
-.lugano-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 5vw; }
-.lugano-header>a { flex: 0 1 260px; }
+.lugano-header { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 5vw; }
+.lugano-brands { flex: 0 1 auto; width: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem; min-width: 0; }
+.lugano-brands>a { flex: 0 1 auto; width: auto; display: flex; align-items: center; min-height: 44px; max-width: 100%; }
+.lugano-brands>a:first-child { width: 340px; }
+.lugano-brands .lugano-logo { width: 100%; }
+.lugano-event-brand { border-left: 1px solid #75929f; padding-left: 1.5rem; }
+.lugano-event-brand img { width: 210px; }
 .lugano-header img { width: 100%; height: auto; }
 .lugano-language { font-size: 1rem; display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }
 .lugano-language select { max-width: 100%; font: inherit; background: #08283c; color: #fff6e6; border: 1px solid #75929f; padding: .5rem; min-height: 44px; }
 
 /* The complete artwork is supplementary to the demo and purchase, including in source order. */
-.lugano-offer { display: grid; grid-template-columns: minmax(0, 52fr) minmax(0, 48fr); align-items: center; }
-.lugano-art { display: block; width: 100%; height: auto; max-height: 800px; object-fit: contain; image-rendering: pixelated; }
+.lugano-offer { display: grid; grid-template-columns: minmax(0, 56fr) minmax(0, 44fr); align-items: center; padding-right: 5vw; gap: 2vw; }
+.lugano-art { display: block; width: min(100%, 440px); height: auto; max-height: none; margin-inline: auto; object-fit: contain; image-rendering: pixelated; }
 .lugano-hero-copy { min-width: 0; padding: 1.5rem 4vw 2.5rem 5vw; }
 .lugano-event { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1.5rem; margin-bottom: 1.25rem; }
 .lugano-event img { width: 170px; height: auto; }
 .lugano-event p { margin: 0; font-size: .875rem; color: #d6e3e8; }
 .lugano-event a { display: inline-flex; align-items: center; min-height: 44px; }
 .lugano-event p>a { margin-top: .5rem; }
-body.lugano .lugano-hero-copy h1 { font-family: inherit; font-size: clamp(2rem, 3.5vw, 3.25rem); line-height: 1.15; letter-spacing: -.025em; text-shadow: none; font-weight: 800; margin: 0 0 1rem; max-width: 14em; }
+body.lugano .lugano-hero-copy h1 { font-family: inherit; font-size: clamp(2rem, 3vw, 2.75rem); line-height: 1.2; letter-spacing: -.015em; text-shadow: none; font-weight: 650; margin: 0 0 1rem; max-width: 14em; }
 .lugano-intro { max-width: 36rem; font-size: 1rem; color: #d6e3e8; }
 .lugano-demo { display: flex; align-items: center; gap: 1rem; padding: .75rem; margin: 1.25rem 0 0; background: #fff6e6; color: #08283c; text-decoration: none; border-bottom: 4px solid #f8a04b; }
 .lugano-demo:hover { background: #fff; }
@@ -79,13 +84,18 @@ body.lugano .lugano-hero-copy h1 { font-family: inherit; font-size: clamp(2rem, 
   .lugano-products .lugano-product-art { margin-inline: auto; }
 }
 @media (max-width: 960px) {
-  .lugano-offer { grid-template-columns: 1fr; }
-  .lugano-art { width: min(100%, 480px); max-height: none; margin: 0 auto 2rem; }
+  .lugano-offer { grid-template-columns: 1fr; padding-right: 0; gap: 0; }
+  .lugano-art { width: min(90%, 360px); max-height: none; margin: 0 auto 2rem; }
   .lugano-hero-copy { padding: 1.5rem 5vw 2rem; }
 }
 @media (max-width: 700px) {
   .lugano-header { padding: 1rem 5vw; }
-  .lugano-header>a { flex-basis: 128px; }
+  .lugano-header { grid-template-columns: 1fr; align-items: flex-start; gap: 1.25rem; }
+  .lugano-brands { width: 100%; gap: .75rem 1rem; }
+  .lugano-brands>a:first-child { width: auto; min-width: 0; flex: 1 1 180px; }
+  .lugano-brands>.lugano-event-brand { width: 130px; min-width: 0; flex: 0 1 130px; padding-left: 1rem; }
+  .lugano-event-brand img { width: 100%; }
+  .lugano-language { width: 100%; justify-content: space-between; }
   .lugano-download-body { grid-template-columns: 1fr; gap: 1.5rem; }
   .lugano-download-body .lugano-product-art { margin-inline: auto; }
   .lugano-products { grid-template-columns: 1fr; }

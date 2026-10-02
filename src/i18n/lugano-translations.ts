@@ -1,6 +1,7 @@
 import type { Language } from './locales';
 
 const en = {
+  skipToContent: 'Skip to content',
   waysToPlay: 'Ways to play',
   eventDate: '23–24 October 2026',
   heading: 'Hero goes to Lugano.',
@@ -21,6 +22,7 @@ export type LuganoTranslation = typeof en;
 export const luganoTranslations: Record<Language, LuganoTranslation> = {
   en,
   it: {
+    skipToContent: 'Vai al contenuto',
     waysToPlay: 'Modi per giocare',
     eventDate: '23–24 ottobre 2026',
     heading: 'Hero arriva a Lugano.',
@@ -33,6 +35,7 @@ export const luganoTranslations: Record<Language, LuganoTranslation> = {
     artAlt: 'Hero mangia un gelato in riva al lago di Lugano',
   },
   de: {
+    skipToContent: 'Zum Inhalt',
     waysToPlay: 'So kannst du spielen',
     eventDate: '23.–24. Oktober 2026',
     heading: 'Hero kommt nach Lugano.',
@@ -45,6 +48,7 @@ export const luganoTranslations: Record<Language, LuganoTranslation> = {
     artAlt: 'Hero isst ein Eis am Luganersee',
   },
   es: {
+    skipToContent: 'Ir al contenido',
     waysToPlay: 'Formas de jugar',
     eventDate: '23–24 de octubre de 2026',
     heading: 'Hero llega a Lugano.',
@@ -57,6 +61,7 @@ export const luganoTranslations: Record<Language, LuganoTranslation> = {
     artAlt: 'Hero comiendo un helado junto al lago de Lugano',
   },
   fr: {
+    skipToContent: 'Aller au contenu',
     waysToPlay: 'Façons de jouer',
     eventDate: '23–24 octobre 2026',
     heading: 'Hero arrive à Lugano.',
@@ -69,6 +74,7 @@ export const luganoTranslations: Record<Language, LuganoTranslation> = {
     artAlt: 'Hero mange une glace au bord du lac de Lugano',
   },
   nl: {
+    skipToContent: 'Naar de inhoud',
     waysToPlay: 'Manieren om te spelen',
     eventDate: '23–24 oktober 2026',
     heading: 'Hero komt naar Lugano.',
@@ -81,6 +87,7 @@ export const luganoTranslations: Record<Language, LuganoTranslation> = {
     artAlt: 'Hero eet een ijsje aan het Meer van Lugano',
   },
   fi: {
+    skipToContent: 'Siirry sisältöön',
     waysToPlay: 'Tapoja pelata',
     eventDate: '23.–24. lokakuuta 2026',
     heading: 'Hero saapuu Luganoon.',
@@ -93,6 +100,7 @@ export const luganoTranslations: Record<Language, LuganoTranslation> = {
     artAlt: 'Hero syö jäätelöä Luganojärven rannalla',
   },
   ja: {
+    skipToContent: '本文へ移動',
     waysToPlay: '遊び方を選ぶ',
     eventDate: '2026年10月23日・24日',
     heading: 'Hero、ルガーノへ。',
@@ -105,6 +113,7 @@ export const luganoTranslations: Record<Language, LuganoTranslation> = {
     artAlt: 'ルガーノ湖のほとりでジェラートを食べるHero',
   },
   ko: {
+    skipToContent: '본문으로 이동',
     waysToPlay: '플레이 방법',
     eventDate: '2026년 10월 23–24일',
     heading: 'Hero가 루가노에 갑니다.',

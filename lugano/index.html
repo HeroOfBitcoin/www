@@ -15,6 +15,7 @@
   <script type="module" src="/src/lugano.ts"></script>
 </head>
 <body class="lugano">
+  <a class="lugano-skip-link" href="#main-content" data-lugano="skipToContent">Skip to content</a>
   <header class="lugano-header">
     <a href="/" aria-label="Hero of Bitcoin"><img src="/assets/images/hob_textlogo_horizontal.webp" width="1280" height="312" alt="Hero of Bitcoin" /></a>
     <label class="lugano-language"><span data-i18n="languageLabel">Language</span>
@@ -23,7 +24,7 @@
       </select>
     </label>
   </header>
-  <main>
+  <main id="main-content" tabindex="-1">
     <section class="lugano-offer" aria-labelledby="lugano-title">
       <div class="lugano-hero-copy">
         <div class="lugano-event">
@@ -38,16 +39,24 @@
           <span class="lugano-demo__play" aria-hidden="true">▶</span>
         </a>
         <div class="lugano-hero-links">
-          <a class="lugano-download-link" href="#download-details" data-language-link><span data-lugano="downloadLabel">Full game for your computer</span> <span aria-hidden="true">↓</span></a>
+          <a class="lugano-download-link" href="#buy-game" data-language-link><span data-i18n="buyWithBitcoin">Buy with Bitcoin or Lightning</span> <span aria-hidden="true">↓</span></a>
           <a class="lugano-trailer" href="https://youtu.be/IBqAaWS--Bg" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">▶</span> <span data-i18n="watchTrailer">Watch the trailer</span> ↗</a>
+        </div>
+        <div id="buy-game" class="lugano-buy" tabindex="-1" role="region" aria-labelledby="lugano-buy-title">
+          <h2 id="lugano-buy-title" data-lugano="downloadLabel">Full game for your computer</h2>
+          <div class="lugano-price"><strong data-btc-price aria-live="polite">— BTC</strong><span><span data-reference-usd></span> <span data-reference-eur></span></span></div>
+          <p class="lugano-fine" data-i18n="priceLockNote">Final price at checkout.</p>
+          <button type="button" class="pixel-button" data-checkout><span data-i18n="buyWithBitcoin">Buy with Bitcoin or Lightning</span></button>
+          <p class="lugano-fine" data-i18n="receiptNote">No account or email. Download after payment.</p>
+          <p data-checkout-status role="status" aria-live="polite"></p>
+          <noscript><p>Enable JavaScript to start Bitcoin or Lightning checkout. You can still <a data-demo-link href="https://demo.heroofbitcoin.xyz/?event=lugano">play the demo</a>.</p></noscript>
         </div>
       </div>
       <img class="lugano-art" src="/assets/lugano/hero-lugano.png" width="1499" height="1536" alt="Hero eating gelato beside Lake Lugano" data-lugano-alt="artAlt" fetchpriority="high" />
     </section>
     <section id="download-details" class="lugano-download-section" aria-labelledby="lugano-download-title">
-      <div class="lugano-download-info" data-reveal>
-        <p class="lugano-section-label" data-lugano="digitalTitle">Digital game</p>
-        <h2 id="lugano-download-title" data-lugano="downloadLabel">Full game for your computer</h2>
+      <div class="lugano-download-info">
+        <h2 id="lugano-download-title" data-lugano="digitalTitle">Digital game</h2>
         <div class="lugano-download-body">
           <img class="lugano-product-art" src="/assets/lugano/digital-download-pixel.png" width="256" height="256" alt="" loading="lazy" decoding="async" />
           <div>
@@ -62,20 +71,11 @@
           </div>
         </div>
       </div>
-      <div class="lugano-buy" data-reveal>
-        <p class="lugano-section-label" data-i18n="instantDownload">Instant download</p>
-        <div class="lugano-price"><strong data-btc-price aria-live="polite">— BTC</strong><span><span data-reference-usd></span> <span data-reference-eur></span></span></div>
-        <p class="lugano-fine" data-i18n="priceLockNote">Final price at checkout.</p>
-        <button type="button" class="pixel-button" data-checkout><span data-i18n="buyWithBitcoin">Buy with Bitcoin or Lightning</span></button>
-        <p class="lugano-fine" data-i18n="receiptNote">No account or email. Download after payment.</p>
-        <p data-checkout-status role="status" aria-live="polite"></p>
-        <noscript><p>For checkout, enable JavaScript or visit <a href="/digital/">the digital game page</a>.</p></noscript>
-      </div>
     </section>
     <section class="lugano-products" aria-label="Ways to play" data-lugano-aria="waysToPlay">
       <h2 class="lugano-products-title" data-lugano="waysToPlay">Ways to play</h2>
-      <article data-reveal><img class="lugano-product-art" src="/assets/lugano/handheld-pixel.png" width="256" height="256" alt="" loading="lazy" decoding="async" /><div><h3>Hero Handheld</h3><p data-lugano="handheldText">A handheld with the game ready to play.</p><a href="/#hero-handheld" data-language-link data-lugano="handheldLink">See the handheld →</a></div></article>
-      <article data-reveal><img class="lugano-product-art" src="/assets/lugano/box-game-pixel.png" width="256" height="256" alt="" loading="lazy" decoding="async" /><div><h3 data-lugano="cartridgeTitle">Game Boy cartridge</h3><p data-lugano="cartridgeText">A boxed cartridge for your Game Boy. Game in English.</p><a href="/#collectors-edition" data-language-link data-lugano="cartridgeLink">See the cartridge →</a></div></article>
+      <article><img class="lugano-product-art" src="/assets/lugano/handheld-pixel.png" width="256" height="256" alt="" loading="lazy" decoding="async" /><div><h3>Hero Handheld</h3><p data-lugano="handheldText">A handheld with the game ready to play.</p><a href="/#hero-handheld" data-language-link data-lugano="handheldLink">See the handheld →</a></div></article>
+      <article><img class="lugano-product-art" src="/assets/lugano/box-game-pixel.png" width="256" height="256" alt="" loading="lazy" decoding="async" /><div><h3 data-lugano="cartridgeTitle">Game Boy cartridge</h3><p data-lugano="cartridgeText">A boxed cartridge for your Game Boy. Game in English.</p><a href="/#collectors-edition" data-language-link data-lugano="cartridgeLink">See the cartridge →</a></div></article>
     </section>
   </main>
   <footer><p>©2022–2026 Hero of Bitcoin · <a href="https://planb.lugano.ch/planb-forum/" target="_blank" rel="noopener noreferrer">Plan ₿ Forum 2026 ↗</a></p><p data-i18n="legal">Game Boy is named only to describe compatibility. All trademarks belong to their owners.</p></footer>

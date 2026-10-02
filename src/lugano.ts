@@ -21,6 +21,11 @@ function applyEventCopy(): void {
     const key = node.dataset.luganoAria as keyof LuganoTranslation;
     if (key in copy) node.setAttribute('aria-label', copy[key]);
   });
+  document.querySelectorAll<HTMLAnchorElement>('[data-demo-link]').forEach((node) => {
+    const url = new URL(node.href);
+    url.searchParams.set('lang', language);
+    node.href = url.href;
+  });
   const date = copy.eventDate;
   const dateNode = document.querySelector('[data-event-date]');
   if (dateNode) dateNode.textContent = date;

@@ -14,8 +14,7 @@ const en = {
   cartridgeTitle: 'Game Boy cartridge',
   cartridgeText: 'A boxed cartridge for your Game Boy. Game in English.',
   cartridgeLink: 'See the cartridge →',
-  qrTitle: 'Keep playing after the demo.',
-  qrText: 'Scan to open this page on your phone.',
+  demoHint: 'Free · Play in your browser',
   artAlt: 'Hero eating gelato beside Lake Lugano',
 };
 export type LuganoTranslation = typeof en;
@@ -30,7 +29,7 @@ export const luganoTranslations: Record<Language, LuganoTranslation> = {
     digitalTitle: 'Gioco digitale', digitalLink: 'Dettagli del download →',
     handheldText: 'Una console portatile con il gioco pronto da giocare.', handheldLink: 'Scopri la console →',
     cartridgeTitle: 'Cartuccia Game Boy', cartridgeText: 'Una cartuccia con confezione per il tuo Game Boy. Gioco in inglese.', cartridgeLink: 'Scopri la cartuccia →',
-    qrTitle: 'Continua a giocare dopo la demo.', qrText: 'Scansiona il codice per aprire questa pagina sul telefono.',
+    demoHint: 'Gratis · Gioca nel browser',
     artAlt: 'Hero mangia un gelato in riva al lago di Lugano',
   },
   de: {
@@ -42,7 +41,7 @@ export const luganoTranslations: Record<Language, LuganoTranslation> = {
     digitalTitle: 'Digitales Spiel', digitalLink: 'Details zum Download →',
     handheldText: 'Eine Handheld-Konsole mit vorinstalliertem Spiel.', handheldLink: 'Handheld ansehen →',
     cartridgeTitle: 'Game-Boy-Modul', cartridgeText: 'Ein Spielmodul mit Verpackung für deinen Game Boy. Spiel auf Englisch.', cartridgeLink: 'Spielmodul ansehen →',
-    qrTitle: 'Nach der Demo weiterspielen.', qrText: 'Scanne den Code, um diese Seite auf deinem Handy zu öffnen.',
+    demoHint: 'Kostenlos · Direkt im Browser spielen',
     artAlt: 'Hero isst ein Eis am Luganersee',
   },
   es: {
@@ -54,7 +53,7 @@ export const luganoTranslations: Record<Language, LuganoTranslation> = {
     digitalTitle: 'Juego digital', digitalLink: 'Detalles de la descarga →',
     handheldText: 'Una consola portátil con el juego listo para jugar.', handheldLink: 'Ver la consola →',
     cartridgeTitle: 'Cartucho de Game Boy', cartridgeText: 'Un cartucho con caja para tu Game Boy. Juego en inglés.', cartridgeLink: 'Ver el cartucho →',
-    qrTitle: 'Sigue jugando después de la demo.', qrText: 'Escanea el código para abrir esta página en tu móvil.',
+    demoHint: 'Gratis · Juega en el navegador',
     artAlt: 'Hero comiendo un helado junto al lago de Lugano',
   },
   fr: {
@@ -66,7 +65,7 @@ export const luganoTranslations: Record<Language, LuganoTranslation> = {
     digitalTitle: 'Jeu numérique', digitalLink: 'Détails du téléchargement →',
     handheldText: 'Une console portable avec le jeu prêt à jouer.', handheldLink: 'Voir la console →',
     cartridgeTitle: 'Cartouche Game Boy', cartridgeText: 'Une cartouche en boîte pour votre Game Boy. Jeu en anglais.', cartridgeLink: 'Voir la cartouche →',
-    qrTitle: 'Continuez à jouer après la démo.', qrText: 'Scannez le code pour ouvrir cette page sur votre téléphone.',
+    demoHint: 'Gratuit · Jouez dans votre navigateur',
     artAlt: 'Hero mange une glace au bord du lac de Lugano',
   },
   nl: {
@@ -78,7 +77,7 @@ export const luganoTranslations: Record<Language, LuganoTranslation> = {
     digitalTitle: 'Digitaal spel', digitalLink: 'Downloadinformatie →',
     handheldText: 'Een handheld waarop het spel klaarstaat om te spelen.', handheldLink: 'Bekijk de handheld →',
     cartridgeTitle: 'Game Boy-cartridge', cartridgeText: 'Een cartridge in doos voor je Game Boy. Het spel is in het Engels.', cartridgeLink: 'Bekijk de cartridge →',
-    qrTitle: 'Speel verder na de demo.', qrText: 'Scan de code om deze pagina op je telefoon te openen.',
+    demoHint: 'Gratis · Speel in je browser',
     artAlt: 'Hero eet een ijsje aan het Meer van Lugano',
   },
   fi: {
@@ -90,7 +89,7 @@ export const luganoTranslations: Record<Language, LuganoTranslation> = {
     digitalTitle: 'Digitaalinen peli', digitalLink: 'Lisätietoja latauksesta →',
     handheldText: 'Käsikonsoli, jossa peli on valmiina pelattavaksi.', handheldLink: 'Tutustu käsikonsoliin →',
     cartridgeTitle: 'Game Boy -pelikasetti', cartridgeText: 'Pelikasetti pakkauksineen Game Boylle. Peli on englanninkielinen.', cartridgeLink: 'Tutustu pelikasettiin →',
-    qrTitle: 'Jatka pelaamista demon jälkeen.', qrText: 'Skannaa koodi ja avaa tämä sivu puhelimellasi.',
+    demoHint: 'Ilmainen · Pelaa selaimessa',
     artAlt: 'Hero syö jäätelöä Luganojärven rannalla',
   },
   ja: {
@@ -102,7 +101,7 @@ export const luganoTranslations: Record<Language, LuganoTranslation> = {
     digitalTitle: 'ダウンロード版', digitalLink: 'ダウンロードの詳細 →',
     handheldText: 'ゲームが入っていて、すぐに遊べる携帯ゲーム機。', handheldLink: '携帯ゲーム機を見る →',
     cartridgeTitle: 'ゲームボーイ用カートリッジ', cartridgeText: '箱付きのゲームボーイ用カートリッジ。ゲームの言語は英語です。', cartridgeLink: 'カートリッジを見る →',
-    qrTitle: '体験版の続きも楽しもう。', qrText: 'コードを読み取ると、スマートフォンでこのページを開けます。',
+    demoHint: '無料 · ブラウザーでプレイ',
     artAlt: 'ルガーノ湖のほとりでジェラートを食べるHero',
   },
   ko: {
@@ -114,7 +113,7 @@ export const luganoTranslations: Record<Language, LuganoTranslation> = {
     digitalTitle: '디지털 게임', digitalLink: '다운로드 정보 →',
     handheldText: '게임이 설치되어 바로 플레이할 수 있는 휴대용 게임기입니다.', handheldLink: '휴대용 게임기 보기 →',
     cartridgeTitle: '게임보이 카트리지', cartridgeText: '패키지가 포함된 게임보이용 카트리지입니다. 게임 언어는 영어입니다.', cartridgeLink: '카트리지 보기 →',
-    qrTitle: '데모를 즐겼다면 계속 플레이하세요.', qrText: '코드를 스캔해 휴대폰에서 이 페이지를 여세요.',
+    demoHint: '무료 · 브라우저에서 플레이',
     artAlt: '루가노 호숫가에서 젤라토를 먹는 Hero',
   },
 };

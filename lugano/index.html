@@ -33,7 +33,13 @@
         </div>
         <h1 id="lugano-title" data-lugano="heading">Hero goes to Lugano.</h1>
         <p class="lugano-intro" data-lugano="intro">A Bitcoin adventure made for Game Boy. Try the demo or get the full game for your computer.</p>
-        <p class="lugano-download" data-lugano="downloadLabel">Full game for your computer</p>
+        <a class="lugano-demo" data-demo-link href="https://demo.heroofbitcoin.xyz/?event=lugano">
+          <img src="/assets/images/scenes/airport_color.png" width="160" height="144" alt="" />
+          <span class="lugano-demo__copy"><strong data-i18n="playDemo">Play the demo</strong><span data-lugano="demoHint">Free · Play in your browser</span></span>
+          <span class="lugano-demo__play" aria-hidden="true">▶</span>
+        </a>
+        <a class="lugano-trailer" href="https://youtu.be/IBqAaWS--Bg" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">▶</span> <span data-i18n="watchTrailer">Watch the trailer</span> ↗</a>
+        <p id="download-details" class="lugano-download" data-lugano="downloadLabel">Full game for your computer</p>
         <div class="game-platforms" data-game-platforms="windows,macos,linux">
           <span><img src="/assets/platforms/windows.svg" width="28" height="28" alt="" />Windows<small>x86-64</small></span>
           <span><img src="/assets/platforms/macos.svg" width="28" height="28" alt="" />macOS<small>Apple Silicon</small></span>
@@ -43,18 +49,16 @@
         <div class="lugano-price"><strong data-btc-price aria-live="polite">— BTC</strong><span><span data-reference-usd></span> <span data-reference-eur></span></span></div>
         <p class="lugano-fine" data-i18n="priceLockNote">Final price at checkout.</p>
         <button type="button" class="pixel-button" data-checkout><span data-i18n="buyWithBitcoin">Buy with Bitcoin or Lightning</span></button>
-        <a class="lugano-demo" href="https://demo.heroofbitcoin.xyz/?event=lugano" data-i18n="playDemo">Play the demo</a>
         <p class="lugano-fine" data-i18n="receiptNote">No account or email. Download after payment.</p>
         <p data-checkout-status role="status" aria-live="polite"></p>
         <noscript><p>For checkout, enable JavaScript or visit <a href="/digital/">the digital game page</a>.</p></noscript>
       </div>
     </section>
     <section class="lugano-products" aria-label="Ways to play" data-lugano-aria="waysToPlay">
-      <div><h2 data-lugano="digitalTitle">Digital game</h2><p data-i18n="launcherFeatures">Choose your language and play offline with a keyboard or controller.</p><a href="/digital/" data-language-link data-lugano="digitalLink">Download details →</a></div>
-      <div><h2>Hero Handheld</h2><p data-lugano="handheldText">A handheld with the game ready to play.</p><a href="/#hero-handheld" data-language-link data-lugano="handheldLink">See the handheld →</a></div>
-      <div><h2 data-lugano="cartridgeTitle">Game Boy cartridge</h2><p data-lugano="cartridgeText">A boxed cartridge for your Game Boy. Game in English.</p><a href="/#collectors-edition" data-language-link data-lugano="cartridgeLink">See the cartridge →</a></div>
+      <div><img class="lugano-product-art" src="/assets/lugano/digital-download-pixel.png" width="128" height="128" alt="" loading="lazy" decoding="async" /><h2 data-lugano="digitalTitle">Digital game</h2><p data-i18n="launcherFeatures">Choose your language and play offline with a keyboard or controller.</p><a href="#download-details" data-language-link data-lugano="digitalLink">Download details →</a></div>
+      <div><img class="lugano-product-art" src="/assets/lugano/handheld-pixel.png" width="128" height="128" alt="" loading="lazy" decoding="async" /><h2>Hero Handheld</h2><p data-lugano="handheldText">A handheld with the game ready to play.</p><a href="/#hero-handheld" data-language-link data-lugano="handheldLink">See the handheld →</a></div>
+      <div><img class="lugano-product-art" src="/assets/lugano/box-game-pixel.png" width="128" height="128" alt="" loading="lazy" decoding="async" /><h2 data-lugano="cartridgeTitle">Game Boy cartridge</h2><p data-lugano="cartridgeText">A boxed cartridge for your Game Boy. Game in English.</p><a href="/#collectors-edition" data-language-link data-lugano="cartridgeLink">See the cartridge →</a></div>
     </section>
-    <aside class="lugano-scan"><img src="/assets/lugano/purchase-qr.svg" width="120" height="120" alt="QR: heroofbitcoin.xyz/lugano" loading="lazy" /><div><strong data-lugano="qrTitle">Keep playing after the demo.</strong><p data-lugano="qrText">Scan to open this page on your phone.</p><p><a href="https://heroofbitcoin.xyz/lugano">heroofbitcoin.xyz/lugano</a></p></div></aside>
   </main>
   <footer><p>©2022–2026 Hero of Bitcoin · <a href="https://planb.lugano.ch/planb-forum/" target="_blank" rel="noopener noreferrer">Plan ₿ Forum 2026 ↗</a></p><p data-i18n="legal">Game Boy is named only to describe compatibility. All trademarks belong to their owners.</p></footer>
 </body>

@@ -25,8 +25,7 @@
   </header>
   <main>
     <section class="lugano-offer" aria-labelledby="lugano-title">
-      <img class="lugano-art" src="/assets/lugano/hero-lugano.png" width="1500" height="1536" alt="Hero eating gelato beside Lake Lugano" data-lugano-alt="artAlt" fetchpriority="high" />
-      <div class="lugano-buy">
+      <div class="lugano-hero-copy">
         <div class="lugano-event">
           <a href="https://planb.lugano.ch/planb-forum/" target="_blank" rel="noopener noreferrer"><img src="/assets/lugano/planb-forum-2026.svg" width="240" height="58" alt="Plan ₿ Forum 2026" /></a>
           <p><span data-event-date>23–24 October 2026</span> · Lugano<br><a href="https://planb.lugano.ch/planb-forum/" target="_blank" rel="noopener noreferrer" data-lugano="eventLink">Official event website ↗</a></p>
@@ -38,14 +37,33 @@
           <span class="lugano-demo__copy"><strong data-i18n="playDemo">Play the demo</strong><span data-lugano="demoHint">Free · Play in your browser</span></span>
           <span class="lugano-demo__play" aria-hidden="true">▶</span>
         </a>
-        <a class="lugano-trailer" href="https://youtu.be/IBqAaWS--Bg" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">▶</span> <span data-i18n="watchTrailer">Watch the trailer</span> ↗</a>
-        <p id="download-details" class="lugano-download" data-lugano="downloadLabel">Full game for your computer</p>
-        <div class="game-platforms" data-game-platforms="windows,macos,linux">
-          <span><img src="/assets/platforms/windows.svg" width="28" height="28" alt="" />Windows<small>x86-64</small></span>
-          <span><img src="/assets/platforms/macos.svg" width="28" height="28" alt="" />macOS<small>Apple Silicon</small></span>
-          <span><img src="/assets/platforms/linux.svg" width="28" height="28" alt="" />Linux<small>x86-64</small></span>
+        <div class="lugano-hero-links">
+          <a class="lugano-download-link" href="#download-details" data-language-link><span data-lugano="downloadLabel">Full game for your computer</span> <span aria-hidden="true">↓</span></a>
+          <a class="lugano-trailer" href="https://youtu.be/IBqAaWS--Bg" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">▶</span> <span data-i18n="watchTrailer">Watch the trailer</span> ↗</a>
         </div>
-        <div class="lugano-languages" data-game-languages="en,nl,fi"><span data-i18n="gameLanguage">Game languages</span>: <strong>English · Nederlands · Suomi</strong></div>
+      </div>
+      <img class="lugano-art" src="/assets/lugano/hero-lugano.png" width="1499" height="1536" alt="Hero eating gelato beside Lake Lugano" data-lugano-alt="artAlt" fetchpriority="high" />
+    </section>
+    <section id="download-details" class="lugano-download-section" aria-labelledby="lugano-download-title">
+      <div class="lugano-download-info" data-reveal>
+        <p class="lugano-section-label" data-lugano="digitalTitle">Digital game</p>
+        <h2 id="lugano-download-title" data-lugano="downloadLabel">Full game for your computer</h2>
+        <div class="lugano-download-body">
+          <img class="lugano-product-art" src="/assets/lugano/digital-download-pixel.png" width="256" height="256" alt="" loading="lazy" decoding="async" />
+          <div>
+            <p data-i18n="launcherFeatures">Choose your language and play offline with a keyboard or controller.</p>
+            <div class="game-platforms" data-game-platforms="windows,macos,linux">
+              <span><img src="/assets/platforms/windows.svg" width="28" height="28" alt="" />Windows<small>x86-64</small></span>
+              <span><img src="/assets/platforms/macos.svg" width="28" height="28" alt="" />macOS<small>Apple Silicon</small></span>
+              <span><img src="/assets/platforms/linux.svg" width="28" height="28" alt="" />Linux<small>x86-64</small></span>
+            </div>
+            <div class="lugano-languages" data-game-languages="en,nl,fi"><span data-i18n="gameLanguage">Game languages</span>: <strong>English · Nederlands · Suomi</strong></div>
+            <p class="lugano-guide" data-i18n="pdfGuide">English PDF guide</p>
+          </div>
+        </div>
+      </div>
+      <div class="lugano-buy" data-reveal>
+        <p class="lugano-section-label" data-i18n="instantDownload">Instant download</p>
         <div class="lugano-price"><strong data-btc-price aria-live="polite">— BTC</strong><span><span data-reference-usd></span> <span data-reference-eur></span></span></div>
         <p class="lugano-fine" data-i18n="priceLockNote">Final price at checkout.</p>
         <button type="button" class="pixel-button" data-checkout><span data-i18n="buyWithBitcoin">Buy with Bitcoin or Lightning</span></button>
@@ -55,9 +73,9 @@
       </div>
     </section>
     <section class="lugano-products" aria-label="Ways to play" data-lugano-aria="waysToPlay">
-      <div><img class="lugano-product-art" src="/assets/lugano/digital-download-pixel.png" width="256" height="256" alt="" loading="lazy" decoding="async" /><h2 data-lugano="digitalTitle">Digital game</h2><p data-i18n="launcherFeatures">Choose your language and play offline with a keyboard or controller.</p><a href="#download-details" data-language-link data-lugano="digitalLink">Download details →</a></div>
-      <div><img class="lugano-product-art" src="/assets/lugano/handheld-pixel.png" width="256" height="256" alt="" loading="lazy" decoding="async" /><h2>Hero Handheld</h2><p data-lugano="handheldText">A handheld with the game ready to play.</p><a href="/#hero-handheld" data-language-link data-lugano="handheldLink">See the handheld →</a></div>
-      <div><img class="lugano-product-art" src="/assets/lugano/box-game-pixel.png" width="256" height="256" alt="" loading="lazy" decoding="async" /><h2 data-lugano="cartridgeTitle">Game Boy cartridge</h2><p data-lugano="cartridgeText">A boxed cartridge for your Game Boy. Game in English.</p><a href="/#collectors-edition" data-language-link data-lugano="cartridgeLink">See the cartridge →</a></div>
+      <h2 class="lugano-products-title" data-lugano="waysToPlay">Ways to play</h2>
+      <article data-reveal><img class="lugano-product-art" src="/assets/lugano/handheld-pixel.png" width="256" height="256" alt="" loading="lazy" decoding="async" /><div><h3>Hero Handheld</h3><p data-lugano="handheldText">A handheld with the game ready to play.</p><a href="/#hero-handheld" data-language-link data-lugano="handheldLink">See the handheld →</a></div></article>
+      <article data-reveal><img class="lugano-product-art" src="/assets/lugano/box-game-pixel.png" width="256" height="256" alt="" loading="lazy" decoding="async" /><div><h3 data-lugano="cartridgeTitle">Game Boy cartridge</h3><p data-lugano="cartridgeText">A boxed cartridge for your Game Boy. Game in English.</p><a href="/#collectors-edition" data-language-link data-lugano="cartridgeLink">See the cartridge →</a></div></article>
     </section>
   </main>
   <footer><p>©2022–2026 Hero of Bitcoin · <a href="https://planb.lugano.ch/planb-forum/" target="_blank" rel="noopener noreferrer">Plan ₿ Forum 2026 ↗</a></p><p data-i18n="legal">Game Boy is named only to describe compatibility. All trademarks belong to their owners.</p></footer>

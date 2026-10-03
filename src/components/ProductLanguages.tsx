@@ -1,12 +1,7 @@
 import { FlagIcon } from './LanguageSwitcher';
 
-export type GameLanguage = 'en' | 'nl' | 'fi';
-
-const names: Record<GameLanguage, string> = {
-  en: 'English',
-  nl: 'Nederlands',
-  fi: 'Suomi',
-};
+import { gameLanguageName, type GameLanguage } from '../data/game-languages';
+export type { GameLanguage } from '../data/game-languages';
 
 export default function ProductLanguages({ languages }: { languages: readonly GameLanguage[] }) {
   return (
@@ -16,7 +11,7 @@ export default function ProductLanguages({ languages }: { languages: readonly Ga
           <span className="inline-block h-4 w-5 shrink-0 overflow-hidden border border-black/30" aria-hidden="true">
             <FlagIcon lang={language} />
           </span>
-          <span lang={language}>{names[language]}</span>
+          <span lang={language}>{gameLanguageName(language)}</span>
         </li>
       ))}
     </ul>

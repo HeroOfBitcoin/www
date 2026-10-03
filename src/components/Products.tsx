@@ -1,3 +1,4 @@
+import { DIGITAL_GAME_LANGUAGES } from '../data/game-languages';
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import PixelCard from './ui/PixelCard';
 import GameDownloadInfo from './GameDownloadInfo';
@@ -486,7 +487,7 @@ const Products: React.FC = () => {
             <div className="mb-6 max-w-[32rem] space-y-3 border-l-4 border-yellow-300 bg-white/10 px-3 py-3">
               <div>
                 <p className="mb-1 font-mono text-xs text-neutral-200">{digitalCopy.gameLanguage}</p>
-                <ProductLanguages languages={['en', 'nl', 'fi']} />
+                <ProductLanguages languages={DIGITAL_GAME_LANGUAGES} />
               </div>
               <div>
                 <p className="mb-1 font-mono text-xs text-neutral-200">{digitalCopy.physicalLanguage}</p>

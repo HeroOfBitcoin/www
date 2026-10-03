@@ -2,7 +2,7 @@ import type { Language } from './locales';
 
 const englishDigitalTranslation = {
   pageTitle: 'Hero of Bitcoin Digital | Game Boy-Compatible Bitcoin Game',
-  pageDescription: 'Hero of Bitcoin is a Game Boy-compatible adventure in El Salvador. Play in English, Dutch or Finnish on Windows, macOS or Linux. English PDF guide included. Pay with Bitcoin or Lightning.',
+  pageDescription: 'Hero of Bitcoin is a Game Boy-compatible adventure in El Salvador. Play in English, Dutch, Finnish or Italian (Beta) on Windows, macOS or Linux. English PDF guide included. Pay with Bitcoin or Lightning.',
   languageLabel: 'Language',
   headerEdition: 'Digital download',
   heroAudience: 'Game Boy-compatible adventure',
@@ -47,7 +47,7 @@ export const digitalTranslations = {
   en: englishDigitalTranslation,
   es: {
     pageTitle: 'Hero of Bitcoin Digital | Juego Bitcoin compatible con Game Boy',
-    pageDescription: 'Hero of Bitcoin es una aventura compatible con Game Boy ambientada en El Salvador. Juega en inglés, neerlandés o finés en Windows, macOS o Linux. Incluye una guía PDF en inglés. Paga con Bitcoin o Lightning.',
+    pageDescription: 'Hero of Bitcoin es una aventura compatible con Game Boy ambientada en El Salvador. Juega en inglés, neerlandés, finés o italiano (Beta) en Windows, macOS o Linux. Incluye una guía PDF en inglés. Paga con Bitcoin o Lightning.',
     languageLabel: 'Idioma',
     headerEdition: 'Descarga digital',
     heroAudience: 'Aventura compatible con Game Boy',
@@ -85,7 +85,7 @@ export const digitalTranslations = {
   },
   it: {
     pageTitle: 'Hero of Bitcoin Digital | Gioco Bitcoin compatibile con Game Boy',
-    pageDescription: 'Hero of Bitcoin è un’avventura compatibile con Game Boy ambientata in El Salvador. Gioca in inglese, olandese o finlandese su Windows, macOS o Linux. Guida PDF in inglese inclusa. Paga con Bitcoin o Lightning.',
+    pageDescription: 'Hero of Bitcoin è un’avventura compatibile con Game Boy ambientata in El Salvador. Gioca in inglese, olandese, finlandese o italiano (Beta) su Windows, macOS o Linux. Guida PDF in inglese inclusa. Paga con Bitcoin o Lightning.',
     languageLabel: 'Lingua',
     headerEdition: 'Download digitale',
     heroAudience: 'Avventura compatibile con Game Boy',
@@ -123,7 +123,7 @@ export const digitalTranslations = {
   },
   ja: {
     pageTitle: 'Hero of Bitcoin Digital | Game Boy互換Bitcoinゲーム',
-    pageDescription: 'Hero of Bitcoinは、エルサルバドルを舞台にしたGame Boy互換アドベンチャーです。Windows、macOS、Linuxで英語・オランダ語・フィンランド語を選べます。英語版PDFガイドを同梱。BitcoinまたはLightningで購入できます。',
+    pageDescription: 'Hero of Bitcoinは、エルサルバドルを舞台にしたGame Boy互換アドベンチャーです。Windows、macOS、Linuxで英語・オランダ語・フィンランド語・イタリア語（Beta）を選べます。英語版PDFガイドを同梱。BitcoinまたはLightningで購入できます。',
     languageLabel: '言語',
     headerEdition: 'デジタルダウンロード',
     heroAudience: 'Game Boy互換アドベンチャー',
@@ -161,7 +161,7 @@ export const digitalTranslations = {
   },
   de: {
     pageTitle: 'Hero of Bitcoin Digital | Game-Boy-kompatibles Bitcoin-Spiel',
-    pageDescription: 'Hero of Bitcoin ist ein Game-Boy-kompatibles Abenteuer in El Salvador. Spiele auf Windows, macOS oder Linux auf Englisch, Niederländisch oder Finnisch. Englische PDF-Anleitung inklusive. Bezahle mit Bitcoin oder Lightning.',
+    pageDescription: 'Hero of Bitcoin ist ein Game-Boy-kompatibles Abenteuer in El Salvador. Spiele auf Windows, macOS oder Linux auf Englisch, Niederländisch, Finnisch oder Italienisch (Beta). Englische PDF-Anleitung inklusive. Bezahle mit Bitcoin oder Lightning.',
     languageLabel: 'Sprache',
     headerEdition: 'Digitaler Download',
     heroAudience: 'Game-Boy-kompatibles Abenteuer',
@@ -199,7 +199,7 @@ export const digitalTranslations = {
   },
   ko: {
     pageTitle: 'Hero of Bitcoin Digital | Game Boy 호환 비트코인 게임',
-    pageDescription: 'Hero of Bitcoin은 엘살바도르를 배경으로 한 Game Boy 호환 어드벤처입니다. Windows, macOS, Linux에서 영어, 네덜란드어, 핀란드어로 플레이할 수 있습니다. 영어 PDF 가이드가 포함됩니다. 비트코인 또는 라이트닝으로 결제하세요.',
+    pageDescription: 'Hero of Bitcoin은 엘살바도르를 배경으로 한 Game Boy 호환 어드벤처입니다. Windows, macOS, Linux에서 영어, 네덜란드어, 핀란드어, 이탈리아어(Beta)로 플레이할 수 있습니다. 영어 PDF 가이드가 포함됩니다. 비트코인 또는 라이트닝으로 결제하세요.',
     languageLabel: '언어',
     headerEdition: '디지털 다운로드',
     heroAudience: 'Game Boy 호환 어드벤처',
@@ -237,7 +237,7 @@ export const digitalTranslations = {
   },
   fr: {
     pageTitle: 'Hero of Bitcoin Digital | Jeu Bitcoin compatible avec la Game Boy',
-    pageDescription: 'Hero of Bitcoin est une aventure compatible Game Boy au Salvador. Jouez en anglais, néerlandais ou finnois sur Windows, macOS ou Linux. Guide PDF en anglais inclus. Payez en Bitcoin ou via Lightning.',
+    pageDescription: 'Hero of Bitcoin est une aventure compatible Game Boy au Salvador. Jouez en anglais, néerlandais, finnois ou italien (Beta) sur Windows, macOS ou Linux. Guide PDF en anglais inclus. Payez en Bitcoin ou via Lightning.',
     languageLabel: 'Langue',
     headerEdition: 'Téléchargement numérique',
     heroAudience: 'Aventure compatible avec la Game Boy',
@@ -275,7 +275,7 @@ export const digitalTranslations = {
   },
   nl: {
     pageTitle: 'Hero of Bitcoin Digital | Game Boy-compatibele Bitcoin-game',
-    pageDescription: 'Hero of Bitcoin is een Game Boy-compatibel avontuur in El Salvador. Speel in het Engels, Nederlands of Fins op Windows, macOS of Linux. Engelse pdf-gids inbegrepen. Betaal met Bitcoin of Lightning.',
+    pageDescription: 'Hero of Bitcoin is een Game Boy-compatibel avontuur in El Salvador. Speel in het Engels, Nederlands, Fins of Italiaans (Beta) op Windows, macOS of Linux. Engelse pdf-gids inbegrepen. Betaal met Bitcoin of Lightning.',
     languageLabel: 'Taal',
     headerEdition: 'Digitale download',
     heroAudience: 'Game Boy-compatibel avontuur',
@@ -313,7 +313,7 @@ export const digitalTranslations = {
   },
   fi: {
     pageTitle: 'Hero of Bitcoin Digital | Game Boy -yhteensopiva Bitcoin-peli',
-    pageDescription: 'Hero of Bitcoin on El Salvadoriin sijoittuva Game Boy -yhteensopiva seikkailu. Pelaa englanniksi, hollanniksi tai suomeksi Windowsilla, macOS:llä tai Linuxilla. Mukana englanninkielinen PDF-opas. Maksa Bitcoinilla tai Lightningilla.',
+    pageDescription: 'Hero of Bitcoin on El Salvadoriin sijoittuva Game Boy -yhteensopiva seikkailu. Pelaa englanniksi, hollanniksi, suomeksi tai italiaksi (Beta) Windowsilla, macOS:llä tai Linuxilla. Mukana englanninkielinen PDF-opas. Maksa Bitcoinilla tai Lightningilla.',
     languageLabel: 'Kieli',
     headerEdition: 'Digitaalinen lataus',
     heroAudience: 'Game Boy -yhteensopiva seikkailu',

@@ -1,3 +1,4 @@
+import { DIGITAL_GAME_LANGUAGES } from '../data/game-languages';
 import { digitalTranslations } from '../i18n/digital-translations';
 import type { Language } from '../i18n/locales';
 import GamePlatforms from './GamePlatforms';
@@ -11,7 +12,7 @@ export default function GameDownloadInfo({ language, compact = false }: { langua
       <GamePlatforms />
       {!compact && <p className="game-download-info__features">{copy.launcherFeatures}</p>}
       <p className="game-download-info__label">{copy.gameLanguage}</p>
-      <ProductLanguages languages={['en', 'nl', 'fi']} />
+      <ProductLanguages languages={DIGITAL_GAME_LANGUAGES} />
       {!compact && <p className="game-download-info__guide">{copy.pdfGuide}</p>}
     </div>
   );

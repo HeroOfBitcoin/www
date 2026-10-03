@@ -14,7 +14,7 @@ export const products: Product[] = [
   {
     id: 'instant-download',
     title: 'Hero of Bitcoin - Digital Game Download',
-    description: 'Download Hero of Bitcoin for Windows (x86-64), macOS (Apple Silicon) and Linux (x86-64). Play in English, Dutch or Finnish. English PDF quick-start guide included. Pay with Bitcoin or Lightning. No email required.',
+    description: 'Download Hero of Bitcoin for Windows (x86-64), macOS (Apple Silicon) and Linux (x86-64). Play in English, Dutch, Finnish or Italian (Beta). English PDF quick-start guide included. Pay with Bitcoin or Lightning. No email required.',
     pubDate: '2024-01-01',
     path: '/digital/',
     availability: 'available',
@@ -22,7 +22,7 @@ export const products: Product[] = [
   {
     id: 'collectors-edition',
     title: "Collector's Edition - Physical Game Boy Cartridge",
-    description: 'Limited to ~450 units. Playable on original hardware. Includes box, manual, orange Game Boy cartridge, sticker, and protective box cover. Compatible with Game Boy, GBC, GBA, and Analogue Pocket. Digital game included for Windows (x86-64), macOS (Apple Silicon) and Linux (x86-64), in English, Dutch and Finnish.',
+    description: 'Limited to ~450 units. Playable on original hardware. Includes box, manual, orange Game Boy cartridge, sticker, and protective box cover. Compatible with Game Boy, GBC, GBA, and Analogue Pocket. Digital game included for Windows (x86-64), macOS (Apple Silicon) and Linux (x86-64), in English, Dutch, Finnish and Italian (Beta).',
     pubDate: '2024-01-01',
     availability: 'limited',
     limitedQuantity: 450,
@@ -30,7 +30,7 @@ export const products: Product[] = [
   {
     id: 'digital-edition',
     title: 'Digital Edition - Boxed microSD Bundle',
-    description: 'Physical boxed edition for emulator players. Includes box, manual, microSD with the game ROM, decorative cartridge collectible, sticker, and protective box cover. Digital game included for Windows (x86-64), macOS (Apple Silicon) and Linux (x86-64), in English, Dutch and Finnish.',
+    description: 'Physical boxed edition for emulator players. Includes box, manual, microSD with the game ROM, decorative cartridge collectible, sticker, and protective box cover. Digital game included for Windows (x86-64), macOS (Apple Silicon) and Linux (x86-64), in English, Dutch, Finnish and Italian (Beta).',
     pubDate: '2024-01-01',
     availability: 'available',
   },
@@ -44,7 +44,7 @@ export const products: Product[] = [
   {
     id: 'stackchain-magazine',
     title: 'Stackchain Magazine - Limited Edition Bundle',
-    description: 'Limited to 30 prints. Includes Stackchain Magazine Round 5, fine art print with alternative Hero of Bitcoin cover, premium protective toploader, and Hero of Bitcoin digital game for Windows (x86-64), macOS (Apple Silicon) and Linux (x86-64), in English, Dutch and Finnish.',
+    description: 'Limited to 30 prints. Includes Stackchain Magazine Round 5, fine art print with alternative Hero of Bitcoin cover, premium protective toploader, and Hero of Bitcoin digital game for Windows (x86-64), macOS (Apple Silicon) and Linux (x86-64), in English, Dutch, Finnish and Italian (Beta).',
     pubDate: '2024-12-17',
     availability: 'limited',
     limitedQuantity: 30,
@@ -52,7 +52,7 @@ export const products: Product[] = [
   {
     id: 'graded-copy',
     title: 'Hero of Bitcoin Geyser Release: CGC 9.9',
-    description: 'A team-verified CGC 9.9 Geyser Release collector copy with NFC authenticity certificate, including the digital game for Windows (x86-64), macOS (Apple Silicon) and Linux (x86-64). Play in English, Dutch or Finnish. One direct Bitcoin or Lightning invoice includes selected shipping.',
+    description: 'A team-verified CGC 9.9 Geyser Release collector copy with NFC authenticity certificate, including the digital game for Windows (x86-64), macOS (Apple Silicon) and Linux (x86-64). Play in English, Dutch, Finnish or Italian (Beta). One direct Bitcoin or Lightning invoice includes selected shipping.',
     pubDate: '2026-07-23',
     availability: 'limited',
     limitedQuantity: 1,

@@ -20,7 +20,7 @@ test('Lugano copy covers each site language and every event-specific element', a
 test('Lugano keeps the print URL, approved game languages and official event links', async () => {
   const html = await readFile(new URL('../dist/lugano/index.html', import.meta.url), 'utf8');
   assert.match(html, /rel="canonical" href="https:\/\/heroofbitcoin\.xyz\/lugano\/"/);
-  assert.match(html, /data-game-languages="en,nl,fi"/);
+  assert.match(html, /data-game-languages="en,nl,fi,it"/);
   assert.match(html, /https:\/\/demo\.heroofbitcoin\.xyz\/\?event=lugano/);
   assert.match(html, /href="\/#hero-handheld"/);
   assert.match(html, /href="\/#collectors-edition"/);

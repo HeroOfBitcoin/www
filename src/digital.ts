@@ -1,3 +1,4 @@
+import { createClaimControls } from './claim';
 import { DIGITAL_GAME_LANGUAGES, gameLanguageName } from './data/game-languages';
 import './styles/digital.css';
 import './styles/game-languages.css';
@@ -62,6 +63,7 @@ let currentProductPrice: ProductPrice | null = null;
 let fastRates: BtcRates | null = null;
 let hasServerBtcPrice = false;
 let activeReviewIndex = 0;
+const claimControls = createClaimControls(apiBaseUrl, () => currentLanguage);
 
 function applyClaimCodeFromUrl(): void {
   const claimCode = new URL(window.location.href).searchParams.get('claim')?.trim().toUpperCase();
@@ -196,6 +198,7 @@ function applyLanguage(language: Language): void {
   window.history.replaceState({}, '', url);
   setStatus('');
   renderPrice();
+  claimControls.render();
 }
 
 function setStatus(message: string, isError = false): void {
@@ -323,17 +326,26 @@ const checkoutController = new CheckoutController({
   setStatus,
 });
 
+let startingCheckout = false;
 async function startCheckout(): Promise<void> {
-  const copy = digitalTranslations[currentLanguage];
-  await checkoutController.start({
-    language: currentLanguage,
-    couponCode: discountCodeInput?.value ?? '',
-    copy: {
-      creating: copy.checkoutCreating,
-      invalidDiscount: copy.checkoutInvalidDiscount,
-      unavailable: copy.checkoutUnavailable,
-    },
-  });
+  if (startingCheckout) return;
+  startingCheckout = true;
+  try {
+    if (!await claimControls.refresh()) return;
+    const copy = digitalTranslations[currentLanguage];
+    const succeeded = await checkoutController.start({
+      language: currentLanguage,
+      couponCode: discountCodeInput?.value ?? '',
+      copy: {
+        creating: copy.checkoutCreating,
+        invalidDiscount: copy.checkoutInvalidDiscount,
+        unavailable: copy.checkoutUnavailable,
+      },
+    });
+    if (!succeeded) await claimControls.refresh();
+  } finally {
+    startingCheckout = false;
+  }
 }
 
 if (languagePicker) {
@@ -360,11 +372,14 @@ discountCodeInput?.addEventListener('keydown', (event) => {
 });
 discountCodeInput?.addEventListener('input', () => {
   discountCodeInput.value = normalizeCouponCodeEntry(discountCodeInput.value);
+  applyLanguage(currentLanguage);
 });
+discountCodeInput?.addEventListener('change', () => void claimControls.refresh());
 
 window.addEventListener('pageshow', (event) => {
   if (event.persisted) {
     checkoutController.reset();
+    void claimControls.refresh();
   }
 });
 
@@ -393,6 +408,7 @@ for (const node of document.querySelectorAll<HTMLElement>('[data-game-languages]
 
 applyClaimCodeFromUrl();
 applyLanguage(resolveLanguage());
+void claimControls.refresh();
 showReview(activeReviewIndex, false);
 
 const revealNodes = document.querySelectorAll<HTMLElement>('[data-reveal]');

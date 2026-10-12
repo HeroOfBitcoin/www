@@ -1,0 +1,7 @@
+/* Claim prices are replaced only after server validation; hidden must win over layout CSS. */
+html[data-claim='true'] [hidden] { display: none !important; }
+.claim-info { margin: 0 0 1rem; color: #fff4d1; line-height: 1.55; }
+.claim-info[hidden] { display: none; }
+.claim-info p { margin: 0.5rem 0; }
+.claim-info a { color: #ffd86a; }
+.claim-info a:focus-visible { outline: 3px solid #fff4d1; outline-offset: 3px; }

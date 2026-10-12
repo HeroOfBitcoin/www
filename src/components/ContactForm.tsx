@@ -436,6 +436,7 @@ const ContactForm: React.FC = () => {
 
   return (
     <form
+      id="support"
       onSubmit={handleSubmit}
       className="relative mx-auto mb-4 max-w-xl border-2 border-black bg-white p-4 text-left"
     >

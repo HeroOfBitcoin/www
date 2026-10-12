@@ -48,6 +48,10 @@
           <h2 id="lugano-buy-title" data-lugano="downloadLabel">Full game for your computer</h2>
           <div class="lugano-price"><strong data-btc-price aria-live="polite">— BTC</strong><span><span data-reference-usd></span> <span data-reference-eur></span></span></div>
           <p class="lugano-fine" data-i18n="priceLockNote">Final price at checkout.</p>
+          <details class="offer__discount" data-discount>
+            <summary data-i18n="discountToggle">Discount or claim code?</summary>
+            <input type="text" maxlength="64" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Discount or claim code" data-i18n-aria="discountCode" placeholder="Enter code" data-i18n-placeholder="discountPlaceholder" data-discount-code />
+          </details>
           <button type="button" class="pixel-button" data-checkout><span data-i18n="buyWithBitcoin">Buy with Bitcoin or Lightning</span></button>
           <p class="lugano-fine" data-i18n="receiptNote">No account or email. Download after payment.</p>
           <p data-checkout-status role="status" aria-live="polite"></p>

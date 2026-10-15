@@ -6,5 +6,5 @@ const names: Record<GameLanguage, string> = {
   en: 'English', nl: 'Nederlands', fi: 'Suomi', it: 'Italiano',
 };
 export function gameLanguageName(language: GameLanguage): string {
-  return names[language] + (BETA_GAME_LANGUAGES.includes(language) ? ' (Beta)' : '');
+  return names[language];
 }

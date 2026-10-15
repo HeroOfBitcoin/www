@@ -87,8 +87,8 @@ launcher platforms and language selection do not describe handheld support.
 The digital game includes Windows (x86-64), macOS (Apple Silicon) and Linux
 (x86-64) applications. The launcher selects the game language, configures a
 controller and starts the included game offline. Game languages are English,
-Dutch and Finnish. The English PDF guide is included, as is an extra English ROM
-in the ZIP. Physical game editions remain English; the nine website interface
+Dutch, Finnish and Italian (Beta). The English PDF guide is included, as is an
+extra English ROM in the ZIP. Physical game editions remain English; the nine website interface
 languages do not imply nine languages in the customer download.
 
 `GameDownloadInfo` and `GamePlatforms` present these facts on the homepage,
@@ -116,6 +116,8 @@ does not issue codes or change payment or fulfillment rules.
 | Success page | `https://heroofbitcoin.xyz/success.html` |
 
 Localized URLs work with `?lang=de`, `?lang=es`, `?lang=fr`, or `?lang=ko`.
+The support form is linked directly with `/?lang=en#support`; the page positions
+the form after rendering and after its images and fonts finish loading.
 
 ## High-Signal Files
 
@@ -252,6 +254,6 @@ in `public/assets/lugano/README.md`.
 `src/lugano.ts` uses the existing digital checkout and pricing controller.
 Event copy lives in `src/i18n/lugano-translations.ts`, covering the nine site
 languages; product links preserve the selected language. Page language is
-separate from game availability: the desktop download lists EN/NL/FI and exact
-OS architectures, while the cartridge is English and handheld details link
+separate from game availability: the desktop download lists EN/NL/FI and IT
+(Beta), with exact OS architectures, while the cartridge is English and handheld details link
 to the separate product. The page makes no sponsorship or endorsement claim.

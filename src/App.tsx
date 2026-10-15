@@ -58,6 +58,7 @@ const App: React.FC = () => {
 
   const hashToTab: Record<string, Tab> = {
     '': Tab.GAME,
+    'support': Tab.GAME,
     'products': Tab.PRODUCTS,
     'partners': Tab.PARTNERS,
     'instant-download': Tab.PRODUCTS,
@@ -75,12 +76,23 @@ const App: React.FC = () => {
       const tab = hashToTab[hash];
       if (tab !== undefined) {
         setActiveTab(tab);
-        // Scroll to specific product element after a short delay
+        // Scroll to the requested product or support form after rendering
         if (hash && hash !== 'products' && hash !== 'partners') {
           setTimeout(() => {
-            const element = document.getElementById(hash);
-            if (element) {
-              element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const scrollToAnchor = () => {
+              if (window.location.hash.slice(1) !== hash) return;
+              document.getElementById(hash)?.scrollIntoView({
+                behavior: hash === 'support' ? 'instant' : 'smooth',
+                block: 'start',
+              });
+            };
+            scrollToAnchor();
+            if (hash === 'support') {
+              // React can insert images after window.load; wait for the actual layout inputs.
+              void Promise.all([
+                document.fonts.ready,
+                ...Array.from(document.images, image => image.decode().catch(() => undefined)),
+              ]).then(scrollToAnchor);
             }
           }, 100);
         }

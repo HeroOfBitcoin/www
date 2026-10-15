@@ -1,6 +1,7 @@
 import { FlagIcon } from './LanguageSwitcher';
 
-import { gameLanguageName, type GameLanguage } from '../data/game-languages';
+import { BETA_GAME_LANGUAGES, gameLanguageName, type GameLanguage } from '../data/game-languages';
+import '../styles/game-languages.css';
 export type { GameLanguage } from '../data/game-languages';
 
 export default function ProductLanguages({ languages }: { languages: readonly GameLanguage[] }) {
@@ -11,7 +12,10 @@ export default function ProductLanguages({ languages }: { languages: readonly Ga
           <span className="inline-block h-4 w-5 shrink-0 overflow-hidden border border-black/30" aria-hidden="true">
             <FlagIcon lang={language} />
           </span>
-          <span lang={language}>{gameLanguageName(language)}</span>
+          <span lang={language}>
+            {gameLanguageName(language)}
+            {BETA_GAME_LANGUAGES.includes(language) && <> <small className="game-language-beta">BETA</small></>}
+          </span>
         </li>
       ))}
     </ul>

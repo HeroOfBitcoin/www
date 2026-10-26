@@ -1,4 +1,4 @@
 {
-  "digitalRedirectEnabled": true,
+  "digitalRedirectEnabled": false,
   "digitalRedirectTarget": "/lugano/"
 }

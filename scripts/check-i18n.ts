@@ -2,6 +2,7 @@ import { SUPPORTED_LANGUAGES, type Language } from '../src/i18n/locales';
 import { certificateTranslations } from '../src/i18n/certificate-translations';
 import { digitalTranslations } from '../src/i18n/digital-translations';
 import { downloadLinkTranslations } from '../src/i18n/download-link-translations';
+import { orderReferenceTranslations } from '../src/i18n/order-reference-translations';
 import { translations } from '../src/i18n/translations';
 
 type TranslationNode = string | readonly TranslationNode[] | { readonly [key: string]: TranslationNode };
@@ -89,6 +90,13 @@ for (const language of SUPPORTED_LANGUAGES) {
 }
 
 const certificateCatalogs = certificateTranslations as unknown as Record<Language, TranslationNode>;
+const orderReferenceCatalogs = orderReferenceTranslations as Record<Language, TranslationNode>;
+if (Object.keys(orderReferenceCatalogs).sort().join('|') !== supportedLanguages.join('|')) {
+  fail('order-reference catalog languages differ from supported languages');
+}
+for (const language of SUPPORTED_LANGUAGES) {
+  compareNode(`orderReference.${language}`, orderReferenceCatalogs.en, orderReferenceCatalogs[language]);
+}
 const downloadLinkCatalogs = downloadLinkTranslations as unknown as Record<Language, TranslationNode>;
 if (Object.keys(downloadLinkCatalogs).sort().join('|') !== supportedLanguages.join('|')) {
   fail('download-link catalog languages differ from supported languages');
@@ -145,4 +153,4 @@ for (const language of ['it', 'nl', 'fi'] as const) {
   }
 }
 
-console.log(`✓ ${SUPPORTED_LANGUAGES.length} site, digital, download-link, and certificate locale catalogs have matching keys, arrays, and placeholders`);
+console.log(`✓ ${SUPPORTED_LANGUAGES.length} site, digital, download-link, order-reference, and certificate locale catalogs have matching keys, arrays, and placeholders`);

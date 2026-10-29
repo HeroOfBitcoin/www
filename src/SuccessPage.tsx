@@ -4,6 +4,7 @@ import { ArrowLeft, Download, LoaderCircle, RefreshCcw } from 'lucide-react';
 import PixelCard from './components/ui/PixelCard';
 import GameDownloadInfo from './components/GameDownloadInfo';
 import DownloadLinkActions from './components/DownloadLinkActions';
+import CopyOrderReference from './components/CopyOrderReference';
 import { downloadLinkTranslations } from './i18n/download-link-translations';
 import { translations, type Language } from './i18n/translations';
 import { resolveLanguage, rememberLanguage, LOCALE_BY_LANGUAGE } from './i18n/locales';
@@ -470,7 +471,7 @@ const SuccessPage: React.FC = () => {
                         <dl className="space-y-2 text-sm font-mono text-gray-700">
                           <div>
                             <dt className="font-bold">{checkoutText.orderId}</dt>
-                            <dd className="break-all">{order.order_id}</dd>
+                            <dd><CopyOrderReference reference={order.order_id} language={language} /></dd>
                           </div>
                           <div>
                             <dt className="font-bold">{checkoutText.product}</dt>

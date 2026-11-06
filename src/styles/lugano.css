@@ -63,8 +63,6 @@ body.lugano .lugano-hero-copy h1 { font-family: inherit; font-size: clamp(2rem, 
 .lugano .game-platforms>span { display: grid; grid-template-columns: 28px minmax(0, 1fr); column-gap: .5rem; min-width: 0; font-size: 1rem; }
 .lugano .game-platforms img { grid-row: span 2; }
 .lugano .game-platforms small { font-size: .875rem; opacity: 1; color: #3e596b; }
-.lugano-languages { font-size: 1rem; margin: 1rem 0; }
-.lugano-languages strong { display: block; font-weight: 600; }
 .lugano-download-body .lugano-guide { font-size: 1rem; margin: 0; }
 .lugano-products { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 3rem; padding: 2.5rem 5vw; background: #fff6e6; color: #08283c; border-top: 1px solid #08283c30; }
 .lugano-products-title { grid-column: 1 / -1; font-size: 1.5rem; line-height: 1.3; margin: 0; }

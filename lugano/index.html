@@ -72,7 +72,15 @@
               <span><img src="/assets/platforms/macos.svg" width="28" height="28" alt="" />macOS<small>Apple Silicon</small></span>
               <span><img src="/assets/platforms/linux.svg" width="28" height="28" alt="" />Linux<small>x86-64</small></span>
             </div>
-            <div class="lugano-languages" data-game-languages="en,nl,fi,it"><span data-i18n="gameLanguage">Game languages</span>: <strong>English · Nederlands · Suomi · <span lang="it">Italiano <small class="game-language-beta">BETA</small></span></strong></div>
+            <div class="game-language-group" data-game-languages="en,nl,fi,it">
+              <p class="game-language-group__label" id="game-languages-label" data-i18n="gameLanguage">Game languages</p>
+              <ul class="game-language-list" role="list" aria-labelledby="game-languages-label">
+                <li><img src="/assets/flags/en.svg" width="20" height="15" alt="" /><span lang="en">English</span></li>
+                <li><img src="/assets/flags/nl.svg" width="20" height="15" alt="" /><span lang="nl">Nederlands</span></li>
+                <li><img src="/assets/flags/fi.svg" width="20" height="15" alt="" /><span lang="fi">Suomi</span></li>
+                <li><img src="/assets/flags/it.svg" width="20" height="15" alt="" /><span lang="it">Italiano</span> <small class="game-language-beta">Beta</small></li>
+              </ul>
+            </div>
             <p class="lugano-guide" data-i18n="pdfGuide">English PDF guide</p>
           </div>
         </div>

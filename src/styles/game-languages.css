@@ -1,6 +1,50 @@
-.game-languages { margin-top: 1rem; color: #fdffe1; font-size: 0.84rem; }
-.game-languages p { margin: 0 0 0.5rem; font-size: 0.75rem; opacity: 0.85; }
-.game-languages ul { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin: 0; padding: 0; list-style: none; }
-.game-languages li { display: inline-flex; align-items: center; gap: 0.4rem; white-space: nowrap; }
-.game-languages img { border: 1px solid #ffffff60; }
-.game-language-beta { font-size: 0.625rem; font-weight: 400; letter-spacing: 0.04em; vertical-align: super; }
+.game-language-group {
+  display: grid;
+  gap: .5rem;
+  margin-block: 1rem;
+}
+.game-language-group > .game-language-group__label {
+  margin: 0;
+  color: inherit;
+  font: 700 .75rem/1.35 system-ui, sans-serif;
+  letter-spacing: .075em;
+  text-transform: uppercase;
+}
+.game-language-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: inherit;
+}
+.game-language-list > li {
+  display: inline-flex;
+  align-items: center;
+  gap: .42rem;
+  min-width: 0;
+  max-width: 100%;
+  padding: .38rem .55rem;
+  border: 1px solid color-mix(in srgb, currentColor 24%, transparent);
+  background: color-mix(in srgb, currentColor 7%, transparent);
+  color: inherit;
+  font: 650 .875rem/1.25 system-ui, sans-serif;
+}
+.game-language-list img {
+  display: block;
+  flex: none;
+  inline-size: 1.25rem;
+  block-size: .9375rem;
+  border: 1px solid #7c858a;
+  object-fit: cover;
+}
+.game-language-beta {
+  flex: none;
+  padding: .13rem .28rem;
+  background: #f6cd83;
+  color: #342414;
+  font: 750 .625rem/1.2 system-ui, sans-serif;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}

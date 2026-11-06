@@ -408,33 +408,30 @@ nextReviewButton?.addEventListener('click', () => {
   showReview(activeReviewIndex + 1);
 });
 
-// Render both purchase pages from the same game-language release configuration.
-function gameLanguageLabel(language: GameLanguage): HTMLSpanElement {
+function gameLanguageItem(language: GameLanguage): HTMLLIElement {
+  const item = document.createElement('li');
+  const flag = document.createElement('img');
+  flag.src = `/assets/flags/${language}.svg`;
+  flag.width = 20;
+  flag.height = 15;
+  flag.alt = '';
   const label = document.createElement('span');
   label.lang = language;
   label.textContent = gameLanguageName(language);
+  item.append(flag, label);
   if (BETA_GAME_LANGUAGES.includes(language)) {
     const marker = document.createElement('small');
     marker.className = 'game-language-beta';
-    marker.textContent = 'BETA';
-    label.append(' ', marker);
+    marker.textContent = 'Beta';
+    item.append(marker);
   }
-  return label;
+  return item;
 }
 
+// Keep the static language lists aligned with the digital release configuration.
 for (const node of document.querySelectorAll<HTMLElement>('[data-game-languages]')) {
   node.dataset.gameLanguages = DIGITAL_GAME_LANGUAGES.join(',');
-  const summary = node.querySelector('strong');
-  if (summary) summary.replaceChildren(...DIGITAL_GAME_LANGUAGES.flatMap((language, index) => (
-    index ? [' · ', gameLanguageLabel(language)] : [gameLanguageLabel(language)]
-  )));
-  const list = node.querySelector('ul');
-  if (list) list.replaceChildren(...DIGITAL_GAME_LANGUAGES.map(language => {
-    const item = document.createElement('li');
-    const flag = document.createElement('img');
-    flag.src = `/assets/flags/${language}.svg`; flag.width = 20; flag.height = 15; flag.alt = '';
-    item.append(flag, gameLanguageLabel(language)); return item;
-  }));
+  node.querySelector('.game-language-list')?.replaceChildren(...DIGITAL_GAME_LANGUAGES.map(gameLanguageItem));
 }
 
 applyClaimCodeFromUrl();

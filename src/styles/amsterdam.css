@@ -77,7 +77,6 @@ body.amsterdam .lugano-hero-copy h1 { max-width: none; margin-bottom: .6rem; }
 .amsterdam .lugano-download-section { padding-block: 1.6rem; color: #102b26; }
 .amsterdam .lugano-download-info h2 { margin-bottom: .4rem; }
 .amsterdam .lugano-download-info p { margin-block: .4rem; }
-.amsterdam .lugano-languages strong { display: inline; }
 .lugano.amsterdam footer { background: #0b211d; }
 
 @media (max-width: 960px) {

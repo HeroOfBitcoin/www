@@ -40,6 +40,27 @@ const conferenceConfig: ConferenceConfig = JSON.parse(
   readFileSync(new URL('./config/conference.json', import.meta.url), 'utf8'),
 )
 
+function referralNotice(): Plugin {
+  const markup = readFileSync(new URL('./src/referral/notice.html', import.meta.url), 'utf8')
+    .replace('@@HOB_REFERRAL_BULL@@', '/assets/referral/bull-bitcoin.png')
+    .replace('@@HOB_REFERRAL_QR@@', '/assets/referral/bullbitcoin-qr.png')
+  const styles = readFileSync(new URL('./src/referral/notice.css', import.meta.url), 'utf8')
+  return {
+    name: 'hob-referral-notice',
+    transformIndexHtml: {
+      order: 'post',
+      handler(html, context) {
+        // /slp/ is only a redirect; the destination already has the notice.
+        if (context.filename.endsWith('/slp/index.html')) return html
+        return {
+          html: html.replace('</body>', () => `${markup}\n</body>`),
+          tags: [{ tag: 'style', children: styles, injectTo: 'head' }],
+        }
+      },
+    },
+  }
+}
+
 // GitHub Pages serves the directory index. Mirror its slash redirect locally
 // so Vite does not serve the homepage instead of the alias.
 function localDirectoryAlias(path: string): Plugin {
@@ -59,7 +80,7 @@ function localDirectoryAlias(path: string): Plugin {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [localDirectoryAlias('/amsterdam'), conferenceRedirect(conferenceConfig), react()],
+  plugins: [localDirectoryAlias('/amsterdam'), conferenceRedirect(conferenceConfig), react(), referralNotice()],
   server: {
     allowedHosts: ['127.0.0.1.nip.io'],
   },

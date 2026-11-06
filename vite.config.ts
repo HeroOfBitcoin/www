@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
-import { defineConfig, type Plugin } from 'vite'
+import { defineConfig, type Plugin, type ViteDevServer } from 'vite'
 import react from '@vitejs/plugin-react'
 
 interface ConferenceConfig {
@@ -40,9 +40,26 @@ const conferenceConfig: ConferenceConfig = JSON.parse(
   readFileSync(new URL('./config/conference.json', import.meta.url), 'utf8'),
 )
 
+// GitHub Pages serves the directory index. Mirror its slash redirect locally
+// so Vite does not serve the homepage instead of the alias.
+function localDirectoryAlias(path: string): Plugin {
+  const install = ({ middlewares }: Pick<ViteDevServer, 'middlewares'>) => {
+    middlewares.use((request, response, next) => {
+      const url = request.url ?? ''
+      if (url !== path && !url.startsWith(`${path}?`)) return next()
+      response.writeHead(308, {
+        Location: `${path}/${url.slice(path.length)}`,
+        'Cache-Control': 'no-store',
+      })
+      response.end()
+    })
+  }
+  return { name: 'local-directory-alias', configureServer: install, configurePreviewServer: install }
+}
+
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [conferenceRedirect(conferenceConfig), react()],
+  plugins: [localDirectoryAlias('/amsterdam'), conferenceRedirect(conferenceConfig), react()],
   server: {
     allowedHosts: ['127.0.0.1.nip.io'],
   },
@@ -58,6 +75,7 @@ export default defineConfig({
         success: fileURLToPath(new URL('./success.html', import.meta.url)),
         digital: fileURLToPath(new URL('./digital/index.html', import.meta.url)),
         lugano: fileURLToPath(new URL('./lugano/index.html', import.meta.url)),
+        amsterdam: fileURLToPath(new URL('./amsterdam/index.html', import.meta.url)),
         slp: fileURLToPath(new URL('./slp/index.html', import.meta.url)),
       },
     },

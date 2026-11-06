@@ -1,0 +1,63 @@
+html:has(body.lugano.amsterdam), body.lugano.amsterdam { background: #102b26; }
+.amsterdam .lugano-language select { background: #102b26; }
+.amsterdam .lugano-header, .amsterdam .lugano-offer, .amsterdam .lugano-download-section, .lugano.amsterdam footer {
+  padding-inline: max(5vw, calc((100% - 1180px) / 2));
+}
+.amsterdam .lugano-header { padding-block: .75rem; border-bottom: 1px solid #fff6e62e; }
+.amsterdam .lugano-brands > a:first-child { width: min(100%, 260px); }
+.amsterdam .lugano-offer {
+  grid-template-columns: minmax(0, .88fr) minmax(0, 1.12fr);
+  grid-template-areas: "intro art" "buy art";
+  grid-template-rows: auto 1fr;
+  gap: .75rem clamp(2rem, 5vw, 5rem);
+  padding-block: clamp(1.75rem, 4vw, 4rem);
+}
+.amsterdam .lugano-hero-copy { grid-area: intro; padding: 0; }
+.amsterdam-kicker {
+  margin: 0 0 .75rem;
+  color: #ffbc75;
+  font-size: .875rem;
+  font-weight: 750;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+body.amsterdam .lugano-hero-copy h1 { max-width: none; margin-bottom: .6rem; }
+.amsterdam h1 > span { display: block; }
+.amsterdam .lugano-intro { margin: 0; }
+.amsterdam .lugano-art {
+  grid-area: art;
+  align-self: center;
+  width: 100%;
+  max-width: 620px;
+  margin: 0;
+}
+.amsterdam .lugano-buy { grid-area: buy; align-self: start; margin: 0; padding-top: 1rem; }
+.amsterdam .lugano-buy .offer__note { margin: 0; font-size: .875rem; }
+.amsterdam .lugano-price > span { font-size: .875rem; }
+.amsterdam .lugano-hero-links { margin-top: .25rem; }
+.amsterdam .lugano-download-section { padding-block: 1.6rem; color: #102b26; }
+.amsterdam .lugano-download-info h2 { margin-bottom: .4rem; }
+.amsterdam .lugano-download-info p { margin-block: .4rem; }
+.amsterdam .lugano-languages strong { display: inline; }
+.lugano.amsterdam footer { background: #0b211d; }
+
+@media (max-width: 960px) {
+  .amsterdam .lugano-offer {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "intro" "art" "buy";
+    grid-template-rows: auto;
+    gap: 1rem;
+  }
+  .amsterdam .lugano-art { width: min(100%, 25rem); justify-self: center; }
+}
+@media (max-width: 540px) {
+  .amsterdam .lugano-header { grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: .75rem; }
+  .amsterdam .lugano-brands > a:first-child { flex: 0 1 180px; }
+  .amsterdam .lugano-language > span { display: none; }
+  .amsterdam .lugano-art { width: min(100%, 14rem); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .amsterdam .lugano-art { animation: amsterdam-art-in .3s ease-out both; }
+  .amsterdam .lugano-hero-links a { transition: color .15s; }
+}
+@keyframes amsterdam-art-in { from { opacity: .55; transform: translateY(4px); } }

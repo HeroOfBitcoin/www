@@ -257,3 +257,11 @@ languages; product links preserve the selected language. Page language is
 separate from game availability: the desktop download lists EN/NL/FI and IT
 (Beta), with exact OS architectures, while the cartridge is English and handheld details link
 to the separate product. The page makes no sponsorship or endorsement claim.
+
+## Amsterdam download alias
+
+`/amsterdam/` uses the Dutch Hero pixel art and the same prices, checkout,
+claim-code handling and nine interface languages as `/digital/`. It is a
+direct-link page, not a separate product or claim campaign. `?lang=nl` selects
+Dutch; an existing `claim` query parameter pre-fills the code. The page leaves
+`/digital/` and `/lugano/` unchanged.

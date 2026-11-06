@@ -19,7 +19,7 @@ import {
 } from './i18n/locales';
 import { getApiBaseUrl } from './lib/api';
 
-interface ProductPrice {
+export interface ProductPrice {
   id: string;
   amount: number | null;
   currency: string;
@@ -51,6 +51,7 @@ const statusNodes = Array.from(document.querySelectorAll<HTMLElement>('[data-che
 const discountCodeInput = document.querySelector<HTMLInputElement>('[data-discount-code]');
 const languagePicker = document.querySelector<HTMLSelectElement>('[data-language-picker]');
 const priceNode = document.querySelector<HTMLElement>('[data-btc-price]');
+const originalBtcNode = document.querySelector<HTMLElement>('[data-original-btc-price]');
 const reviewNodes = Array.from(document.querySelectorAll<HTMLElement>('[data-review]'));
 const reviewIndexNode = document.querySelector<HTMLElement>('[data-review-index]');
 const reviewTotalNode = document.querySelector<HTMLElement>('[data-review-total]');
@@ -60,6 +61,7 @@ const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
 const initialPriceUsd = Number(priceNode?.dataset.priceUsd);
 let currentLanguage: Language = 'en';
 let currentProductPrice: ProductPrice | null = null;
+let adjustPricePreview: ((base: Readonly<ProductPrice>) => ProductPrice) | undefined;
 let fastRates: BtcRates | null = null;
 let hasServerBtcPrice = false;
 let activeReviewIndex = 0;
@@ -122,10 +124,25 @@ function buildFastPrice(amountUsd: number, rates: BtcRates): ProductPrice {
   };
 }
 
+export function configurePricePreview(adjust: (base: Readonly<ProductPrice>) => ProductPrice): () => void {
+  adjustPricePreview = adjust;
+  renderPrice();
+  return renderPrice;
+}
+
 function renderPrice(): void {
-  const product = currentProductPrice;
-  if (!product) {
+  const base = currentProductPrice ?? (adjustPricePreview && Number.isFinite(initialPriceUsd) && initialPriceUsd > 0
+    ? { id: 'instant-download', amount: initialPriceUsd, currency: 'USD', btc: null, reference_usd: initialPriceUsd, reference_eur: null }
+    : null);
+  if (!base) {
     return;
+  }
+  const product = adjustPricePreview?.(base) ?? base;
+
+  if (originalBtcNode) {
+    const original = product !== base && product.btc !== base.btc ? base.btc : null;
+    originalBtcNode.textContent = original ? `${original} BTC` : '';
+    originalBtcNode.hidden = !original;
   }
 
   document.querySelectorAll<HTMLElement>('[data-btc-price]').forEach((node) => {

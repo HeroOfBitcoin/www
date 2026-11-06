@@ -1,7 +1,35 @@
 import { LOCALE_BY_LANGUAGE, type Language } from './i18n/locales';
+import type { ProductPrice } from './digital';
 
 export const AMSTERDAM_PROMO_CODE = 'AMSTERDAM12';
 export const AMSTERDAM_PROMO_END = Date.parse('2026-11-09T17:00:00+01:00');
+const discountFactor = 0.88;
+
+export function amsterdamPromoPrice(base: Readonly<ProductPrice>, code: string, now: number): ProductPrice {
+  if (now >= AMSTERDAM_PROMO_END || code.trim().toUpperCase() !== AMSTERDAM_PROMO_CODE
+      || base.amount === null || !Number.isFinite(base.amount) || base.amount <= 0) return base;
+
+  const baseCents = Math.round(base.amount * 100);
+  // Match checkout's integer-cent rounding before estimating the BTC amount.
+  const amountCents = Math.max(1, Math.round(baseCents * discountFactor));
+  if (amountCents >= baseCents) return base;
+
+  const factor = amountCents / baseCents;
+  const baseSats = Math.round(Number(base.btc) * 100_000_000);
+  const sats = baseSats > 0 ? Math.max(1, Math.round(baseSats * factor)) : null;
+  const referenceFactor = sats === null ? factor : sats / baseSats;
+  const reference = (value: number | null, currency: string) => base.currency === currency
+    ? amountCents / 100
+    : value === null ? null : Number((value * referenceFactor).toFixed(2));
+
+  return {
+    ...base,
+    amount: amountCents / 100,
+    btc: sats === null ? null : (sats / 100_000_000).toFixed(8),
+    reference_usd: reference(base.reference_usd, 'USD'),
+    reference_eur: reference(base.reference_eur, 'EUR'),
+  };
+}
 
 export const amsterdamPromoCopy = {
   en: { savings: '12% off', ends: 'Ends in', apply: 'Apply code' },

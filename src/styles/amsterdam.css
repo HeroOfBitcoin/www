@@ -34,6 +34,14 @@ body.amsterdam .lugano-hero-copy h1 { max-width: none; margin-bottom: .6rem; }
 .amsterdam .lugano-buy { grid-area: buy; align-self: start; margin: 0; padding-top: 1rem; }
 .amsterdam .lugano-buy .offer__note { margin: 0; font-size: .875rem; }
 .amsterdam .lugano-price > span { font-size: .875rem; }
+.amsterdam-price-original {
+  color: #c0cec5;
+  font-size: .9375rem;
+  font-variant-numeric: tabular-nums;
+}
+.amsterdam .lugano-price:has(.amsterdam-price-original:not([hidden])) { row-gap: .2rem; }
+.amsterdam .lugano-price:has(.amsterdam-price-original:not([hidden])) > strong { color: #ffbc75; }
+.amsterdam-price-original:not([hidden]) + span { flex-basis: 100%; }
 .amsterdam-promo:not([hidden]) {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;

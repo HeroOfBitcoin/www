@@ -1,8 +1,8 @@
 // Share the digital checkout and Lugano's conference layout without its event copy.
-import './digital';
+import { configurePricePreview } from './digital';
 import './styles/lugano.css';
 import './styles/amsterdam.css';
-import { amsterdamPromoCopy, amsterdamPromoCountdown, AMSTERDAM_PROMO_CODE, AMSTERDAM_PROMO_END } from './amsterdam-promo';
+import { amsterdamPromoCopy, amsterdamPromoCountdown, amsterdamPromoPrice, AMSTERDAM_PROMO_CODE, AMSTERDAM_PROMO_END } from './amsterdam-promo';
 import { isLanguage } from './i18n/locales';
 
 function localizeLinks(): void {
@@ -29,6 +29,7 @@ const codeDetails = codeInput?.closest<HTMLDetailsElement>('[data-discount]');
 // Leave QR visitors in the dedicated claim flow, without a competing offer.
 if (promo && savings && code && ends && countdown && apply && codeInput && codeDetails
     && !new URLSearchParams(location.search).has('claim') && Date.now() < AMSTERDAM_PROMO_END) {
+  const refreshPrice = configurePricePreview(base => amsterdamPromoPrice(base, codeInput.value, Date.now()));
   const getLanguage = () => {
     const language = document.documentElement.lang;
     return isLanguage(language) ? language : 'en';
@@ -36,7 +37,9 @@ if (promo && savings && code && ends && countdown && apply && codeInput && codeD
 
   const renderPromo = (): boolean => {
     const remaining = amsterdamPromoCountdown(Date.now(), getLanguage());
+    const expiredNow = remaining === null && !promo.hidden;
     promo.hidden = remaining === null;
+    if (expiredNow) refreshPrice();
     if (remaining === null) return false;
     countdown.textContent = remaining;
     return true;

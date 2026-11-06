@@ -34,6 +34,37 @@ body.amsterdam .lugano-hero-copy h1 { max-width: none; margin-bottom: .6rem; }
 .amsterdam .lugano-buy { grid-area: buy; align-self: start; margin: 0; padding-top: 1rem; }
 .amsterdam .lugano-buy .offer__note { margin: 0; font-size: .875rem; }
 .amsterdam .lugano-price > span { font-size: .875rem; }
+.amsterdam-promo:not([hidden]) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: .25rem .75rem;
+  margin: 0 0 .875rem;
+  padding: .65rem .75rem;
+  border-inline-start: 3px solid #ffbc75;
+  background: #203d32;
+}
+.amsterdam-promo__offer { display: flex; flex-wrap: wrap; align-items: baseline; gap: .1rem .6rem; }
+.amsterdam-promo p { margin: 0; }
+.amsterdam-promo strong { color: #ffbc75; font-size: 1.35rem; line-height: 1.2; }
+.amsterdam-promo code { font-size: .9rem; font-weight: 700; overflow-wrap: anywhere; }
+.amsterdam-promo__time { grid-column: 1; color: #e1eee5; font-size: .8125rem; }
+.amsterdam-promo [role="timer"] { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.amsterdam-promo button {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  max-width: 10rem;
+  min-height: 44px;
+  padding: .3rem .6rem;
+  border: 1px solid #ffbc75;
+  color: #fff6e6;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-size: .8125rem;
+  font-weight: 650;
+}
+.amsterdam-promo button:hover { color: #102b26; background: #ffbc75; }
 .amsterdam .lugano-hero-links { margin-top: .25rem; }
 .amsterdam .lugano-download-section { padding-block: 1.6rem; color: #102b26; }
 .amsterdam .lugano-download-info h2 { margin-bottom: .4rem; }
@@ -56,8 +87,13 @@ body.amsterdam .lugano-hero-copy h1 { max-width: none; margin-bottom: .6rem; }
   .amsterdam .lugano-language > span { display: none; }
   .amsterdam .lugano-art { width: min(100%, 14rem); }
 }
+@media (max-width: 360px) {
+  .amsterdam .lugano-offer { gap: .75rem; padding-block: 1.25rem; }
+  .amsterdam .lugano-art { width: min(100%, 10.5rem); }
+}
 @media (prefers-reduced-motion: no-preference) {
   .amsterdam .lugano-art { animation: amsterdam-art-in .3s ease-out both; }
   .amsterdam .lugano-hero-links a { transition: color .15s; }
+  .amsterdam-promo button { transition: background .15s, color .15s; }
 }
 @keyframes amsterdam-art-in { from { opacity: .55; transform: translateY(4px); } }
